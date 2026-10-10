@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"time"
 
 	"github.com/antoniolg/remote-sessions/internal/claude"
@@ -94,6 +95,9 @@ func setup() error {
 		return errors.New(i18n.T("service_not_ready", err, cfg.LogPath()))
 	}
 	fmt.Println(i18n.T("ready"))
+	if runtime.GOOS == "darwin" {
+		fmt.Println(i18n.T("macos_access"))
+	}
 	info, err := pairingInfo(cfg)
 	if err != nil {
 		return err

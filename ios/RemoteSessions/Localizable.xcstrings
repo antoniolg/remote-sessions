@@ -8114,6 +8114,534 @@
           }
         }
       }
+    },
+    "The computer doesn't let Remote Sessions open this conversation's folder. On a Mac, allow remote-sessions in System Settings › Privacy & Security › Files and Folders." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El ordenador no deja a Remote Sessions abrir la carpeta de esta conversación. En un Mac, permite remote-sessions en Ajustes del Sistema › Privacidad y seguridad › Archivos y carpetas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’ordinateur n’autorise pas Remote Sessions à ouvrir le dossier de cette conversation. Sur un Mac, autorisez remote-sessions dans Réglages Système › Confidentialité et sécurité › Fichiers et dossiers."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Computer erlaubt Remote Sessions nicht, den Ordner dieser Unterhaltung zu öffnen. Erlaube auf einem Mac remote-sessions unter Systemeinstellungen › Datenschutz & Sicherheit › Dateien und Ordner."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il computer non consente a Remote Sessions di aprire la cartella di questa conversazione. Su un Mac, consenti remote-sessions in Impostazioni di Sistema › Privacy e sicurezza › File e cartelle."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O computador não permite que o Remote Sessions abra a pasta desta conversa. Em um Mac, permita o remote-sessions em Ajustes do Sistema › Privacidade e Segurança › Arquivos e Pastas."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コンピュータが、このチャットのフォルダを Remote Sessions で開くことを許可していません。Mac では「システム設定」›「プライバシーとセキュリティ」›「ファイルとフォルダ」で remote-sessions を許可してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "컴퓨터가 Remote Sessions에서 이 대화의 폴더를 여는 것을 허용하지 않습니다. Mac에서는 시스템 설정 › 개인정보 보호 및 보안 › 파일 및 폴더에서 remote-sessions를 허용하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电脑不允许 Remote Sessions 打开此对话的文件夹。在 Mac 上，请在“系统设置”›“隐私与安全性”›“文件与文件夹”中允许 remote-sessions。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "電腦不允許 Remote Sessions 開啟此對話的資料夾。在 Mac 上，請在「系統設定」›「隱私權與安全性」›「檔案與檔案夾」中允許 remote-sessions。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Компьютер не разрешает Remote Sessions открыть папку этого разговора. На Mac разрешите remote-sessions в Системных настройках › Конфиденциальность и безопасность › Файлы и папки."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De computer staat Remote Sessions niet toe de map van dit gesprek te openen. Sta op een Mac remote-sessions toe in Systeeminstellingen › Privacy en beveiliging › Bestanden en mappen."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilgisayar, Remote Sessions'ın bu sohbetin klasörünü açmasına izin vermiyor. Mac'te Sistem Ayarları › Gizlilik ve Güvenlik › Dosyalar ve Klasörler bölümünden remote-sessions'a izin ver."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komputer nie pozwala Remote Sessions otworzyć folderu tej rozmowy. Na Macu zezwól remote-sessions w Ustawieniach systemowych › Prywatność i ochrona › Pliki i foldery."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komputer tidak mengizinkan Remote Sessions membuka folder percakapan ini. Di Mac, izinkan remote-sessions di Pengaturan Sistem › Privasi & Keamanan › File dan Folder."
+          }
+        }
+      }
+    },
+    "Claude Code is waiting for an answer on the computer. Open the conversation there to continue." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code está esperando una respuesta en el ordenador. Abre allí la conversación para continuar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code attend une réponse sur l’ordinateur. Ouvrez-y la conversation pour continuer."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code wartet auf dem Computer auf eine Antwort. Öffne die Unterhaltung dort, um fortzufahren."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code sta aspettando una risposta sul computer. Apri lì la conversazione per continuare."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Claude Code está esperando uma resposta no computador. Abra a conversa lá para continuar."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code がコンピュータで応答を待っています。続けるには、コンピュータでそのチャットを開いてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code가 컴퓨터에서 응답을 기다리고 있습니다. 계속하려면 컴퓨터에서 대화를 여세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 正在电脑上等待回答。请在电脑上打开该对话以继续。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 正在電腦上等待回覆。請在電腦上開啟該對話以繼續。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code ждёт ответа на компьютере. Откройте там разговор, чтобы продолжить."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code wacht op de computer op een antwoord. Open het gesprek daar om verder te gaan."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code bilgisayarda bir yanıt bekliyor. Devam etmek için sohbeti orada aç."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code czeka na komputerze na odpowiedź. Otwórz tam rozmowę, aby kontynuować."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code sedang menunggu jawaban di komputer. Buka percakapan di sana untuk melanjutkan."
+          }
+        }
+      }
+    },
+    "Claude Code asks whether you trust the folder %@. Trust it only if it's your own project." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code pregunta si confías en la carpeta %@. Confía solo si es un proyecto tuyo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code demande si vous faites confiance au dossier %@. Ne le faites que s’il s’agit de votre propre projet."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code fragt, ob du dem Ordner %@ vertraust. Vertraue ihm nur, wenn es dein eigenes Projekt ist."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code chiede se ti fidi della cartella %@. Fidati solo se è un tuo progetto."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Claude Code pergunta se você confia na pasta %@. Confie apenas se for um projeto seu."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code がフォルダ %@ を信頼するか確認しています。自分のプロジェクトの場合のみ信頼してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code가 %@ 폴더를 신뢰하는지 묻고 있습니다. 본인 프로젝트인 경우에만 신뢰하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 询问你是否信任文件夹 %@。仅当这是你自己的项目时才信任它。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 詢問你是否信任資料夾 %@。只有在這是你自己的專案時才信任它。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code спрашивает, доверяете ли вы папке %@. Доверяйте, только если это ваш собственный проект."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code vraagt of je de map %@ vertrouwt. Vertrouw hem alleen als het je eigen project is."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code %@ klasörüne güvenip güvenmediğini soruyor. Yalnızca kendi projense güven."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code pyta, czy ufasz folderowi %@. Ufaj tylko, jeśli to Twój własny projekt."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code menanyakan apakah Anda memercayai folder %@. Percayai hanya jika itu proyek Anda sendiri."
+          }
+        }
+      }
+    },
+    "Trust this folder?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Confías en esta carpeta?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faire confiance à ce dossier ?"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diesem Ordner vertrauen?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti fidi di questa cartella?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confiar nesta pasta?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このフォルダを信頼しますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 폴더를 신뢰할까요?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信任此文件夹？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信任此資料夾？"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доверять этой папке?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze map vertrouwen?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu klasöre güvenilsin mi?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaufać temu folderowi?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Percayai folder ini?"
+          }
+        }
+      }
+    },
+    "Trust and connect" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confiar y conectar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faire confiance et se connecter"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertrauen und verbinden"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fidati e connetti"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confiar e conectar"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信頼して接続"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "신뢰하고 연결"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信任并连接"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信任並連線"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доверять и подключиться"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertrouwen en verbinden"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Güven ve bağlan"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaufaj i połącz"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Percayai dan hubungkan"
+          }
+        }
+      }
+    },
+    "Claude Code will be able to read, edit and run files in %@. Trust it only if it's your own project." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code podrá leer, editar y ejecutar archivos en %@. Confía solo si es un proyecto tuyo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code pourra lire, modifier et exécuter des fichiers dans %@. Ne lui faites confiance que s’il s’agit de votre propre projet."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code kann dann in %@ Dateien lesen, bearbeiten und ausführen. Vertraue ihm nur, wenn es dein eigenes Projekt ist."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code potrà leggere, modificare ed eseguire file in %@. Fidati solo se è un tuo progetto."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Claude Code poderá ler, editar e executar arquivos em %@. Confie apenas se for um projeto seu."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code は %@ 内のファイルを読み取り、編集、実行できるようになります。自分のプロジェクトの場合のみ信頼してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code가 %@의 파일을 읽고, 편집하고, 실행할 수 있게 됩니다. 본인 프로젝트인 경우에만 신뢰하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 将能够读取、编辑和运行 %@ 中的文件。仅当这是你自己的项目时才信任它。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code 將能讀取、編輯和執行 %@ 中的檔案。只有在這是你自己的專案時才信任它。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code сможет читать, изменять и запускать файлы в %@. Доверяйте, только если это ваш собственный проект."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code kan dan bestanden in %@ lezen, bewerken en uitvoeren. Vertrouw hem alleen als het je eigen project is."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, %@ içindeki dosyaları okuyabilecek, düzenleyebilecek ve çalıştırabilecek. Yalnızca kendi projense güven."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code będzie mógł czytać, edytować i uruchamiać pliki w %@. Ufaj tylko, jeśli to Twój własny projekt."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code akan dapat membaca, mengedit, dan menjalankan file di %@. Percayai hanya jika itu proyek Anda sendiri."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

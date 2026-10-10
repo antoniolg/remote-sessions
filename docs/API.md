@@ -31,6 +31,9 @@ All responses are JSON. Errors: non-2xx status with `{"code": "<code>", "error":
 | `open_elsewhere` | the conversation is open on the computer (terminal or desktop app) |
 | `remote_control_timeout` | Remote Control did not publish its URL in time (is Claude Code logged in with a subscription?) |
 | `launch_failed` | Claude Code could not resume the conversation |
+| `trust_required` | Claude Code asks whether to trust the folder (`folder` in the body). Ask the user and retry with `{"trustFolder": true}` |
+| `folder_access` | the OS does not let the server open the folder (macOS privacy: Files and Folders / Full Disk Access) |
+| `prompt_blocked` | Claude Code is waiting on a question the server does not know how to answer (`error` has its text) |
 | `internal` | anything else |
 
 ### `GET /health` (no auth)
@@ -66,7 +69,7 @@ Latest messages (max 200), oldest first:
 `text` is Markdown, cut at 4000 characters. `tools` lists the tool names Claude used in that reply.
 
 ### `POST /v1/sessions/{id}/remote-control`
-Resumes the session in a pseudo-terminal with Remote Control and waits (up to ~45 s) for its claude.ai URL.
+Resumes the session in a pseudo-terminal with Remote Control and waits (up to ~45 s) for its claude.ai URL. Optional body: `{"trustFolder": true}` to answer yes if Claude Code asks whether to trust the folder (only after the user confirmed it).
 ```json
 { "url": "https://claude.ai/code/session_01…", "reused": false }
 ```
@@ -74,6 +77,7 @@ Resumes the session in a pseudo-terminal with Remote Control and waits (up to ~4
 - `409 open_elsewhere` when the session is open elsewhere on the computer (terminal or desktop app).
 - `504 remote_control_timeout` when Remote Control did not come up in time.
 - `502 launch_failed` when Claude Code exited or could not start.
+- `409 trust_required`, `403 folder_access`, `502 prompt_blocked`: see the error codes above.
 
 Apps open `url`; the Claude app handles it as a universal/app link.
 

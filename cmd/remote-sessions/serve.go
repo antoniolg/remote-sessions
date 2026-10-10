@@ -64,10 +64,12 @@ func serve(args []string) error {
 		return err
 	}
 	launch := launcher.New(claudeBin)
+	store := transcripts.NewStore(transcripts.DefaultDir())
 	api := &server.Server{
 		ID: cfg.ID, Name: cfg.ComputerName(), Version: version, Token: cfg.Token,
-		Store: transcripts.NewStore(transcripts.DefaultDir()), Agents: &claude.Agents{Bin: claudeBin}, Launcher: launch,
+		Store: store, Agents: &claude.Agents{Bin: claudeBin}, Launcher: launch,
 	}
+	go requestFolderAccess(store)
 	httpServer := &http.Server{
 		Addr:              fmt.Sprintf(":%d", cfg.Port),
 		Handler:           api.Handler(),

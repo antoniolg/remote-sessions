@@ -193,4 +193,9 @@
     <string name="demo_invoices_1">Fatura PDF’lerini, adında fatura tarihini kullanarak yeniden adlandıran bir betik yaz</string>
     <string name="demo_invoices_2">`rename-invoices.sh` betiğini oluşturdum. Her PDF’ten tarihi okuyor ve `2026-10-01 Tedarikçi.pdf` gibi yeniden adlandırıyor.</string>
     <string name="untitled">Başlıksız</string>
+    <string name="trust_title">Bu klasöre güvenilsin mi?</string>
+    <string name="trust_message">Claude Code, %1$s içindeki dosyaları okuyabilecek, düzenleyebilecek ve çalıştırabilecek. Yalnızca kendi projense güven.</string>
+    <string name="trust_confirm">Güven ve bağlan</string>
+    <string name="error_code_folder_access">Bilgisayar, Remote Sessions’ın bu sohbetin klasörünü açmasına izin vermiyor. Mac’te Sistem Ayarları › Gizlilik ve Güvenlik › Dosyalar ve Klasörler bölümünden remote-sessions’a izin ver.</string>
+    <string name="error_code_prompt_blocked">Claude Code bilgisayarda bir yanıt bekliyor. Devam etmek için sohbeti orada aç.</string>
 </resources>

@@ -193,4 +193,9 @@
     <string name="demo_invoices_1">Schrijf een script dat de factuur-pdf’s hernoemt met de factuurdatum in de naam</string>
     <string name="demo_invoices_2">Ik heb `rename-invoices.sh` gemaakt. Het leest de datum uit elke pdf en hernoemt hem zoals `2026-10-01 Leverancier.pdf`.</string>
     <string name="untitled">Naamloos</string>
+    <string name="trust_title">Deze map vertrouwen?</string>
+    <string name="trust_message">Claude Code kan dan bestanden in %1$s lezen, bewerken en uitvoeren. Vertrouw hem alleen als het je eigen project is.</string>
+    <string name="trust_confirm">Vertrouwen en verbinden</string>
+    <string name="error_code_folder_access">De computer staat Remote Sessions niet toe de map van dit gesprek te openen. Sta op een Mac remote-sessions toe in Systeeminstellingen › Privacy en beveiliging › Bestanden en mappen.</string>
+    <string name="error_code_prompt_blocked">Claude Code wacht op de computer op een antwoord. Open het gesprek daar om verder te gaan.</string>
 </resources>

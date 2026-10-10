@@ -13,6 +13,7 @@ interface SessionsSource {
     suspend fun health(): Health
     suspend fun sessions(): List<Session>
     suspend fun messages(sessionId: String): List<Message>
-    suspend fun startRemoteControl(sessionId: String): RemoteControlResult
+    /** [trustFolder] answers yes if Claude Code asks whether to trust the folder (only after the user confirmed). */
+    suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean = false): RemoteControlResult
     suspend fun stopRemoteControl(sessionId: String)
 }

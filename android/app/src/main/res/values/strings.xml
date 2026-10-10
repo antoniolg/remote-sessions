@@ -196,4 +196,9 @@
     <string name="demo_invoices_1">Write a script that renames the invoice PDFs, using the invoice date in the name</string>
     <string name="demo_invoices_2">I created `rename-invoices.sh`. It reads the date from each PDF and renames it like `2026-10-01 Supplier.pdf`.</string>
     <string name="untitled">Untitled</string>
+    <string name="trust_title">Trust this folder?</string>
+    <string name="trust_message">Claude Code will be able to read, edit and run files in %1$s. Trust it only if it’s your own project.</string>
+    <string name="trust_confirm">Trust and connect</string>
+    <string name="error_code_folder_access">The computer doesn’t let Remote Sessions open this conversation’s folder. On a Mac, allow remote-sessions in System Settings › Privacy &amp; Security › Files and Folders.</string>
+    <string name="error_code_prompt_blocked">Claude Code is waiting for an answer on the computer. Open the conversation there to continue.</string>
 </resources>

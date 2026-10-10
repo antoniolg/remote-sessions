@@ -14,6 +14,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.HttpUrl
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -30,6 +31,9 @@ object ApiErrorCode {
     const val OPEN_ELSEWHERE = "open_elsewhere"
     const val REMOTE_CONTROL_TIMEOUT = "remote_control_timeout"
     const val LAUNCH_FAILED = "launch_failed"
+    const val TRUST_REQUIRED = "trust_required"
+    const val FOLDER_ACCESS = "folder_access"
+    const val PROMPT_BLOCKED = "prompt_blocked"
     const val INTERNAL = "internal"
 }
 
@@ -37,7 +41,7 @@ object ApiErrorCode {
  * The server answered with a non-2xx status. [code] is the stable error code and [serverMessage]
  * the server's (English) `error` text, both when present.
  */
-class ApiException(val status: Int, val code: String?, val serverMessage: String?) :
+class ApiException(val status: Int, val code: String?, val serverMessage: String?, val folder: String? = null) :
     Exception("HTTP $status ${code.orEmpty()} ${serverMessage.orEmpty()}".trim())
 
 val ApiJson = Json {
@@ -61,9 +65,10 @@ class ApiClient(
         get<MessageList>("v1/sessions/$sessionId/messages", timeoutSeconds = 20, query = mapOf("limit" to "$limit")).messages
 
     /** Waits up to ~45 s on the server, so the call timeout is generous. */
-    suspend fun startRemoteControl(sessionId: String): RemoteControlResult {
+    suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean = false): RemoteControlResult {
+        val body = if (trustFolder) """{"trustFolder":true}""" else ""
         val request = request("v1/sessions/$sessionId/remote-control")
-            .post(ByteArray(0).toRequestBody())
+            .post(body.toRequestBody("application/json".toMediaType()))
             .build()
         return execute(request, timeoutSeconds = 75) { ApiJson.decodeFromString(it) }
     }
@@ -115,6 +120,7 @@ class ApiClient(
                 status = status,
                 code = parsed?.code?.takeIf { it.isNotBlank() },
                 serverMessage = parsed?.error?.takeIf { it.isNotBlank() },
+                folder = parsed?.folder?.takeIf { it.isNotBlank() },
             )
         }
     }

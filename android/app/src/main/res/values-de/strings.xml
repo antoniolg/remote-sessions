@@ -193,4 +193,9 @@
     <string name="demo_invoices_1">Schreib ein Skript, das die Rechnungs-PDFs umbenennt und dabei das Rechnungsdatum in den Namen aufnimmt</string>
     <string name="demo_invoices_2">Ich habe `rename-invoices.sh` erstellt. Es liest das Datum aus jedem PDF und benennt es um, etwa in `2026-10-01 Lieferant.pdf`.</string>
     <string name="untitled">Ohne Titel</string>
+    <string name="trust_title">Diesem Ordner vertrauen?</string>
+    <string name="trust_message">Claude Code kann dann in %1$s Dateien lesen, bearbeiten und ausführen. Vertraue ihm nur, wenn es dein eigenes Projekt ist.</string>
+    <string name="trust_confirm">Vertrauen und verbinden</string>
+    <string name="error_code_folder_access">Der Computer erlaubt Remote Sessions nicht, den Ordner dieser Unterhaltung zu öffnen. Erlaube auf einem Mac remote-sessions unter Systemeinstellungen › Datenschutz &amp; Sicherheit › Dateien und Ordner.</string>
+    <string name="error_code_prompt_blocked">Claude Code wartet auf dem Computer auf eine Antwort. Öffne die Unterhaltung dort, um fortzufahren.</string>
 </resources>

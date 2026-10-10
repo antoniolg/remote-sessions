@@ -6,6 +6,7 @@ import (
 	"crypto/subtle"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
@@ -151,12 +152,27 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "internal", err.Error())
 		return
 	}
+	var body struct {
+		TrustFolder bool `json:"trustFolder"`
+	}
+	_ = json.NewDecoder(io.LimitReader(r.Body, 4096)).Decode(&body)
 	// Keep going if the phone gives up: the session stays useful and the next tap reuses it.
-	managed, err := s.Launcher.Start(context.WithoutCancel(r.Context()), id, path, summary.Cwd, summary.Title())
+	managed, err := s.Launcher.Start(context.WithoutCancel(r.Context()), id, path, summary.Cwd, summary.Title(),
+		launcher.Options{TrustFolder: body.TrustFolder})
 	s.Agents.Invalidate()
+	var promptErr *launcher.PromptError
 	switch {
 	case err == nil:
 		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false})
+	case errors.Is(err, launcher.ErrTrustRequired):
+		writeJSON(w, http.StatusConflict, map[string]string{"code": "trust_required", "folder": summary.Cwd,
+			"error": "Claude Code asks whether you trust " + summary.Cwd + ". Confirm to trust it and connect."})
+	case errors.Is(err, launcher.ErrFolderAccess):
+		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+summary.Cwd+
+			". On macOS, allow remote-sessions in System Settings › Privacy & Security › Files and Folders (or Full Disk Access).")
+	case errors.As(err, &promptErr):
+		log.Printf("remote-control %s: %v", id, err)
+		writeError(w, http.StatusBadGateway, "prompt_blocked", promptErr.Error())
 	case errors.Is(err, launcher.ErrTimeout):
 		log.Printf("remote-control %s: timeout. Terminal:\n%s", id, managed.Screen())
 		writeError(w, http.StatusGatewayTimeout, "remote_control_timeout", "Remote Control did not answer in time. Check that Claude Code is logged in with your Claude account.")

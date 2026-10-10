@@ -189,4 +189,9 @@
     <string name="demo_invoices_1">写一个脚本，用开票日期重命名发票 PDF</string>
     <string name="demo_invoices_2">我创建了 `rename-invoices.sh`。它会读取每个 PDF 中的日期，并重命名为类似 `2026-10-01 供应商.pdf` 的形式。</string>
     <string name="untitled">无标题</string>
+    <string name="trust_title">信任此文件夹？</string>
+    <string name="trust_message">Claude Code 将能够读取、编辑和运行 %1$s 中的文件。仅当这是你自己的项目时才信任它。</string>
+    <string name="trust_confirm">信任并连接</string>
+    <string name="error_code_folder_access">电脑不允许 Remote Sessions 打开此对话的文件夹。在 Mac 上，请在“系统设置”›“隐私与安全性”›“文件与文件夹”中允许 remote-sessions。</string>
+    <string name="error_code_prompt_blocked">Claude Code 正在电脑上等待回答。请在电脑上打开该对话以继续。</string>
 </resources>

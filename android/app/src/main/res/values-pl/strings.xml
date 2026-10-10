@@ -201,4 +201,9 @@
     <string name="demo_invoices_1">Napisz skrypt, który zmienia nazwy plików PDF z fakturami, używając w nazwie daty faktury</string>
     <string name="demo_invoices_2">Utworzyłem `rename-invoices.sh`. Odczytuje datę z każdego pliku PDF i zmienia jego nazwę na przykład na `2026-10-01 Dostawca.pdf`.</string>
     <string name="untitled">Bez tytułu</string>
+    <string name="trust_title">Zaufać temu folderowi?</string>
+    <string name="trust_message">Claude Code będzie mógł czytać, edytować i uruchamiać pliki w %1$s. Ufaj tylko, jeśli to Twój własny projekt.</string>
+    <string name="trust_confirm">Zaufaj i połącz</string>
+    <string name="error_code_folder_access">Komputer nie pozwala Remote Sessions otworzyć folderu tej rozmowy. Na Macu zezwól remote-sessions w Ustawieniach systemowych › Prywatność i ochrona › Pliki i foldery.</string>
+    <string name="error_code_prompt_blocked">Claude Code czeka na komputerze na odpowiedź. Otwórz tam rozmowę, aby kontynuować.</string>
 </resources>

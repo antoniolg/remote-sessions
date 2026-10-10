@@ -136,6 +136,8 @@ fun RemoteSessionsRoot(
             onDismissError = connectViewModel::dismissError,
             onDismissDemo = connectViewModel::dismissDemoNotice,
             onPairComputer = onboardingViewModel::beginAddComputer,
+            onTrust = connectViewModel::trustAndConnect,
+            onDismissTrust = connectViewModel::dismissTrust,
         )
     }
 }

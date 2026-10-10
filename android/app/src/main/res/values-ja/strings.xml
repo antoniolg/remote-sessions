@@ -189,4 +189,9 @@
     <string name="demo_invoices_1">請求書の PDF の名前を、請求日を含めて変更するスクリプトを書いてください</string>
     <string name="demo_invoices_2">`rename-invoices.sh` を作成しました。各 PDF から日付を読み取り、`2026-10-01 取引先.pdf` のような名前に変更します。</string>
     <string name="untitled">無題</string>
+    <string name="trust_title">このフォルダを信頼しますか？</string>
+    <string name="trust_message">Claude Code は %1$s 内のファイルを読み取り、編集、実行できるようになります。自分のプロジェクトの場合のみ信頼してください。</string>
+    <string name="trust_confirm">信頼して接続</string>
+    <string name="error_code_folder_access">コンピュータが、このチャットのフォルダを Remote Sessions で開くことを許可していません。Mac では「システム設定」›「プライバシーとセキュリティ」›「ファイルとフォルダ」で remote-sessions を許可してください。</string>
+    <string name="error_code_prompt_blocked">Claude Code がコンピュータで応答を待っています。続けるには、コンピュータでそのチャットを開いてください。</string>
 </resources>

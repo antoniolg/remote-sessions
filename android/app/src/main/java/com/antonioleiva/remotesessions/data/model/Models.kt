@@ -65,4 +65,6 @@ data class Health(
 data class ApiErrorBody(
     val error: String? = null,
     val code: String? = null,
+    /** The folder Claude Code asks to trust (`trust_required`). */
+    val folder: String? = null,
 )

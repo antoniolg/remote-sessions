@@ -189,4 +189,9 @@
     <string name="demo_invoices_1">寫一個指令碼，用發票日期重新命名發票 PDF</string>
     <string name="demo_invoices_2">我建立了 `rename-invoices.sh`。它會讀取每個 PDF 的日期，並重新命名為類似 `2026-10-01 供應商.pdf` 的格式。</string>
     <string name="untitled">未命名</string>
+    <string name="trust_title">信任此資料夾？</string>
+    <string name="trust_message">Claude Code 將能讀取、編輯和執行 %1$s 中的檔案。只有在這是你自己的專案時才信任它。</string>
+    <string name="trust_confirm">信任並連線</string>
+    <string name="error_code_folder_access">電腦不允許 Remote Sessions 開啟此對話的資料夾。在 Mac 上，請在「系統設定」›「隱私權與安全性」›「檔案與檔案夾」中允許 remote-sessions。</string>
+    <string name="error_code_prompt_blocked">Claude Code 正在電腦上等待回覆。請在電腦上開啟該對話以繼續。</string>
 </resources>

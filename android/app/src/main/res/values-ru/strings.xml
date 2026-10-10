@@ -201,4 +201,9 @@
     <string name="demo_invoices_1">Напиши скрипт, который переименовывает PDF-файлы счетов, добавляя в имя дату счёта</string>
     <string name="demo_invoices_2">Я создал `rename-invoices.sh`. Он считывает дату из каждого PDF и переименовывает файл в формате `2026-10-01 Поставщик.pdf`.</string>
     <string name="untitled">Без названия</string>
+    <string name="trust_title">Доверять этой папке?</string>
+    <string name="trust_message">Claude Code сможет читать, изменять и запускать файлы в %1$s. Доверяйте, только если это ваш собственный проект.</string>
+    <string name="trust_confirm">Доверять и подключиться</string>
+    <string name="error_code_folder_access">Компьютер не разрешает Remote Sessions открыть папку этого разговора. На Mac разрешите remote-sessions в Системных настройках › Конфиденциальность и безопасность › Файлы и папки.</string>
+    <string name="error_code_prompt_blocked">Claude Code ждёт ответа на компьютере. Откройте там разговор, чтобы продолжить.</string>
 </resources>

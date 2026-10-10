@@ -197,4 +197,9 @@
     <string name="demo_invoices_1">Escribe un script que renombre los PDF de las facturas usando la fecha de la factura en el nombre</string>
     <string name="demo_invoices_2">He creado `rename-invoices.sh`. Lee la fecha de cada PDF y lo renombra así: `2026-10-01 Proveedor.pdf`.</string>
     <string name="untitled">Sin título</string>
+    <string name="trust_title">¿Confías en esta carpeta?</string>
+    <string name="trust_message">Claude Code podrá leer, editar y ejecutar archivos en %1$s. Confía solo si es un proyecto tuyo.</string>
+    <string name="trust_confirm">Confiar y conectar</string>
+    <string name="error_code_folder_access">El ordenador no deja a Remote Sessions abrir la carpeta de esta conversación. En un Mac, permite remote-sessions en Ajustes del Sistema › Privacidad y seguridad › Archivos y carpetas.</string>
+    <string name="error_code_prompt_blocked">Claude Code está esperando una respuesta en el ordenador. Abre allí la conversación para continuar.</string>
 </resources>

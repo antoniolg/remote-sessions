@@ -7,12 +7,18 @@ import SwiftUI
 final class Connector {
     private(set) var opening: Session?
     var errorMessage: String?
+    /// A connection waiting for the user to trust its folder.
+    var pendingTrust: (session: Session, folder: String)?
+    private var openURL: OpenURLAction?
+    private var source: SessionSource?
     /// Bumped after connecting or stopping, so screens refresh.
     private(set) var changes = 0
     private var task: Task<Void, Never>?
 
-    func connect(_ session: Session, source: SessionSource?, openURL: OpenURLAction) {
+    func connect(_ session: Session, source: SessionSource?, openURL: OpenURLAction, trustFolder: Bool = false) {
         guard let source, opening == nil else { return }
+        self.source = source
+        self.openURL = openURL
         opening = session
         task = Task {
             defer {
@@ -20,9 +26,11 @@ final class Connector {
                 changes += 1
             }
             do {
-                openURL(try await source.connect(sessionID: session.id))
+                openURL(try await source.connect(sessionID: session.id, trustFolder: trustFolder))
             } catch where error.isCancellation {
                 // Cancelled from the overlay.
+            } catch SourceError.trustRequired(let folder) {
+                pendingTrust = (session, folder)
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -37,6 +45,13 @@ final class Connector {
             errorMessage = error.localizedDescription
         }
         changes += 1
+    }
+
+    /// The user trusts the folder: connect again answering yes.
+    func trustAndConnect() {
+        guard let pending = pendingTrust, let openURL else { return }
+        pendingTrust = nil
+        connect(pending.session, source: source, openURL: openURL, trustFolder: true)
     }
 
     func cancel() {
@@ -60,6 +75,14 @@ struct ConnectorPresentation: ViewModifier {
             .overlay {
                 if let session = connector.opening {
                     OpeningOverlay(session: session) { connector.cancel() }
+                }
+            }
+            .alert("Trust this folder?", isPresented: .constant(connector.pendingTrust != nil)) {
+                Button("Trust and connect") { connector.trustAndConnect() }
+                Button("Cancel", role: .cancel) { connector.pendingTrust = nil }
+            } message: {
+                if let folder = connector.pendingTrust?.folder {
+                    Text("Claude Code will be able to read, edit and run files in \(folder). Trust it only if it's your own project.")
                 }
             }
             .alert("Couldn't connect", isPresented: .constant(connector.errorMessage != nil)) {

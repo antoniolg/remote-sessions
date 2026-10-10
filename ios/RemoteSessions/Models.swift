@@ -54,6 +54,7 @@ struct Health: Decodable {
 struct APIError: Decodable {
     let code: String?
     let error: String
+    let folder: String?
 }
 
 /// A paired computer. The token lives in the Keychain, not here.

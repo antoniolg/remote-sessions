@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antonioleiva.remotesessions.AppContainer
 import com.antonioleiva.remotesessions.data.model.Session
+import com.antonioleiva.remotesessions.data.net.ApiErrorCode
+import com.antonioleiva.remotesessions.data.net.ApiException
 import androidx.annotation.StringRes
 import com.antonioleiva.remotesessions.R
 import com.antonioleiva.remotesessions.ui.common.UiText
@@ -27,7 +29,11 @@ data class ConnectUiState(
     @param:StringRes val errorTitle: Int? = null,
     val error: UiText? = null,
     val demoNotice: Boolean = false,
+    /** Claude Code asks whether to trust this session's folder; the user decides. */
+    val pendingTrust: PendingTrust? = null,
 )
+
+data class PendingTrust(val session: Session, val folder: String)
 
 /** Asks the computer to resume a session with Remote Control and hands the claude.ai URL to the UI. */
 class ConnectViewModel(private val container: AppContainer) : ViewModel() {
@@ -44,7 +50,7 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
 
     private var job: Job? = null
 
-    fun connect(session: Session) {
+    fun connect(session: Session, trustFolder: Boolean = false) {
         val source = container.currentSource.value ?: return
         if (source.isDemo) {
             _state.update { it.copy(demoNotice = true) }
@@ -54,10 +60,16 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
         _state.update { it.copy(opening = session) }
         job = viewModelScope.launch {
             try {
-                val result = source.startRemoteControl(session.id)
+                val result = source.startRemoteControl(session.id, trustFolder)
                 urls.send(result.url)
             } catch (e: CancellationException) {
                 throw e
+            } catch (e: ApiException) {
+                if (e.code == ApiErrorCode.TRUST_REQUIRED) {
+                    _state.update { it.copy(pendingTrust = PendingTrust(session, e.folder.orEmpty())) }
+                } else {
+                    showError(R.string.connect_error_title, e.toUiText())
+                }
             } catch (e: Exception) {
                 showError(R.string.connect_error_title, e.toUiText())
             } finally {
@@ -66,6 +78,15 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
             }
         }
     }
+
+    /** The user trusts the folder: connect again answering yes. */
+    fun trustAndConnect() {
+        val pending = _state.value.pendingTrust ?: return
+        _state.update { it.copy(pendingTrust = null) }
+        connect(pending.session, trustFolder = true)
+    }
+
+    fun dismissTrust() = _state.update { it.copy(pendingTrust = null) }
 
     fun cancel() {
         job?.cancel()

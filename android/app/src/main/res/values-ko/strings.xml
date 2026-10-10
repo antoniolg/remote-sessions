@@ -189,4 +189,9 @@
     <string name="demo_invoices_1">청구서 PDF 파일 이름을 청구일을 넣어 바꾸는 스크립트를 작성해 주세요</string>
     <string name="demo_invoices_2">`rename-invoices.sh`를 만들었습니다. 각 PDF에서 날짜를 읽어 `2026-10-01 공급업체.pdf` 같은 형식으로 이름을 바꿉니다.</string>
     <string name="untitled">제목 없음</string>
+    <string name="trust_title">이 폴더를 신뢰할까요?</string>
+    <string name="trust_message">Claude Code가 %1$s의 파일을 읽고, 편집하고, 실행할 수 있게 됩니다. 본인 프로젝트인 경우에만 신뢰하세요.</string>
+    <string name="trust_confirm">신뢰하고 연결</string>
+    <string name="error_code_folder_access">컴퓨터가 Remote Sessions에서 이 대화의 폴더를 여는 것을 허용하지 않습니다. Mac에서는 시스템 설정 › 개인정보 보호 및 보안 › 파일 및 폴더에서 remote-sessions를 허용하세요.</string>
+    <string name="error_code_prompt_blocked">Claude Code가 컴퓨터에서 응답을 기다리고 있습니다. 계속하려면 컴퓨터에서 대화를 여세요.</string>
 </resources>

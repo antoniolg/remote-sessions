@@ -64,9 +64,15 @@ func (l *Launcher) Get(sessionID string) (*Managed, bool) {
 	return m, ok
 }
 
+// Options change how a session is started.
+type Options struct {
+	// TrustFolder answers "yes" if Claude Code asks whether to trust the session's folder.
+	TrustFolder bool
+}
+
 // Start resumes the session with Remote Control and waits for its claude.ai URL.
 // Concurrent calls for the same session wait for the first one.
-func (l *Launcher) Start(ctx context.Context, sessionID, transcript, cwd, title string) (*Managed, error) {
+func (l *Launcher) Start(ctx context.Context, sessionID, transcript, cwd, title string, opts Options) (*Managed, error) {
 	l.mu.Lock()
 	if m, ok := l.sessions[sessionID]; ok {
 		if m.URL != "" {
@@ -99,14 +105,17 @@ func (l *Launcher) Start(ctx context.Context, sessionID, transcript, cwd, title 
 		l.mu.Unlock()
 		close(wait)
 	}()
-	return l.start(sessionID, transcript, cwd, title)
+	return l.start(sessionID, transcript, cwd, title, opts)
 }
 
-func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, error) {
+func (l *Launcher) start(sessionID, transcript, cwd, title string, opts Options) (*Managed, error) {
 	dir := filepath.Dir(transcript)
 	offsets := snapshotOffsets(dir)
 	if info, err := os.Stat(cwd); err != nil || !info.IsDir() {
 		cwd, _ = os.UserHomeDir()
+	}
+	if !canOpen(cwd, 3*time.Second) {
+		return nil, ErrFolderAccess
 	}
 	terminal, err := pty.New()
 	if err != nil {
@@ -115,7 +124,7 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, er
 	_ = terminal.Resize(cols, rows)
 	cmd := terminal.Command(l.ClaudeBin, "--resume", sessionID, "--remote-control", title)
 	cmd.Dir = cwd
-	cmd.Env = append(os.Environ(), "TERM=xterm-256color")
+	cmd.Env = childEnv()
 	if err := cmd.Start(); err != nil {
 		terminal.Close()
 		return nil, err
@@ -137,23 +146,57 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, er
 	l.sessions[sessionID] = m
 	l.mu.Unlock()
 
+	url, err := l.watch(m, dir, offsets, opts)
+	if err != nil {
+		// Don't leave a stuck session behind: the next tap starts a fresh one.
+		_ = m.cmd.Process.Kill()
+		return m, err
+	}
+	l.mu.Lock()
+	m.URL = url
+	l.mu.Unlock()
+	return m, nil
+}
+
+// watch answers Claude Code's startup questions and returns the Remote Control URL, read from
+// the terminal or, failing that, from the bridge record in the transcript.
+func (l *Launcher) watch(m *Managed, dir string, offsets map[string]int64, opts Options) (string, error) {
 	deadline := time.Now().Add(l.Timeout)
+	seen := 0           // output already handled
+	var waiting prompt  // question shown and not answered by us
+	var since time.Time // when it appeared
 	for time.Now().Before(deadline) {
+		if url := remoteURL.FindString(m.screen.Raw()); url != "" {
+			return url, nil
+		}
 		if bridge := newBridge(dir, offsets, m.Started); bridge != "" {
-			l.mu.Lock()
-			m.URL = transcripts.BridgeURL(bridge)
-			l.mu.Unlock()
-			return m, nil
+			return transcripts.BridgeURL(bridge), nil
+		}
+		text, offset := m.screen.Since(seen)
+		switch found := detectPrompt(text); found {
+		case trustPrompt:
+			if !opts.TrustFolder {
+				return "", ErrTrustRequired
+			}
+			_, _ = m.pty.Write([]byte(keyDown + keyEnter)) // "Yes, I trust this folder"
+			seen, waiting = offset, noPrompt
+		case browserPrompt:
+			_, _ = m.pty.Write([]byte(keyEscape)) // keep browser tools off
+			seen, waiting = offset, noPrompt
+		case unknownPrompt:
+			if waiting != unknownPrompt {
+				waiting, since = unknownPrompt, time.Now()
+			} else if time.Since(since) > 5*time.Second {
+				return "", &PromptError{Text: strings.Join(strings.Fields(text), " ")}
+			}
 		}
 		select {
 		case <-m.done:
-			return m, errors.New("Claude Code exited while resuming the session")
-		case <-time.After(time.Second):
+			return "", errors.New("Claude Code exited while resuming the session")
+		case <-time.After(500 * time.Millisecond):
 		}
 	}
-	// Don't leave a blank session behind: the next tap starts a fresh one.
-	_ = m.cmd.Process.Kill()
-	return m, ErrTimeout
+	return "", ErrTimeout
 }
 
 // Stop ends a session this server started.

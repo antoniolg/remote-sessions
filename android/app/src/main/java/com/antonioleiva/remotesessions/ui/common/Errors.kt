@@ -17,6 +17,8 @@ fun Throwable.toUiText(): UiText = when (this) {
         ApiErrorCode.OPEN_ELSEWHERE -> uiText(R.string.error_code_open_elsewhere)
         ApiErrorCode.REMOTE_CONTROL_TIMEOUT -> uiText(R.string.error_code_remote_control_timeout)
         ApiErrorCode.LAUNCH_FAILED -> uiText(R.string.error_code_launch_failed)
+        ApiErrorCode.FOLDER_ACCESS -> uiText(R.string.error_code_folder_access)
+        ApiErrorCode.PROMPT_BLOCKED -> uiText(R.string.error_code_prompt_blocked)
         ApiErrorCode.INTERNAL -> uiText(R.string.error_code_internal)
         else -> serverMessage?.let { UiText.Raw(it) }
             ?: if (status == 401) uiText(R.string.error_code_unauthorized) else uiText(R.string.error_http_status, status)

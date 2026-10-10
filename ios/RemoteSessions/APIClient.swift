@@ -5,7 +5,7 @@ import Foundation
 protocol SessionSource: Sendable {
     func sessions() async throws -> [Session]
     func messages(sessionID: String) async throws -> [Message]
-    func connect(sessionID: String) async throws -> URL
+    func connect(sessionID: String, trustFolder: Bool) async throws -> URL
     func disconnect(sessionID: String) async throws
 }
 
@@ -13,6 +13,8 @@ enum SourceError: LocalizedError {
     case server(String)
     /// An API error: a stable code (docs/API.md) translated here, with the server's English text as fallback.
     case api(code: String?, message: String)
+    /// Claude Code asks whether to trust this folder; the user decides and connects again.
+    case trustRequired(folder: String)
     case unreachable(String)
     case demo
 
@@ -26,8 +28,12 @@ enum SourceError: LocalizedError {
             case "open_elsewhere": String(localized: "The conversation is open on the computer. Close it there, or type /remote-control in it.")
             case "remote_control_timeout": String(localized: "Remote Control didn't respond in time. Check that Claude Code is signed in with your Claude subscription.")
             case "launch_failed": String(localized: "Claude Code couldn't resume the conversation.")
+            case "folder_access": String(localized: "The computer doesn't let Remote Sessions open this conversation's folder. On a Mac, allow remote-sessions in System Settings › Privacy & Security › Files and Folders.")
+            case "prompt_blocked": String(localized: "Claude Code is waiting for an answer on the computer. Open the conversation there to continue.")
             default: message
             }
+        case .trustRequired(let folder):
+            String(localized: "Claude Code asks whether you trust the folder \(folder). Trust it only if it's your own project.")
         case .unreachable(let name):
             String(localized: "Can't find \(name). Check that it's turned on, that the server is running and that you're both on the same Wi-Fi or on Tailscale.")
         case .demo: String(localized: "This is a demo. Pair your computer to connect for real.")
@@ -49,8 +55,9 @@ struct APIClient: SessionSource {
         try await request("v1/sessions/\(sessionID)/messages?limit=60", as: MessageList.self).messages
     }
 
-    func connect(sessionID: String) async throws -> URL {
-        try await request("v1/sessions/\(sessionID)/remote-control", method: "POST", timeout: 70, as: RemoteControlResult.self).url
+    func connect(sessionID: String, trustFolder: Bool) async throws -> URL {
+        let body = trustFolder ? Data(#"{"trustFolder":true}"#.utf8) : nil
+        return try await request("v1/sessions/\(sessionID)/remote-control", method: "POST", body: body, timeout: 70, as: RemoteControlResult.self).url
     }
 
     func disconnect(sessionID: String) async throws {
@@ -62,11 +69,11 @@ struct APIClient: SessionSource {
         try await request("health", as: Health.self)
     }
 
-    private func request<T: Decodable>(_ path: String, method: String = "GET", timeout: TimeInterval = 20, as type: T.Type) async throws -> T {
-        try await JSONDecoder.api.decode(T.self, from: data(path, method: method, timeout: timeout))
+    private func request<T: Decodable>(_ path: String, method: String = "GET", body: Data? = nil, timeout: TimeInterval = 20, as type: T.Type) async throws -> T {
+        try await JSONDecoder.api.decode(T.self, from: data(path, method: method, body: body, timeout: timeout))
     }
 
-    private func data(_ path: String, method: String, timeout: TimeInterval) async throws -> Data {
+    private func data(_ path: String, method: String, body: Data? = nil, timeout: TimeInterval) async throws -> Data {
         let session = URLSession(configuration: .ephemeral, delegate: PinningDelegate(fingerprint: computer.fingerprint), delegateQueue: nil)
         defer { session.finishTasksAndInvalidate() }
         var hosts = computer.orderedHosts
@@ -82,7 +89,7 @@ struct APIClient: SessionSource {
             let host = hosts[index]
             index += 1
             do {
-                let result = try await attempt(session, host: host, path: path, method: method, timeout: timeout)
+                let result = try await attempt(session, host: host, path: path, method: method, body: body, timeout: timeout)
                 await onReachable(host)
                 return result
             } catch let error as URLError where error.isUnreachable {
@@ -92,17 +99,22 @@ struct APIClient: SessionSource {
         throw SourceError.unreachable(computer.name)
     }
 
-    private func attempt(_ session: URLSession, host: String, path: String, method: String, timeout: TimeInterval) async throws -> Data {
+    private func attempt(_ session: URLSession, host: String, path: String, method: String, body: Data?, timeout: TimeInterval) async throws -> Data {
         let hostPart = host.contains(":") ? "[\(host)]" : host
         guard let url = URL(string: "https://\(hostPart):\(computer.port)/\(path)") else { throw SourceError.server(String(localized: "Invalid address: \(host)")) }
         var request = URLRequest(url: url, timeoutInterval: timeout)
         request.httpMethod = method
+        if let body {
+            request.httpBody = body
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         let (data, response) = try await session.data(for: request)
         guard let http = response as? HTTPURLResponse else { throw SourceError.server(String(localized: "Unexpected response from the computer")) }
         guard (200..<300).contains(http.statusCode) else {
-            let body = try? JSONDecoder().decode(APIError.self, from: data)
-            throw SourceError.api(code: body?.code, message: body?.error ?? "HTTP \(http.statusCode)")
+            let error = try? JSONDecoder().decode(APIError.self, from: data)
+            if error?.code == "trust_required" { throw SourceError.trustRequired(folder: error?.folder ?? "") }
+            throw SourceError.api(code: error?.code, message: error?.error ?? "HTTP \(http.statusCode)")
         }
         return data
     }

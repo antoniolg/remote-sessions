@@ -189,4 +189,9 @@
     <string name="demo_invoices_1">Tulis skrip yang mengganti nama PDF faktur, dengan tanggal faktur di namanya</string>
     <string name="demo_invoices_2">Aku membuat `rename-invoices.sh`. Skrip ini membaca tanggal dari setiap PDF dan mengganti namanya seperti `2026-10-01 Pemasok.pdf`.</string>
     <string name="untitled">Tanpa judul</string>
+    <string name="trust_title">Percayai folder ini?</string>
+    <string name="trust_message">Claude Code akan dapat membaca, mengedit, dan menjalankan file di %1$s. Percayai hanya jika itu proyek Anda sendiri.</string>
+    <string name="trust_confirm">Percayai dan hubungkan</string>
+    <string name="error_code_folder_access">Komputer tidak mengizinkan Remote Sessions membuka folder percakapan ini. Di Mac, izinkan remote-sessions di Pengaturan Sistem › Privasi &amp; Keamanan › File dan Folder.</string>
+    <string name="error_code_prompt_blocked">Claude Code sedang menunggu jawaban di komputer. Buka percakapan di sana untuk melanjutkan.</string>
 </resources>

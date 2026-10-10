@@ -33,7 +33,19 @@ fun ConnectDialogs(
     onDismissError: () -> Unit,
     onDismissDemo: () -> Unit,
     onPairComputer: () -> Unit,
+    onTrust: () -> Unit,
+    onDismissTrust: () -> Unit,
 ) {
+    state.pendingTrust?.let { pending ->
+        AlertDialog(
+            onDismissRequest = onDismissTrust,
+            title = { Text(stringResource(R.string.trust_title)) },
+            text = { Text(stringResource(R.string.trust_message, pending.folder)) },
+            confirmButton = { TextButton(onClick = onTrust) { Text(stringResource(R.string.trust_confirm)) } },
+            dismissButton = { TextButton(onClick = onDismissTrust) { Text(stringResource(R.string.action_cancel)) } },
+        )
+    }
+
     state.opening?.let { session ->
         Dialog(
             onDismissRequest = {},
