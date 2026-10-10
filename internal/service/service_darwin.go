@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"html"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
+	"time"
 )
 
 func plistPath() string {
@@ -37,12 +39,31 @@ func Install(exe string) error {
 	if err := os.WriteFile(plistPath(), []byte(plist), 0o644); err != nil {
 		return err
 	}
+	unload()
+	// bootout returns before the old job is gone; bootstrap fails with error 5 until then.
+	var err error
+	for attempt := 0; attempt < 10; attempt++ {
+		if err = run("launchctl", "bootstrap", domain(), plistPath()); err == nil {
+			return nil
+		}
+		time.Sleep(500 * time.Millisecond)
+	}
+	return err
+}
+
+// unload stops the job and waits until launchd forgets it.
+func unload() {
 	_ = run("launchctl", "bootout", domain()+"/"+launchdLabel)
-	return run("launchctl", "bootstrap", domain(), plistPath())
+	for attempt := 0; attempt < 20; attempt++ {
+		if exec.Command("launchctl", "print", domain()+"/"+launchdLabel).Run() != nil {
+			return
+		}
+		time.Sleep(250 * time.Millisecond)
+	}
 }
 
 func Uninstall() error {
-	_ = run("launchctl", "bootout", domain()+"/"+launchdLabel)
+	unload()
 	if err := os.Remove(plistPath()); err != nil && !os.IsNotExist(err) {
 		return err
 	}
