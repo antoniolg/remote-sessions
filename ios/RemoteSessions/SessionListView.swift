@@ -23,29 +23,29 @@ struct SessionListView: View {
     }
 
     private var title: String {
-        store.demoMode ? "Demo" : project ?? store.selected?.name ?? "Remote Sessions"
+        store.demoMode ? String(localized: "Demo") : project ?? store.selected?.name ?? "Remote Sessions"
     }
 
     var body: some View {
         NavigationStack {
             Group {
                 if sessions.isEmpty && loading {
-                    ProgressView("Cargando conversaciones…")
+                    ProgressView("Loading conversations…")
                 } else if sessions.isEmpty, let loadError {
                     ContentUnavailableView {
-                        Label("Sin conexión", systemImage: "wifi.exclamationmark")
+                        Label("No connection", systemImage: "wifi.exclamationmark")
                     } description: {
                         Text(loadError)
                     } actions: {
-                        Button("Reintentar") { Task { await load() } }
-                        Button("Ajustes") { showingSettings = true }
+                        Button("Try again") { Task { await load() } }
+                        Button("Settings") { showingSettings = true }
                     }
                 } else {
                     list
                 }
             }
             .navigationTitle(title)
-            .searchable(text: $search, prompt: "Buscar conversaciones")
+            .searchable(text: $search, prompt: "Search conversations")
             .toolbar { toolbar }
             .refreshable { await load() }
             .sheet(isPresented: $showingSettings) { SettingsView() }
@@ -69,8 +69,8 @@ struct SessionListView: View {
         .overlay {
             if visible.isEmpty && !loading {
                 if search.isEmpty {
-                    ContentUnavailableView("Sin conversaciones", systemImage: "bubble.left.and.bubble.right",
-                                           description: Text("Cuando uses Claude Code en este ordenador, aparecerán aquí."))
+                    ContentUnavailableView("No conversations", systemImage: "bubble.left.and.bubble.right",
+                                           description: Text("When you use Claude Code on this computer, your conversations will show up here."))
                 } else {
                     ContentUnavailableView.search(text: search)
                 }
@@ -83,20 +83,20 @@ struct SessionListView: View {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
                 if store.computers.count > 1 {
-                    Picker("Ordenador", selection: Binding(get: { store.selected }, set: { if let computer = $0 { store.select(computer) } })) {
+                    Picker("Computer", selection: Binding(get: { store.selected }, set: { if let computer = $0 { store.select(computer) } })) {
                         ForEach(store.computers) { Text($0.name).tag(Optional($0)) }
                     }
                 }
-                Picker("Proyecto", selection: $project) {
-                    Text("Todos los proyectos").tag(String?.none)
+                Picker("Project", selection: $project) {
+                    Text("All projects").tag(String?.none)
                     ForEach(projects, id: \.self) { Text($0).tag(String?.some($0)) }
                 }
             } label: {
-                Image(systemName: project == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                Label("Filter", systemImage: project == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
-            Button { showingSettings = true } label: { Image(systemName: "gearshape") }
+            Button("Settings", systemImage: "gearshape") { showingSettings = true }
         }
     }
 
@@ -130,7 +130,7 @@ private struct SessionRow: View {
                     Image(systemName: session.remote != nil ? "antenna.radiowaves.left.and.right.circle.fill" : "circle.fill")
                         .foregroundStyle(.green)
                         .imageScale(.small)
-                        .accessibilityLabel(session.remote != nil ? "Con Remote Control" : "Abierta en el ordenador")
+                        .accessibilityLabel(session.remote != nil ? String(localized: "Running with Remote Control") : String(localized: "Open on the computer"))
                 }
             }
             if let lastPrompt = session.lastPrompt, lastPrompt != session.displayTitle {

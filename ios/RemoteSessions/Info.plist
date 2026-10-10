@@ -41,8 +41,8 @@
 		<string>_remotesessions._tcp</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>La cámara se usa para escanear el código QR que muestra tu ordenador.</string>
+	<string>The camera is used to scan the QR code shown by your computer.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Remote Sessions se conecta a tu ordenador en la red local para mostrar tus conversaciones de Claude Code.</string>
+	<string>Remote Sessions connects to your computer on the local network to show your Claude Code conversations.</string>
 </dict>
 </plist>

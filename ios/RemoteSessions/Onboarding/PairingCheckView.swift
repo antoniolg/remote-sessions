@@ -15,18 +15,18 @@ struct PairingCheckView: View {
                 Image(systemName: "wifi.exclamationmark")
                     .font(.system(size: 56))
                     .foregroundStyle(.orange)
-                Text("No se pudo conectar con \(link.computer.name)")
+                Text("Couldn't connect to \(link.computer.name)")
                     .font(.title2.bold())
                     .multilineTextAlignment(.center)
                 Text(error)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
-                Button("Reintentar") { attempt += 1 }
+                Button("Try again") { attempt += 1 }
                     .buttonStyle(.borderedProminent)
             } else {
                 ProgressView()
                     .controlSize(.large)
-                Text("Conectando con \(link.computer.name)…")
+                Text("Connecting to \(link.computer.name)…")
                     .font(.headline)
             }
             Spacer()
@@ -42,7 +42,7 @@ struct PairingCheckView: View {
         do {
             let health = try await client.health()
             guard health.id == link.computer.id else {
-                error = "En esa dirección responde otro ordenador. Vuelve a escanear el código."
+                error = String(localized: "A different computer answered at that address. Scan the code again.")
                 return
             }
             _ = try await client.sessions()

@@ -21,16 +21,16 @@ enum SourceError: LocalizedError {
         case .server(let message): message
         case .api(let code, let message):
             switch code {
-            case "unauthorized": "El ordenador ya no reconoce este móvil. Vuelve a escanear su código con `remote-sessions pair`."
-            case "not_found": "Esa conversación ya no existe en el ordenador."
-            case "open_elsewhere": "La conversación está abierta en el ordenador. Ciérrala allí, o escribe /remote-control en ella."
-            case "remote_control_timeout": "Remote Control no respondió a tiempo. Comprueba que Claude Code tiene la sesión iniciada con tu suscripción de Claude."
-            case "launch_failed": "Claude Code no pudo reanudar la conversación."
+            case "unauthorized": String(localized: "This computer no longer recognizes this phone. Scan its code again with `remote-sessions pair`.")
+            case "not_found": String(localized: "That conversation no longer exists on the computer.")
+            case "open_elsewhere": String(localized: "The conversation is open on the computer. Close it there, or type /remote-control in it.")
+            case "remote_control_timeout": String(localized: "Remote Control didn't respond in time. Check that Claude Code is signed in with your Claude subscription.")
+            case "launch_failed": String(localized: "Claude Code couldn't resume the conversation.")
             default: message
             }
         case .unreachable(let name):
-            "No se encuentra \(name). Comprueba que está encendido, que el servidor está en marcha y que estáis en la misma wifi o en Tailscale."
-        case .demo: "Esto es una demostración. Empareja tu ordenador para conectar de verdad."
+            String(localized: "Can't find \(name). Check that it's turned on, that the server is running and that you're both on the same Wi-Fi or on Tailscale.")
+        case .demo: String(localized: "This is a demo. Pair your computer to connect for real.")
         }
     }
 }
@@ -94,12 +94,12 @@ struct APIClient: SessionSource {
 
     private func attempt(_ session: URLSession, host: String, path: String, method: String, timeout: TimeInterval) async throws -> Data {
         let hostPart = host.contains(":") ? "[\(host)]" : host
-        guard let url = URL(string: "https://\(hostPart):\(computer.port)/\(path)") else { throw SourceError.server("Dirección no válida: \(host)") }
+        guard let url = URL(string: "https://\(hostPart):\(computer.port)/\(path)") else { throw SourceError.server(String(localized: "Invalid address: \(host)")) }
         var request = URLRequest(url: url, timeoutInterval: timeout)
         request.httpMethod = method
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         let (data, response) = try await session.data(for: request)
-        guard let http = response as? HTTPURLResponse else { throw SourceError.server("Respuesta inesperada del ordenador") }
+        guard let http = response as? HTTPURLResponse else { throw SourceError.server(String(localized: "Unexpected response from the computer")) }
         guard (200..<300).contains(http.statusCode) else {
             let body = try? JSONDecoder().decode(APIError.self, from: data)
             throw SourceError.api(code: body?.code, message: body?.error ?? "HTTP \(http.statusCode)")
@@ -144,7 +144,7 @@ extension JSONDecoder {
             // Honours the offset ("Z" or "+02:00"), with or without fractional seconds.
             if let date = try? Date(text, strategy: Date.ISO8601FormatStyle(includingFractionalSeconds: true)) { return date }
             if let date = try? Date(text, strategy: Date.ISO8601FormatStyle()) { return date }
-            throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Fecha no válida: \(text)"))
+            throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Invalid date: \(text)"))
         }
         return decoder
     }()

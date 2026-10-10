@@ -44,7 +44,7 @@ struct RemoteSessionsApp: App {
                     }
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancelar") { openedLink = nil }
+                            Button("Cancel") { openedLink = nil }
                         }
                     }
                 }

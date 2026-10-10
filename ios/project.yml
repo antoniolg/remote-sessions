@@ -1,6 +1,8 @@
 name: RemoteSessions
 options:
   bundleIdPrefix: com.antonioleiva
+  # English is the source language; translations live in the String Catalogs (*.xcstrings).
+  developmentLanguage: en
   deploymentTarget:
     iOS: "18.0"
 settings:
@@ -9,6 +11,8 @@ settings:
     MARKETING_VERSION: "1.0"
     DEVELOPMENT_TEAM: G9B2SPDPZG
     CURRENT_PROJECT_VERSION: "1"
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
 targets:
   RemoteSessions:
     type: application
@@ -36,9 +40,10 @@ targets:
         # The server is reached by IP or LAN name with a self-signed certificate that the app pins.
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
-        NSLocalNetworkUsageDescription: Remote Sessions se conecta a tu ordenador en la red local para mostrar tus conversaciones de Claude Code.
+        # Usage descriptions are translated in RemoteSessions/InfoPlist.xcstrings.
+        NSLocalNetworkUsageDescription: Remote Sessions connects to your computer on the local network to show your Claude Code conversations.
         NSBonjourServices: [_remotesessions._tcp]
-        NSCameraUsageDescription: La cámara se usa para escanear el código QR que muestra tu ordenador.
+        NSCameraUsageDescription: The camera is used to scan the QR code shown by your computer.
         CFBundleURLTypes:
           - CFBundleURLName: com.antonioleiva.remotesessions
             CFBundleURLSchemes: [remotesessions]

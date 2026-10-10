@@ -8,7 +8,7 @@ struct ScanStepView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Escanea el código QR que muestra la terminal")
+            Text("Scan the QR code shown in the terminal")
                 .font(.title2.bold())
                 .multilineTextAlignment(.center)
             if QRScanner.isAvailable {
@@ -18,19 +18,19 @@ struct ScanStepView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .frame(maxHeight: 360)
             } else {
-                ContentUnavailableView("Cámara no disponible", systemImage: "camera",
-                                       description: Text("Pega el enlace que aparece debajo del código."))
+                ContentUnavailableView("Camera unavailable", systemImage: "camera",
+                                       description: Text("Paste the link that appears below the code."))
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text("¿No puedes escanearlo? Pega el enlace remotesessions://… o vuelve a mostrarlo con `remote-sessions pair`.")
+                Text("Can't scan it? Paste the remotesessions://… link or show it again with `remote-sessions pair`.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 HStack {
-                    TextField("remotesessions://pair?…", text: $pasted)
+                    TextField(text: $pasted, prompt: Text(verbatim: "remotesessions://pair?…")) { Text("Pairing link") }
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .textFieldStyle(.roundedBorder)
-                    Button("Usar") {
+                    Button("Use") {
                         if let link = PairingLink(pasted) { onLink(link) } else { invalid = true }
                     }
                     .disabled(pasted.isEmpty)
@@ -39,10 +39,10 @@ struct ScanStepView: View {
             Spacer(minLength: 0)
         }
         .padding(24)
-        .alert("Ese código no es de Remote Sessions", isPresented: $invalid) {
+        .alert("That's not a Remote Sessions code", isPresented: $invalid) {
             Button("OK") {}
         } message: {
-            Text("Escanea el código que muestra `remote-sessions setup` o `remote-sessions pair`.")
+            Text("Scan the code shown by `remote-sessions setup` or `remote-sessions pair`.")
         }
     }
 }

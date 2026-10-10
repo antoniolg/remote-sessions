@@ -62,7 +62,7 @@ struct ConnectorPresentation: ViewModifier {
                     OpeningOverlay(session: session) { connector.cancel() }
                 }
             }
-            .alert("No se pudo conectar", isPresented: .constant(connector.errorMessage != nil)) {
+            .alert("Couldn't connect", isPresented: .constant(connector.errorMessage != nil)) {
                 Button("OK") { connector.errorMessage = nil }
             } message: {
                 Text(connector.errorMessage ?? "")
@@ -70,7 +70,7 @@ struct ConnectorPresentation: ViewModifier {
     }
 }
 
-/// "Conectar", or "Abrir" when the computer already runs the session with Remote Control.
+/// "Connect", or "Open" when the computer already runs the session with Remote Control.
 struct ConnectButton: View {
     let session: Session
     var prominent = false
@@ -87,9 +87,9 @@ struct ConnectButton: View {
             }
         } label: {
             if session.remote != nil {
-                Label("Abrir", systemImage: "arrow.up.forward.app")
+                Label("Open", systemImage: "arrow.up.forward.app")
             } else {
-                Label("Conectar", systemImage: "antenna.radiowaves.left.and.right")
+                Label("Connect", systemImage: "antenna.radiowaves.left.and.right")
             }
         }
         .disabled(connector.opening != nil)
@@ -108,17 +108,17 @@ private struct OpeningOverlay: View {
     var body: some View {
         VStack(spacing: 12) {
             ProgressView()
-            Text("Activando Remote Control…")
+            Text("Starting Remote Control…")
                 .font(.headline)
             Text(session.displayTitle)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-            Text("Puede tardar hasta un minuto")
+            Text("This can take up to a minute")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
-            Button("Cancelar", role: .cancel, action: cancel)
+            Button("Cancel", role: .cancel, action: cancel)
                 .padding(.top, 4)
         }
         .padding(24)

@@ -23,7 +23,7 @@ struct OnboardingView: View {
             .toolbar {
                 if startAtInstall {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancelar", action: onFinish)
+                        Button("Cancel", action: onFinish)
                     }
                 }
             }
@@ -49,16 +49,16 @@ struct OnboardingView: View {
                 .font(.system(size: 72))
                 .foregroundStyle(.tint)
             VStack(spacing: 12) {
-                Text("Remote Sessions")
+                Text(verbatim: "Remote Sessions")
                     .font(.largeTitle.bold())
-                Text("Consulta tus conversaciones de Claude Code desde el móvil y continúa cualquiera con un toque.")
+                Text("View your Claude Code conversations from your phone and continue any of them with a tap.")
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
             }
             VStack(alignment: .leading, spacing: 14) {
-                Requirement(icon: "terminal", text: "Claude Code instalado en tu ordenador")
-                Requirement(icon: "person.crop.circle.badge.checkmark", text: "Una suscripción de Claude (Remote Control no funciona con API key)")
-                Requirement(icon: "wifi", text: "El móvil en la misma wifi que el ordenador, o Tailscale")
+                Requirement(icon: "terminal", text: "Claude Code installed on your computer")
+                Requirement(icon: "person.crop.circle.badge.checkmark", text: "A Claude subscription (Remote Control doesn't work with an API key)")
+                Requirement(icon: "wifi", text: "Your phone on the same Wi-Fi as your computer, or Tailscale")
             }
             .padding()
             .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 16))
@@ -66,11 +66,11 @@ struct OnboardingView: View {
             Button {
                 path.append(.install)
             } label: {
-                Text("Empezar").frame(maxWidth: .infinity)
+                Text("Get started").frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            Button("Probar sin ordenador") {
+            Button("Try without a computer") {
                 store.demoMode = true
                 onFinish()
             }
@@ -90,7 +90,7 @@ struct PairingLinkBox: Hashable {
 
 private struct Requirement: View {
     let icon: String
-    let text: String
+    let text: LocalizedStringKey
 
     var body: some View {
         Label {
@@ -109,15 +109,15 @@ struct TailscaleStepView: View {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 56))
                 .foregroundStyle(.green)
-            Text("¡Conectado!")
+            Text("Connected!")
                 .font(.largeTitle.bold())
-            Text("Ya puedes ver tus conversaciones mientras estés en la misma wifi que el ordenador.")
+            Text("You can now see your conversations while you're on the same Wi-Fi as your computer.")
             VStack(alignment: .leading, spacing: 8) {
-                Label("¿Y fuera de casa?", systemImage: "globe")
+                Label("Away from home?", systemImage: "globe")
                     .font(.headline)
-                Text("Instala Tailscale en el ordenador y en el móvil con la misma cuenta. Después vuelve a ejecutar `remote-sessions pair` y escanea el código: incluirá la dirección de Tailscale.")
+                Text("Install Tailscale on your computer and your phone with the same account. Then run `remote-sessions pair` again and scan the code: it will include the Tailscale address.")
                     .foregroundStyle(.secondary)
-                Link("Descargar Tailscale", destination: Links.tailscale)
+                Link("Download Tailscale", destination: Links.tailscale)
             }
             .padding()
             .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 16))
@@ -125,7 +125,7 @@ struct TailscaleStepView: View {
             Button {
                 onFinish()
             } label: {
-                Text("Ver mis conversaciones").frame(maxWidth: .infinity)
+                Text("See my conversations").frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)

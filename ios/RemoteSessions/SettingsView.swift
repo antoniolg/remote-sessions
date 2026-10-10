@@ -17,7 +17,7 @@ struct SettingsView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(computer.name).foregroundStyle(.primary)
-                                    Text((computer.lastHost ?? computer.hosts.first ?? "") + ":\(computer.port)")
+                                    Text(verbatim: (computer.lastHost ?? computer.hosts.first ?? "") + ":\(computer.port)")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
@@ -31,35 +31,35 @@ struct SettingsView: View {
                     .onDelete { offsets in
                         offsets.map { store.computers[$0] }.forEach(store.remove)
                     }
-                    Button("Añadir ordenador", systemImage: "plus") { addingComputer = true }
+                    Button("Add computer", systemImage: "plus") { addingComputer = true }
                 } header: {
-                    Text("Ordenadores")
+                    Text("Computers")
                 } footer: {
-                    Text("Desliza para olvidar un ordenador. Para revocar el acceso desde el ordenador, ejecuta `remote-sessions pair --rotate`.")
+                    Text("Swipe to forget a computer. To revoke access from the computer, run `remote-sessions pair --rotate`.")
                 }
 
                 Section {
-                    Toggle("Modo demostración", isOn: Binding(get: { store.demoMode }, set: { store.demoMode = $0 }))
+                    Toggle("Demo mode", isOn: Binding(get: { store.demoMode }, set: { store.demoMode = $0 }))
                 } footer: {
-                    Text("Muestra conversaciones de ejemplo sin conectarse a ningún ordenador.")
+                    Text("Shows sample conversations without connecting to any computer.")
                 }
 
-                Section("Información") {
-                    Link("Cómo instalar el servidor", destination: Links.home)
-                    Link("Política de privacidad", destination: Links.privacy)
-                    Link("Código fuente", destination: Links.source)
-                    LabeledContent("Versión", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")
+                Section("About") {
+                    Link("How to install the server", destination: Links.home)
+                    Link("Privacy policy", destination: Links.privacy)
+                    Link("Source code", destination: Links.source)
+                    LabeledContent("Version", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")
                 }
 
                 Section {
                 } footer: {
-                    Text("Remote Sessions no es una app oficial de Anthropic. Claude y Claude Code son marcas de Anthropic.")
+                    Text("Remote Sessions is not an official Anthropic app. Claude and Claude Code are trademarks of Anthropic.")
                 }
             }
-            .navigationTitle("Ajustes")
+            .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Hecho") { dismiss() }
+                    Button("Done") { dismiss() }
                 }
             }
             .fullScreenCover(isPresented: $addingComputer) {

@@ -14,11 +14,11 @@ enum InstallCommand: String, CaseIterable, Identifiable {
         }
     }
 
-    var where_: String {
+    var where_: LocalizedStringResource {
         switch self {
-        case .macOS: "Abre Terminal y pega:"
-        case .windows: "Abre PowerShell y pega:"
-        case .linux: "Abre una terminal y pega:"
+        case .macOS: "Open Terminal and paste:"
+        case .windows: "Open PowerShell and paste:"
+        case .linux: "Open a terminal and paste:"
         }
     }
 
@@ -30,10 +30,10 @@ enum InstallCommand: String, CaseIterable, Identifiable {
         }
     }
 
-    var note: String? {
+    var note: LocalizedStringResource? {
         switch self {
-        case .macOS: "¿Sin Homebrew? También vale: curl -fsSL https://antonioleiva.com/remote-sessions/install.sh | sh"
-        case .windows: "Si Windows pregunta por el firewall, permite el acceso en redes privadas."
+        case .macOS: "No Homebrew? This works too: \(InstallCommand.linux.command)"
+        case .windows: "If Windows asks about the firewall, allow access on private networks."
         case .linux: nil
         }
     }
@@ -47,31 +47,31 @@ struct InstallStepView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Instala el servidor en tu ordenador")
+                Text("Install the server on your computer")
                     .font(.title.bold())
-                Text("Es un programa pequeño que deja al móvil ver tus conversaciones. Se ejecuta en segundo plano y solo responde a los móviles que emparejes.")
+                Text("It's a small program that lets your phone see your conversations. It runs in the background and only answers the phones you pair.")
                     .foregroundStyle(.secondary)
-                Picker("Sistema", selection: $system) {
-                    ForEach(InstallCommand.allCases) { Text($0.title).tag($0) }
+                Picker("Operating system", selection: $system) {
+                    ForEach(InstallCommand.allCases) { Text(verbatim: $0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
                 VStack(alignment: .leading, spacing: 10) {
                     Text(system.where_)
                         .font(.subheadline.weight(.semibold))
-                    Text(system.command)
+                    Text(verbatim: system.command)
                         .font(.system(.callout, design: .monospaced))
                         .textSelection(.enabled)
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
                     HStack {
-                        Button(copied ? "Copiado" : "Copiar", systemImage: copied ? "checkmark" : "doc.on.doc") {
+                        Button(copied ? String(localized: "Copied") : String(localized: "Copy"), systemImage: copied ? "checkmark" : "doc.on.doc") {
                             UIPasteboard.general.string = system.command
                             copied = true
                         }
-                        ShareLink(item: system.command, subject: Text("Instalar Remote Sessions"),
-                                  message: Text("Pega esto en la terminal de tu ordenador:")) {
-                            Label("Enviar al ordenador", systemImage: "square.and.arrow.up")
+                        ShareLink(item: system.command, subject: Text("Install Remote Sessions"),
+                                  message: Text("Paste this into your computer's terminal:")) {
+                            Label("Send to computer", systemImage: "square.and.arrow.up")
                         }
                     }
                     .buttonStyle(.bordered)
@@ -82,7 +82,7 @@ struct InstallStepView: View {
                             .textSelection(.enabled)
                     }
                 }
-                Label("Al terminar, la terminal mostrará un código QR.", systemImage: "qrcode")
+                Label("When it finishes, the terminal will show a QR code.", systemImage: "qrcode")
                     .foregroundStyle(.secondary)
             }
             .padding(24)
@@ -90,7 +90,7 @@ struct InstallStepView: View {
         .onChange(of: system) { copied = false }
         .safeAreaInset(edge: .bottom) {
             Button(action: onNext) {
-                Text("Ya veo el código QR").frame(maxWidth: .infinity)
+                Text("I can see the QR code").frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)

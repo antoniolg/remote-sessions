@@ -21,7 +21,7 @@ struct Session: Identifiable, Decodable, Hashable {
 
     /// The server sends an empty title when the conversation has none.
     var displayTitle: String {
-        title.isEmpty ? String(localized: "Sin título") : title
+        title.isEmpty ? String(localized: "Untitled") : title
     }
 }
 
@@ -90,7 +90,7 @@ struct PairingLink: Equatable {
         else { return nil }
         let hosts = (items["hosts"] ?? "").split(separator: ",").map(String.init).filter { !$0.isEmpty }
         guard !hosts.isEmpty else { return nil }
-        computer = Computer(id: id, name: items["name"] ?? "Ordenador", port: port, hosts: hosts, fingerprint: fingerprint)
+        computer = Computer(id: id, name: items["name"] ?? String(localized: "Computer"), port: port, hosts: hosts, fingerprint: fingerprint)
         self.token = token
     }
 }

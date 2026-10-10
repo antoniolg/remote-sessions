@@ -19,7 +19,7 @@ struct SessionDetailView: View {
                     if messages.isEmpty && loading {
                         ProgressView().padding(.top, 40)
                     } else if messages.isEmpty, let loadError {
-                        ContentUnavailableView("No se pudieron cargar los mensajes", systemImage: "exclamationmark.bubble", description: Text(loadError))
+                        ContentUnavailableView("Couldn't load the messages", systemImage: "exclamationmark.bubble", description: Text(loadError))
                     }
                     ForEach(messages) { MessageBubble(message: $0).id($0.id) }
                 }
@@ -35,7 +35,7 @@ struct SessionDetailView: View {
         .toolbar {
             if shown.remote != nil {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Detener", role: .destructive) {
+                    Button("Stop", role: .destructive) {
                         Task { await connector.stop(shown, source: store.source) }
                     }
                 }
