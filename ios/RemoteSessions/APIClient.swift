@@ -76,27 +76,46 @@ struct APIClient: SessionSource {
     private func data(_ path: String, method: String, body: Data? = nil, timeout: TimeInterval) async throws -> Data {
         let session = URLSession(configuration: .ephemeral, delegate: PinningDelegate(fingerprint: computer.fingerprint), delegateQueue: nil)
         defer { session.finishTasksAndInvalidate() }
-        var hosts = computer.orderedHosts
-        var index = 0
-        var discovered = false
-        while true {
-            if index == hosts.count {
-                // Every known address failed: ask Bonjour where the computer is now.
-                guard !discovered, let found = await Discovery.find(serverID: computer.id), !hosts.contains(found) else { break }
-                discovered = true
-                hosts.append(found)
-            }
-            let host = hosts[index]
-            index += 1
+        // Reuse the address that answered recently; otherwise race every known one.
+        if let host = await ReachableHosts.shared.host(for: computer.id) {
             do {
-                let result = try await attempt(session, host: host, path: path, method: method, body: body, timeout: timeout)
-                await onReachable(host)
-                return result
+                return try await attempt(session, host: host, path: path, method: method, body: body, timeout: timeout)
             } catch let error as URLError where error.isUnreachable {
-                continue
+                await ReachableHosts.shared.forget(computer.id)
             }
         }
-        throw SourceError.unreachable(computer.name)
+        guard let host = await findHost(session) else { throw SourceError.unreachable(computer.name) }
+        await ReachableHosts.shared.remember(host, for: computer.id)
+        await onReachable(host)
+        return try await attempt(session, host: host, path: path, method: method, body: body, timeout: timeout)
+    }
+
+    /// Asks every known address at once (home network, Tailscale…) and returns the first that answers.
+    /// Away from home the LAN address just hangs, so trying them one by one wasted the whole timeout.
+    private func findHost(_ session: URLSession) async -> String? {
+        if let host = await firstHealthy(session, hosts: computer.orderedHosts) { return host }
+        // None answered: ask Bonjour where the computer is now.
+        guard let found = await Discovery.find(serverID: computer.id) else { return nil }
+        return await firstHealthy(session, hosts: [found])
+    }
+
+    private func firstHealthy(_ session: URLSession, hosts: [String]) async -> String? {
+        await withTaskGroup(of: String?.self) { group in
+            for host in hosts {
+                group.addTask {
+                    let health = try? await attempt(session, host: host, path: "health", method: "GET", body: nil, timeout: 6)
+                    guard let health, let info = try? JSONDecoder.api.decode(Health.self, from: health), info.id == computer.id else { return nil }
+                    return host
+                }
+            }
+            for await host in group {
+                if let host {
+                    group.cancelAll()
+                    return host
+                }
+            }
+            return nil
+        }
     }
 
     private func attempt(_ session: URLSession, host: String, path: String, method: String, body: Data?, timeout: TimeInterval) async throws -> Data {
@@ -120,10 +139,30 @@ struct APIClient: SessionSource {
     }
 }
 
+/// The address each computer answered on lately, shared by every request.
+actor ReachableHosts {
+    static let shared = ReachableHosts()
+    private var hosts: [String: (host: String, at: Date)] = [:]
+
+    func host(for id: String) -> String? {
+        guard let entry = hosts[id], Date().timeIntervalSince(entry.at) < 120 else { return nil }
+        return entry.host
+    }
+
+    func remember(_ host: String, for id: String) {
+        hosts[id] = (host, Date())
+    }
+
+    func forget(_ id: String) {
+        hosts[id] = nil
+    }
+}
+
 private extension URLError {
     /// Failures that mean "try the next address"; a pinning failure is not one of them.
     var isUnreachable: Bool {
-        [.cannotConnectToHost, .cannotFindHost, .timedOut, .networkConnectionLost, .notConnectedToInternet, .dnsLookupFailed]
+        [.cannotConnectToHost, .cannotFindHost, .timedOut, .networkConnectionLost, .notConnectedToInternet, .dnsLookupFailed,
+         .secureConnectionFailed, .cannotLoadFromNetwork]
             .contains(code)
     }
 }

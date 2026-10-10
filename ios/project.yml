@@ -38,8 +38,11 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         ITSAppUsesNonExemptEncryption: false
         # The server is reached by IP or LAN name with a self-signed certificate that the app pins.
+        # Tailscale addresses (100.64.0.0/10) are not "local" for ATS, which rejected the self-signed
+        # certificate before PinningDelegate could check it. Trust comes from the pinned fingerprint.
+        # (NSAllowsLocalNetworking would make iOS ignore NSAllowsArbitraryLoads, so it must not be set.)
         NSAppTransportSecurity:
-          NSAllowsLocalNetworking: true
+          NSAllowsArbitraryLoads: true
         # Usage descriptions are translated in RemoteSessions/InfoPlist.xcstrings.
         NSLocalNetworkUsageDescription: Remote Sessions connects to your computer on the local network to show your Claude Code conversations.
         NSBonjourServices: [_remotesessions._tcp]
