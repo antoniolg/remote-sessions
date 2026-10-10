@@ -25,22 +25,19 @@ checksum:
 changelog:
   sort: asc
 
-homebrew_casks:
+# A formula, like the other tools in the tap: formulas are not quarantined, so the unnotarized binary runs as is.
+brews:
   - name: remote-sessions
     repository:
       owner: antoniolg
       name: homebrew-tap
+    directory: Formula
     homepage: https://antonioleiva.com/en/projects/remote-sessions
     description: Use your Claude Code sessions from your phone
-    binaries: [remote-sessions]
+    license: MIT
+    install: |
+      bin.install "remote-sessions"
+    test: |
+      assert_match version.to_s, shell_output("#{bin}/remote-sessions version")
     caveats: |
       Run `remote-sessions setup` to start the background service and pair your phone.
-    hooks:
-      post:
-        # The binary is not notarized: drop the quarantine flag so macOS lets it run.
-        install: |
-          if OS.mac?
-            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/remote-sessions"]
-          end
-        uninstall: |
-          system_command "#{HOMEBREW_PREFIX}/bin/remote-sessions", args: ["service", "uninstall"], must_succeed: false
