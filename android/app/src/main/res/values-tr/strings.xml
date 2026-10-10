@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">Tamam</string>
+    <string name="action_cancel">İptal</string>
+    <string name="action_retry">Tekrar dene</string>
+    <string name="action_back">Geri</string>
+    <string name="action_close">Kapat</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="generic_error_title">Hata</string>
+
+    <!-- Relative time -->
+    <string name="time_now">az önce</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%d dk önce</item>
+        <item quantity="other">%d dk önce</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">%d sa önce</item>
+        <item quantity="other">%d sa önce</item>
+    </plurals>
+    <string name="time_yesterday">dün</string>
+    <plurals name="time_days_ago">
+        <item quantity="one">%d gün önce</item>
+        <item quantity="other">%d gün önce</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">Sohbetler</string>
+    <string name="sessions_demo_subtitle">Demo modu</string>
+    <string name="sessions_switch_computer">Bilgisayar değiştir</string>
+    <string name="sessions_selected">Seçili</string>
+    <string name="sessions_filter_project">Projeye göre filtrele</string>
+    <string name="sessions_all_projects">Tüm projeler</string>
+    <string name="sessions_search_hint">Sohbetlerde ara</string>
+    <string name="sessions_clear_search">Aramayı temizle</string>
+    <string name="sessions_loading">Sohbetler yükleniyor…</string>
+    <string name="sessions_offline_title">Bilgisayara ulaşılamıyor</string>
+    <string name="sessions_empty_title">Sohbet yok</string>
+    <string name="sessions_empty_message">Bilgisayarda Claude Code kullandığında sohbetlerin burada görünecek.</string>
+    <string name="sessions_no_results_title">Sonuç yok</string>
+    <string name="sessions_no_results_message">Aramanla veya seçili projeyle eşleşen sohbet yok.</string>
+    <string name="session_running">Bilgisayarda açık</string>
+    <string name="session_connect">Bağlan</string>
+    <string name="session_open_in_claude">Claude’da aç</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">Mesajlar yüklenemedi</string>
+    <string name="detail_empty_title">Mesaj yok</string>
+    <string name="detail_empty_message">Bu sohbette henüz gösterilecek mesaj yok.</string>
+    <string name="detail_tools">Araçlar</string>
+    <string name="detail_connect">Bağlan</string>
+    <string name="detail_open">Aç</string>
+    <string name="detail_stop">Durdur</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Remote Control başlatılıyor…</string>
+    <string name="connect_progress_hint">Bu işlem bir dakikaya kadar sürebilir</string>
+    <string name="connect_error_title">Bağlanılamadı</string>
+    <string name="stop_error_title">Durdurulamadı</string>
+    <string name="open_error_title">Açılamadı</string>
+    <string name="open_error_message">%1$s bağlantısını açabilecek uygulama yok</string>
+    <string name="demo_dialog_title">Demo modu</string>
+    <string name="demo_dialog_message">Bu sohbetler örnektir ve bağlı bir bilgisayar yok.\n\nEşlenmiş bir bilgisayarla “Bağlan”, sohbeti Remote Control ile sürdürür ve telefonundan devam edebilmen için Claude uygulamasında açar.</string>
+    <string name="demo_dialog_pair">Bilgisayar eşle</string>
+    <string name="demo_dialog_dismiss">Anladım</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">“%1$s” bilgisayarına ulaşılamadı. Açık olduğundan, remote-sessions’ın çalıştığından ve aynı ağda ya da Tailscale’de olduğundan emin ol.</string>
+    <string name="error_pin_mismatch">“%1$s” sertifikası eşlenen sertifikayla eşleşmiyor. Bilgisayarı yeniden eşle.</string>
+    <string name="error_timeout">Bilgisayarın yanıt vermesi çok uzun sürdü.</string>
+    <string name="error_network">Ağ hatası: %1$s</string>
+    <string name="error_bad_response">Bilgisayardan beklenmeyen yanıt. remote-sessions güncel mi?</string>
+    <string name="error_unexpected">Beklenmeyen hata</string>
+    <string name="error_http_status">Bilgisayardan %1$d hatası</string>
+    <string name="error_code_unauthorized">Bilgisayar bu telefonu reddetti. Yeniden eşle.</string>
+    <string name="error_code_not_found">Bu sohbet artık bilgisayarda yok.</string>
+    <string name="error_code_open_elsewhere">Bu sohbet bilgisayarda başka bir yerde açık (terminal veya masaüstü uygulaması). Orada kapatıp tekrar dene.</string>
+    <string name="error_code_remote_control_timeout">Remote Control zamanında başlamadı. Biraz sonra tekrar dene.</string>
+    <string name="error_code_launch_failed">Bilgisayar Claude Code’u başlatamadı. Yüklü olduğunu ve oturum açıldığını kontrol et.</string>
+    <string name="error_code_internal">Bilgisayarda bir sorun oluştu. Tekrar dene.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Bu bir Remote Sessions bağlantısı değil. remotesessions://pair ile başlamalı</string>
+    <string name="pairing_error_version">Desteklenmeyen eşleme sürümü (%1$s). Uygulamayı güncelle.</string>
+    <string name="pairing_error_missing_field">Bağlantıda “%1$s” alanı eksik.</string>
+    <string name="pairing_error_fingerprint">Sertifika parmak izi geçerli değil.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_computers">Bilgisayarlar</string>
+    <string name="settings_no_computers">Eşlenmiş bilgisayar yok</string>
+    <string name="settings_no_computers_hint">Gerçek sohbetlerini görmek için bir bilgisayar ekle.</string>
+    <string name="settings_last_address">Son adres: %1$s</string>
+    <string name="settings_remove_computer">%1$s bilgisayarını kaldır</string>
+    <string name="settings_add_computer">Bilgisayar ekle</string>
+    <string name="settings_demo_section">Demo modu</string>
+    <string name="settings_demo_exit">Demo modundan çık</string>
+    <string name="settings_demo_exit_to_welcome">Karşılama ekranına döneceksin.</string>
+    <string name="settings_demo_exit_to_computers">Bilgisayarlarına döneceksin.</string>
+    <string name="settings_demo_enter">Örnek verilerle dene</string>
+    <string name="settings_demo_enter_hint">Hiçbir bilgisayara bağlanmadan uydurma sohbetler gösterir.</string>
+    <string name="settings_about">Hakkında</string>
+    <string name="settings_version">Sürüm %1$s</string>
+    <string name="settings_security">Telefonun, sabitlenmiş bir sertifikayla HTTPS üzerinden doğrudan bilgisayarınla konuşur.</string>
+    <string name="settings_project_page">Proje sayfası</string>
+    <string name="settings_privacy">Gizlilik politikası</string>
+    <string name="settings_source">Kaynak kodu</string>
+    <string name="settings_disclaimer">Remote Sessions resmi bir Anthropic uygulaması değildir. Claude ve Claude Code, Anthropic’in ticari markalarıdır.</string>
+    <string name="settings_remove_title">“%1$s” kaldırılsın mı?</string>
+    <string name="settings_remove_message">Sohbetlerini artık görmeyeceksin. İstediğin zaman yeniden eşleyebilirsin.</string>
+    <string name="settings_remove_confirm">Kaldır</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">Kurulum</string>
+    <string name="onboarding_title_add">Bilgisayar ekle</string>
+    <string name="welcome_tagline">Bilgisayarındaki Claude Code sohbetlerini telefonundan takip et.</string>
+    <string name="welcome_feature_list">Sohbetlerini ve son mesajlarını proje bazında gör.</string>
+    <string name="welcome_feature_connect">Remote Control ile Claude uygulamasında devam etmek için “Bağlan”a dokun.</string>
+    <string name="welcome_feature_secure">Telefonun, şifreli bir bağlantı üzerinden doğrudan bilgisayarınla konuşur.</string>
+    <string name="welcome_requirements_title">Gerekenler</string>
+    <string name="welcome_requirement_claude_code">Bilgisayarında yüklü Claude Code (macOS, Windows veya Linux).</string>
+    <string name="welcome_requirement_subscription">Remote Control içeren bir Claude aboneliği.</string>
+    <string name="welcome_requirement_app">Bu telefonda Claude uygulaması (isteğe bağlı; yoksa tarayıcı açılır).</string>
+    <string name="welcome_start">Başla</string>
+    <string name="welcome_demo">Bilgisayarsız dene</string>
+
+    <string name="install_title">Sunucuyu yükle</string>
+    <string name="install_subtitle">Remote Sessions, Claude Code kullandığın bilgisayarda küçük bir sunucuya ihtiyaç duyar.</string>
+    <string name="install_shell_terminal">Terminal</string>
+    <string name="install_run_in">Bilgisayarında %1$s uygulamasını aç ve şunu çalıştır:</string>
+    <string name="install_copy">Kopyala</string>
+    <string name="install_copied">Komut kopyalandı</string>
+    <string name="install_share">Paylaş</string>
+    <string name="install_share_subject">Remote Sessions’ı yükle (%1$s)</string>
+    <string name="install_share_chooser">Komutu paylaş</string>
+    <string name="install_explanation">Komut remote-sessions’ı yükler, arka planda çalışır durumda tutar ve bu telefonu eşlemek için bir QR kodu gösterir.</string>
+    <string name="install_macos_no_brew">Homebrew yok mu? Linux komutu macOS’ta da çalışır.</string>
+    <string name="install_share_hint">Başka bir cihazda mı yazacaksın? Kendine e-posta veya sohbetle göndermek için “Paylaş”ı kullan.</string>
+    <string name="install_done">Yaptım</string>
+
+    <string name="scan_title">Kodu tara</string>
+    <string name="scan_subtitle">Bilgisayarın kurulumun sonunda gösterdiği QR koduna doğrult.</string>
+    <string name="scan_camera_needed">QR kodunu okumak için kamera gerekiyor.</string>
+    <string name="scan_camera_denied">Kamera izni yok. Bunun yerine bilgisayarın gösterdiği bağlantıyı yapıştırabilirsin.</string>
+    <string name="scan_allow_camera">Kameraya izin ver</string>
+    <string name="scan_missing_code">Kodu göremiyor musun? Yeniden göstermek için bilgisayarda remote-sessions pair komutunu çalıştır.</string>
+    <string name="scan_paste_link">Bağlantıyı yapıştır</string>
+    <string name="scan_paste_message">Bilgisayarın gösterdiği remotesessions://pair… bağlantısını yapıştır.</string>
+    <string name="scan_pair">Eşle</string>
+
+    <string name="tailscale_title">Evin dışında da kullan</string>
+    <string name="tailscale_code_read">Kod okundu: “%1$s”. Bağlantıyı test etmeden önce isteğe bağlı bir ipucu.</string>
+    <string name="tailscale_same_network">Varsayılan olarak telefonun ve bilgisayarın aynı Wi‑Fi ağında olmalı.</string>
+    <string name="tailscale_body">Tailscale’i bilgisayara ve telefonuna aynı hesapla yüklersen port açmadan her yerden bağlanabilirsin. Kişisel kullanım için ücretsizdir.</string>
+    <string name="tailscale_repair_hint">Sunucu, Tailscale adresini QR koduna ekler. Daha sonra yüklersen bilgisayarı Ayarlar’dan yeniden eşle.</string>
+    <string name="tailscale_download">Tailscale’i indir</string>
+    <string name="tailscale_test">Bağlantıyı test et</string>
+
+    <string name="test_title">Bağlantı testi</string>
+    <string name="test_subtitle">Bu telefonun “%1$s” bilgisayarına ulaşıp ulaşamadığı kontrol ediliyor.</string>
+    <string name="test_server_found">Sunucu bulundu</string>
+    <string name="test_load_sessions">Sohbetleri yükle</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="one">%d sohbet yüklendi</item>
+        <item quantity="other">%d sohbet yüklendi</item>
+    </plurals>
+    <string name="test_success">Her şey hazır! “%1$s” artık eşlendi.</string>
+    <string name="test_offline_hint">Şu anda bilgisayarla aynı ağda değilsen yine de kaydedip daha sonra bağlanabilirsin.</string>
+    <string name="test_view_sessions">Sohbetleri gör</string>
+    <string name="test_save_anyway">Yine de kaydet</string>
+    <string name="test_rescan">Başka bir kod tara</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">Demo MacBook</string>
+    <string name="demo_login_title">Google ile girişi düzelt</string>
+    <string name="demo_login_1">Google ile giriş, canlı ortamda 401 hatasıyla başarısız oluyor. Bakabilir misin?</string>
+    <string name="demo_login_2">Buldum: **refresh token** son kullanma tarihi olmadan kaydediliyordu, bu yüzden `AuthService.refresh()` onu hiç yenilemiyordu.\n\n`TokenStore.save()` metodunu `expiresAt` değerini saklayacak şekilde değiştirdim ve otomatik yenileme ekledim.</string>
+    <string name="demo_login_3">Harika. Şimdi süresi dolmuş token durumu için bir test ekle</string>
+    <string name="demo_login_4">Tamam. `AuthServiceTest` içine `refreshesExpiredToken()` ekledim ve *42 testin* hepsi geçiyor.</string>
+    <string name="demo_newsletter_title">Ekim bülteni taslağı</string>
+    <string name="demo_newsletter_1">Kurs haberleriyle Ekim bülteninin bir taslağını yaz</string>
+    <string name="demo_newsletter_2">İşte taslak. Öncekilerin tonunu korudum ve şunları öne çıkardım:\n\n- Yeni **agents** modülü\n- Bir sonraki dönemin tarihi\n- [Web sitesine](https://example.com) bir bağlantı</string>
+    <string name="demo_newsletter_3">Daha kısa yap ve araçlarla ilgili paragrafı çıkar</string>
+    <string name="demo_newsletter_4">Tamam: şimdi 180 kelime ve araçlar paragrafı çıkarıldı.</string>
+    <string name="demo_migration_title">Veritabanını PostgreSQL 17’ye taşı</string>
+    <string name="demo_migration_1">Taşımada ne gibi riskler görüyorsun?</string>
+    <string name="demo_migration_2">Başlıca riskler:\n\n1. Örtük sıralamaya dayanan sorgular.\n2. Güncellenmesi gereken `pg_trgm` eklentisi.\n3. Yeniden indeksleme sırasındaki kilit süresi.</string>
+    <string name="demo_settings_title">Compose ile ayarlar ekranı</string>
+    <string name="demo_settings_1">Ayarlar ekranını oluştur. Material 3 kullan ve karanlık moda uy</string>
+    <string name="demo_settings_2">Hesap, bildirimler ve tema bölümleriyle `SettingsScreen` oluşturdum. Renkler `MaterialTheme.colorScheme` üzerinden geliyor, bu yüzden karanlık mod kendiliğinden çalışıyor.</string>
+    <string name="demo_invoices_title">Faturaları yeniden adlandırma betiği</string>
+    <string name="demo_invoices_1">Fatura PDF’lerini, adında fatura tarihini kullanarak yeniden adlandıran bir betik yaz</string>
+    <string name="demo_invoices_2">`rename-invoices.sh` betiğini oluşturdum. Her PDF’ten tarihi okuyor ve `2026-10-01 Tedarikçi.pdf` gibi yeniden adlandırıyor.</string>
+</resources>

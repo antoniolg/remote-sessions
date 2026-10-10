@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_retry">Coba lagi</string>
+    <string name="action_back">Kembali</string>
+    <string name="action_close">Tutup</string>
+    <string name="action_settings">Setelan</string>
+    <string name="generic_error_title">Error</string>
+
+    <!-- Relative time -->
+    <string name="time_now">baru saja</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%d mnt lalu</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="other">%d jam lalu</item>
+    </plurals>
+    <string name="time_yesterday">kemarin</string>
+    <plurals name="time_days_ago">
+        <item quantity="other">%d hari lalu</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">Percakapan</string>
+    <string name="sessions_demo_subtitle">Mode demo</string>
+    <string name="sessions_switch_computer">Ganti komputer</string>
+    <string name="sessions_selected">Dipilih</string>
+    <string name="sessions_filter_project">Filter menurut proyek</string>
+    <string name="sessions_all_projects">Semua proyek</string>
+    <string name="sessions_search_hint">Cari percakapan</string>
+    <string name="sessions_clear_search">Hapus pencarian</string>
+    <string name="sessions_loading">Memuat percakapan…</string>
+    <string name="sessions_offline_title">Komputer tidak dapat dijangkau</string>
+    <string name="sessions_empty_title">Tidak ada percakapan</string>
+    <string name="sessions_empty_message">Saat kamu memakai Claude Code di komputer, percakapanmu akan muncul di sini.</string>
+    <string name="sessions_no_results_title">Tidak ada hasil</string>
+    <string name="sessions_no_results_message">Tidak ada percakapan yang cocok dengan pencarian atau proyek yang dipilih.</string>
+    <string name="session_running">Terbuka di komputer</string>
+    <string name="session_connect">Hubungkan</string>
+    <string name="session_open_in_claude">Buka di Claude</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">Tidak dapat memuat pesan</string>
+    <string name="detail_empty_title">Tidak ada pesan</string>
+    <string name="detail_empty_message">Percakapan ini belum memiliki pesan untuk ditampilkan.</string>
+    <string name="detail_tools">Alat</string>
+    <string name="detail_connect">Hubungkan</string>
+    <string name="detail_open">Buka</string>
+    <string name="detail_stop">Hentikan</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Memulai Remote Control…</string>
+    <string name="connect_progress_hint">Ini bisa memakan waktu hingga satu menit</string>
+    <string name="connect_error_title">Tidak dapat terhubung</string>
+    <string name="stop_error_title">Tidak dapat menghentikan</string>
+    <string name="open_error_title">Tidak dapat membuka</string>
+    <string name="open_error_message">Tidak ada aplikasi yang dapat membuka %1$s</string>
+    <string name="demo_dialog_title">Mode demo</string>
+    <string name="demo_dialog_message">Percakapan ini hanya contoh dan tidak ada komputer yang terhubung.\n\nDengan komputer yang sudah dipasangkan, “Hubungkan” melanjutkan percakapan dengan Remote Control dan membukanya di aplikasi Claude agar kamu bisa melanjutkan di ponsel.</string>
+    <string name="demo_dialog_pair">Pasangkan komputer</string>
+    <string name="demo_dialog_dismiss">Mengerti</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">Tidak dapat menjangkau “%1$s”. Pastikan komputer menyala, remote-sessions berjalan, dan kamu berada di jaringan yang sama atau di Tailscale.</string>
+    <string name="error_pin_mismatch">Sertifikat “%1$s” tidak cocok dengan yang dipasangkan. Pasangkan ulang komputer.</string>
+    <string name="error_timeout">Komputer terlalu lama merespons.</string>
+    <string name="error_network">Error jaringan: %1$s</string>
+    <string name="error_bad_response">Respons tak terduga dari komputer. Apakah remote-sessions sudah versi terbaru?</string>
+    <string name="error_unexpected">Error tak terduga</string>
+    <string name="error_http_status">Error %1$d dari komputer</string>
+    <string name="error_code_unauthorized">Komputer menolak ponsel ini. Pasangkan ulang.</string>
+    <string name="error_code_not_found">Percakapan ini sudah tidak ada di komputer.</string>
+    <string name="error_code_open_elsewhere">Percakapan ini terbuka di tempat lain di komputer (terminal atau aplikasi desktop). Tutup di sana lalu coba lagi.</string>
+    <string name="error_code_remote_control_timeout">Remote Control tidak dimulai tepat waktu. Coba lagi sebentar lagi.</string>
+    <string name="error_code_launch_failed">Komputer tidak dapat memulai Claude Code. Pastikan sudah terinstal dan kamu sudah login.</string>
+    <string name="error_code_internal">Terjadi masalah di komputer. Coba lagi.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Ini bukan link Remote Sessions. Link harus diawali remotesessions://pair</string>
+    <string name="pairing_error_version">Versi pemasangan tidak didukung (%1$s). Perbarui aplikasi.</string>
+    <string name="pairing_error_missing_field">Link tidak memiliki kolom “%1$s”.</string>
+    <string name="pairing_error_fingerprint">Sidik jari sertifikat tidak valid.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Setelan</string>
+    <string name="settings_computers">Komputer</string>
+    <string name="settings_no_computers">Tidak ada komputer yang dipasangkan</string>
+    <string name="settings_no_computers_hint">Tambahkan satu untuk melihat percakapanmu yang sebenarnya.</string>
+    <string name="settings_last_address">Alamat terakhir: %1$s</string>
+    <string name="settings_remove_computer">Hapus %1$s</string>
+    <string name="settings_add_computer">Tambah komputer</string>
+    <string name="settings_demo_section">Mode demo</string>
+    <string name="settings_demo_exit">Keluar dari mode demo</string>
+    <string name="settings_demo_exit_to_welcome">Kamu akan kembali ke layar sambutan.</string>
+    <string name="settings_demo_exit_to_computers">Kamu akan kembali ke daftar komputermu.</string>
+    <string name="settings_demo_enter">Coba dengan data contoh</string>
+    <string name="settings_demo_enter_hint">Menampilkan percakapan rekaan tanpa terhubung ke komputer mana pun.</string>
+    <string name="settings_about">Tentang</string>
+    <string name="settings_version">Versi %1$s</string>
+    <string name="settings_security">Ponselmu berkomunikasi langsung dengan komputermu melalui HTTPS dengan sertifikat yang disematkan.</string>
+    <string name="settings_project_page">Halaman proyek</string>
+    <string name="settings_privacy">Kebijakan privasi</string>
+    <string name="settings_source">Kode sumber</string>
+    <string name="settings_disclaimer">Remote Sessions bukan aplikasi resmi Anthropic. Claude dan Claude Code adalah merek dagang Anthropic.</string>
+    <string name="settings_remove_title">Hapus “%1$s”?</string>
+    <string name="settings_remove_message">Kamu tidak akan lagi melihat percakapannya. Kamu bisa memasangkannya lagi kapan saja.</string>
+    <string name="settings_remove_confirm">Hapus</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">Penyiapan</string>
+    <string name="onboarding_title_add">Tambah komputer</string>
+    <string name="welcome_tagline">Ikuti percakapan Claude Code di komputermu dari ponsel.</string>
+    <string name="welcome_feature_list">Lihat percakapanmu dan pesan terbarunya, per proyek.</string>
+    <string name="welcome_feature_connect">Ketuk “Hubungkan” untuk melanjutkannya di aplikasi Claude dengan Remote Control.</string>
+    <string name="welcome_feature_secure">Ponselmu berkomunikasi langsung dengan komputermu melalui koneksi terenkripsi.</string>
+    <string name="welcome_requirements_title">Yang kamu perlukan</string>
+    <string name="welcome_requirement_claude_code">Claude Code terinstal di komputermu (macOS, Windows, atau Linux).</string>
+    <string name="welcome_requirement_subscription">Langganan Claude yang mencakup Remote Control.</string>
+    <string name="welcome_requirement_app">Aplikasi Claude di ponsel ini (opsional; jika tidak ada, browser akan terbuka).</string>
+    <string name="welcome_start">Mulai</string>
+    <string name="welcome_demo">Coba tanpa komputer</string>
+
+    <string name="install_title">Instal server</string>
+    <string name="install_subtitle">Remote Sessions memerlukan server kecil di komputer tempat kamu memakai Claude Code.</string>
+    <string name="install_shell_terminal">Terminal</string>
+    <string name="install_run_in">Buka %1$s di komputermu dan jalankan:</string>
+    <string name="install_copy">Salin</string>
+    <string name="install_copied">Perintah disalin</string>
+    <string name="install_share">Bagikan</string>
+    <string name="install_share_subject">Instal Remote Sessions (%1$s)</string>
+    <string name="install_share_chooser">Bagikan perintah</string>
+    <string name="install_explanation">Perintah ini menginstal remote-sessions, menjalankannya di latar belakang, dan menampilkan kode QR untuk memasangkan ponsel ini.</string>
+    <string name="install_macos_no_brew">Tidak punya Homebrew? Perintah Linux juga berfungsi di macOS.</string>
+    <string name="install_share_hint">Mengetiknya di perangkat lain? Gunakan “Bagikan” untuk mengirimnya ke dirimu sendiri lewat email atau chat.</string>
+    <string name="install_done">Sudah</string>
+
+    <string name="scan_title">Pindai kode</string>
+    <string name="scan_subtitle">Arahkan ke kode QR yang ditampilkan komputer di akhir instalasi.</string>
+    <string name="scan_camera_needed">Kamera diperlukan untuk membaca kode QR.</string>
+    <string name="scan_camera_denied">Tidak ada izin kamera. Kamu bisa menempelkan link yang ditampilkan komputer sebagai gantinya.</string>
+    <string name="scan_allow_camera">Izinkan kamera</string>
+    <string name="scan_missing_code">Tidak melihat kodenya? Jalankan remote-sessions pair di komputer untuk menampilkannya lagi.</string>
+    <string name="scan_paste_link">Tempel link</string>
+    <string name="scan_paste_message">Tempel link remotesessions://pair… yang ditampilkan komputer.</string>
+    <string name="scan_pair">Pasangkan</string>
+
+    <string name="tailscale_title">Gunakan juga di luar rumah</string>
+    <string name="tailscale_code_read">Kode terbaca: “%1$s”. Satu tips opsional sebelum menguji koneksi.</string>
+    <string name="tailscale_same_network">Secara bawaan, ponsel dan komputermu harus berada di jaringan Wi‑Fi yang sama.</string>
+    <string name="tailscale_body">Instal Tailscale di komputer dan ponselmu dengan akun yang sama, lalu kamu bisa terhubung dari mana saja tanpa membuka port. Gratis untuk penggunaan pribadi.</string>
+    <string name="tailscale_repair_hint">Server menyertakan alamat Tailscale-nya di kode QR. Jika kamu menginstalnya nanti, pasangkan ulang komputer dari Setelan.</string>
+    <string name="tailscale_download">Dapatkan Tailscale</string>
+    <string name="tailscale_test">Uji koneksi</string>
+
+    <string name="test_title">Uji koneksi</string>
+    <string name="test_subtitle">Memeriksa apakah ponsel ini dapat menjangkau “%1$s”.</string>
+    <string name="test_server_found">Server ditemukan</string>
+    <string name="test_load_sessions">Muat percakapan</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="other">%d percakapan dimuat</item>
+    </plurals>
+    <string name="test_success">Beres! “%1$s” sudah dipasangkan.</string>
+    <string name="test_offline_hint">Jika saat ini kamu tidak berada di jaringan yang sama dengan komputer, kamu tetap bisa menyimpannya dan terhubung nanti.</string>
+    <string name="test_view_sessions">Lihat percakapan</string>
+    <string name="test_save_anyway">Tetap simpan</string>
+    <string name="test_rescan">Pindai kode lain</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">MacBook Demo</string>
+    <string name="demo_login_title">Perbaiki login Google</string>
+    <string name="demo_login_1">Login Google gagal di produksi dengan error 401. Bisa tolong dicek?</string>
+    <string name="demo_login_2">Ketemu: **refresh token** disimpan tanpa tanggal kedaluwarsa, jadi `AuthService.refresh()` tidak pernah memperbaruinya.\n\nAku mengubah `TokenStore.save()` agar menyimpan `expiresAt` dan menambahkan pembaruan otomatis.</string>
+    <string name="demo_login_3">Mantap. Sekarang tambahkan tes untuk kasus token kedaluwarsa</string>
+    <string name="demo_login_4">Selesai. Aku menambahkan `refreshesExpiredToken()` ke `AuthServiceTest` dan semua *42 tes* lulus.</string>
+    <string name="demo_newsletter_title">Draf newsletter Oktober</string>
+    <string name="demo_newsletter_1">Tulis draf newsletter Oktober dengan kabar terbaru kursus</string>
+    <string name="demo_newsletter_2">Ini drafnya. Aku mempertahankan gaya bahasa edisi sebelumnya dan menyoroti:\n\n- Modul baru tentang **agents**\n- Tanggal angkatan berikutnya\n- Link ke [situs web](https://example.com)</string>
+    <string name="demo_newsletter_3">Buat lebih singkat dan hapus paragraf tentang alat</string>
+    <string name="demo_newsletter_4">Selesai: sekarang 180 kata dan paragraf tentang alat sudah dihapus.</string>
+    <string name="demo_migration_title">Migrasi database ke PostgreSQL 17</string>
+    <string name="demo_migration_1">Risiko apa saja yang kamu lihat dalam migrasi ini?</string>
+    <string name="demo_migration_2">Risiko utamanya:\n\n1. Kueri yang bergantung pada urutan implisit.\n2. Ekstensi `pg_trgm`, yang perlu diperbarui.\n3. Waktu penguncian saat pengindeksan ulang.</string>
+    <string name="demo_settings_title">Layar setelan di Compose</string>
+    <string name="demo_settings_1">Buat layar setelan. Gunakan Material 3 dan dukung mode gelap</string>
+    <string name="demo_settings_2">Aku membuat `SettingsScreen` dengan bagian untuk akun, notifikasi, dan tema. Warnanya diambil dari `MaterialTheme.colorScheme`, jadi mode gelap langsung berfungsi.</string>
+    <string name="demo_invoices_title">Skrip untuk mengganti nama faktur</string>
+    <string name="demo_invoices_1">Tulis skrip yang mengganti nama PDF faktur, dengan tanggal faktur di namanya</string>
+    <string name="demo_invoices_2">Aku membuat `rename-invoices.sh`. Skrip ini membaca tanggal dari setiap PDF dan mengganti namanya seperti `2026-10-01 Pemasok.pdf`.</string>
+</resources>

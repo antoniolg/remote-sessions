@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">確定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_retry">重試</string>
+    <string name="action_back">返回</string>
+    <string name="action_close">關閉</string>
+    <string name="action_settings">設定</string>
+    <string name="generic_error_title">錯誤</string>
+
+    <!-- Relative time -->
+    <string name="time_now">剛剛</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%d 分鐘前</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="other">%d 小時前</item>
+    </plurals>
+    <string name="time_yesterday">昨天</string>
+    <plurals name="time_days_ago">
+        <item quantity="other">%d 天前</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">對話</string>
+    <string name="sessions_demo_subtitle">展示模式</string>
+    <string name="sessions_switch_computer">切換電腦</string>
+    <string name="sessions_selected">已選取</string>
+    <string name="sessions_filter_project">依專案篩選</string>
+    <string name="sessions_all_projects">所有專案</string>
+    <string name="sessions_search_hint">搜尋對話</string>
+    <string name="sessions_clear_search">清除搜尋</string>
+    <string name="sessions_loading">正在載入對話…</string>
+    <string name="sessions_offline_title">無法連線到電腦</string>
+    <string name="sessions_empty_title">沒有對話</string>
+    <string name="sessions_empty_message">在電腦上使用 Claude Code 後，你的對話就會顯示在這裡。</string>
+    <string name="sessions_no_results_title">沒有結果</string>
+    <string name="sessions_no_results_message">沒有符合搜尋內容或所選專案的對話。</string>
+    <string name="session_running">已在電腦上開啟</string>
+    <string name="session_connect">連線</string>
+    <string name="session_open_in_claude">在 Claude 中開啟</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">無法載入訊息</string>
+    <string name="detail_empty_title">沒有訊息</string>
+    <string name="detail_empty_message">這個對話目前還沒有可顯示的訊息。</string>
+    <string name="detail_tools">工具</string>
+    <string name="detail_connect">連線</string>
+    <string name="detail_open">開啟</string>
+    <string name="detail_stop">停止</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">正在啟動 Remote Control…</string>
+    <string name="connect_progress_hint">最多可能需要一分鐘</string>
+    <string name="connect_error_title">無法連線</string>
+    <string name="stop_error_title">無法停止</string>
+    <string name="open_error_title">無法開啟</string>
+    <string name="open_error_message">沒有可開啟 %1$s 的應用程式</string>
+    <string name="demo_dialog_title">展示模式</string>
+    <string name="demo_dialog_message">這些對話僅為範例，目前沒有連線任何電腦。\n\n配對電腦後，輕觸「連線」即可透過 Remote Control 恢復對話，並在 Claude 應用程式中開啟，讓你在手機上繼續。</string>
+    <string name="demo_dialog_pair">配對電腦</string>
+    <string name="demo_dialog_dismiss">我知道了</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">無法連線到「%1$s」。請確認電腦已開機、remote-sessions 正在執行，且你與電腦位於同一個網路或都在 Tailscale 上。</string>
+    <string name="error_pin_mismatch">「%1$s」的憑證與已配對的憑證不符。請重新配對這台電腦。</string>
+    <string name="error_timeout">電腦回應逾時。</string>
+    <string name="error_network">網路錯誤：%1$s</string>
+    <string name="error_bad_response">電腦傳回非預期的回應。remote-sessions 是最新版本嗎？</string>
+    <string name="error_unexpected">非預期的錯誤</string>
+    <string name="error_http_status">電腦傳回錯誤 %1$d</string>
+    <string name="error_code_unauthorized">電腦拒絕了這支手機。請重新配對。</string>
+    <string name="error_code_not_found">這個對話已不存在於電腦上。</string>
+    <string name="error_code_open_elsewhere">這個對話已在電腦上的其他地方（終端機或桌面應用程式）開啟。請先在那裡關閉，然後再試一次。</string>
+    <string name="error_code_remote_control_timeout">Remote Control 未能及時啟動。請稍後再試。</string>
+    <string name="error_code_launch_failed">電腦無法啟動 Claude Code。請確認已安裝並已登入。</string>
+    <string name="error_code_internal">電腦上發生問題。請再試一次。</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">這不是 Remote Sessions 連結。連結必須以 remotesessions://pair 開頭</string>
+    <string name="pairing_error_version">不支援的配對版本（%1$s）。請更新應用程式。</string>
+    <string name="pairing_error_missing_field">連結缺少「%1$s」欄位。</string>
+    <string name="pairing_error_fingerprint">憑證指紋無效。</string>
+
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="settings_computers">電腦</string>
+    <string name="settings_no_computers">沒有已配對的電腦</string>
+    <string name="settings_no_computers_hint">新增一台電腦即可查看你的實際對話。</string>
+    <string name="settings_last_address">上次位址：%1$s</string>
+    <string name="settings_remove_computer">移除 %1$s</string>
+    <string name="settings_add_computer">新增電腦</string>
+    <string name="settings_demo_section">展示模式</string>
+    <string name="settings_demo_exit">結束展示模式</string>
+    <string name="settings_demo_exit_to_welcome">你將回到歡迎畫面。</string>
+    <string name="settings_demo_exit_to_computers">你將回到電腦列表。</string>
+    <string name="settings_demo_enter">使用範例資料試用</string>
+    <string name="settings_demo_enter_hint">顯示虛構的對話，不會連線到任何電腦。</string>
+    <string name="settings_about">關於</string>
+    <string name="settings_version">版本 %1$s</string>
+    <string name="settings_security">你的手機會透過使用固定憑證的 HTTPS 直接與電腦通訊。</string>
+    <string name="settings_project_page">專案頁面</string>
+    <string name="settings_privacy">隱私權政策</string>
+    <string name="settings_source">原始碼</string>
+    <string name="settings_disclaimer">Remote Sessions 並非 Anthropic 的官方應用程式。Claude 與 Claude Code 是 Anthropic 的商標。</string>
+    <string name="settings_remove_title">要移除「%1$s」嗎？</string>
+    <string name="settings_remove_message">你將不會再看到它的對話。你隨時都可以重新配對。</string>
+    <string name="settings_remove_confirm">移除</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">設定</string>
+    <string name="onboarding_title_add">新增電腦</string>
+    <string name="welcome_tagline">在手機上查看電腦裡的 Claude Code 對話。</string>
+    <string name="welcome_feature_list">依專案查看你的對話及最新訊息。</string>
+    <string name="welcome_feature_connect">輕觸「連線」，即可透過 Remote Control 在 Claude 應用程式中接續對話。</string>
+    <string name="welcome_feature_secure">你的手機會透過加密連線直接與電腦通訊。</string>
+    <string name="welcome_requirements_title">你需要</string>
+    <string name="welcome_requirement_claude_code">電腦上已安裝 Claude Code（macOS、Windows 或 Linux）。</string>
+    <string name="welcome_requirement_subscription">包含 Remote Control 的 Claude 訂閱方案。</string>
+    <string name="welcome_requirement_app">這支手機上的 Claude 應用程式（選用；若沒有則會開啟瀏覽器）。</string>
+    <string name="welcome_start">開始使用</string>
+    <string name="welcome_demo">不用電腦先試用</string>
+
+    <string name="install_title">安裝伺服器</string>
+    <string name="install_subtitle">Remote Sessions 需要在你使用 Claude Code 的電腦上執行一個小型伺服器。</string>
+    <string name="install_shell_terminal">終端機</string>
+    <string name="install_run_in">在電腦上開啟%1$s並執行：</string>
+    <string name="install_copy">複製</string>
+    <string name="install_copied">已複製指令</string>
+    <string name="install_share">分享</string>
+    <string name="install_share_subject">安裝 Remote Sessions（%1$s）</string>
+    <string name="install_share_chooser">分享指令</string>
+    <string name="install_explanation">這個指令會安裝 remote-sessions，讓它在背景持續執行，並顯示用來配對這支手機的 QR 圖碼。</string>
+    <string name="install_macos_no_brew">沒有 Homebrew 嗎？Linux 指令在 macOS 上也能使用。</string>
+    <string name="install_share_hint">要在其他裝置上輸入嗎？使用「分享」透過電子郵件或聊天傳給自己。</string>
+    <string name="install_done">我完成了</string>
+
+    <string name="scan_title">掃描 QR 圖碼</string>
+    <string name="scan_subtitle">對準安裝結束時電腦上顯示的 QR 圖碼。</string>
+    <string name="scan_camera_needed">需要使用相機才能讀取 QR 圖碼。</string>
+    <string name="scan_camera_denied">沒有相機權限。你也可以貼上電腦上顯示的連結。</string>
+    <string name="scan_allow_camera">允許使用相機</string>
+    <string name="scan_missing_code">看不到 QR 圖碼嗎？在電腦上執行 remote-sessions pair 即可再次顯示。</string>
+    <string name="scan_paste_link">貼上連結</string>
+    <string name="scan_paste_message">貼上電腦上顯示的 remotesessions://pair… 連結。</string>
+    <string name="scan_pair">配對</string>
+
+    <string name="tailscale_title">出門在外也能用</string>
+    <string name="tailscale_code_read">已讀取圖碼：「%1$s」。測試連線前，有一個選用的小提示。</string>
+    <string name="tailscale_same_network">預設情況下，手機和電腦必須連上同一個 Wi‑Fi 網路。</string>
+    <string name="tailscale_body">在電腦和手機上以同一個帳戶安裝 Tailscale，就能隨時隨地連線，無需開放連接埠。個人使用免費。</string>
+    <string name="tailscale_repair_hint">伺服器會將它的 Tailscale 位址包含在 QR 圖碼中。如果你之後才安裝，請到「設定」重新配對電腦。</string>
+    <string name="tailscale_download">取得 Tailscale</string>
+    <string name="tailscale_test">測試連線</string>
+
+    <string name="test_title">連線測試</string>
+    <string name="test_subtitle">正在檢查這支手機能否連線到「%1$s」。</string>
+    <string name="test_server_found">已找到伺服器</string>
+    <string name="test_load_sessions">載入對話</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="other">已載入 %d 個對話</item>
+    </plurals>
+    <string name="test_success">大功告成！「%1$s」已完成配對。</string>
+    <string name="test_offline_hint">如果你目前與電腦不在同一個網路，仍可以先儲存，稍後再連線。</string>
+    <string name="test_view_sessions">查看對話</string>
+    <string name="test_save_anyway">仍要儲存</string>
+    <string name="test_rescan">掃描其他圖碼</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">展示用 MacBook</string>
+    <string name="demo_login_title">修正 Google 登入</string>
+    <string name="demo_login_1">正式環境的 Google 登入失敗，回傳 401。可以幫我看一下嗎？</string>
+    <string name="demo_login_2">找到原因了：**更新權杖**儲存時沒有包含到期日，所以 `AuthService.refresh()` 從未更新它。\n\n我修改了 `TokenStore.save()`，讓它儲存 `expiresAt`，並加入自動更新。</string>
+    <string name="demo_login_3">很好。現在幫權杖過期的情況加一個測試</string>
+    <string name="demo_login_4">完成了。我在 `AuthServiceTest` 中加入了 `refreshesExpiredToken()`，*42 項測試*全部通過。</string>
+    <string name="demo_newsletter_title">十月電子報草稿</string>
+    <string name="demo_newsletter_1">寫一份十月電子報的草稿，介紹課程的最新消息</string>
+    <string name="demo_newsletter_2">這是草稿。我維持了前幾期的語氣，並特別介紹：\n\n- 全新的**代理**單元\n- 下一梯次的開課日期\n- [網站](https://example.com)連結</string>
+    <string name="demo_newsletter_3">再精簡一點，並刪掉關於工具的那一段</string>
+    <string name="demo_newsletter_4">完成：現在只有 180 個字，工具那一段已刪除。</string>
+    <string name="demo_migration_title">將資料庫遷移到 PostgreSQL 17</string>
+    <string name="demo_migration_1">你覺得這次遷移有哪些風險？</string>
+    <string name="demo_migration_2">主要風險有：\n\n1. 依賴隱含排序的查詢。\n2. 需要更新的 `pg_trgm` 擴充功能。\n3. 重建索引期間的鎖定時間。</string>
+    <string name="demo_settings_title">用 Compose 製作設定畫面</string>
+    <string name="demo_settings_1">製作設定畫面。使用 Material 3 並支援深色模式</string>
+    <string name="demo_settings_2">我建立了 `SettingsScreen`，包含帳戶、通知和主題等區塊。顏色取自 `MaterialTheme.colorScheme`，所以深色模式可以直接運作。</string>
+    <string name="demo_invoices_title">重新命名發票的指令碼</string>
+    <string name="demo_invoices_1">寫一個指令碼，用發票日期重新命名發票 PDF</string>
+    <string name="demo_invoices_2">我建立了 `rename-invoices.sh`。它會讀取每個 PDF 的日期，並重新命名為類似 `2026-10-01 供應商.pdf` 的格式。</string>
+</resources>

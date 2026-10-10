@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_retry">Tentar de novo</string>
+    <string name="action_back">Voltar</string>
+    <string name="action_close">Fechar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="generic_error_title">Erro</string>
+
+    <!-- Relative time -->
+    <string name="time_now">agora mesmo</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">há %d min</item>
+        <item quantity="many">há %d min</item>
+        <item quantity="other">há %d min</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">há %d h</item>
+        <item quantity="many">há %d h</item>
+        <item quantity="other">há %d h</item>
+    </plurals>
+    <string name="time_yesterday">ontem</string>
+    <plurals name="time_days_ago">
+        <item quantity="one">há %d dia</item>
+        <item quantity="many">há %d dias</item>
+        <item quantity="other">há %d dias</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">Conversas</string>
+    <string name="sessions_demo_subtitle">Modo demo</string>
+    <string name="sessions_switch_computer">Trocar de computador</string>
+    <string name="sessions_selected">Selecionado</string>
+    <string name="sessions_filter_project">Filtrar por projeto</string>
+    <string name="sessions_all_projects">Todos os projetos</string>
+    <string name="sessions_search_hint">Pesquisar conversas</string>
+    <string name="sessions_clear_search">Limpar pesquisa</string>
+    <string name="sessions_loading">Carregando conversas…</string>
+    <string name="sessions_offline_title">Não foi possível acessar o computador</string>
+    <string name="sessions_empty_title">Nenhuma conversa</string>
+    <string name="sessions_empty_message">Quando você usar o Claude Code no computador, suas conversas vão aparecer aqui.</string>
+    <string name="sessions_no_results_title">Nenhum resultado</string>
+    <string name="sessions_no_results_message">Nenhuma conversa corresponde à sua pesquisa ou ao projeto selecionado.</string>
+    <string name="session_running">Aberta no computador</string>
+    <string name="session_connect">Conectar</string>
+    <string name="session_open_in_claude">Abrir no Claude</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">Não foi possível carregar as mensagens</string>
+    <string name="detail_empty_title">Nenhuma mensagem</string>
+    <string name="detail_empty_message">Esta conversa ainda não tem mensagens para mostrar.</string>
+    <string name="detail_tools">Ferramentas</string>
+    <string name="detail_connect">Conectar</string>
+    <string name="detail_open">Abrir</string>
+    <string name="detail_stop">Parar</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Iniciando o Remote Control…</string>
+    <string name="connect_progress_hint">Isso pode levar até um minuto</string>
+    <string name="connect_error_title">Não foi possível conectar</string>
+    <string name="stop_error_title">Não foi possível parar</string>
+    <string name="open_error_title">Não foi possível abrir</string>
+    <string name="open_error_message">Nenhum app consegue abrir %1$s</string>
+    <string name="demo_dialog_title">Modo demo</string>
+    <string name="demo_dialog_message">Estas conversas são exemplos e nenhum computador está conectado.\n\nCom um computador pareado, “Conectar” retoma a conversa com o Remote Control e a abre no app do Claude para você continuar pelo celular.</string>
+    <string name="demo_dialog_pair">Parear um computador</string>
+    <string name="demo_dialog_dismiss">Entendi</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">Não foi possível acessar “%1$s”. Verifique se ele está ligado, se o remote-sessions está em execução e se vocês estão na mesma rede ou no Tailscale.</string>
+    <string name="error_pin_mismatch">O certificado de “%1$s” não corresponde ao pareado. Pareie o computador de novo.</string>
+    <string name="error_timeout">O computador demorou demais para responder.</string>
+    <string name="error_network">Erro de rede: %1$s</string>
+    <string name="error_bad_response">Resposta inesperada do computador. O remote-sessions está atualizado?</string>
+    <string name="error_unexpected">Erro inesperado</string>
+    <string name="error_http_status">Erro %1$d do computador</string>
+    <string name="error_code_unauthorized">O computador recusou este celular. Pareie de novo.</string>
+    <string name="error_code_not_found">Esta conversa não existe mais no computador.</string>
+    <string name="error_code_open_elsewhere">Esta conversa está aberta em outro lugar no computador (terminal ou app para desktop). Feche-a lá e tente de novo.</string>
+    <string name="error_code_remote_control_timeout">O Remote Control não iniciou a tempo. Tente de novo daqui a pouco.</string>
+    <string name="error_code_launch_failed">O computador não conseguiu iniciar o Claude Code. Verifique se ele está instalado e se você fez login.</string>
+    <string name="error_code_internal">Algo deu errado no computador. Tente de novo.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Este não é um link do Remote Sessions. Ele precisa começar com remotesessions://pair</string>
+    <string name="pairing_error_version">Versão de pareamento não suportada (%1$s). Atualize o app.</string>
+    <string name="pairing_error_missing_field">Falta o campo “%1$s” no link.</string>
+    <string name="pairing_error_fingerprint">A impressão digital do certificado não é válida.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_computers">Computadores</string>
+    <string name="settings_no_computers">Nenhum computador pareado</string>
+    <string name="settings_no_computers_hint">Adicione um para ver suas conversas reais.</string>
+    <string name="settings_last_address">Último endereço: %1$s</string>
+    <string name="settings_remove_computer">Remover %1$s</string>
+    <string name="settings_add_computer">Adicionar computador</string>
+    <string name="settings_demo_section">Modo demo</string>
+    <string name="settings_demo_exit">Sair do modo demo</string>
+    <string name="settings_demo_exit_to_welcome">Você vai voltar para a tela de boas-vindas.</string>
+    <string name="settings_demo_exit_to_computers">Você vai voltar para seus computadores.</string>
+    <string name="settings_demo_enter">Testar com dados de exemplo</string>
+    <string name="settings_demo_enter_hint">Mostra conversas fictícias sem se conectar a nenhum computador.</string>
+    <string name="settings_about">Sobre</string>
+    <string name="settings_version">Versão %1$s</string>
+    <string name="settings_security">Seu celular se comunica diretamente com seu computador via HTTPS com um certificado fixado.</string>
+    <string name="settings_project_page">Página do projeto</string>
+    <string name="settings_privacy">Política de privacidade</string>
+    <string name="settings_source">Código-fonte</string>
+    <string name="settings_disclaimer">O Remote Sessions não é um app oficial da Anthropic. Claude e Claude Code são marcas da Anthropic.</string>
+    <string name="settings_remove_title">Remover “%1$s”?</string>
+    <string name="settings_remove_message">Você vai deixar de ver as conversas dele. Pode pareá-lo de novo quando quiser.</string>
+    <string name="settings_remove_confirm">Remover</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">Configuração</string>
+    <string name="onboarding_title_add">Adicionar computador</string>
+    <string name="welcome_tagline">Acompanhe pelo celular as conversas do Claude Code no seu computador.</string>
+    <string name="welcome_feature_list">Veja suas conversas e as mensagens mais recentes, por projeto.</string>
+    <string name="welcome_feature_connect">Toque em “Conectar” para retomá-las no app do Claude com o Remote Control.</string>
+    <string name="welcome_feature_secure">Seu celular se comunica diretamente com seu computador por uma conexão criptografada.</string>
+    <string name="welcome_requirements_title">Você vai precisar de</string>
+    <string name="welcome_requirement_claude_code">Claude Code instalado no seu computador (macOS, Windows ou Linux).</string>
+    <string name="welcome_requirement_subscription">Uma assinatura do Claude que inclua o Remote Control.</string>
+    <string name="welcome_requirement_app">O app do Claude neste celular (opcional; senão, o navegador é aberto).</string>
+    <string name="welcome_start">Começar</string>
+    <string name="welcome_demo">Testar sem computador</string>
+
+    <string name="install_title">Instale o servidor</string>
+    <string name="install_subtitle">O Remote Sessions precisa de um pequeno servidor no computador em que você usa o Claude Code.</string>
+    <string name="install_shell_terminal">Terminal</string>
+    <string name="install_run_in">Abra o %1$s no seu computador e execute:</string>
+    <string name="install_copy">Copiar</string>
+    <string name="install_copied">Comando copiado</string>
+    <string name="install_share">Compartilhar</string>
+    <string name="install_share_subject">Instalar o Remote Sessions (%1$s)</string>
+    <string name="install_share_chooser">Compartilhar comando</string>
+    <string name="install_explanation">O comando instala o remote-sessions, mantém ele rodando em segundo plano e mostra um QR code para parear este celular.</string>
+    <string name="install_macos_no_brew">Não tem Homebrew? O comando do Linux também funciona no macOS.</string>
+    <string name="install_share_hint">Vai digitar em outro dispositivo? Use “Compartilhar” para enviá-lo para você mesmo por e-mail ou chat.</string>
+    <string name="install_done">Já fiz</string>
+
+    <string name="scan_title">Escaneie o código</string>
+    <string name="scan_subtitle">Aponte para o QR code que o computador mostrou no fim da instalação.</string>
+    <string name="scan_camera_needed">A câmera é necessária para ler o QR code.</string>
+    <string name="scan_camera_denied">Sem permissão de câmera. Você pode colar o link que o computador mostra.</string>
+    <string name="scan_allow_camera">Permitir câmera</string>
+    <string name="scan_missing_code">Não está vendo o código? Execute remote-sessions pair no computador para mostrá-lo de novo.</string>
+    <string name="scan_paste_link">Colar link</string>
+    <string name="scan_paste_message">Cole o link remotesessions://pair… que o computador mostra.</string>
+    <string name="scan_pair">Parear</string>
+
+    <string name="tailscale_title">Use também fora de casa</string>
+    <string name="tailscale_code_read">Código lido: “%1$s”. Uma dica opcional antes de testar a conexão.</string>
+    <string name="tailscale_same_network">Por padrão, o celular e o computador precisam estar na mesma rede Wi‑Fi.</string>
+    <string name="tailscale_body">Instale o Tailscale no computador e no celular com a mesma conta e você poderá se conectar de qualquer lugar, sem abrir portas. É grátis para uso pessoal.</string>
+    <string name="tailscale_repair_hint">O servidor inclui o endereço do Tailscale no QR code. Se você instalar depois, pareie o computador de novo em Configurações.</string>
+    <string name="tailscale_download">Baixar o Tailscale</string>
+    <string name="tailscale_test">Testar a conexão</string>
+
+    <string name="test_title">Teste de conexão</string>
+    <string name="test_subtitle">Verificando se este celular consegue acessar “%1$s”.</string>
+    <string name="test_server_found">Servidor encontrado</string>
+    <string name="test_load_sessions">Carregar conversas</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="one">%d conversa carregada</item>
+        <item quantity="many">%d conversas carregadas</item>
+        <item quantity="other">%d conversas carregadas</item>
+    </plurals>
+    <string name="test_success">Tudo pronto! “%1$s” agora está pareado.</string>
+    <string name="test_offline_hint">Se você não estiver na mesma rede que o computador agora, pode salvá-lo mesmo assim e se conectar depois.</string>
+    <string name="test_view_sessions">Ver conversas</string>
+    <string name="test_save_anyway">Salvar mesmo assim</string>
+    <string name="test_rescan">Escanear outro código</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">MacBook de demonstração</string>
+    <string name="demo_login_title">Corrigir o login com Google</string>
+    <string name="demo_login_1">O login com Google falha em produção com um 401. Pode dar uma olhada?</string>
+    <string name="demo_login_2">Achei: o **refresh token** era salvo sem a data de expiração, então `AuthService.refresh()` nunca o renovava.\n\nAlterei `TokenStore.save()` para guardar `expiresAt` e adicionei a renovação automática.</string>
+    <string name="demo_login_3">Ótimo. Agora adicione um teste para o caso do token expirado</string>
+    <string name="demo_login_4">Pronto. Adicionei `refreshesExpiredToken()` ao `AuthServiceTest` e os *42 testes* passam.</string>
+    <string name="demo_newsletter_title">Rascunho da newsletter de outubro</string>
+    <string name="demo_newsletter_1">Escreva um rascunho da newsletter de outubro com as novidades do curso</string>
+    <string name="demo_newsletter_2">Aqui está o rascunho. Mantive o tom das anteriores e destaquei:\n\n- O novo módulo de **agentes**\n- A data da próxima turma\n- Um link para [o site](https://example.com)</string>
+    <string name="demo_newsletter_3">Deixe mais curta e tire o parágrafo sobre ferramentas</string>
+    <string name="demo_newsletter_4">Pronto: agora ela tem 180 palavras e o parágrafo sobre ferramentas saiu.</string>
+    <string name="demo_migration_title">Migrar o banco de dados para PostgreSQL 17</string>
+    <string name="demo_migration_1">Que riscos você vê na migração?</string>
+    <string name="demo_migration_2">Os principais riscos são:\n\n1. Consultas que dependem de uma ordenação implícita.\n2. A extensão `pg_trgm`, que precisa ser atualizada.\n3. O tempo de bloqueio durante a reindexação.</string>
+    <string name="demo_settings_title">Tela de configurações em Compose</string>
+    <string name="demo_settings_1">Crie a tela de configurações. Use Material 3 e respeite o modo escuro</string>
+    <string name="demo_settings_2">Criei `SettingsScreen` com seções para a conta, as notificações e o tema. As cores vêm de `MaterialTheme.colorScheme`, então o modo escuro funciona sem esforço.</string>
+    <string name="demo_invoices_title">Script para renomear notas fiscais</string>
+    <string name="demo_invoices_1">Escreva um script que renomeie os PDFs das notas fiscais usando a data da nota no nome</string>
+    <string name="demo_invoices_2">Criei `rename-invoices.sh`. Ele lê a data de cada PDF e o renomeia assim: `2026-10-01 Fornecedor.pdf`.</string>
+</resources>

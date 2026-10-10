@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="action_retry">再試行</string>
+    <string name="action_back">戻る</string>
+    <string name="action_close">閉じる</string>
+    <string name="action_settings">設定</string>
+    <string name="generic_error_title">エラー</string>
+
+    <!-- Relative time -->
+    <string name="time_now">たった今</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%d分前</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="other">%d時間前</item>
+    </plurals>
+    <string name="time_yesterday">昨日</string>
+    <plurals name="time_days_ago">
+        <item quantity="other">%d日前</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">会話</string>
+    <string name="sessions_demo_subtitle">デモモード</string>
+    <string name="sessions_switch_computer">コンピュータを切り替え</string>
+    <string name="sessions_selected">選択中</string>
+    <string name="sessions_filter_project">プロジェクトで絞り込む</string>
+    <string name="sessions_all_projects">すべてのプロジェクト</string>
+    <string name="sessions_search_hint">会話を検索</string>
+    <string name="sessions_clear_search">検索をクリア</string>
+    <string name="sessions_loading">会話を読み込み中…</string>
+    <string name="sessions_offline_title">コンピュータに接続できません</string>
+    <string name="sessions_empty_title">会話がありません</string>
+    <string name="sessions_empty_message">コンピュータで Claude Code を使うと、ここに会話が表示されます。</string>
+    <string name="sessions_no_results_title">結果なし</string>
+    <string name="sessions_no_results_message">検索条件または選択したプロジェクトに一致する会話はありません。</string>
+    <string name="session_running">コンピュータで開いています</string>
+    <string name="session_connect">接続</string>
+    <string name="session_open_in_claude">Claude で開く</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">メッセージを読み込めませんでした</string>
+    <string name="detail_empty_title">メッセージがありません</string>
+    <string name="detail_empty_message">この会話にはまだ表示できるメッセージがありません。</string>
+    <string name="detail_tools">ツール</string>
+    <string name="detail_connect">接続</string>
+    <string name="detail_open">開く</string>
+    <string name="detail_stop">停止</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Remote Control を起動中…</string>
+    <string name="connect_progress_hint">最大1分ほどかかることがあります</string>
+    <string name="connect_error_title">接続できませんでした</string>
+    <string name="stop_error_title">停止できませんでした</string>
+    <string name="open_error_title">開けませんでした</string>
+    <string name="open_error_message">%1$s を開けるアプリがありません</string>
+    <string name="demo_dialog_title">デモモード</string>
+    <string name="demo_dialog_message">これらの会話はサンプルで、コンピュータは接続されていません。\n\nコンピュータをペアリングすると、「接続」で Remote Control を使って会話を再開し、Claude アプリで開いてスマートフォンから続けられます。</string>
+    <string name="demo_dialog_pair">コンピュータをペアリング</string>
+    <string name="demo_dialog_dismiss">OK</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">「%1$s」に接続できませんでした。電源が入っていて remote-sessions が実行中であり、同じネットワークまたは Tailscale に接続していることを確認してください。</string>
+    <string name="error_pin_mismatch">「%1$s」の証明書がペアリング済みのものと一致しません。コンピュータをもう一度ペアリングしてください。</string>
+    <string name="error_timeout">コンピュータの応答に時間がかかりすぎています。</string>
+    <string name="error_network">ネットワークエラー: %1$s</string>
+    <string name="error_bad_response">コンピュータから予期しない応答がありました。remote-sessions は最新版ですか？</string>
+    <string name="error_unexpected">予期しないエラー</string>
+    <string name="error_http_status">コンピュータからのエラー %1$d</string>
+    <string name="error_code_unauthorized">コンピュータがこのスマートフォンを拒否しました。もう一度ペアリングしてください。</string>
+    <string name="error_code_not_found">この会話はコンピュータ上にもう存在しません。</string>
+    <string name="error_code_open_elsewhere">この会話はコンピュータの別の場所（ターミナルまたはデスクトップアプリ）で開かれています。そちらで閉じてから、もう一度お試しください。</string>
+    <string name="error_code_remote_control_timeout">Remote Control が時間内に起動しませんでした。しばらくしてからもう一度お試しください。</string>
+    <string name="error_code_launch_failed">コンピュータで Claude Code を起動できませんでした。インストール済みでサインインしているか確認してください。</string>
+    <string name="error_code_internal">コンピュータで問題が発生しました。もう一度お試しください。</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Remote Sessions のリンクではありません。remotesessions://pair で始まる必要があります</string>
+    <string name="pairing_error_version">サポートされていないペアリングバージョンです（%1$s）。アプリを更新してください。</string>
+    <string name="pairing_error_missing_field">リンクに「%1$s」フィールドがありません。</string>
+    <string name="pairing_error_fingerprint">証明書のフィンガープリントが無効です。</string>
+
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="settings_computers">コンピュータ</string>
+    <string name="settings_no_computers">ペアリング済みのコンピュータはありません</string>
+    <string name="settings_no_computers_hint">追加すると実際の会話が表示されます。</string>
+    <string name="settings_last_address">最後のアドレス: %1$s</string>
+    <string name="settings_remove_computer">%1$s を削除</string>
+    <string name="settings_add_computer">コンピュータを追加</string>
+    <string name="settings_demo_section">デモモード</string>
+    <string name="settings_demo_exit">デモモードを終了</string>
+    <string name="settings_demo_exit_to_welcome">ようこそ画面に戻ります。</string>
+    <string name="settings_demo_exit_to_computers">コンピュータの一覧に戻ります。</string>
+    <string name="settings_demo_enter">サンプルデータで試す</string>
+    <string name="settings_demo_enter_hint">コンピュータに接続せずに、架空の会話を表示します。</string>
+    <string name="settings_about">このアプリについて</string>
+    <string name="settings_version">バージョン %1$s</string>
+    <string name="settings_security">スマートフォンは、固定された証明書を使った HTTPS でコンピュータと直接通信します。</string>
+    <string name="settings_project_page">プロジェクトページ</string>
+    <string name="settings_privacy">プライバシーポリシー</string>
+    <string name="settings_source">ソースコード</string>
+    <string name="settings_disclaimer">Remote Sessions は Anthropic の公式アプリではありません。Claude および Claude Code は Anthropic の商標です。</string>
+    <string name="settings_remove_title">「%1$s」を削除しますか？</string>
+    <string name="settings_remove_message">このコンピュータの会話は表示されなくなります。いつでも再度ペアリングできます。</string>
+    <string name="settings_remove_confirm">削除</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">セットアップ</string>
+    <string name="onboarding_title_add">コンピュータを追加</string>
+    <string name="welcome_tagline">コンピュータ上の Claude Code の会話を、スマートフォンから確認できます。</string>
+    <string name="welcome_feature_list">プロジェクトごとに会話と最新のメッセージを確認できます。</string>
+    <string name="welcome_feature_connect">「接続」をタップすると、Remote Control で Claude アプリから続きを再開できます。</string>
+    <string name="welcome_feature_secure">スマートフォンは暗号化された接続でコンピュータと直接通信します。</string>
+    <string name="welcome_requirements_title">必要なもの</string>
+    <string name="welcome_requirement_claude_code">コンピュータにインストールされた Claude Code（macOS、Windows、Linux）。</string>
+    <string name="welcome_requirement_subscription">Remote Control を含む Claude のサブスクリプション。</string>
+    <string name="welcome_requirement_app">このスマートフォンの Claude アプリ（任意。ない場合はブラウザが開きます）。</string>
+    <string name="welcome_start">はじめる</string>
+    <string name="welcome_demo">コンピュータなしで試す</string>
+
+    <string name="install_title">サーバーをインストール</string>
+    <string name="install_subtitle">Remote Sessions を使うには、Claude Code を使っているコンピュータに小さなサーバーが必要です。</string>
+    <string name="install_shell_terminal">ターミナル</string>
+    <string name="install_run_in">コンピュータで %1$s を開き、次のコマンドを実行してください:</string>
+    <string name="install_copy">コピー</string>
+    <string name="install_copied">コマンドをコピーしました</string>
+    <string name="install_share">共有</string>
+    <string name="install_share_subject">Remote Sessions をインストール（%1$s）</string>
+    <string name="install_share_chooser">コマンドを共有</string>
+    <string name="install_explanation">このコマンドは remote-sessions をインストールしてバックグラウンドで実行し続け、このスマートフォンをペアリングするための QR コードを表示します。</string>
+    <string name="install_macos_no_brew">Homebrew がない場合は、Linux 用のコマンドも macOS で使えます。</string>
+    <string name="install_share_hint">別のデバイスで入力しますか？「共有」を使ってメールやチャットで自分に送れます。</string>
+    <string name="install_done">完了しました</string>
+
+    <string name="scan_title">コードをスキャン</string>
+    <string name="scan_subtitle">インストールの最後にコンピュータに表示された QR コードにカメラを向けてください。</string>
+    <string name="scan_camera_needed">QR コードを読み取るにはカメラが必要です。</string>
+    <string name="scan_camera_denied">カメラの権限がありません。代わりに、コンピュータに表示されたリンクを貼り付けることもできます。</string>
+    <string name="scan_allow_camera">カメラを許可</string>
+    <string name="scan_missing_code">コードが見当たりませんか？コンピュータで remote-sessions pair を実行すると再表示されます。</string>
+    <string name="scan_paste_link">リンクを貼り付け</string>
+    <string name="scan_paste_message">コンピュータに表示された remotesessions://pair… のリンクを貼り付けてください。</string>
+    <string name="scan_pair">ペアリング</string>
+
+    <string name="tailscale_title">外出先でも使う</string>
+    <string name="tailscale_code_read">コードを読み取りました:「%1$s」。接続テストの前に、任意のヒントがひとつあります。</string>
+    <string name="tailscale_same_network">初期状態では、スマートフォンとコンピュータが同じ Wi‑Fi ネットワークに接続している必要があります。</string>
+    <string name="tailscale_body">コンピュータとスマートフォンに同じアカウントで Tailscale をインストールすれば、ポートを開放せずにどこからでも接続できます。個人利用は無料です。</string>
+    <string name="tailscale_repair_hint">サーバーは QR コードに Tailscale のアドレスを含めます。後からインストールした場合は、「設定」からコンピュータを再度ペアリングしてください。</string>
+    <string name="tailscale_download">Tailscale を入手</string>
+    <string name="tailscale_test">接続をテスト</string>
+
+    <string name="test_title">接続テスト</string>
+    <string name="test_subtitle">このスマートフォンから「%1$s」に接続できるか確認しています。</string>
+    <string name="test_server_found">サーバーが見つかりました</string>
+    <string name="test_load_sessions">会話を読み込む</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="other">%d件の会話を読み込みました</item>
+    </plurals>
+    <string name="test_success">準備完了！「%1$s」をペアリングしました。</string>
+    <string name="test_offline_hint">今コンピュータと同じネットワークにいない場合でも、保存しておいて後で接続できます。</string>
+    <string name="test_view_sessions">会話を表示</string>
+    <string name="test_save_anyway">このまま保存</string>
+    <string name="test_rescan">別のコードをスキャン</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">デモ用 MacBook</string>
+    <string name="demo_login_title">Google ログインを修正</string>
+    <string name="demo_login_1">本番環境で Google ログインが 401 で失敗します。見てもらえますか？</string>
+    <string name="demo_login_2">原因が分かりました。**リフレッシュトークン**が有効期限なしで保存されていたため、`AuthService.refresh()` が更新していませんでした。\n\n`TokenStore.save()` で `expiresAt` を保存するように変更し、自動更新を追加しました。</string>
+    <string name="demo_login_3">いいですね。期限切れトークンのケースのテストも追加してください</string>
+    <string name="demo_login_4">完了しました。`AuthServiceTest` に `refreshesExpiredToken()` を追加し、*42件のテスト*がすべて成功しています。</string>
+    <string name="demo_newsletter_title">10月のニュースレター下書き</string>
+    <string name="demo_newsletter_1">講座のお知らせを入れて、10月のニュースレターの下書きを書いてください</string>
+    <string name="demo_newsletter_2">下書きができました。これまでのトーンを保ちつつ、次の点を強調しています:\n\n- 新しい**エージェント**モジュール\n- 次期の開講日\n- [ウェブサイト](https://example.com)へのリンク</string>
+    <string name="demo_newsletter_3">もっと短くして、ツールについての段落は削除してください</string>
+    <string name="demo_newsletter_4">完了しました。180語になり、ツールの段落は削除しました。</string>
+    <string name="demo_migration_title">データベースを PostgreSQL 17 に移行</string>
+    <string name="demo_migration_1">この移行にはどんなリスクがありますか？</string>
+    <string name="demo_migration_2">主なリスクは次のとおりです:\n\n1. 暗黙の並び順に依存しているクエリ。\n2. 更新が必要な `pg_trgm` 拡張機能。\n3. 再インデックス中のロック時間。</string>
+    <string name="demo_settings_title">Compose で設定画面</string>
+    <string name="demo_settings_1">設定画面を作ってください。Material 3 を使い、ダークモードに対応させてください</string>
+    <string name="demo_settings_2">アカウント、通知、テーマのセクションを持つ `SettingsScreen` を作成しました。色は `MaterialTheme.colorScheme` から取得しているので、ダークモードにもそのまま対応します。</string>
+    <string name="demo_invoices_title">請求書の名前を変更するスクリプト</string>
+    <string name="demo_invoices_1">請求書の PDF の名前を、請求日を含めて変更するスクリプトを書いてください</string>
+    <string name="demo_invoices_2">`rename-invoices.sh` を作成しました。各 PDF から日付を読み取り、`2026-10-01 取引先.pdf` のような名前に変更します。</string>
+</resources>

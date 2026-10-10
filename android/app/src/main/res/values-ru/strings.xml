@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">ОК</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_retry">Повторить</string>
+    <string name="action_back">Назад</string>
+    <string name="action_close">Закрыть</string>
+    <string name="action_settings">Настройки</string>
+    <string name="generic_error_title">Ошибка</string>
+
+    <!-- Relative time -->
+    <string name="time_now">только что</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%d мин назад</item>
+        <item quantity="few">%d мин назад</item>
+        <item quantity="many">%d мин назад</item>
+        <item quantity="other">%d мин назад</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">%d ч назад</item>
+        <item quantity="few">%d ч назад</item>
+        <item quantity="many">%d ч назад</item>
+        <item quantity="other">%d ч назад</item>
+    </plurals>
+    <string name="time_yesterday">вчера</string>
+    <plurals name="time_days_ago">
+        <item quantity="one">%d день назад</item>
+        <item quantity="few">%d дня назад</item>
+        <item quantity="many">%d дней назад</item>
+        <item quantity="other">%d дня назад</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">Диалоги</string>
+    <string name="sessions_demo_subtitle">Демо-режим</string>
+    <string name="sessions_switch_computer">Сменить компьютер</string>
+    <string name="sessions_selected">Выбрано</string>
+    <string name="sessions_filter_project">Фильтр по проекту</string>
+    <string name="sessions_all_projects">Все проекты</string>
+    <string name="sessions_search_hint">Поиск диалогов</string>
+    <string name="sessions_clear_search">Очистить поиск</string>
+    <string name="sessions_loading">Загрузка диалогов…</string>
+    <string name="sessions_offline_title">Не удаётся связаться с компьютером</string>
+    <string name="sessions_empty_title">Нет диалогов</string>
+    <string name="sessions_empty_message">Когда вы будете работать с Claude Code на компьютере, ваши диалоги появятся здесь.</string>
+    <string name="sessions_no_results_title">Ничего не найдено</string>
+    <string name="sessions_no_results_message">Нет диалогов, соответствующих запросу или выбранному проекту.</string>
+    <string name="session_running">Открыт на компьютере</string>
+    <string name="session_connect">Подключить</string>
+    <string name="session_open_in_claude">Открыть в Claude</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">Не удалось загрузить сообщения</string>
+    <string name="detail_empty_title">Нет сообщений</string>
+    <string name="detail_empty_message">В этом диалоге пока нет сообщений для отображения.</string>
+    <string name="detail_tools">Инструменты</string>
+    <string name="detail_connect">Подключить</string>
+    <string name="detail_open">Открыть</string>
+    <string name="detail_stop">Остановить</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Запуск Remote Control…</string>
+    <string name="connect_progress_hint">Это может занять до минуты</string>
+    <string name="connect_error_title">Не удалось подключиться</string>
+    <string name="stop_error_title">Не удалось остановить</string>
+    <string name="open_error_title">Не удалось открыть</string>
+    <string name="open_error_message">Нет приложения, которое может открыть %1$s</string>
+    <string name="demo_dialog_title">Демо-режим</string>
+    <string name="demo_dialog_message">Это примеры диалогов, и компьютер не подключён.\n\nЕсли компьютер сопряжён, кнопка «Подключить» возобновляет диалог через Remote Control и открывает его в приложении Claude, чтобы вы могли продолжить на телефоне.</string>
+    <string name="demo_dialog_pair">Сопрячь компьютер</string>
+    <string name="demo_dialog_dismiss">Понятно</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">Не удалось связаться с «%1$s». Убедитесь, что компьютер включён, remote-sessions запущен, а вы находитесь в той же сети или в Tailscale.</string>
+    <string name="error_pin_mismatch">Сертификат «%1$s» не совпадает с сопряжённым. Выполните сопряжение компьютера заново.</string>
+    <string name="error_timeout">Компьютер слишком долго не отвечал.</string>
+    <string name="error_network">Ошибка сети: %1$s</string>
+    <string name="error_bad_response">Неожиданный ответ от компьютера. Установлена ли последняя версия remote-sessions?</string>
+    <string name="error_unexpected">Непредвиденная ошибка</string>
+    <string name="error_http_status">Ошибка %1$d от компьютера</string>
+    <string name="error_code_unauthorized">Компьютер отклонил этот телефон. Выполните сопряжение заново.</string>
+    <string name="error_code_not_found">Этого диалога больше нет на компьютере.</string>
+    <string name="error_code_open_elsewhere">Этот диалог открыт в другом месте на компьютере (в терминале или настольном приложении). Закройте его там и повторите попытку.</string>
+    <string name="error_code_remote_control_timeout">Remote Control не запустился вовремя. Повторите попытку чуть позже.</string>
+    <string name="error_code_launch_failed">Компьютеру не удалось запустить Claude Code. Убедитесь, что он установлен и вы вошли в аккаунт.</string>
+    <string name="error_code_internal">На компьютере что-то пошло не так. Повторите попытку.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Это не ссылка Remote Sessions. Она должна начинаться с remotesessions://pair</string>
+    <string name="pairing_error_version">Неподдерживаемая версия сопряжения (%1$s). Обновите приложение.</string>
+    <string name="pairing_error_missing_field">В ссылке отсутствует поле «%1$s».</string>
+    <string name="pairing_error_fingerprint">Недействительный отпечаток сертификата.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_computers">Компьютеры</string>
+    <string name="settings_no_computers">Нет сопряжённых компьютеров</string>
+    <string name="settings_no_computers_hint">Добавьте компьютер, чтобы видеть свои настоящие диалоги.</string>
+    <string name="settings_last_address">Последний адрес: %1$s</string>
+    <string name="settings_remove_computer">Удалить %1$s</string>
+    <string name="settings_add_computer">Добавить компьютер</string>
+    <string name="settings_demo_section">Демо-режим</string>
+    <string name="settings_demo_exit">Выйти из демо-режима</string>
+    <string name="settings_demo_exit_to_welcome">Вы вернётесь на экран приветствия.</string>
+    <string name="settings_demo_exit_to_computers">Вы вернётесь к своим компьютерам.</string>
+    <string name="settings_demo_enter">Попробовать на примерах</string>
+    <string name="settings_demo_enter_hint">Показывает вымышленные диалоги без подключения к компьютеру.</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="settings_security">Телефон связывается с компьютером напрямую по HTTPS с закреплённым сертификатом.</string>
+    <string name="settings_project_page">Страница проекта</string>
+    <string name="settings_privacy">Политика конфиденциальности</string>
+    <string name="settings_source">Исходный код</string>
+    <string name="settings_disclaimer">Remote Sessions не является официальным приложением Anthropic. Claude и Claude Code — товарные знаки Anthropic.</string>
+    <string name="settings_remove_title">Удалить «%1$s»?</string>
+    <string name="settings_remove_message">Вы перестанете видеть его диалоги. Выполнить сопряжение снова можно в любой момент.</string>
+    <string name="settings_remove_confirm">Удалить</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">Настройка</string>
+    <string name="onboarding_title_add">Добавить компьютер</string>
+    <string name="welcome_tagline">Следите за диалогами Claude Code на компьютере прямо с телефона.</string>
+    <string name="welcome_feature_list">Просматривайте диалоги и последние сообщения по проектам.</string>
+    <string name="welcome_feature_connect">Нажмите «Подключить», чтобы продолжить диалог в приложении Claude через Remote Control.</string>
+    <string name="welcome_feature_secure">Телефон связывается с компьютером напрямую по зашифрованному соединению.</string>
+    <string name="welcome_requirements_title">Что понадобится</string>
+    <string name="welcome_requirement_claude_code">Claude Code, установленный на компьютере (macOS, Windows или Linux).</string>
+    <string name="welcome_requirement_subscription">Подписка Claude, включающая Remote Control.</string>
+    <string name="welcome_requirement_app">Приложение Claude на этом телефоне (необязательно; иначе откроется браузер).</string>
+    <string name="welcome_start">Начать</string>
+    <string name="welcome_demo">Попробовать без компьютера</string>
+
+    <string name="install_title">Установите сервер</string>
+    <string name="install_subtitle">Для Remote Sessions нужен небольшой сервер на компьютере, где вы используете Claude Code.</string>
+    <string name="install_shell_terminal">Терминал</string>
+    <string name="install_run_in">Откройте %1$s на компьютере и выполните:</string>
+    <string name="install_copy">Копировать</string>
+    <string name="install_copied">Команда скопирована</string>
+    <string name="install_share">Поделиться</string>
+    <string name="install_share_subject">Установка Remote Sessions (%1$s)</string>
+    <string name="install_share_chooser">Поделиться командой</string>
+    <string name="install_explanation">Команда устанавливает remote-sessions, запускает его в фоновом режиме и показывает QR-код для сопряжения с этим телефоном.</string>
+    <string name="install_macos_no_brew">Нет Homebrew? Команда для Linux работает и на macOS.</string>
+    <string name="install_share_hint">Будете вводить на другом устройстве? Нажмите «Поделиться», чтобы отправить команду себе по почте или в мессенджер.</string>
+    <string name="install_done">Готово</string>
+
+    <string name="scan_title">Отсканируйте код</string>
+    <string name="scan_subtitle">Наведите камеру на QR-код, который компьютер показал в конце установки.</string>
+    <string name="scan_camera_needed">Для чтения QR-кода нужна камера.</string>
+    <string name="scan_camera_denied">Нет доступа к камере. Вместо этого можно вставить ссылку, которую показывает компьютер.</string>
+    <string name="scan_allow_camera">Разрешить камеру</string>
+    <string name="scan_missing_code">Не видите код? Выполните remote-sessions pair на компьютере, чтобы показать его снова.</string>
+    <string name="scan_paste_link">Вставить ссылку</string>
+    <string name="scan_paste_message">Вставьте ссылку remotesessions://pair…, которую показывает компьютер.</string>
+    <string name="scan_pair">Сопрячь</string>
+
+    <string name="tailscale_title">Пользуйтесь и вне дома</string>
+    <string name="tailscale_code_read">Код считан: «%1$s». Один необязательный совет перед проверкой подключения.</string>
+    <string name="tailscale_same_network">По умолчанию телефон и компьютер должны быть в одной сети Wi‑Fi.</string>
+    <string name="tailscale_body">Установите Tailscale на компьютер и телефон с одной учётной записью — и подключайтесь откуда угодно, не открывая порты. Для личного использования это бесплатно.</string>
+    <string name="tailscale_repair_hint">Сервер добавляет свой адрес Tailscale в QR-код. Если установите Tailscale позже, выполните сопряжение компьютера заново в настройках.</string>
+    <string name="tailscale_download">Скачать Tailscale</string>
+    <string name="tailscale_test">Проверить подключение</string>
+
+    <string name="test_title">Проверка подключения</string>
+    <string name="test_subtitle">Проверяем, может ли этот телефон связаться с «%1$s».</string>
+    <string name="test_server_found">Сервер найден</string>
+    <string name="test_load_sessions">Загрузка диалогов</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="one">Загружен %d диалог</item>
+        <item quantity="few">Загружено %d диалога</item>
+        <item quantity="many">Загружено %d диалогов</item>
+        <item quantity="other">Загружено %d диалога</item>
+    </plurals>
+    <string name="test_success">Готово! «%1$s» сопряжён.</string>
+    <string name="test_offline_hint">Если сейчас вы не в одной сети с компьютером, его всё равно можно сохранить и подключиться позже.</string>
+    <string name="test_view_sessions">Открыть диалоги</string>
+    <string name="test_save_anyway">Всё равно сохранить</string>
+    <string name="test_rescan">Сканировать другой код</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">Демо MacBook</string>
+    <string name="demo_login_title">Исправить вход через Google</string>
+    <string name="demo_login_1">Вход через Google в продакшене падает с ошибкой 401. Можешь посмотреть?</string>
+    <string name="demo_login_2">Нашёл: **refresh-токен** сохранялся без срока действия, поэтому `AuthService.refresh()` никогда его не обновлял.\n\nЯ изменил `TokenStore.save()`, чтобы он сохранял `expiresAt`, и добавил автоматическое обновление.</string>
+    <string name="demo_login_3">Отлично. Теперь добавь тест для случая с истёкшим токеном</string>
+    <string name="demo_login_4">Готово. Я добавил `refreshesExpiredToken()` в `AuthServiceTest`, и все *42 теста* проходят.</string>
+    <string name="demo_newsletter_title">Черновик октябрьской рассылки</string>
+    <string name="demo_newsletter_1">Напиши черновик октябрьской рассылки с новостями курса</string>
+    <string name="demo_newsletter_2">Вот черновик. Я сохранил тон предыдущих выпусков и выделил:\n\n- Новый модуль об **агентах**\n- Дату старта следующего потока\n- Ссылку на [сайт](https://example.com)</string>
+    <string name="demo_newsletter_3">Сделай короче и убери абзац про инструменты</string>
+    <string name="demo_newsletter_4">Готово: теперь в тексте 180 слов, абзаца про инструменты больше нет.</string>
+    <string name="demo_migration_title">Миграция базы данных на PostgreSQL 17</string>
+    <string name="demo_migration_1">Какие риски ты видишь в миграции?</string>
+    <string name="demo_migration_2">Основные риски:\n\n1. Запросы, которые полагаются на неявный порядок сортировки.\n2. Расширение `pg_trgm`, которое нужно обновить.\n3. Время блокировок при переиндексации.</string>
+    <string name="demo_settings_title">Экран настроек на Compose</string>
+    <string name="demo_settings_1">Сделай экран настроек. Используй Material 3 и поддержи тёмную тему</string>
+    <string name="demo_settings_2">Я создал `SettingsScreen` с разделами для аккаунта, уведомлений и темы. Цвета берутся из `MaterialTheme.colorScheme`, поэтому тёмная тема работает сама собой.</string>
+    <string name="demo_invoices_title">Скрипт для переименования счетов</string>
+    <string name="demo_invoices_1">Напиши скрипт, который переименовывает PDF-файлы счетов, добавляя в имя дату счёта</string>
+    <string name="demo_invoices_2">Я создал `rename-invoices.sh`. Он считывает дату из каждого PDF и переименовывает файл в формате `2026-10-01 Поставщик.pdf`.</string>
+</resources>

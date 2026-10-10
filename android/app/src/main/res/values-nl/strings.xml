@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Annuleren</string>
+    <string name="action_retry">Opnieuw</string>
+    <string name="action_back">Terug</string>
+    <string name="action_close">Sluiten</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="generic_error_title">Fout</string>
+
+    <!-- Relative time -->
+    <string name="time_now">zojuist</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="one">%d min geleden</item>
+        <item quantity="other">%d min geleden</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="one">%d u geleden</item>
+        <item quantity="other">%d u geleden</item>
+    </plurals>
+    <string name="time_yesterday">gisteren</string>
+    <plurals name="time_days_ago">
+        <item quantity="one">%d dag geleden</item>
+        <item quantity="other">%d dagen geleden</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">Gesprekken</string>
+    <string name="sessions_demo_subtitle">Demomodus</string>
+    <string name="sessions_switch_computer">Andere computer</string>
+    <string name="sessions_selected">Geselecteerd</string>
+    <string name="sessions_filter_project">Filteren op project</string>
+    <string name="sessions_all_projects">Alle projecten</string>
+    <string name="sessions_search_hint">Gesprekken zoeken</string>
+    <string name="sessions_clear_search">Zoekopdracht wissen</string>
+    <string name="sessions_loading">Gesprekken laden…</string>
+    <string name="sessions_offline_title">Computer niet bereikbaar</string>
+    <string name="sessions_empty_title">Geen gesprekken</string>
+    <string name="sessions_empty_message">Als je Claude Code op de computer gebruikt, verschijnen je gesprekken hier.</string>
+    <string name="sessions_no_results_title">Geen resultaten</string>
+    <string name="sessions_no_results_message">Geen enkel gesprek komt overeen met je zoekopdracht of het geselecteerde project.</string>
+    <string name="session_running">Geopend op de computer</string>
+    <string name="session_connect">Verbinden</string>
+    <string name="session_open_in_claude">Openen in Claude</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">Kan de berichten niet laden</string>
+    <string name="detail_empty_title">Geen berichten</string>
+    <string name="detail_empty_message">Dit gesprek heeft nog geen berichten om te tonen.</string>
+    <string name="detail_tools">Tools</string>
+    <string name="detail_connect">Verbinden</string>
+    <string name="detail_open">Openen</string>
+    <string name="detail_stop">Stoppen</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Remote Control starten…</string>
+    <string name="connect_progress_hint">Dit kan tot een minuut duren</string>
+    <string name="connect_error_title">Kan geen verbinding maken</string>
+    <string name="stop_error_title">Kan niet stoppen</string>
+    <string name="open_error_title">Kan niet openen</string>
+    <string name="open_error_message">Geen app kan %1$s openen</string>
+    <string name="demo_dialog_title">Demomodus</string>
+    <string name="demo_dialog_message">Deze gesprekken zijn voorbeelden en er is geen computer verbonden.\n\nMet een gekoppelde computer hervat „Verbinden” het gesprek met Remote Control en opent het in de Claude-app, zodat je verder kunt op je telefoon.</string>
+    <string name="demo_dialog_pair">Computer koppelen</string>
+    <string name="demo_dialog_dismiss">Begrepen</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">Kan „%1$s” niet bereiken. Controleer of de computer aanstaat, remote-sessions draait en je op hetzelfde netwerk of op Tailscale zit.</string>
+    <string name="error_pin_mismatch">Het certificaat van „%1$s” komt niet overeen met het gekoppelde. Koppel de computer opnieuw.</string>
+    <string name="error_timeout">De computer deed er te lang over om te antwoorden.</string>
+    <string name="error_network">Netwerkfout: %1$s</string>
+    <string name="error_bad_response">Onverwacht antwoord van de computer. Is remote-sessions up-to-date?</string>
+    <string name="error_unexpected">Onverwachte fout</string>
+    <string name="error_http_status">Fout %1$d van de computer</string>
+    <string name="error_code_unauthorized">De computer heeft deze telefoon geweigerd. Koppel opnieuw.</string>
+    <string name="error_code_not_found">Dit gesprek bestaat niet meer op de computer.</string>
+    <string name="error_code_open_elsewhere">Dit gesprek is elders op de computer geopend (terminal of desktop-app). Sluit het daar en probeer het opnieuw.</string>
+    <string name="error_code_remote_control_timeout">Remote Control is niet op tijd gestart. Probeer het zo opnieuw.</string>
+    <string name="error_code_launch_failed">De computer kon Claude Code niet starten. Controleer of het geïnstalleerd is en je bent ingelogd.</string>
+    <string name="error_code_internal">Er ging iets mis op de computer. Probeer het opnieuw.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Dit is geen Remote Sessions-link. Hij moet beginnen met remotesessions://pair</string>
+    <string name="pairing_error_version">Niet-ondersteunde koppelingsversie (%1$s). Werk de app bij.</string>
+    <string name="pairing_error_missing_field">In de link ontbreekt het veld „%1$s”.</string>
+    <string name="pairing_error_fingerprint">De vingerafdruk van het certificaat is ongeldig.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_computers">Computers</string>
+    <string name="settings_no_computers">Geen gekoppelde computers</string>
+    <string name="settings_no_computers_hint">Voeg er een toe om je echte gesprekken te zien.</string>
+    <string name="settings_last_address">Laatste adres: %1$s</string>
+    <string name="settings_remove_computer">%1$s verwijderen</string>
+    <string name="settings_add_computer">Computer toevoegen</string>
+    <string name="settings_demo_section">Demomodus</string>
+    <string name="settings_demo_exit">Demomodus verlaten</string>
+    <string name="settings_demo_exit_to_welcome">Je gaat terug naar het welkomstscherm.</string>
+    <string name="settings_demo_exit_to_computers">Je gaat terug naar je computers.</string>
+    <string name="settings_demo_enter">Proberen met voorbeelddata</string>
+    <string name="settings_demo_enter_hint">Toont verzonnen gesprekken zonder met een computer te verbinden.</string>
+    <string name="settings_about">Over</string>
+    <string name="settings_version">Versie %1$s</string>
+    <string name="settings_security">Je telefoon praat rechtstreeks met je computer via HTTPS met een vastgepind certificaat.</string>
+    <string name="settings_project_page">Projectpagina</string>
+    <string name="settings_privacy">Privacybeleid</string>
+    <string name="settings_source">Broncode</string>
+    <string name="settings_disclaimer">Remote Sessions is geen officiële app van Anthropic. Claude en Claude Code zijn handelsmerken van Anthropic.</string>
+    <string name="settings_remove_title">„%1$s” verwijderen?</string>
+    <string name="settings_remove_message">Je ziet de gesprekken ervan niet meer. Je kunt de computer altijd opnieuw koppelen.</string>
+    <string name="settings_remove_confirm">Verwijderen</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">Instellen</string>
+    <string name="onboarding_title_add">Computer toevoegen</string>
+    <string name="welcome_tagline">Volg de Claude Code-gesprekken op je computer vanaf je telefoon.</string>
+    <string name="welcome_feature_list">Bekijk je gesprekken en hun laatste berichten, per project.</string>
+    <string name="welcome_feature_connect">Tik op „Verbinden” om ze verder te zetten in de Claude-app met Remote Control.</string>
+    <string name="welcome_feature_secure">Je telefoon praat rechtstreeks met je computer via een versleutelde verbinding.</string>
+    <string name="welcome_requirements_title">Wat je nodig hebt</string>
+    <string name="welcome_requirement_claude_code">Claude Code geïnstalleerd op je computer (macOS, Windows of Linux).</string>
+    <string name="welcome_requirement_subscription">Een Claude-abonnement met Remote Control.</string>
+    <string name="welcome_requirement_app">De Claude-app op deze telefoon (optioneel; anders opent de browser).</string>
+    <string name="welcome_start">Aan de slag</string>
+    <string name="welcome_demo">Proberen zonder computer</string>
+
+    <string name="install_title">Server installeren</string>
+    <string name="install_subtitle">Remote Sessions heeft een kleine server nodig op de computer waarop je Claude Code gebruikt.</string>
+    <string name="install_shell_terminal">Terminal</string>
+    <string name="install_run_in">Open %1$s op je computer en voer uit:</string>
+    <string name="install_copy">Kopiëren</string>
+    <string name="install_copied">Opdracht gekopieerd</string>
+    <string name="install_share">Delen</string>
+    <string name="install_share_subject">Remote Sessions installeren (%1$s)</string>
+    <string name="install_share_chooser">Opdracht delen</string>
+    <string name="install_explanation">De opdracht installeert remote-sessions, laat het op de achtergrond draaien en toont een QR-code om deze telefoon te koppelen.</string>
+    <string name="install_macos_no_brew">Geen Homebrew? De Linux-opdracht werkt ook op macOS.</string>
+    <string name="install_share_hint">Typ je het op een ander apparaat? Gebruik „Delen” om het naar jezelf te sturen via e-mail of chat.</string>
+    <string name="install_done">Gedaan</string>
+
+    <string name="scan_title">Scan de code</string>
+    <string name="scan_subtitle">Richt op de QR-code die de computer aan het eind van de installatie liet zien.</string>
+    <string name="scan_camera_needed">De camera is nodig om de QR-code te lezen.</string>
+    <string name="scan_camera_denied">Geen cameratoestemming. Je kunt in plaats daarvan de link plakken die de computer toont.</string>
+    <string name="scan_allow_camera">Camera toestaan</string>
+    <string name="scan_missing_code">Zie je de code niet? Voer remote-sessions pair uit op de computer om hem opnieuw te tonen.</string>
+    <string name="scan_paste_link">Link plakken</string>
+    <string name="scan_paste_message">Plak de remotesessions://pair…-link die de computer toont.</string>
+    <string name="scan_pair">Koppelen</string>
+
+    <string name="tailscale_title">Gebruik het ook buitenshuis</string>
+    <string name="tailscale_code_read">Code gelezen: „%1$s”. Nog één optionele tip voordat je de verbinding test.</string>
+    <string name="tailscale_same_network">Standaard moeten je telefoon en computer op hetzelfde wifi‑netwerk zitten.</string>
+    <string name="tailscale_body">Installeer Tailscale op de computer en op je telefoon met hetzelfde account en je kunt overal verbinding maken, zonder poorten te openen. Gratis voor persoonlijk gebruik.</string>
+    <string name="tailscale_repair_hint">De server zet zijn Tailscale-adres in de QR-code. Installeer je het later, koppel de computer dan opnieuw via Instellingen.</string>
+    <string name="tailscale_download">Tailscale downloaden</string>
+    <string name="tailscale_test">Verbinding testen</string>
+
+    <string name="test_title">Verbindingstest</string>
+    <string name="test_subtitle">Controleren of deze telefoon „%1$s” kan bereiken.</string>
+    <string name="test_server_found">Server gevonden</string>
+    <string name="test_load_sessions">Gesprekken laden</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="one">%d gesprek geladen</item>
+        <item quantity="other">%d gesprekken geladen</item>
+    </plurals>
+    <string name="test_success">Klaar! „%1$s” is nu gekoppeld.</string>
+    <string name="test_offline_hint">Zit je nu niet op hetzelfde netwerk als de computer, dan kun je hem toch opslaan en later verbinden.</string>
+    <string name="test_view_sessions">Gesprekken bekijken</string>
+    <string name="test_save_anyway">Toch opslaan</string>
+    <string name="test_rescan">Andere code scannen</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">Demo-MacBook</string>
+    <string name="demo_login_title">Inloggen met Google repareren</string>
+    <string name="demo_login_1">Inloggen met Google mislukt in productie met een 401. Kun je even kijken?</string>
+    <string name="demo_login_2">Gevonden: de **refresh token** werd opgeslagen zonder vervaldatum, dus `AuthService.refresh()` vernieuwde hem nooit.\n\nIk heb `TokenStore.save()` aangepast zodat het `expiresAt` opslaat en automatische vernieuwing toegevoegd.</string>
+    <string name="demo_login_3">Top. Voeg nu een test toe voor het geval van een verlopen token</string>
+    <string name="demo_login_4">Klaar. Ik heb `refreshesExpiredToken()` toegevoegd aan `AuthServiceTest` en alle *42 tests* slagen.</string>
+    <string name="demo_newsletter_title">Concept nieuwsbrief oktober</string>
+    <string name="demo_newsletter_1">Schrijf een concept voor de nieuwsbrief van oktober met het nieuws over de cursus</string>
+    <string name="demo_newsletter_2">Hier is het concept. Ik heb de toon van de vorige aangehouden en dit uitgelicht:\n\n- De nieuwe module over **agents**\n- De datum van de volgende groep\n- Een link naar [de website](https://example.com)</string>
+    <string name="demo_newsletter_3">Maak hem korter en schrap de alinea over tools</string>
+    <string name="demo_newsletter_4">Klaar: hij is nu 180 woorden en de alinea over tools is weg.</string>
+    <string name="demo_migration_title">Database migreren naar PostgreSQL 17</string>
+    <string name="demo_migration_1">Welke risico’s zie je bij de migratie?</string>
+    <string name="demo_migration_2">De belangrijkste risico’s zijn:\n\n1. Query’s die op impliciete sortering vertrouwen.\n2. De extensie `pg_trgm`, die moet worden bijgewerkt.\n3. Lock-tijd tijdens het herindexeren.</string>
+    <string name="demo_settings_title">Instellingenscherm in Compose</string>
+    <string name="demo_settings_1">Bouw het instellingenscherm. Gebruik Material 3 en respecteer de donkere modus</string>
+    <string name="demo_settings_2">Ik heb `SettingsScreen` gemaakt met secties voor het account, meldingen en thema. De kleuren komen uit `MaterialTheme.colorScheme`, dus de donkere modus werkt meteen.</string>
+    <string name="demo_invoices_title">Script om facturen te hernoemen</string>
+    <string name="demo_invoices_1">Schrijf een script dat de factuur-pdf’s hernoemt met de factuurdatum in de naam</string>
+    <string name="demo_invoices_2">Ik heb `rename-invoices.sh` gemaakt. Het leest de datum uit elke pdf en hernoemt hem zoals `2026-10-01 Leverancier.pdf`.</string>
+</resources>

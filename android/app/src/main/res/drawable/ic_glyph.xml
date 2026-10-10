@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The same laptop + phone glyph, cropped, for use inside the app. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="62dp"
+    android:viewportWidth="680"
+    android:viewportHeight="440">
+    <group android:translateX="-172" android:translateY="-293">
+        <path android:fillColor="#FFFFFF" android:fillType="evenOdd" android:pathData="M262,620 V357 A50,50 0 0 1 312,307 H710 A50,50 0 0 1 760,352 H664 A70,70 0 0 0 594,422 V620 Z M305,620 V364 A14,14 0 0 1 319,350 H664 A70,70 0 0 0 594,420 V620 Z" />
+        <path android:fillColor="#FFFFFF" android:fillAlpha="0.4" android:pathData="M305,620 V364 A14,14 0 0 1 319,350 H664 A70,70 0 0 0 594,420 V620 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M215,620 H594 V676 H215 A28,28 0 0 1 215,620 Z" />
+        <path android:fillColor="#FFFFFF" android:fillType="evenOdd" android:pathData="M667,385 H765 A45,45 0 0 1 810,430 V645 A45,45 0 0 1 765,690 H667 A45,45 0 0 1 622,645 V430 A45,45 0 0 1 667,385 Z M670,417 H762 A16,16 0 0 1 778,433 V642 A16,16 0 0 1 762,658 H670 A16,16 0 0 1 654,642 V433 A16,16 0 0 1 670,417 Z" />
+        <path android:fillColor="#FFFFFF" android:fillAlpha="0.4" android:pathData="M670,417 H762 A16,16 0 0 1 778,433 V642 A16,16 0 0 1 762,658 H670 A16,16 0 0 1 654,642 V433 A16,16 0 0 1 670,417 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M700,430 H734 A10,10 0 0 1 744,440 V440 A10,10 0 0 1 734,450 H700 A10,10 0 0 1 690,440 V440 A10,10 0 0 1 700,430 Z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M687,628 H747 A7,7 0 0 1 754,635 V635 A7,7 0 0 1 747,642 H687 A7,7 0 0 1 680,635 V635 A7,7 0 0 1 687,628 Z" />
+    </group>
+</vector>

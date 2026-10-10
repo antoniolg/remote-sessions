@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="action_ok">확인</string>
+    <string name="action_cancel">취소</string>
+    <string name="action_retry">다시 시도</string>
+    <string name="action_back">뒤로</string>
+    <string name="action_close">닫기</string>
+    <string name="action_settings">설정</string>
+    <string name="generic_error_title">오류</string>
+
+    <!-- Relative time -->
+    <string name="time_now">방금</string>
+    <plurals name="time_minutes_ago">
+        <item quantity="other">%d분 전</item>
+    </plurals>
+    <plurals name="time_hours_ago">
+        <item quantity="other">%d시간 전</item>
+    </plurals>
+    <string name="time_yesterday">어제</string>
+    <plurals name="time_days_ago">
+        <item quantity="other">%d일 전</item>
+    </plurals>
+
+    <!-- Sessions list -->
+    <string name="sessions_title">대화</string>
+    <string name="sessions_demo_subtitle">데모 모드</string>
+    <string name="sessions_switch_computer">컴퓨터 전환</string>
+    <string name="sessions_selected">선택됨</string>
+    <string name="sessions_filter_project">프로젝트별 필터</string>
+    <string name="sessions_all_projects">모든 프로젝트</string>
+    <string name="sessions_search_hint">대화 검색</string>
+    <string name="sessions_clear_search">검색어 지우기</string>
+    <string name="sessions_loading">대화를 불러오는 중…</string>
+    <string name="sessions_offline_title">컴퓨터에 연결할 수 없습니다</string>
+    <string name="sessions_empty_title">대화 없음</string>
+    <string name="sessions_empty_message">컴퓨터에서 Claude Code를 사용하면 여기에 대화가 표시됩니다.</string>
+    <string name="sessions_no_results_title">결과 없음</string>
+    <string name="sessions_no_results_message">검색어 또는 선택한 프로젝트와 일치하는 대화가 없습니다.</string>
+    <string name="session_running">컴퓨터에서 열려 있음</string>
+    <string name="session_connect">연결</string>
+    <string name="session_open_in_claude">Claude에서 열기</string>
+
+    <!-- Session detail -->
+    <string name="detail_load_error_title">메시지를 불러올 수 없습니다</string>
+    <string name="detail_empty_title">메시지 없음</string>
+    <string name="detail_empty_message">이 대화에는 아직 표시할 메시지가 없습니다.</string>
+    <string name="detail_tools">도구</string>
+    <string name="detail_connect">연결</string>
+    <string name="detail_open">열기</string>
+    <string name="detail_stop">중지</string>
+
+    <!-- Connect -->
+    <string name="connect_progress_title">Remote Control 시작 중…</string>
+    <string name="connect_progress_hint">최대 1분 정도 걸릴 수 있습니다</string>
+    <string name="connect_error_title">연결할 수 없습니다</string>
+    <string name="stop_error_title">중지할 수 없습니다</string>
+    <string name="open_error_title">열 수 없습니다</string>
+    <string name="open_error_message">%1$s을(를) 열 수 있는 앱이 없습니다</string>
+    <string name="demo_dialog_title">데모 모드</string>
+    <string name="demo_dialog_message">이 대화들은 예시이며 연결된 컴퓨터가 없습니다.\n\n컴퓨터를 페어링하면 “연결”을 눌러 Remote Control로 대화를 재개하고 Claude 앱에서 열어 휴대폰으로 이어서 진행할 수 있습니다.</string>
+    <string name="demo_dialog_pair">컴퓨터 페어링</string>
+    <string name="demo_dialog_dismiss">확인</string>
+
+    <!-- Errors -->
+    <string name="error_unreachable">“%1$s”에 연결할 수 없습니다. 컴퓨터가 켜져 있고 remote-sessions가 실행 중이며, 같은 네트워크 또는 Tailscale에 연결되어 있는지 확인하세요.</string>
+    <string name="error_pin_mismatch">“%1$s”의 인증서가 페어링된 인증서와 일치하지 않습니다. 컴퓨터를 다시 페어링하세요.</string>
+    <string name="error_timeout">컴퓨터의 응답 시간이 너무 오래 걸렸습니다.</string>
+    <string name="error_network">네트워크 오류: %1$s</string>
+    <string name="error_bad_response">컴퓨터에서 예상치 못한 응답을 받았습니다. remote-sessions가 최신 버전인가요?</string>
+    <string name="error_unexpected">예상치 못한 오류</string>
+    <string name="error_http_status">컴퓨터 오류 %1$d</string>
+    <string name="error_code_unauthorized">컴퓨터가 이 휴대폰을 거부했습니다. 다시 페어링하세요.</string>
+    <string name="error_code_not_found">이 대화는 더 이상 컴퓨터에 존재하지 않습니다.</string>
+    <string name="error_code_open_elsewhere">이 대화가 컴퓨터의 다른 곳(터미널 또는 데스크톱 앱)에서 열려 있습니다. 그곳에서 닫은 후 다시 시도하세요.</string>
+    <string name="error_code_remote_control_timeout">Remote Control이 제시간에 시작되지 않았습니다. 잠시 후 다시 시도하세요.</string>
+    <string name="error_code_launch_failed">컴퓨터에서 Claude Code를 시작할 수 없습니다. 설치되어 있고 로그인되어 있는지 확인하세요.</string>
+    <string name="error_code_internal">컴퓨터에서 문제가 발생했습니다. 다시 시도하세요.</string>
+
+    <!-- Pairing link errors -->
+    <string name="pairing_error_not_a_link">Remote Sessions 링크가 아닙니다. remotesessions://pair로 시작해야 합니다</string>
+    <string name="pairing_error_version">지원되지 않는 페어링 버전입니다(%1$s). 앱을 업데이트하세요.</string>
+    <string name="pairing_error_missing_field">링크에 “%1$s” 필드가 없습니다.</string>
+    <string name="pairing_error_fingerprint">인증서 지문이 유효하지 않습니다.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">설정</string>
+    <string name="settings_computers">컴퓨터</string>
+    <string name="settings_no_computers">페어링된 컴퓨터 없음</string>
+    <string name="settings_no_computers_hint">컴퓨터를 추가하면 실제 대화를 볼 수 있습니다.</string>
+    <string name="settings_last_address">마지막 주소: %1$s</string>
+    <string name="settings_remove_computer">%1$s 삭제</string>
+    <string name="settings_add_computer">컴퓨터 추가</string>
+    <string name="settings_demo_section">데모 모드</string>
+    <string name="settings_demo_exit">데모 모드 종료</string>
+    <string name="settings_demo_exit_to_welcome">시작 화면으로 돌아갑니다.</string>
+    <string name="settings_demo_exit_to_computers">컴퓨터 목록으로 돌아갑니다.</string>
+    <string name="settings_demo_enter">샘플 데이터로 체험하기</string>
+    <string name="settings_demo_enter_hint">컴퓨터에 연결하지 않고 가상의 대화를 보여 줍니다.</string>
+    <string name="settings_about">정보</string>
+    <string name="settings_version">버전 %1$s</string>
+    <string name="settings_security">휴대폰은 고정된 인증서를 사용하는 HTTPS로 컴퓨터와 직접 통신합니다.</string>
+    <string name="settings_project_page">프로젝트 페이지</string>
+    <string name="settings_privacy">개인정보 처리방침</string>
+    <string name="settings_source">소스 코드</string>
+    <string name="settings_disclaimer">Remote Sessions는 Anthropic의 공식 앱이 아닙니다. Claude 및 Claude Code는 Anthropic의 상표입니다.</string>
+    <string name="settings_remove_title">“%1$s”을(를) 삭제할까요?</string>
+    <string name="settings_remove_message">이 컴퓨터의 대화가 더 이상 표시되지 않습니다. 언제든지 다시 페어링할 수 있습니다.</string>
+    <string name="settings_remove_confirm">삭제</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_setup">설정</string>
+    <string name="onboarding_title_add">컴퓨터 추가</string>
+    <string name="welcome_tagline">컴퓨터의 Claude Code 대화를 휴대폰에서 확인하세요.</string>
+    <string name="welcome_feature_list">프로젝트별로 대화와 최신 메시지를 확인할 수 있습니다.</string>
+    <string name="welcome_feature_connect">“연결”을 탭하면 Remote Control로 Claude 앱에서 이어서 진행할 수 있습니다.</string>
+    <string name="welcome_feature_secure">휴대폰은 암호화된 연결로 컴퓨터와 직접 통신합니다.</string>
+    <string name="welcome_requirements_title">필요한 것</string>
+    <string name="welcome_requirement_claude_code">컴퓨터에 설치된 Claude Code(macOS, Windows 또는 Linux).</string>
+    <string name="welcome_requirement_subscription">Remote Control이 포함된 Claude 구독.</string>
+    <string name="welcome_requirement_app">이 휴대폰의 Claude 앱(선택 사항이며, 없으면 브라우저가 열립니다).</string>
+    <string name="welcome_start">시작하기</string>
+    <string name="welcome_demo">컴퓨터 없이 체험하기</string>
+
+    <string name="install_title">서버 설치</string>
+    <string name="install_subtitle">Remote Sessions를 사용하려면 Claude Code를 사용하는 컴퓨터에 작은 서버가 필요합니다.</string>
+    <string name="install_shell_terminal">터미널</string>
+    <string name="install_run_in">컴퓨터에서 %1$s을(를) 열고 다음을 실행하세요:</string>
+    <string name="install_copy">복사</string>
+    <string name="install_copied">명령어를 복사했습니다</string>
+    <string name="install_share">공유</string>
+    <string name="install_share_subject">Remote Sessions 설치(%1$s)</string>
+    <string name="install_share_chooser">명령어 공유</string>
+    <string name="install_explanation">이 명령어는 remote-sessions를 설치하고 백그라운드에서 계속 실행되도록 한 뒤, 이 휴대폰을 페어링할 QR 코드를 표시합니다.</string>
+    <string name="install_macos_no_brew">Homebrew가 없나요? Linux용 명령어는 macOS에서도 작동합니다.</string>
+    <string name="install_share_hint">다른 기기에서 입력하시나요? “공유”를 사용해 이메일이나 채팅으로 자신에게 보내세요.</string>
+    <string name="install_done">완료했습니다</string>
+
+    <string name="scan_title">코드 스캔</string>
+    <string name="scan_subtitle">설치가 끝날 때 컴퓨터에 표시된 QR 코드를 비추세요.</string>
+    <string name="scan_camera_needed">QR 코드를 읽으려면 카메라가 필요합니다.</string>
+    <string name="scan_camera_denied">카메라 권한이 없습니다. 대신 컴퓨터에 표시된 링크를 붙여넣을 수 있습니다.</string>
+    <string name="scan_allow_camera">카메라 허용</string>
+    <string name="scan_missing_code">코드가 보이지 않나요? 컴퓨터에서 remote-sessions pair를 실행하면 다시 표시됩니다.</string>
+    <string name="scan_paste_link">링크 붙여넣기</string>
+    <string name="scan_paste_message">컴퓨터에 표시된 remotesessions://pair… 링크를 붙여넣으세요.</string>
+    <string name="scan_pair">페어링</string>
+
+    <string name="tailscale_title">외부에서도 사용하기</string>
+    <string name="tailscale_code_read">코드를 읽었습니다: “%1$s”. 연결을 테스트하기 전에 선택 사항인 팁이 하나 있습니다.</string>
+    <string name="tailscale_same_network">기본적으로 휴대폰과 컴퓨터가 같은 Wi‑Fi 네트워크에 있어야 합니다.</string>
+    <string name="tailscale_body">컴퓨터와 휴대폰에 같은 계정으로 Tailscale을 설치하면 포트를 열지 않고도 어디서나 연결할 수 있습니다. 개인 용도로는 무료입니다.</string>
+    <string name="tailscale_repair_hint">서버는 QR 코드에 Tailscale 주소를 포함합니다. 나중에 설치한다면 설정에서 컴퓨터를 다시 페어링하세요.</string>
+    <string name="tailscale_download">Tailscale 받기</string>
+    <string name="tailscale_test">연결 테스트</string>
+
+    <string name="test_title">연결 테스트</string>
+    <string name="test_subtitle">이 휴대폰이 “%1$s”에 연결할 수 있는지 확인하는 중입니다.</string>
+    <string name="test_server_found">서버를 찾았습니다</string>
+    <string name="test_load_sessions">대화 불러오기</string>
+    <plurals name="test_sessions_loaded">
+        <item quantity="other">대화 %d개를 불러왔습니다</item>
+    </plurals>
+    <string name="test_success">완료! “%1$s”이(가) 페어링되었습니다.</string>
+    <string name="test_offline_hint">지금 컴퓨터와 같은 네트워크에 있지 않다면, 일단 저장하고 나중에 연결할 수 있습니다.</string>
+    <string name="test_view_sessions">대화 보기</string>
+    <string name="test_save_anyway">그래도 저장</string>
+    <string name="test_rescan">다른 코드 스캔</string>
+
+    <!-- Demo content (Markdown is rendered; keep `code`, **bold** and links) -->
+    <string name="demo_computer_name">데모 MacBook</string>
+    <string name="demo_login_title">Google 로그인 수정</string>
+    <string name="demo_login_1">프로덕션에서 Google 로그인이 401 오류로 실패해요. 확인해 줄 수 있나요?</string>
+    <string name="demo_login_2">원인을 찾았습니다. **리프레시 토큰**이 만료일 없이 저장되어 `AuthService.refresh()`가 토큰을 갱신하지 않았습니다.\n\n`TokenStore.save()`가 `expiresAt`을 저장하도록 변경하고 자동 갱신을 추가했습니다.</string>
+    <string name="demo_login_3">좋아요. 이제 만료된 토큰 케이스에 대한 테스트를 추가해 주세요</string>
+    <string name="demo_login_4">완료했습니다. `AuthServiceTest`에 `refreshesExpiredToken()`을 추가했고 *42개 테스트*가 모두 통과합니다.</string>
+    <string name="demo_newsletter_title">10월 뉴스레터 초안</string>
+    <string name="demo_newsletter_1">강의 소식을 담아 10월 뉴스레터 초안을 작성해 주세요</string>
+    <string name="demo_newsletter_2">초안입니다. 이전 뉴스레터의 톤을 유지하고 다음을 강조했습니다:\n\n- 새로운 **에이전트** 모듈\n- 다음 기수 시작일\n- [웹사이트](https://example.com) 링크</string>
+    <string name="demo_newsletter_3">더 짧게 줄이고 도구에 관한 문단은 빼 주세요</string>
+    <string name="demo_newsletter_4">완료했습니다. 이제 180단어이고 도구 문단은 삭제했습니다.</string>
+    <string name="demo_migration_title">데이터베이스를 PostgreSQL 17로 마이그레이션</string>
+    <string name="demo_migration_1">이번 마이그레이션에서 어떤 위험이 있을까요?</string>
+    <string name="demo_migration_2">주요 위험은 다음과 같습니다:\n\n1. 암묵적인 정렬 순서에 의존하는 쿼리.\n2. 업데이트가 필요한 `pg_trgm` 확장.\n3. 재인덱싱 중 잠금 시간.</string>
+    <string name="demo_settings_title">Compose로 만든 설정 화면</string>
+    <string name="demo_settings_1">설정 화면을 만들어 주세요. Material 3를 사용하고 다크 모드를 지원해 주세요</string>
+    <string name="demo_settings_2">계정, 알림, 테마 섹션이 있는 `SettingsScreen`을 만들었습니다. 색상은 `MaterialTheme.colorScheme`에서 가져오므로 다크 모드도 그대로 작동합니다.</string>
+    <string name="demo_invoices_title">청구서 이름 변경 스크립트</string>
+    <string name="demo_invoices_1">청구서 PDF 파일 이름을 청구일을 넣어 바꾸는 스크립트를 작성해 주세요</string>
+    <string name="demo_invoices_2">`rename-invoices.sh`를 만들었습니다. 각 PDF에서 날짜를 읽어 `2026-10-01 공급업체.pdf` 같은 형식으로 이름을 바꿉니다.</string>
+</resources>
