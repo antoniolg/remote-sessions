@@ -66,3 +66,13 @@ Test a pairing link on an emulator (the host machine is `10.0.2.2`):
 ```sh
 adb shell "am start -a android.intent.action.VIEW -d 'remotesessions://pair?v=1&id=…&name=Mac&port=8787&hosts=10.0.2.2&token=…&fp=…'"
 ```
+
+## Release
+
+`tools/play-bundle.sh` builds the signed AAB with the Play upload key stored in 1Password (needs `op` access to the Agent Runtime vault):
+
+```bash
+~/.local/bin/oprun --with-op-token android/tools/play-bundle.sh android ~/Downloads/remote-sessions.aab
+```
+
+Bump `versionCode` in `app/build.gradle.kts` for every upload.

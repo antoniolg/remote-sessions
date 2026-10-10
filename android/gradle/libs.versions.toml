@@ -13,7 +13,7 @@ serialization = "1.11.0"
 okhttp = "5.5.0"
 datastore = "1.2.1"
 camerax = "1.6.2"
-mlkit-barcode = "17.3.0"
+mlkit-barcode = "18.3.1"
 junit = "4.13.2"
 
 [libraries]
@@ -35,7 +35,8 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 camerax-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
 camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
 camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
-mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode" }
+# Unbundled: Google Play services downloads the model, which keeps it out of the app.
+mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "mlkit-barcode" }
 junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
