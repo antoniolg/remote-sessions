@@ -19,7 +19,11 @@ import (
 	"github.com/aymanbagabas/go-pty"
 )
 
-const screenKeep = 16 << 10
+const (
+	screenKeep = 16 << 10
+	cols       = 200
+	rows       = 50
+)
 
 // ErrTimeout means the session started but Remote Control did not publish its URL in time.
 var ErrTimeout = errors.New("timeout")
@@ -64,9 +68,15 @@ func (l *Launcher) Get(sessionID string) (*Managed, bool) {
 // Concurrent calls for the same session wait for the first one.
 func (l *Launcher) Start(ctx context.Context, sessionID, transcript, cwd, title string) (*Managed, error) {
 	l.mu.Lock()
-	if m, ok := l.sessions[sessionID]; ok && m.URL != "" {
+	if m, ok := l.sessions[sessionID]; ok {
+		if m.URL != "" {
+			l.mu.Unlock()
+			return m, nil
+		}
+		// A previous attempt is still running without a URL: start over instead of running two.
 		l.mu.Unlock()
-		return m, nil
+		l.Stop(sessionID)
+		l.mu.Lock()
 	}
 	if wait, ok := l.starting[sessionID]; ok {
 		l.mu.Unlock()
@@ -102,7 +112,7 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, er
 	if err != nil {
 		return nil, err
 	}
-	_ = terminal.Resize(200, 50)
+	_ = terminal.Resize(cols, rows)
 	cmd := terminal.Command(l.ClaudeBin, "--resume", sessionID, "--remote-control", title)
 	cmd.Dir = cwd
 	cmd.Env = append(os.Environ(), "TERM=xterm-256color")
@@ -111,8 +121,8 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, er
 		return nil, err
 	}
 	m := &Managed{SessionID: sessionID, Started: time.Now(), pty: terminal, cmd: cmd, screen: newRing(screenKeep), done: make(chan struct{})}
-	// The TUI blocks if nobody reads its output.
-	go func() { _, _ = io.Copy(m.screen, terminal) }()
+	// The TUI blocks if nobody reads its output or answers its terminal queries.
+	go answerQueries(terminal, m.screen, cols, rows)
 	go func() {
 		_ = cmd.Wait()
 		terminal.Close()
@@ -141,6 +151,8 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string) (*Managed, er
 		case <-time.After(time.Second):
 		}
 	}
+	// Don't leave a blank session behind: the next tap starts a fresh one.
+	_ = m.cmd.Process.Kill()
 	return m, ErrTimeout
 }
 
