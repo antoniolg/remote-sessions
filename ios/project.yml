@@ -1,0 +1,62 @@
+name: RemoteSessions
+options:
+  bundleIdPrefix: com.antonioleiva
+  deploymentTarget:
+    iOS: "18.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0"
+    DEVELOPMENT_TEAM: G9B2SPDPZG
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  RemoteSessions:
+    type: application
+    platform: iOS
+    sources: [RemoteSessions]
+    settings:
+      base:
+        # Kept from the app's first name: App Store Connect ties the record to this id.
+        PRODUCT_BUNDLE_IDENTIFIER: com.antonioleiva.clauderemote
+        PRODUCT_NAME: RemoteSessions
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Remote Sessions
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+    info:
+      path: RemoteSessions/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        # The server is reached by IP or LAN name with a self-signed certificate that the app pins.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        NSLocalNetworkUsageDescription: Remote Sessions se conecta a tu ordenador en la red local para mostrar tus conversaciones de Claude Code.
+        NSBonjourServices: [_remotesessions._tcp]
+        NSCameraUsageDescription: La cámara se usa para escanear el código QR que muestra tu ordenador.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.antonioleiva.remotesessions
+            CFBundleURLSchemes: [remotesessions]
+  RemoteSessionsTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [RemoteSessionsTests]
+    dependencies:
+      - target: RemoteSessions
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.antonioleiva.remotesessions.tests
+schemes:
+  RemoteSessions:
+    build:
+      targets:
+        RemoteSessions: all
+        RemoteSessionsTests: [test]
+    test:
+      targets: [RemoteSessionsTests]

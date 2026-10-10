@@ -1,0 +1,46 @@
+# Builds the server for every OS and publishes it to GitHub Releases and the Homebrew tap.
+# Release: tag vX.Y.Z and run `goreleaser release --clean` with GITHUB_TOKEN (needs write access to antoniolg/homebrew-tap).
+version: 2
+project_name: remote-sessions
+
+builds:
+  - main: ./cmd/remote-sessions
+    binary: remote-sessions
+    env: [CGO_ENABLED=0]
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+    ldflags: ["-s -w -X main.version={{ .Version }}"]
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    files: [README.md, LICENSE]
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+
+homebrew_casks:
+  - name: remote-sessions
+    repository:
+      owner: antoniolg
+      name: homebrew-tap
+    homepage: https://antonioleiva.com/en/projects/remote-sessions
+    description: Use your Claude Code sessions from your phone
+    binaries: [remote-sessions]
+    caveats: |
+      Run `remote-sessions setup` to start the background service and pair your phone.
+    hooks:
+      post:
+        # The binary is not notarized: drop the quarantine flag so macOS lets it run.
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/remote-sessions"]
+          end
+        uninstall: |
+          system_command "#{HOMEBREW_PREFIX}/bin/remote-sessions", args: ["service", "uninstall"], must_succeed: false

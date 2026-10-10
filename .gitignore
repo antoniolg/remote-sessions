@@ -1,0 +1,8 @@
+.DS_Store
+ios/build/
+ios/*.xcodeproj/
+xcuserdata/
+node_modules/
+build/
+dist/
+ios/tools/asc.env

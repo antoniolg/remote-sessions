@@ -1,0 +1,211 @@
+// Package server exposes the v1 API described in docs/API.md.
+package server
+
+import (
+	"context"
+	"crypto/subtle"
+	"encoding/json"
+	"errors"
+	"log"
+	"net/http"
+	"strconv"
+	"time"
+
+	"github.com/antoniolg/remote-sessions/internal/claude"
+	"github.com/antoniolg/remote-sessions/internal/launcher"
+	"github.com/antoniolg/remote-sessions/internal/transcripts"
+)
+
+type Server struct {
+	ID       string
+	Name     string
+	Version  string
+	Token    string
+	Store    *transcripts.Store
+	Agents   *claude.Agents
+	Launcher *launcher.Launcher
+}
+
+type running struct {
+	Kind   string `json:"kind"`
+	Status string `json:"status,omitempty"`
+}
+
+type remote struct {
+	URL string `json:"url"`
+}
+
+type session struct {
+	ID         string    `json:"id"`
+	Title      string    `json:"title"`
+	LastPrompt *string   `json:"lastPrompt"`
+	Cwd        *string   `json:"cwd"`
+	Project    *string   `json:"project"`
+	UpdatedAt  time.Time `json:"updatedAt"`
+	Running    *running  `json:"running"`
+	Remote     *remote   `json:"remote"`
+}
+
+func nullable(value string) *string {
+	if value == "" {
+		return nil
+	}
+	return &value
+}
+
+// Handler routes every endpoint and logs each request.
+func (s *Server) Handler() http.Handler {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /health", s.health)
+	mux.HandleFunc("GET /v1/sessions", s.auth(s.list))
+	mux.HandleFunc("GET /v1/sessions/{id}/messages", s.auth(s.messages))
+	mux.HandleFunc("POST /v1/sessions/{id}/remote-control", s.auth(s.connect))
+	mux.HandleFunc("DELETE /v1/sessions/{id}/remote-control", s.auth(s.disconnect))
+	return logRequests(mux)
+}
+
+func (s *Server) auth(next http.HandlerFunc) http.HandlerFunc {
+	expected := []byte("Bearer " + s.Token)
+	return func(w http.ResponseWriter, r *http.Request) {
+		if subtle.ConstantTimeCompare([]byte(r.Header.Get("Authorization")), expected) != 1 {
+			writeError(w, http.StatusUnauthorized, "unauthorized", "Invalid token. Pair the phone again.")
+			return
+		}
+		next(w, r)
+	}
+}
+
+func (s *Server) health(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]any{"ok": true, "id": s.ID, "name": s.Name, "version": s.Version})
+}
+
+func (s *Server) present(summary transcripts.Summary, agents map[string]claude.Agent) session {
+	out := session{
+		ID:         summary.ID,
+		Title:      summary.Title(),
+		LastPrompt: nullable(transcripts.Clip(summary.LastPrompt, 200)),
+		Cwd:        nullable(summary.Cwd),
+		Project:    nullable(summary.Project()),
+		UpdatedAt:  summary.UpdatedAt.UTC(),
+	}
+	if managed, ok := s.Launcher.Get(summary.ID); ok {
+		out.Running = &running{Kind: "remote-sessions"}
+		if managed.URL != "" {
+			out.Remote = &remote{URL: managed.URL}
+		}
+	} else if agent, ok := agents[summary.ID]; ok {
+		out.Running = &running{Kind: agent.Kind, Status: agent.Status}
+	}
+	return out
+}
+
+func (s *Server) list(w http.ResponseWriter, _ *http.Request) {
+	summaries, err := s.Store.List()
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, "internal", "Could not read the Claude Code conversations: "+err.Error())
+		return
+	}
+	agents := s.Agents.Running()
+	sessions := make([]session, 0, len(summaries))
+	for _, summary := range summaries {
+		sessions = append(sessions, s.present(summary, agents))
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"sessions": sessions})
+}
+
+func (s *Server) messages(w http.ResponseWriter, r *http.Request) {
+	path, ok := s.Store.Find(r.PathValue("id"))
+	if !ok {
+		writeError(w, http.StatusNotFound, "not_found", "Conversation not found")
+		return
+	}
+	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
+	if limit <= 0 {
+		limit = 60
+	}
+	messages, err := transcripts.RecentMessages(path, min(limit, 200))
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, "internal", err.Error())
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"messages": messages})
+}
+
+func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	path, ok := s.Store.Find(id)
+	if !ok {
+		writeError(w, http.StatusNotFound, "not_found", "Conversation not found")
+		return
+	}
+	if managed, ok := s.Launcher.Get(id); ok && managed.URL != "" {
+		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": true})
+		return
+	}
+	if _, open := s.Agents.Running()[id]; open {
+		writeError(w, http.StatusConflict, "open_elsewhere", "The conversation is already open on the computer. Close it there or run /remote-control in it.")
+		return
+	}
+	summary, err := s.Store.SummaryFor(path)
+	if err != nil {
+		writeError(w, http.StatusInternalServerError, "internal", err.Error())
+		return
+	}
+	// Keep going if the phone gives up: the session stays useful and the next tap reuses it.
+	managed, err := s.Launcher.Start(context.WithoutCancel(r.Context()), id, path, summary.Cwd, summary.Title())
+	s.Agents.Invalidate()
+	switch {
+	case err == nil:
+		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false})
+	case errors.Is(err, launcher.ErrTimeout):
+		log.Printf("remote-control %s: timeout. Terminal:\n%s", id, managed.Screen())
+		writeError(w, http.StatusGatewayTimeout, "remote_control_timeout", "Remote Control did not answer in time. Check that Claude Code is logged in with your Claude account.")
+	default:
+		if managed != nil {
+			log.Printf("remote-control %s: %v. Terminal:\n%s", id, err, managed.Screen())
+		}
+		writeError(w, http.StatusBadGateway, "launch_failed", "Could not start Remote Control: "+err.Error())
+	}
+}
+
+func (s *Server) disconnect(w http.ResponseWriter, r *http.Request) {
+	if !s.Launcher.Stop(r.PathValue("id")) {
+		writeError(w, http.StatusNotFound, "not_found", "Remote Sessions is not running this conversation")
+		return
+	}
+	s.Agents.Invalidate()
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func writeJSON(w http.ResponseWriter, status int, body any) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Cache-Control", "no-store")
+	w.WriteHeader(status)
+	_ = json.NewEncoder(w).Encode(body)
+}
+
+// writeError sends a stable code for the apps to translate and an English message as fallback.
+func writeError(w http.ResponseWriter, status int, code, message string) {
+	writeJSON(w, status, map[string]string{"code": code, "error": message})
+}
+
+type statusRecorder struct {
+	http.ResponseWriter
+	status int
+}
+
+func (r *statusRecorder) WriteHeader(status int) {
+	r.status = status
+	r.ResponseWriter.WriteHeader(status)
+}
+
+func logRequests(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		recorder := &statusRecorder{ResponseWriter: w, status: http.StatusOK}
+		next.ServeHTTP(recorder, r)
+		if r.URL.Path != "/health" {
+			log.Printf("%s %s %s %d %s", r.RemoteAddr, r.Method, r.URL.Path, recorder.status, time.Since(start).Round(time.Millisecond))
+		}
+	})
+}
