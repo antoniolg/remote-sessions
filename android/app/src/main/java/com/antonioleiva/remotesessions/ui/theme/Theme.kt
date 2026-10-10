@@ -52,7 +52,8 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun RemoteSessionsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    // Brand colours by default, like the iOS app and the icon; wallpaper colours would make the app lavender or blue.
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colors = when {

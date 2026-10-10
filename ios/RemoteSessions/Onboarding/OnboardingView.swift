@@ -7,6 +7,8 @@ struct OnboardingView: View {
     }
 
     var startAtInstall = false
+    /// Steps to open on top of the welcome screen (store screenshots).
+    var initialPath: [Step] = []
     let onFinish: () -> Void
     @Environment(ComputerStore.self) private var store
     @State private var path: [Step] = []
@@ -27,6 +29,7 @@ struct OnboardingView: View {
                     }
                 }
             }
+            .onAppear { if path.isEmpty { path = initialPath } }
             .navigationDestination(for: Step.self) { step in
                 switch step {
                 case .install:

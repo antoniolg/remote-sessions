@@ -9,6 +9,7 @@ struct SessionListView: View {
     @State private var loading = false
     @State private var loadError: String?
     @State private var showingSettings = false
+    @State private var path: [Session] = []
 
     private var projects: [String] {
         Array(Set(sessions.compactMap(\.project))).sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
@@ -27,7 +28,7 @@ struct SessionListView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 if sessions.isEmpty && loading {
                     ProgressView("Loading conversations…")
@@ -107,6 +108,12 @@ struct SessionListView: View {
         do {
             sessions = try await source.sessions()
             loadError = nil
+            #if DEBUG
+            // Store screenshots: REMOTE_SESSIONS_SCREEN=detail opens the first conversation.
+            if ProcessInfo.processInfo.environment["REMOTE_SESSIONS_SCREEN"] == "detail", path.isEmpty, let first = sessions.first {
+                path = [first]
+            }
+            #endif
         } catch where error.isCancellation {
             // A newer load replaced this one.
         } catch {

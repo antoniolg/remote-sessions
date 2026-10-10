@@ -1,0 +1,8 @@
+{
+  "name": "Remote Sessions",
+  "subtitle": "Claude Codeをスマホから",
+  "promotionalText": "パソコン上の Claude Code の会話をすべて一覧し、それぞれの進み具合を確認できます。Remote Control で、どの会話もスマホから再開できます。",
+  "keywords": "claude,claude code,remote control,ai,エージェント,コーディング,プログラミング,ターミナル,開発者,cli,セッション,tailscale",
+  "shortDescription": "Claude Code の会話を確認して、どれでもスマホから再開できます。",
+  "description": "Remote Sessions を使えば、パソコン上のすべての Claude Code の会話をポケットに入れて持ち歩けます。\n\nアプリを開くと、すべてのセッションがプロジェクトごとにまとまり、最近使った順に並んで表示されます。セッションをタップすると最新のメッセージを読めます。「接続」をタップすれば Remote Control でパソコン上のセッションを再開でき、Claude アプリで開いて、どこからでも続きを進められます。\n\n使い方\n• 無料の remote-sessions サーバーを、コマンド1つでパソコンにインストールします（macOS、Linux、Windows に対応）。\n• 表示される QR コードをスキャンします。これだけで完了です。\n• 外出先で使うには、両方のデバイスに Tailscale を追加してください。\n\nプライバシー重視の設計\n• 会話は暗号化され、パソコンからスマホへ直接届きます。アカウントもクラウドも分析ツールもありません。\n• ペアリング時にパソコンの証明書を固定するので、接続できるのはあなたのスマホだけです。誰もあなたのパソコンになりすますことはできません。\n• サーバーはオープンソースです。\n\n主な機能\n• Claude Code のすべての会話を、検索やプロジェクトでの絞り込みで表示\n• 各会話の最新メッセージと、Claude が使ったツールを確認\n• タップ1つで Remote Control から会話を再開\n• 複数のパソコンに対応し、ネットワーク上で自動的に再検出\n• パソコンなしで試せるデモモード\n\n動作要件\nClaude のサブスクリプションでログインした Claude Code がパソコンに入っていること（Remote Control は API キーでは動作しません）、そして会話を続けるための Claude アプリが必要です。\n\nRemote Sessions は Anthropic の公式アプリではありません。Claude および Claude Code は Anthropic の商標です。"
+}

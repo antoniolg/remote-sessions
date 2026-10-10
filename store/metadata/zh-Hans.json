@@ -1,0 +1,8 @@
+{
+  "name": "Remote Sessions",
+  "subtitle": "在手机上继续 Claude Code",
+  "promotionalText": "查看电脑上所有 Claude Code 对话，了解每个对话的进展，并通过 Remote Control 在手机上继续其中任意一个。",
+  "keywords": "claude,claude code,remote control,ai,人工智能,智能体,代理,编程,终端,开发者,cli,会话,tailscale,远程",
+  "shortDescription": "查看你的 Claude Code 对话，并在手机上继续任意一个。",
+  "description": "Remote Sessions 把你电脑上的所有 Claude Code 对话装进口袋。\n\n打开应用即可看到全部会话，按项目分组，并按最近使用时间排序。轻点某个会话即可阅读最新消息；轻点“连接”，即可通过 Remote Control 在电脑上恢复该会话：它会在 Claude 应用中打开，无论你身在何处都能接着继续。\n\n使用方法\n• 只需一条命令，即可在电脑上安装免费的 remote-sessions 服务器（支持 macOS、Linux 和 Windows）。\n• 扫描它显示的二维码。就这么简单。\n• 如需在外出时使用，请在两台设备上都安装 Tailscale。\n\n隐私至上的设计\n• 你的对话经过加密，直接从电脑传到手机。无需账号，没有云端，也没有数据分析。\n• 配对时会固定你电脑的证书，因此只有你的手机能够连接，也没有人能冒充你的电脑。\n• 服务器是开源的。\n\n功能特色\n• 所有 Claude Code 对话，支持搜索和按项目筛选\n• 每个对话的最新消息，包括 Claude 使用了哪些工具\n• 轻点一下，即可通过 Remote Control 恢复对话\n• 支持多台电脑，并在你的网络中自动重新发现\n• 演示模式，无需电脑即可体验\n\n系统要求\n电脑上已安装 Claude Code，并使用 Claude 订阅登录（Remote Control 不支持 API 密钥），以及用于继续对话的 Claude 应用。\n\nRemote Sessions 并非 Anthropic 官方应用。Claude 和 Claude Code 是 Anthropic 的商标。"
+}

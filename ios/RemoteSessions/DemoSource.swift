@@ -16,6 +16,12 @@ struct DemoSource: SessionSource {
                     cwd: "~/Projects/api", project: "api", updatedAt: Self.ago(95), running: nil, remote: nil),
             Session(id: "demo-3", title: String(localized: "Ideas for the October newsletter"), lastPrompt: String(localized: "Give me three shorter headlines"),
                     cwd: "~/Documents/Content", project: "Content", updatedAt: Self.ago(60 * 26), running: nil, remote: nil),
+            Session(id: "demo-4", title: String(localized: "Speed up the CI pipeline"), lastPrompt: String(localized: "Cache the Gradle dependencies"),
+                    cwd: "~/Projects/mobile-app", project: "mobile-app", updatedAt: Self.ago(60 * 30), running: nil, remote: nil),
+            Session(id: "demo-5", title: String(localized: "Write the release notes"), lastPrompt: String(localized: "Make them shorter and friendlier"),
+                    cwd: "~/Projects/docs", project: "docs", updatedAt: Self.ago(60 * 50), running: nil, remote: nil),
+            Session(id: "demo-6", title: String(localized: "Fix the flaky checkout test"), lastPrompt: String(localized: "Run it 20 times to confirm it's fixed"),
+                    cwd: "~/Projects/shop", project: "shop", updatedAt: Self.ago(60 * 75), running: nil, remote: nil),
         ]
     }
 

@@ -6,6 +6,7 @@ struct RemoteSessionsApp: App {
     /// Kept apart from `store.needsOnboarding` so the last onboarding step shows after pairing.
     @State private var onboarding: Bool
     @State private var openedLink: PairingLinkBox?
+    @State private var onboardingAtInstall = false
 
     init() {
         let store = ComputerStore()
@@ -13,8 +14,21 @@ struct RemoteSessionsApp: App {
         _onboarding = State(initialValue: store.needsOnboarding)
         #if DEBUG
         // Lets UI checks pair the simulator: SIMCTL_CHILD_REMOTE_SESSIONS_PAIR=<link> xcrun simctl launch …
-        if let text = ProcessInfo.processInfo.environment["REMOTE_SESSIONS_PAIR"], let link = PairingLink(text) {
+        let environment = ProcessInfo.processInfo.environment
+        if let text = environment["REMOTE_SESSIONS_PAIR"], let link = PairingLink(text) {
             _openedLink = State(initialValue: PairingLinkBox(link: link))
+        }
+        // Store screenshots: REMOTE_SESSIONS_SCREEN=list|detail shows the demo, welcome|install the onboarding.
+        switch environment["REMOTE_SESSIONS_SCREEN"] {
+        case "list", "detail":
+            store.demoMode = true
+            _onboarding = State(initialValue: false)
+        case "welcome", "install":
+            store.demoMode = false
+            _onboarding = State(initialValue: true)
+            _onboardingAtInstall = State(initialValue: environment["REMOTE_SESSIONS_SCREEN"] == "install")
+        default:
+            break
         }
         #endif
     }
@@ -23,7 +37,7 @@ struct RemoteSessionsApp: App {
         WindowGroup {
             Group {
                 if onboarding {
-                    OnboardingView { onboarding = false }
+                    OnboardingView(initialPath: onboardingAtInstall ? [.install] : []) { onboarding = false }
                 } else {
                     SessionListView()
                 }
