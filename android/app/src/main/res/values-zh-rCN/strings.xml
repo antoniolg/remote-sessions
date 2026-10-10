@@ -188,4 +188,5 @@
     <string name="demo_invoices_title">重命名发票的脚本</string>
     <string name="demo_invoices_1">写一个脚本，用开票日期重命名发票 PDF</string>
     <string name="demo_invoices_2">我创建了 `rename-invoices.sh`。它会读取每个 PDF 中的日期，并重命名为类似 `2026-10-01 供应商.pdf` 的形式。</string>
+    <string name="untitled">无标题</string>
 </resources>

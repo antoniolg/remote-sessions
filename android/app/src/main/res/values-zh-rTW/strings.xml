@@ -188,4 +188,5 @@
     <string name="demo_invoices_title">重新命名發票的指令碼</string>
     <string name="demo_invoices_1">寫一個指令碼，用發票日期重新命名發票 PDF</string>
     <string name="demo_invoices_2">我建立了 `rename-invoices.sh`。它會讀取每個 PDF 的日期，並重新命名為類似 `2026-10-01 供應商.pdf` 的格式。</string>
+    <string name="untitled">未命名</string>
 </resources>

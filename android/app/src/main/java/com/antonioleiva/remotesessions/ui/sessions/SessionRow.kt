@@ -1,5 +1,6 @@
 package com.antonioleiva.remotesessions.ui.sessions
 
+import com.antonioleiva.remotesessions.ui.common.displayTitle
 import androidx.compose.ui.res.stringResource
 import com.antonioleiva.remotesessions.R
 import androidx.compose.foundation.background
@@ -60,14 +61,14 @@ fun SessionRow(
                     Spacer(Modifier.width(8.dp))
                 }
                 Text(
-                    session.title,
+                    session.displayTitle(),
                     style = MaterialTheme.typography.titleMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
             val prompt = session.lastPrompt
-            if (!prompt.isNullOrBlank() && prompt != session.title) {
+            if (!prompt.isNullOrBlank() && prompt != session.displayTitle()) {
                 Text(
                     prompt,
                     style = MaterialTheme.typography.bodyMedium,

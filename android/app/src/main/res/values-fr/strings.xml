@@ -196,4 +196,5 @@
     <string name="demo_invoices_title">Script pour renommer les factures</string>
     <string name="demo_invoices_1">Écris un script qui renomme les PDF des factures en mettant la date de la facture dans le nom</string>
     <string name="demo_invoices_2">J’ai créé `rename-invoices.sh`. Il lit la date de chaque PDF et le renomme ainsi : `2026-10-01 Fournisseur.pdf`.</string>
+    <string name="untitled">Sans titre</string>
 </resources>

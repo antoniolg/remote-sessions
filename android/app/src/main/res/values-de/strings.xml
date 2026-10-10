@@ -192,4 +192,5 @@
     <string name="demo_invoices_title">Skript zum Umbenennen von Rechnungen</string>
     <string name="demo_invoices_1">Schreib ein Skript, das die Rechnungs-PDFs umbenennt und dabei das Rechnungsdatum in den Namen aufnimmt</string>
     <string name="demo_invoices_2">Ich habe `rename-invoices.sh` erstellt. Es liest das Datum aus jedem PDF und benennt es um, etwa in `2026-10-01 Lieferant.pdf`.</string>
+    <string name="untitled">Ohne Titel</string>
 </resources>

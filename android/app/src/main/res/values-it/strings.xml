@@ -196,4 +196,5 @@
     <string name="demo_invoices_title">Script per rinominare le fatture</string>
     <string name="demo_invoices_1">Scrivi uno script che rinomini i PDF delle fatture usando la data della fattura nel nome</string>
     <string name="demo_invoices_2">Ho creato `rename-invoices.sh`. Legge la data da ogni PDF e lo rinomina così: `2026-10-01 Fornitore.pdf`.</string>
+    <string name="untitled">Senza titolo</string>
 </resources>

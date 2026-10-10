@@ -192,4 +192,5 @@
     <string name="demo_invoices_title">Faturaları yeniden adlandırma betiği</string>
     <string name="demo_invoices_1">Fatura PDF’lerini, adında fatura tarihini kullanarak yeniden adlandıran bir betik yaz</string>
     <string name="demo_invoices_2">`rename-invoices.sh` betiğini oluşturdum. Her PDF’ten tarihi okuyor ve `2026-10-01 Tedarikçi.pdf` gibi yeniden adlandırıyor.</string>
+    <string name="untitled">Başlıksız</string>
 </resources>

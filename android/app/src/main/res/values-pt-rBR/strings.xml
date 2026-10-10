@@ -196,4 +196,5 @@
     <string name="demo_invoices_title">Script para renomear notas fiscais</string>
     <string name="demo_invoices_1">Escreva um script que renomeie os PDFs das notas fiscais usando a data da nota no nome</string>
     <string name="demo_invoices_2">Criei `rename-invoices.sh`. Ele lê a data de cada PDF e o renomeia assim: `2026-10-01 Fornecedor.pdf`.</string>
+    <string name="untitled">Sem título</string>
 </resources>

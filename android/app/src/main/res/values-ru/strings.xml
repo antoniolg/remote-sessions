@@ -200,4 +200,5 @@
     <string name="demo_invoices_title">Скрипт для переименования счетов</string>
     <string name="demo_invoices_1">Напиши скрипт, который переименовывает PDF-файлы счетов, добавляя в имя дату счёта</string>
     <string name="demo_invoices_2">Я создал `rename-invoices.sh`. Он считывает дату из каждого PDF и переименовывает файл в формате `2026-10-01 Поставщик.pdf`.</string>
+    <string name="untitled">Без названия</string>
 </resources>

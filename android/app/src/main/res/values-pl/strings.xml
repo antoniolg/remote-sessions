@@ -200,4 +200,5 @@
     <string name="demo_invoices_title">Skrypt do zmiany nazw faktur</string>
     <string name="demo_invoices_1">Napisz skrypt, który zmienia nazwy plików PDF z fakturami, używając w nazwie daty faktury</string>
     <string name="demo_invoices_2">Utworzyłem `rename-invoices.sh`. Odczytuje datę z każdego pliku PDF i zmienia jego nazwę na przykład na `2026-10-01 Dostawca.pdf`.</string>
+    <string name="untitled">Bez tytułu</string>
 </resources>

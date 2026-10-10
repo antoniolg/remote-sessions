@@ -1,5 +1,6 @@
 package com.antonioleiva.remotesessions.ui.connect
 
+import com.antonioleiva.remotesessions.ui.common.displayTitle
 import androidx.compose.ui.res.stringResource
 import com.antonioleiva.remotesessions.R
 import com.antonioleiva.remotesessions.ui.common.asString
@@ -47,7 +48,7 @@ fun ConnectDialogs(
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                     Text(stringResource(R.string.connect_progress_title), style = MaterialTheme.typography.titleMedium)
                     Text(
-                        session.title,
+                        session.displayTitle(),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,

@@ -188,4 +188,5 @@
     <string name="demo_invoices_title">Skrip untuk mengganti nama faktur</string>
     <string name="demo_invoices_1">Tulis skrip yang mengganti nama PDF faktur, dengan tanggal faktur di namanya</string>
     <string name="demo_invoices_2">Aku membuat `rename-invoices.sh`. Skrip ini membaca tanggal dari setiap PDF dan mengganti namanya seperti `2026-10-01 Pemasok.pdf`.</string>
+    <string name="untitled">Tanpa judul</string>
 </resources>

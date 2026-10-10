@@ -188,4 +188,5 @@
     <string name="demo_invoices_title">請求書の名前を変更するスクリプト</string>
     <string name="demo_invoices_1">請求書の PDF の名前を、請求日を含めて変更するスクリプトを書いてください</string>
     <string name="demo_invoices_2">`rename-invoices.sh` を作成しました。各 PDF から日付を読み取り、`2026-10-01 取引先.pdf` のような名前に変更します。</string>
+    <string name="untitled">無題</string>
 </resources>

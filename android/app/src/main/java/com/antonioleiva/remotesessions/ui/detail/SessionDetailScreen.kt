@@ -1,5 +1,6 @@
 package com.antonioleiva.remotesessions.ui.detail
 
+import com.antonioleiva.remotesessions.ui.common.displayTitle
 import androidx.compose.ui.res.stringResource
 import com.antonioleiva.remotesessions.R
 import com.antonioleiva.remotesessions.ui.common.asString
@@ -65,7 +66,7 @@ fun SessionDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(session.title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(session.displayTitle(), maxLines = 1, overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back)) }
