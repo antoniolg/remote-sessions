@@ -21,8 +21,8 @@ android {
         applicationId = "com.antonioleiva.remotesessions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 3
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "1.0.1"
     }
 
     signingConfigs {

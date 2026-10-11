@@ -23,12 +23,16 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.Executors
 
-/** Camera preview that reports the raw value of every QR code it reads. */
+/**
+ * Camera preview that reports the raw value of every QR code it reads.
+ * Calls [onUnavailable] when no camera can be opened (devices without one, emulators, a camera in use).
+ */
 @Composable
-fun QrScanner(onCode: (String) -> Unit, modifier: Modifier = Modifier) {
+fun QrScanner(onCode: (String) -> Unit, onUnavailable: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val currentOnCode by rememberUpdatedState(onCode)
+    val currentOnUnavailable by rememberUpdatedState(onUnavailable)
     val executor = remember { Executors.newSingleThreadExecutor() }
     val scanner = remember {
         BarcodeScanning.getClient(BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE).build())
@@ -39,7 +43,17 @@ fun QrScanner(onCode: (String) -> Unit, modifier: Modifier = Modifier) {
         val providerFuture = ProcessCameraProvider.getInstance(context)
         var provider: ProcessCameraProvider? = null
         providerFuture.addListener({
-            val cameraProvider = providerFuture.get().also { provider = it }
+            // CameraX fails to initialise when the device has no camera; get() rethrows that failure.
+            val cameraProvider = runCatching { providerFuture.get() }.getOrNull()
+            val selector = cameraProvider?.let { available ->
+                listOf(CameraSelector.DEFAULT_BACK_CAMERA, CameraSelector.DEFAULT_FRONT_CAMERA)
+                    .firstOrNull { runCatching { available.hasCamera(it) }.getOrDefault(false) }
+            }
+            if (cameraProvider == null || selector == null) {
+                currentOnUnavailable()
+                return@addListener
+            }
+            provider = cameraProvider
             val preview = Preview.Builder().build().also { it.surfaceProvider = previewView.surfaceProvider }
             val analysis = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -47,8 +61,8 @@ fun QrScanner(onCode: (String) -> Unit, modifier: Modifier = Modifier) {
                 .also { it.setAnalyzer(executor, QrAnalyzer(scanner) { value -> currentOnCode(value) }) }
             runCatching {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(lifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, preview, analysis)
-            }
+                cameraProvider.bindToLifecycle(lifecycleOwner, selector, preview, analysis)
+            }.onFailure { currentOnUnavailable() }
         }, ContextCompat.getMainExecutor(context))
 
         onDispose {

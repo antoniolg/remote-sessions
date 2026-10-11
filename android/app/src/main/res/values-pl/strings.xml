@@ -149,6 +149,7 @@
     <string name="scan_subtitle">Skieruj aparat na kod QR, który komputer wyświetlił na końcu instalacji.</string>
     <string name="scan_camera_needed">Aparat jest potrzebny do odczytania kodu QR.</string>
     <string name="scan_camera_denied">Brak uprawnień do aparatu. Zamiast tego możesz wkleić link wyświetlony przez komputer.</string>
+    <string name="scan_camera_unavailable">To urządzenie nie ma dostępnego aparatu. Wklej link wyświetlany przez komputer.</string>
     <string name="scan_allow_camera">Zezwól na aparat</string>
     <string name="scan_missing_code">Nie widzisz kodu? Uruchom remote-sessions pair na komputerze, aby wyświetlić go ponownie.</string>
     <string name="scan_paste_link">Wklej link</string>

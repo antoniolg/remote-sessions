@@ -143,6 +143,7 @@
     <string name="scan_subtitle">Richt op de QR-code die de computer aan het eind van de installatie liet zien.</string>
     <string name="scan_camera_needed">De camera is nodig om de QR-code te lezen.</string>
     <string name="scan_camera_denied">Geen cameratoestemming. Je kunt in plaats daarvan de link plakken die de computer toont.</string>
+    <string name="scan_camera_unavailable">Er is geen camera beschikbaar op dit apparaat. Plak in plaats daarvan de link die de computer toont.</string>
     <string name="scan_allow_camera">Camera toestaan</string>
     <string name="scan_missing_code">Zie je de code niet? Voer remote-sessions pair uit op de computer om hem opnieuw te tonen.</string>
     <string name="scan_paste_link">Link plakken</string>

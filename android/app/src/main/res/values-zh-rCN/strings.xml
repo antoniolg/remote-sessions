@@ -140,6 +140,7 @@
     <string name="scan_subtitle">对准安装结束时电脑上显示的二维码。</string>
     <string name="scan_camera_needed">需要使用相机来读取二维码。</string>
     <string name="scan_camera_denied">没有相机权限。你也可以粘贴电脑上显示的链接。</string>
+    <string name="scan_camera_unavailable">此设备没有可用的摄像头。请改为粘贴电脑上显示的链接。</string>
     <string name="scan_allow_camera">允许使用相机</string>
     <string name="scan_missing_code">看不到二维码？在电脑上运行 remote-sessions pair 即可重新显示。</string>
     <string name="scan_paste_link">粘贴链接</string>

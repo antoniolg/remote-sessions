@@ -140,6 +140,7 @@
     <string name="scan_subtitle">インストールの最後にコンピュータに表示された QR コードにカメラを向けてください。</string>
     <string name="scan_camera_needed">QR コードを読み取るにはカメラが必要です。</string>
     <string name="scan_camera_denied">カメラの権限がありません。代わりに、コンピュータに表示されたリンクを貼り付けることもできます。</string>
+    <string name="scan_camera_unavailable">このデバイスでは使用できるカメラがありません。代わりにコンピュータに表示されたリンクを貼り付けてください。</string>
     <string name="scan_allow_camera">カメラを許可</string>
     <string name="scan_missing_code">コードが見当たりませんか？コンピュータで remote-sessions pair を実行すると再表示されます。</string>
     <string name="scan_paste_link">リンクを貼り付け</string>

@@ -146,6 +146,7 @@
     <string name="scan_subtitle">Point at the QR code the computer showed at the end of the installation.</string>
     <string name="scan_camera_needed">The camera is needed to read the QR code.</string>
     <string name="scan_camera_denied">No camera permission. You can paste the link the computer shows instead.</string>
+    <string name="scan_camera_unavailable">This device has no camera available. Paste the link the computer shows instead.</string>
     <string name="scan_allow_camera">Allow camera</string>
     <string name="scan_missing_code">Can’t see the code? Run remote-sessions pair on the computer to show it again.</string>
     <string name="scan_paste_link">Paste link</string>

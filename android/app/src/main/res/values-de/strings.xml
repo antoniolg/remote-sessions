@@ -143,6 +143,7 @@
     <string name="scan_subtitle">Richte die Kamera auf den QR-Code, den der Computer am Ende der Installation angezeigt hat.</string>
     <string name="scan_camera_needed">Zum Lesen des QR-Codes wird die Kamera benötigt.</string>
     <string name="scan_camera_denied">Keine Kameraberechtigung. Du kannst stattdessen den Link einfügen, den der Computer anzeigt.</string>
+    <string name="scan_camera_unavailable">Auf diesem Gerät ist keine Kamera verfügbar. Füge stattdessen den Link ein, den der Computer anzeigt.</string>
     <string name="scan_allow_camera">Kamera erlauben</string>
     <string name="scan_missing_code">Siehst du den Code nicht? Führe remote-sessions pair auf dem Computer aus, um ihn erneut anzuzeigen.</string>
     <string name="scan_paste_link">Link einfügen</string>

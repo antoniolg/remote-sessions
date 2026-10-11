@@ -146,6 +146,7 @@
     <string name="scan_subtitle">Visez le code QR affiché par l’ordinateur à la fin de l’installation.</string>
     <string name="scan_camera_needed">L’appareil photo est nécessaire pour lire le code QR.</string>
     <string name="scan_camera_denied">Pas d’accès à l’appareil photo. Vous pouvez coller à la place le lien affiché par l’ordinateur.</string>
+    <string name="scan_camera_unavailable">Aucune caméra n’est disponible sur cet appareil. Collez plutôt le lien affiché par l’ordinateur.</string>
     <string name="scan_allow_camera">Autoriser l’appareil photo</string>
     <string name="scan_missing_code">Vous ne voyez pas le code ? Exécutez remote-sessions pair sur l’ordinateur pour l’afficher à nouveau.</string>
     <string name="scan_paste_link">Coller le lien</string>

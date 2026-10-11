@@ -143,6 +143,7 @@
     <string name="scan_subtitle">Bilgisayarın kurulumun sonunda gösterdiği QR koduna doğrult.</string>
     <string name="scan_camera_needed">QR kodunu okumak için kamera gerekiyor.</string>
     <string name="scan_camera_denied">Kamera izni yok. Bunun yerine bilgisayarın gösterdiği bağlantıyı yapıştırabilirsin.</string>
+    <string name="scan_camera_unavailable">Bu cihazda kullanılabilir kamera yok. Bunun yerine bilgisayarın gösterdiği bağlantıyı yapıştırın.</string>
     <string name="scan_allow_camera">Kameraya izin ver</string>
     <string name="scan_missing_code">Kodu göremiyor musun? Yeniden göstermek için bilgisayarda remote-sessions pair komutunu çalıştır.</string>
     <string name="scan_paste_link">Bağlantıyı yapıştır</string>

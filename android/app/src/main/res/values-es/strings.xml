@@ -146,6 +146,7 @@
     <string name="scan_subtitle">Apunta al código QR que mostró el ordenador al terminar la instalación.</string>
     <string name="scan_camera_needed">Se necesita la cámara para leer el código QR.</string>
     <string name="scan_camera_denied">Sin permiso de cámara. Puedes pegar el enlace que muestra el ordenador.</string>
+    <string name="scan_camera_unavailable">Este dispositivo no tiene una cámara disponible. Pega el enlace que muestra el ordenador.</string>
     <string name="scan_allow_camera">Permitir cámara</string>
     <string name="scan_missing_code">¿No ves el código? Ejecuta remote-sessions pair en el ordenador para mostrarlo de nuevo.</string>
     <string name="scan_paste_link">Pegar enlace</string>

@@ -140,6 +140,7 @@
     <string name="scan_subtitle">Arahkan ke kode QR yang ditampilkan komputer di akhir instalasi.</string>
     <string name="scan_camera_needed">Kamera diperlukan untuk membaca kode QR.</string>
     <string name="scan_camera_denied">Tidak ada izin kamera. Kamu bisa menempelkan link yang ditampilkan komputer sebagai gantinya.</string>
+    <string name="scan_camera_unavailable">Perangkat ini tidak memiliki kamera yang tersedia. Tempel tautan yang ditampilkan komputer.</string>
     <string name="scan_allow_camera">Izinkan kamera</string>
     <string name="scan_missing_code">Tidak melihat kodenya? Jalankan remote-sessions pair di komputer untuk menampilkannya lagi.</string>
     <string name="scan_paste_link">Tempel link</string>

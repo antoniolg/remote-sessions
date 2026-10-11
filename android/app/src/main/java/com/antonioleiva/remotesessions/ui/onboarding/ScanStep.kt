@@ -52,11 +52,15 @@ fun ScanStep(error: UiText?, onCode: (String) -> Boolean, onClearError: () -> Un
         mutableStateOf(ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
     }
     var denied by remember { mutableStateOf(false) }
+    // Without a usable camera the step falls back to pasting the link.
+    var cameraUnavailable by remember {
+        mutableStateOf(!context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
+    }
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         hasCamera = granted
         denied = !granted
     }
-    LaunchedEffect(Unit) { if (!hasCamera) permission.launch(Manifest.permission.CAMERA) }
+    LaunchedEffect(Unit) { if (!hasCamera && !cameraUnavailable) permission.launch(Manifest.permission.CAMERA) }
     var pasting by remember { mutableStateOf(false) }
     // Ignores the same invalid code for a moment so the error does not flicker on every frame.
     var lastRejected by remember { mutableStateOf<String?>(null) }
@@ -84,11 +88,12 @@ fun ScanStep(error: UiText?, onCode: (String) -> Boolean, onClearError: () -> Un
                 .background(MaterialTheme.colorScheme.surfaceContainerHighest),
             contentAlignment = Alignment.Center,
         ) {
-            if (hasCamera) {
+            if (hasCamera && !cameraUnavailable) {
                 QrScanner(
                     onCode = { code ->
                         if (code != lastRejected && !onCode(code)) lastRejected = code
                     },
+                    onUnavailable = { cameraUnavailable = true },
                     modifier = Modifier.fillMaxSize(),
                 )
             } else {
@@ -98,11 +103,17 @@ fun ScanStep(error: UiText?, onCode: (String) -> Boolean, onClearError: () -> Un
                     modifier = Modifier.padding(24.dp),
                 ) {
                     Icon(Icons.Outlined.NoPhotography, contentDescription = null, modifier = Modifier.size(40.dp))
-                    Text(
-                        stringResource(if (denied) R.string.scan_camera_denied else R.string.scan_camera_needed),
-                        textAlign = TextAlign.Center,
-                    )
-                    Button(onClick = { permission.launch(Manifest.permission.CAMERA) }) { Text(stringResource(R.string.scan_allow_camera)) }
+                    val message = when {
+                        cameraUnavailable -> R.string.scan_camera_unavailable
+                        denied -> R.string.scan_camera_denied
+                        else -> R.string.scan_camera_needed
+                    }
+                    Text(stringResource(message), textAlign = TextAlign.Center)
+                    if (cameraUnavailable) {
+                        Button(onClick = { pasting = true }) { Text(stringResource(R.string.scan_paste_link)) }
+                    } else {
+                        Button(onClick = { permission.launch(Manifest.permission.CAMERA) }) { Text(stringResource(R.string.scan_allow_camera)) }
+                    }
                 }
             }
         }

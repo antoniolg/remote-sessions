@@ -146,6 +146,7 @@
     <string name="scan_subtitle">Inquadra il codice QR mostrato dal computer al termine dell’installazione.</string>
     <string name="scan_camera_needed">Serve la fotocamera per leggere il codice QR.</string>
     <string name="scan_camera_denied">Nessuna autorizzazione per la fotocamera. In alternativa puoi incollare il link mostrato dal computer.</string>
+    <string name="scan_camera_unavailable">Su questo dispositivo non è disponibile nessuna fotocamera. Incolla invece il link mostrato dal computer.</string>
     <string name="scan_allow_camera">Consenti fotocamera</string>
     <string name="scan_missing_code">Non vedi il codice? Esegui remote-sessions pair sul computer per mostrarlo di nuovo.</string>
     <string name="scan_paste_link">Incolla link</string>

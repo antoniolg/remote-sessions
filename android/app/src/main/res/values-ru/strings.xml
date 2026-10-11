@@ -149,6 +149,7 @@
     <string name="scan_subtitle">Наведите камеру на QR-код, который компьютер показал в конце установки.</string>
     <string name="scan_camera_needed">Для чтения QR-кода нужна камера.</string>
     <string name="scan_camera_denied">Нет доступа к камере. Вместо этого можно вставить ссылку, которую показывает компьютер.</string>
+    <string name="scan_camera_unavailable">На этом устройстве нет доступной камеры. Вставьте ссылку, которую показывает компьютер.</string>
     <string name="scan_allow_camera">Разрешить камеру</string>
     <string name="scan_missing_code">Не видите код? Выполните remote-sessions pair на компьютере, чтобы показать его снова.</string>
     <string name="scan_paste_link">Вставить ссылку</string>
