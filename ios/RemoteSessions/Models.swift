@@ -45,6 +45,25 @@ struct RemoteControlResult: Decodable {
     let url: URL
 }
 
+struct CreatedSession: Decodable {
+    let id: String
+    let url: URL
+}
+
+/// A folder on the computer and its subfolders, to pick where a new session starts.
+struct FolderListing: Decodable, Hashable {
+    struct Folder: Decodable, Hashable, Identifiable {
+        let name: String
+        let path: String
+        var id: String { path }
+    }
+
+    let path: String
+    let parent: String?
+    let home: String
+    let folders: [Folder]
+}
+
 struct Health: Decodable {
     let id: String
     let name: String
@@ -79,7 +98,10 @@ struct PairingLink: Equatable {
     let token: String
 
     init?(_ text: String) {
-        guard let components = URLComponents(string: text.trimmingCharacters(in: .whitespacesAndNewlines)),
+        // Older servers encode spaces as "+" (form encoding), which URLComponents keeps literally.
+        // A real "+" always arrives as "%2B", so turning "+" into a space is safe.
+        let text = text.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "+", with: "%20")
+        guard let components = URLComponents(string: text),
               components.scheme == "remotesessions", components.host == "pair"
         else { return nil }
         let items = Dictionary((components.queryItems ?? []).compactMap { item in item.value.map { (item.name, $0) } },

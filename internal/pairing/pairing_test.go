@@ -3,6 +3,7 @@ package pairing
 import (
 	"net"
 	"net/url"
+	"strings"
 	"testing"
 )
 
@@ -19,6 +20,14 @@ func TestURIRoundTrip(t *testing.T) {
 	if q.Get("v") != "1" || q.Get("id") != "abc" || q.Get("name") != "Mac de Antonio" || q.Get("port") != "8787" ||
 		q.Get("hosts") != "192.168.1.10,100.100.1.2" || q.Get("token") != "t+k/n" || q.Get("fp") != "ff00" {
 		t.Fatalf("unexpected query %v", q)
+	}
+}
+
+func TestURIEncodesSpacesAsPercent20(t *testing.T) {
+	// iOS does not decode "+" in a query as a space.
+	uri := Info{ID: "abc", Name: "Mac de Antonio", Port: 1, Hosts: []string{"h"}, Token: "t+k", Fingerprint: "ff"}.URI()
+	if !strings.Contains(uri, "name=Mac%20de%20Antonio") || !strings.Contains(uri, "token=t%2Bk") {
+		t.Fatalf("uri = %s", uri)
 	}
 }
 

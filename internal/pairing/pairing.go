@@ -31,7 +31,8 @@ func (i Info) URI() string {
 	query.Set("hosts", strings.Join(i.Hosts, ","))
 	query.Set("token", i.Token)
 	query.Set("fp", i.Fingerprint)
-	return "remotesessions://pair?" + query.Encode()
+	// Encode() writes spaces as "+", which iOS's URLComponents does not decode; "%20" works everywhere.
+	return "remotesessions://pair?" + strings.ReplaceAll(query.Encode(), "+", "%20")
 }
 
 // PrintQR draws the pairing URI as a QR code for a terminal.

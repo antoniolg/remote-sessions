@@ -43,4 +43,21 @@ struct DemoSource: SessionSource {
     func disconnect(sessionID: String) async throws {
         throw SourceError.demo
     }
+
+    func folders(path: String?) async throws -> FolderListing {
+        let home = "/Users/demo"
+        let tree = [
+            home: ["Documents", "Projects"],
+            "\(home)/Projects": ["api", "docs", "mobile-app", "shop"],
+            "\(home)/Documents": ["Content"],
+        ]
+        let current = path.map { $0.replacingOccurrences(of: "~", with: home) } ?? home
+        let names = tree[current] ?? []
+        return FolderListing(path: current, parent: current == home ? nil : (current as NSString).deletingLastPathComponent,
+                             home: home, folders: names.map { .init(name: $0, path: "\(current)/\($0)") })
+    }
+
+    func create(cwd: String, title: String?, trustFolder: Bool) async throws -> URL {
+        throw SourceError.demo
+    }
 }

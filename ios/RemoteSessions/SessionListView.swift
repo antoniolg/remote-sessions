@@ -9,6 +9,8 @@ struct SessionListView: View {
     @State private var loading = false
     @State private var loadError: String?
     @State private var showingSettings = false
+    @State private var creating = false
+    @Environment(\.openURL) private var openURL
     @State private var path: [Session] = []
 
     private var projects: [String] {
@@ -50,6 +52,12 @@ struct SessionListView: View {
             .toolbar { toolbar }
             .refreshable { await load() }
             .sheet(isPresented: $showingSettings) { SettingsView() }
+            .sheet(isPresented: $creating) {
+                NewSessionView(sessions: sessions) { folder, title in
+                    creating = false
+                    connector.create(in: folder, title: title, source: store.source, openURL: openURL)
+                }
+            }
             .navigationDestination(for: Session.self) { SessionDetailView(session: $0) }
             .task(id: "\(store.version)|\(connector.changes)") { await load() }
         }
@@ -99,6 +107,10 @@ struct SessionListView: View {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Settings", systemImage: "gearshape") { showingSettings = true }
         }
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("New conversation", systemImage: "plus") { creating = true }
+                .disabled(store.source == nil || connector.opening != nil)
+        }
     }
 
     private func load() async {
@@ -110,9 +122,12 @@ struct SessionListView: View {
             loadError = nil
             #if DEBUG
             // Store screenshots: REMOTE_SESSIONS_SCREEN=detail opens the first conversation.
-            if ProcessInfo.processInfo.environment["REMOTE_SESSIONS_SCREEN"] == "detail", path.isEmpty, let first = sessions.first {
+            let screen = ProcessInfo.processInfo.environment["REMOTE_SESSIONS_SCREEN"]
+            if screen == "detail", path.isEmpty, let first = sessions.first {
                 path = [first]
             }
+            // …and new|folders opens the new conversation sheet.
+            if screen == "new" || screen == "folders" { creating = true }
             #endif
         } catch where error.isCancellation {
             // A newer load replaced this one.

@@ -15,6 +15,12 @@ struct PairingLinkTests {
         #expect(link.token == "t+k")
     }
 
+    @Test func decodesPlusAsSpaceFromOlderServers() throws {
+        let link = try #require(PairingLink("remotesessions://pair?v=1&id=abc&name=Mac+de+Antonio&port=8787&hosts=h&token=t%2Bk&fp=\(fingerprint)"))
+        #expect(link.computer.name == "Mac de Antonio")
+        #expect(link.token == "t+k")
+    }
+
     @Test(arguments: [
         "https://example.com",
         "remotesessions://pair?v=2&id=a&port=1&hosts=h&token=t&fp=\(String(repeating: "a", count: 64))",

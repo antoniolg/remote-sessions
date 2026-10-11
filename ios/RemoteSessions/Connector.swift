@@ -1,36 +1,56 @@
 import SwiftUI
 
-/// Asks the computer to resume a session with Remote Control and opens the resulting claude.ai URL.
+/// Something that ends in a Remote Control URL: resuming a conversation or starting a new one.
+struct Launch {
+    let title: String
+    let start: @MainActor (_ trustFolder: Bool) async throws -> URL
+}
+
+/// Asks the computer to resume or start a session with Remote Control and opens the resulting claude.ai URL.
 /// Shared by the list and the detail so both show the same progress overlay and errors.
 @MainActor
 @Observable
 final class Connector {
-    private(set) var opening: Session?
+    private(set) var opening: Launch?
     var errorMessage: String?
-    /// A connection waiting for the user to trust its folder.
-    var pendingTrust: (session: Session, folder: String)?
+    /// A launch waiting for the user to trust its folder.
+    var pendingTrust: (launch: Launch, folder: String)?
     private var openURL: OpenURLAction?
-    private var source: SessionSource?
     /// Bumped after connecting or stopping, so screens refresh.
     private(set) var changes = 0
     private var task: Task<Void, Never>?
 
-    func connect(_ session: Session, source: SessionSource?, openURL: OpenURLAction, trustFolder: Bool = false) {
-        guard let source, opening == nil else { return }
-        self.source = source
+    func connect(_ session: Session, source: SessionSource?, openURL: OpenURLAction) {
+        guard let source else { return }
+        run(Launch(title: session.displayTitle) { trust in
+            try await source.connect(sessionID: session.id, trustFolder: trust)
+        }, openURL: openURL)
+    }
+
+    /// Starts a new conversation in a folder of the computer.
+    func create(in folder: String, title: String?, source: SessionSource?, openURL: OpenURLAction) {
+        guard let source else { return }
+        let name = title ?? (folder as NSString).lastPathComponent
+        run(Launch(title: String(localized: "New conversation in \(name)")) { trust in
+            try await source.create(cwd: folder, title: title, trustFolder: trust)
+        }, openURL: openURL)
+    }
+
+    private func run(_ launch: Launch, openURL: OpenURLAction, trustFolder: Bool = false) {
+        guard opening == nil else { return }
         self.openURL = openURL
-        opening = session
+        opening = launch
         task = Task {
             defer {
                 opening = nil
                 changes += 1
             }
             do {
-                openURL(try await source.connect(sessionID: session.id, trustFolder: trustFolder))
+                openURL(try await launch.start(trustFolder))
             } catch where error.isCancellation {
                 // Cancelled from the overlay.
             } catch SourceError.trustRequired(let folder) {
-                pendingTrust = (session, folder)
+                pendingTrust = (launch, folder)
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -51,7 +71,7 @@ final class Connector {
     func trustAndConnect() {
         guard let pending = pendingTrust, let openURL else { return }
         pendingTrust = nil
-        connect(pending.session, source: source, openURL: openURL, trustFolder: true)
+        run(pending.launch, openURL: openURL, trustFolder: true)
     }
 
     func cancel() {
@@ -73,8 +93,8 @@ struct ConnectorPresentation: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay {
-                if let session = connector.opening {
-                    OpeningOverlay(session: session) { connector.cancel() }
+                if let launch = connector.opening {
+                    OpeningOverlay(title: launch.title) { connector.cancel() }
                 }
             }
             .alert("Trust this folder?", isPresented: .constant(connector.pendingTrust != nil)) {
@@ -125,7 +145,7 @@ struct ConnectButton: View {
 }
 
 private struct OpeningOverlay: View {
-    let session: Session
+    let title: String
     let cancel: () -> Void
 
     var body: some View {
@@ -133,7 +153,7 @@ private struct OpeningOverlay: View {
             ProgressView()
             Text("Starting Remote Control…")
                 .font(.headline)
-            Text(session.displayTitle)
+            Text(title)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

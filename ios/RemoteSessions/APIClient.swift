@@ -7,6 +7,10 @@ protocol SessionSource: Sendable {
     func messages(sessionID: String) async throws -> [Message]
     func connect(sessionID: String, trustFolder: Bool) async throws -> URL
     func disconnect(sessionID: String) async throws
+    /// Subfolders of `path` (the home folder when nil).
+    func folders(path: String?) async throws -> FolderListing
+    /// Starts a new conversation with Remote Control in `cwd`.
+    func create(cwd: String, title: String?, trustFolder: Bool) async throws -> URL
 }
 
 enum SourceError: LocalizedError {
@@ -30,6 +34,7 @@ enum SourceError: LocalizedError {
             case "launch_failed": String(localized: "Claude Code couldn't resume the conversation.")
             case "folder_access": String(localized: "The computer doesn't let Remote Sessions open this conversation's folder. On a Mac, allow remote-sessions in System Settings › Privacy & Security › Files and Folders.")
             case "prompt_blocked": String(localized: "Claude Code is waiting for an answer on the computer. Open the conversation there to continue.")
+            case "outside_home": String(localized: "Only folders inside your home folder can be used.")
             default: message
             }
         case .trustRequired(let folder):
@@ -62,6 +67,24 @@ struct APIClient: SessionSource {
 
     func disconnect(sessionID: String) async throws {
         _ = try await data("v1/sessions/\(sessionID)/remote-control", method: "DELETE", timeout: 20)
+    }
+
+    func folders(path: String?) async throws -> FolderListing {
+        var query = ""
+        if let path, let encoded = path.addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) {
+            query = "?path=\(encoded)"
+        }
+        return try await request("v1/folders\(query)", as: FolderListing.self)
+    }
+
+    func create(cwd: String, title: String?, trustFolder: Bool) async throws -> URL {
+        struct Body: Encodable {
+            let cwd: String
+            let title: String?
+            let trustFolder: Bool
+        }
+        let body = try JSONEncoder().encode(Body(cwd: cwd, title: title, trustFolder: trustFolder))
+        return try await request("v1/sessions", method: "POST", body: body, timeout: 70, as: CreatedSession.self).url
     }
 
     /// Checks a pairing before saving it.
@@ -137,6 +160,11 @@ struct APIClient: SessionSource {
         }
         return data
     }
+}
+
+private extension CharacterSet {
+    /// Query values can't carry the separators "&", "=", "+" or "#" unescaped.
+    static let urlQueryValueAllowed = CharacterSet.urlQueryAllowed.subtracting(CharacterSet(charactersIn: "&=+#?"))
 }
 
 /// The address each computer answered on lately, shared by every request.
