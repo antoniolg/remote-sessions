@@ -19,6 +19,8 @@ It has two parts:
 
 `setup` installs a background service (LaunchAgent, systemd user unit or a logon task), starts it and prints a QR code. Scan it with the app.
 
+On macOS the service runs a copy of the binary at `~/Library/Application Support/remote-sessions/bin/remote-sessions`: privacy permissions such as Full Disk Access are tied to the executable's path, and Homebrew's changes with every version. After `brew upgrade`, the service updates that copy and restarts itself as soon as no conversation is running, so permissions and open conversations survive upgrades. Give Full Disk Access to that path if your projects live in Documents, Desktop or Downloads.
+
 Requirements: Claude Code logged in with a Claude subscription (Remote Control does not work with an API key).
 
 ### Commands

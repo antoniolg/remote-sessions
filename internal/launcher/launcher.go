@@ -66,6 +66,13 @@ func (l *Launcher) Get(sessionID string) (*Managed, bool) {
 	return m, ok
 }
 
+// Busy reports whether any session is running or starting, so an update can wait for them.
+func (l *Launcher) Busy() bool {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return len(l.sessions) > 0 || len(l.starting) > 0
+}
+
 // Options change how a session is started.
 type Options struct {
 	// TrustFolder answers "yes" if Claude Code asks whether to trust the session's folder.

@@ -178,6 +178,10 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false})
 }
 
+// macAccessHint names the file to allow: the service runs a copy at a fixed path (see internal/service).
+const macAccessHint = ". On macOS, give Full Disk Access to ~/Library/Application Support/remote-sessions/bin/remote-sessions " +
+	"in System Settings › Privacy & Security, or allow it when macOS asks about Documents, Desktop or Downloads."
+
 // launchError answers a failed Start or Create with the codes the apps translate.
 func launchError(w http.ResponseWriter, id, cwd string, managed *launcher.Managed, err error) {
 	var promptErr *launcher.PromptError
@@ -186,8 +190,7 @@ func launchError(w http.ResponseWriter, id, cwd string, managed *launcher.Manage
 		writeJSON(w, http.StatusConflict, map[string]string{"code": "trust_required", "folder": cwd,
 			"error": "Claude Code asks whether you trust " + cwd + ". Confirm to trust it and connect."})
 	case errors.Is(err, launcher.ErrFolderAccess):
-		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+cwd+
-			". On macOS, allow remote-sessions in System Settings › Privacy & Security › Files and Folders (or Full Disk Access).")
+		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+cwd+macAccessHint)
 	case errors.As(err, &promptErr):
 		log.Printf("remote-control %s: %v", id, err)
 		writeError(w, http.StatusBadGateway, "prompt_blocked", promptErr.Error())
@@ -227,8 +230,7 @@ func folderError(w http.ResponseWriter, path string, err error) {
 	case errors.Is(err, folders.ErrNotFolder):
 		writeError(w, http.StatusNotFound, "not_found", "Folder not found: "+path)
 	case errors.Is(err, folders.ErrAccess):
-		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+path+
-			". On macOS, allow remote-sessions in System Settings › Privacy & Security › Files and Folders (or Full Disk Access).")
+		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+path+macAccessHint)
 	default:
 		writeError(w, http.StatusInternalServerError, "internal", err.Error())
 	}

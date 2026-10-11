@@ -3,7 +3,10 @@
 package service
 
 import (
+	"bytes"
+	"crypto/sha256"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -47,4 +50,68 @@ func pathEnv() string {
 	home, _ := os.UserHomeDir()
 	dirs := []string{filepath.Join(home, ".local", "bin"), "/opt/homebrew/bin", "/usr/local/bin", "/usr/bin", "/bin", "/usr/sbin", "/sbin"}
 	return strings.Join(dirs, string(os.PathListSeparator))
+}
+
+// copyExecutable writes src (symlinks followed) to dst atomically, so a running dst keeps working.
+func copyExecutable(src, dst string) error {
+	if samePath(src, dst) {
+		return nil
+	}
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+		return err
+	}
+	tmp, err := os.CreateTemp(filepath.Dir(dst), ".remote-sessions-*")
+	if err != nil {
+		return err
+	}
+	defer os.Remove(tmp.Name())
+	if _, err := io.Copy(tmp, in); err != nil {
+		tmp.Close()
+		return err
+	}
+	if err := tmp.Chmod(0o755); err != nil {
+		tmp.Close()
+		return err
+	}
+	if err := tmp.Close(); err != nil {
+		return err
+	}
+	return os.Rename(tmp.Name(), dst)
+}
+
+// samePath reports whether both paths lead to the same file once symlinks are resolved.
+func samePath(a, b string) bool {
+	ra, errA := filepath.EvalSymlinks(a)
+	rb, errB := filepath.EvalSymlinks(b)
+	return errA == nil && errB == nil && ra == rb
+}
+
+func sameContent(a, b string) (bool, error) {
+	ha, err := fileHash(a)
+	if err != nil {
+		return false, err
+	}
+	hb, err := fileHash(b)
+	if err != nil {
+		return false, err
+	}
+	return bytes.Equal(ha, hb), nil
+}
+
+func fileHash(path string) ([]byte, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	hash := sha256.New()
+	if _, err := io.Copy(hash, file); err != nil {
+		return nil, err
+	}
+	return hash.Sum(nil), nil
 }

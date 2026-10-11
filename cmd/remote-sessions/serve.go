@@ -20,6 +20,7 @@ import (
 	"github.com/antoniolg/remote-sessions/internal/i18n"
 	"github.com/antoniolg/remote-sessions/internal/launcher"
 	"github.com/antoniolg/remote-sessions/internal/server"
+	"github.com/antoniolg/remote-sessions/internal/service"
 	"github.com/antoniolg/remote-sessions/internal/transcripts"
 )
 
@@ -91,6 +92,7 @@ func serve(args []string) error {
 		_ = httpServer.Shutdown(ctx)
 	}()
 
+	go followUpdates(launch, httpServer)
 	log.Printf("Remote Sessions %s listening on https://0.0.0.0:%d (claude: %s)", version, cfg.Port, claudeBin)
 	err = httpServer.ListenAndServeTLS("", "")
 	launch.StopAll()
@@ -98,6 +100,29 @@ func serve(args []string) error {
 		return nil
 	}
 	return err
+}
+
+// followUpdates restarts the server on a newly installed version once no session is running
+// (macOS: see service.UpdateFromSource). Exiting is enough: the service manager starts it again.
+func followUpdates(launch *launcher.Launcher, httpServer *http.Server) {
+	for wait := 10 * time.Second; ; wait = 2 * time.Minute {
+		time.Sleep(wait)
+		if launch.Busy() {
+			continue
+		}
+		updated, err := service.UpdateFromSource()
+		if err != nil {
+			log.Printf("update check: %v", err)
+			continue
+		}
+		if updated {
+			log.Printf("A new version of Remote Sessions was installed: restarting")
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			_ = httpServer.Shutdown(ctx)
+			cancel()
+			return
+		}
+	}
 }
 
 func firstNonEmpty(values ...string) string {

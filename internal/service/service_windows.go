@@ -27,3 +27,6 @@ func Restart() error {
 func Installed() bool {
 	return exec.Command("schtasks", "/Query", "/TN", windowsTask).Run() == nil
 }
+
+// UpdateFromSource only matters on macOS, where the service runs a copy of the executable.
+func UpdateFromSource() (bool, error) { return false, nil }
