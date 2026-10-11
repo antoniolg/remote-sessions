@@ -24,6 +24,14 @@ type Agent struct {
 	State     string `json:"state"`
 	PID       int    `json:"pid"`
 	Cwd       string `json:"cwd"`
+	// StartedAt is when the process started, in Unix milliseconds.
+	StartedAt int64 `json:"startedAt"`
+}
+
+// RemoteControlSince reports whether a Remote Control bridge recorded after lastBefore (the latest
+// transcript entry written before it) belongs to this run of the session rather than to an older one.
+func (a Agent) RemoteControlSince(lastBefore time.Time) bool {
+	return a.StartedAt > 0 && !lastBefore.IsZero() && !lastBefore.Before(time.UnixMilli(a.StartedAt))
 }
 
 // Locate returns the claude executable: an explicit path, PATH, or the usual install locations

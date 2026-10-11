@@ -58,7 +58,8 @@ All responses are JSON. Errors: non-2xx status with `{"code": "<code>", "error":
 ```
 - Sorted by `updatedAt`, newest first.
 - `running` is `null` when the session is not open on the computer. `kind`: `interactive`, `background` or `remote-sessions` (started by this server).
-- `remote` is `null` unless this server currently runs the session with Remote Control.
+- `remote` is set when the session has Remote Control: this server runs it, or it is open on the computer and Remote Control was turned on in that run (for example with `/remote-control`). Apps open its `url` directly.
+- `running` without `remote` (and `kind` other than `remote-sessions`) means the session is open on the computer without Remote Control: connecting fails with `open_elsewhere` until it is closed there or `/remote-control` is run in it.
 
 ### `GET /v1/sessions/{id}/messages?limit=60`
 Latest messages (max 200), oldest first:

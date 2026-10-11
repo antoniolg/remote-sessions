@@ -29,8 +29,11 @@ type Summary struct {
 	FirstPrompt     string
 	LastPrompt      string
 	BridgeSessionID string
-	Messages        int
-	UpdatedAt       time.Time
+	// BridgeAfter is the latest timestamp written before the bridge record, which has none of its own:
+	// it tells whether Remote Control was turned on in the current run of an open session.
+	BridgeAfter time.Time
+	Messages    int
+	UpdatedAt   time.Time
 }
 
 // Title picks the best available title.
@@ -137,7 +140,11 @@ func eachRecord(data []byte, fn func(record)) {
 // Summarize parses transcript data. Exported for tests.
 func Summarize(id string, data []byte) Summary {
 	s := Summary{ID: id}
+	var latest time.Time
 	eachRecord(data, func(r record) {
+		if at, err := time.Parse(time.RFC3339Nano, r.Timestamp); err == nil && at.After(latest) {
+			latest = at
+		}
 		if s.Cwd == "" && r.Cwd != "" {
 			s.Cwd = r.Cwd
 		}
@@ -161,6 +168,7 @@ func Summarize(id string, data []byte) Summary {
 		case "bridge-session":
 			if r.BridgeSessionID != "" {
 				s.BridgeSessionID = r.BridgeSessionID
+				s.BridgeAfter = latest
 			}
 		case "user":
 			if typed := typedText(r); typed != "" {

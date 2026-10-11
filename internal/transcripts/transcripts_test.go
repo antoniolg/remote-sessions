@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+	"time"
 )
 
 func lines(t *testing.T, records ...any) []byte {
@@ -112,5 +113,18 @@ func TestProjectDir(t *testing.T) {
 	s := NewStore("/home/me/.claude/projects")
 	if got, want := s.ProjectDir("/Users/me/my.app_v2"), "/home/me/.claude/projects/-Users-me-my-app-v2"; got != want {
 		t.Fatalf("ProjectDir = %s, want %s", got, want)
+	}
+}
+
+func TestBridgeAfterIsTheLatestTimestampBeforeTheBridge(t *testing.T) {
+	data := []byte(`{"type":"user","uuid":"u1","timestamp":"2026-10-11T10:00:00.000Z","message":{"content":"Hola"}}
+{"type":"assistant","uuid":"a1","timestamp":"2026-10-11T10:05:00.000Z","message":{"content":[{"type":"text","text":"Buenas"}]}}
+{"type":"bridge-session","bridgeSessionId":"cse_abc"}
+{"type":"user","uuid":"u2","timestamp":"2026-10-11T11:00:00.000Z","message":{"content":"Otra"}}
+`)
+	s := Summarize("id", data)
+	want := time.Date(2026, 10, 11, 10, 5, 0, 0, time.UTC)
+	if s.BridgeSessionID != "cse_abc" || !s.BridgeAfter.Equal(want) {
+		t.Fatalf("bridge %q after %v, want cse_abc after %v", s.BridgeSessionID, s.BridgeAfter, want)
 	}
 }

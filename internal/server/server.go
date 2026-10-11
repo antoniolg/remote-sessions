@@ -103,6 +103,10 @@ func (s *Server) present(summary transcripts.Summary, agents map[string]claude.A
 		}
 	} else if agent, ok := agents[summary.ID]; ok {
 		out.Running = &running{Kind: agent.Kind, Status: agent.Status}
+		// Open on the computer with /remote-control turned on: the phone can open it too.
+		if summary.BridgeSessionID != "" && agent.RemoteControlSince(summary.BridgeAfter) {
+			out.Remote = &remote{URL: transcripts.BridgeURL(summary.BridgeSessionID)}
+		}
 	}
 	return out
 }
