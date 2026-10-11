@@ -13,6 +13,8 @@ struct Launch {
 final class Connector {
     private(set) var opening: Launch?
     var errorMessage: String?
+    /// A conversation open on the computer without Remote Control, to explain why it can't connect.
+    var openOnComputer: Session?
     /// A launch waiting for the user to trust its folder.
     var pendingTrust: (launch: Launch, folder: String)?
     private var openURL: OpenURLAction?
@@ -105,6 +107,11 @@ struct ConnectorPresentation: ViewModifier {
                     Text("Claude Code will be able to read, edit and run files in \(folder). Trust it only if it's your own project.")
                 }
             }
+            .alert("Open on the computer", isPresented: .constant(connector.openOnComputer != nil)) {
+                Button("OK") { connector.openOnComputer = nil }
+            } message: {
+                Text("This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect.")
+            }
             .alert("Couldn't connect", isPresented: .constant(connector.errorMessage != nil)) {
                 Button("OK") { connector.errorMessage = nil }
             } message: {
@@ -113,7 +120,7 @@ struct ConnectorPresentation: ViewModifier {
     }
 }
 
-/// "Connect", or "Open" when the computer already runs the session with Remote Control.
+/// "Connect", "Open" when the session already has Remote Control, or an explanation when it is open on the computer.
 struct ConnectButton: View {
     let session: Session
     var prominent = false
@@ -123,16 +130,19 @@ struct ConnectButton: View {
 
     var body: some View {
         let button = Button {
-            if let url = session.remote?.url {
-                openURL(url)
-            } else {
+            switch session.availability {
+            case .remoteControl:
+                if let url = session.remote?.url { openURL(url) }
+            case .openOnComputer:
+                connector.openOnComputer = session
+            case .closed:
                 connector.connect(session, source: store.source, openURL: openURL)
             }
         } label: {
-            if session.remote != nil {
-                Label("Open", systemImage: "arrow.up.forward.app")
-            } else {
-                Label("Connect", systemImage: "antenna.radiowaves.left.and.right")
+            switch session.availability {
+            case .remoteControl: Label("Open", systemImage: "arrow.up.forward.app")
+            case .openOnComputer: Label("Open on the computer", systemImage: "desktopcomputer")
+            case .closed: Label("Connect", systemImage: "antenna.radiowaves.left.and.right")
             }
         }
         .disabled(connector.opening != nil)
@@ -169,5 +179,23 @@ private struct OpeningOverlay: View {
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.2))
+    }
+}
+
+/// Says what state a conversation is in, next to the time in the list and in the detail.
+struct AvailabilityLabel: View {
+    let session: Session
+
+    var body: some View {
+        switch session.availability {
+        case .remoteControl:
+            Label("Remote Control", systemImage: "antenna.radiowaves.left.and.right")
+                .foregroundStyle(.green)
+        case .openOnComputer:
+            Label("Open on the computer", systemImage: "desktopcomputer")
+                .foregroundStyle(.orange)
+        case .closed:
+            EmptyView()
+        }
     }
 }

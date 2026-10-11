@@ -19,6 +19,24 @@ struct Session: Identifiable, Decodable, Hashable {
     let running: Running?
     let remote: Remote?
 
+    enum Availability {
+        /// Has Remote Control: opens straight away in the Claude app.
+        case remoteControl
+        /// Open on the computer (terminal or desktop app) without Remote Control: it can't be resumed here.
+        case openOnComputer
+        /// Closed: Connect resumes it with Remote Control.
+        case closed
+    }
+
+    var availability: Availability {
+        if remote != nil { return .remoteControl }
+        if let running, running.kind != "remote-sessions" { return .openOnComputer }
+        return .closed
+    }
+
+    /// Started by Remote Sessions, so it can also stop it.
+    var startedByServer: Bool { running?.kind == "remote-sessions" }
+
     /// The server sends an empty title when the conversation has none.
     var displayTitle: String {
         title.isEmpty ? String(localized: "Untitled") : title

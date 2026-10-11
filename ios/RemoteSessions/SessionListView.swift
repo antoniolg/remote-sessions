@@ -148,12 +148,6 @@ private struct SessionRow: View {
                     .font(.headline)
                     .lineLimit(2)
                 Spacer(minLength: 8)
-                if session.running != nil {
-                    Image(systemName: session.remote != nil ? "antenna.radiowaves.left.and.right.circle.fill" : "circle.fill")
-                        .foregroundStyle(.green)
-                        .imageScale(.small)
-                        .accessibilityLabel(session.remote != nil ? String(localized: "Running with Remote Control") : String(localized: "Open on the computer"))
-                }
             }
             if let lastPrompt = session.lastPrompt, lastPrompt != session.displayTitle {
                 Text(lastPrompt)
@@ -169,6 +163,8 @@ private struct SessionRow: View {
             }
             .font(.caption)
             .foregroundStyle(.tertiary)
+            AvailabilityLabel(session: session)
+                .font(.caption.weight(.medium))
         }
         .padding(.vertical, 4)
     }

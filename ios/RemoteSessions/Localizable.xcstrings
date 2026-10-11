@@ -5561,95 +5561,6 @@
         }
       }
     },
-    "Running with Remote Control" : {
-      "comment" : "Accessibility label: the conversation is running with Remote Control.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mit Remote Control"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Con Remote Control"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avec Remote Control"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dengan Remote Control"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Con Remote Control"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remote Control で実行中"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remote Control 사용 중"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Met Remote Control"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Z Remote Control"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Com Remote Control"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "С Remote Control"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remote Control ile çalışıyor"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在使用 Remote Control"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在使用 Remote Control"
-          }
-        }
-      }
-    },
     "Scan the QR code shown in the terminal" : {
       "localizations" : {
         "de" : {
@@ -10223,6 +10134,182 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hanya folder di dalam folder utama Anda yang dapat digunakan."
+          }
+        }
+      }
+    },
+    "This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta conversación está abierta en el ordenador sin Remote Control. Escribe /remote-control en ella para seguirla desde aquí, o ciérrala allí y pulsa Conectar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette conversation est ouverte sur l’ordinateur sans Remote Control. Tapez /remote-control dedans pour la poursuivre ici, ou fermez-la là-bas et touchez Connecter."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Unterhaltung ist auf dem Computer ohne Remote Control geöffnet. Gib dort /remote-control ein, um hier weiterzumachen, oder schließe sie dort und tippe auf Verbinden."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questa conversazione è aperta sul computer senza Remote Control. Scrivi /remote-control al suo interno per continuarla qui, oppure chiudila lì e tocca Connetti."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta conversa está aberta no computador sem o Remote Control. Digite /remote-control nela para continuar aqui ou feche-a lá e toque em Conectar."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この会話は Remote Control なしでコンピュータ上で開いています。ここで続けるにはその会話で /remote-control と入力するか、コンピュータで閉じてから「接続」をタップしてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 대화는 Remote Control 없이 컴퓨터에서 열려 있습니다. 여기서 계속하려면 해당 대화에 /remote-control을 입력하거나, 컴퓨터에서 닫은 후 연결을 탭하세요."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此对话已在电脑上打开，但未启用 Remote Control。在其中输入 /remote-control 即可在这里继续，或在电脑上关闭它后轻点“连接”。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此對話已在電腦上開啟，但未啟用 Remote Control。在其中輸入 /remote-control 即可在這裡繼續，或在電腦上關閉後點一下「連線」。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот разговор открыт на компьютере без Remote Control. Введите в нём /remote-control, чтобы продолжить здесь, или закройте его там и нажмите «Подключить»."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit gesprek is op de computer geopend zonder Remote Control. Typ er /remote-control in om hier verder te gaan, of sluit het daar en tik op Verbind."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu sohbet bilgisayarda Remote Control olmadan açık. Burada devam etmek için içine /remote-control yazın veya orada kapatıp Bağlan'a dokunun."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta rozmowa jest otwarta na komputerze bez Remote Control. Wpisz w niej /remote-control, aby kontynuować tutaj, albo zamknij ją tam i stuknij Połącz."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Percakapan ini terbuka di komputer tanpa Remote Control. Ketik /remote-control di dalamnya untuk melanjutkan di sini, atau tutup di sana lalu ketuk Hubungkan."
+          }
+        }
+      }
+    },
+    "Remote Control" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote Control"
           }
         }
       }

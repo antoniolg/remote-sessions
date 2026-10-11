@@ -33,7 +33,7 @@ struct SessionDetailView: View {
         .navigationTitle(shown.displayTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            if shown.remote != nil {
+            if shown.remote != nil && shown.startedByServer {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Stop", role: .destructive) {
                         Task { await connector.stop(shown, source: store.source) }
@@ -42,11 +42,15 @@ struct SessionDetailView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            ConnectButton(session: shown, prominent: true)
-                .controlSize(.large)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 8)
-                .background(.bar)
+            VStack(spacing: 6) {
+                AvailabilityLabel(session: shown)
+                    .font(.footnote.weight(.medium))
+                ConnectButton(session: shown, prominent: true)
+                    .controlSize(.large)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(.bar)
         }
         .refreshable { await load() }
         .task(id: connector.changes) { await load() }
