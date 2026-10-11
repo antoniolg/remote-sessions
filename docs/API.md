@@ -34,6 +34,8 @@ All responses are JSON. Errors: non-2xx status with `{"code": "<code>", "error":
 | `trust_required` | Claude Code asks whether to trust the folder (`folder` in the body). Ask the user and retry with `{"trustFolder": true}` |
 | `folder_access` | the OS does not let the server open the folder (macOS privacy: Files and Folders / Full Disk Access) |
 | `prompt_blocked` | Claude Code is waiting on a question the server does not know how to answer (`error` has its text) |
+| `outside_home` | the folder is outside the user's home folder (new sessions and folder browsing) |
+| `bad_request` | the request body is not valid JSON |
 | `internal` | anything else |
 
 ### `GET /health` (no auth)
@@ -80,6 +82,28 @@ Resumes the session in a pseudo-terminal with Remote Control and waits (up to ~4
 - `409 trust_required`, `403 folder_access`, `502 prompt_blocked`: see the error codes above.
 
 Apps open `url`; the Claude app handles it as a universal/app link.
+
+### `POST /v1/sessions`
+Starts a new Claude Code session with Remote Control in a folder and waits for its claude.ai URL, like the endpoint above. Body:
+```json
+{ "cwd": "~/Projects/web", "title": "Optional name", "trustFolder": false }
+```
+`cwd` is absolute or starts with `~`, and must be inside the user's home folder. Response `201`:
+```json
+{ "id": "71d06b3b-…", "url": "https://claude.ai/code/session_01…", "cwd": "/Users/me/Projects/web" }
+```
+- `400 outside_home` for folders outside the home folder, `404 not_found` if it does not exist.
+- `409 trust_required` (with `folder`), `403 folder_access`, `502 prompt_blocked`, `504 remote_control_timeout`, `502 launch_failed`: as above.
+
+The session shows up in `GET /v1/sessions` once Claude Code writes its first message.
+
+### `GET /v1/folders?path=~/Projects`
+Lists the visible subfolders of `path` (home by default) to pick where a new session starts. Hidden folders are left out.
+```json
+{ "path": "/Users/me/Projects", "parent": "/Users/me", "home": "/Users/me",
+  "folders": [{ "name": "web", "path": "/Users/me/Projects/web" }] }
+```
+`parent` is absent at the home folder. Errors: `400 outside_home`, `404 not_found`, `403 folder_access`.
 
 ### `DELETE /v1/sessions/{id}/remote-control`
 Stops a session this server started. `204` on success, `404` if it was not running here.

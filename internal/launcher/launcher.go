@@ -6,8 +6,10 @@ package launcher
 import (
 	"bytes"
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -105,15 +107,28 @@ func (l *Launcher) Start(ctx context.Context, sessionID, transcript, cwd, title 
 		l.mu.Unlock()
 		close(wait)
 	}()
-	return l.start(sessionID, transcript, cwd, title, opts)
-}
-
-func (l *Launcher) start(sessionID, transcript, cwd, title string, opts Options) (*Managed, error) {
-	dir := filepath.Dir(transcript)
-	offsets := snapshotOffsets(dir)
 	if info, err := os.Stat(cwd); err != nil || !info.IsDir() {
 		cwd, _ = os.UserHomeDir()
 	}
+	return l.run(sessionID, filepath.Dir(transcript), cwd, opts, "--resume", sessionID, "--remote-control", title)
+}
+
+// Create starts a new session in cwd with Remote Control and waits for its claude.ai URL.
+// transcriptDir is where Claude Code will write its transcript (see transcripts.ProjectDir).
+func (l *Launcher) Create(cwd, transcriptDir, title string, opts Options) (*Managed, error) {
+	sessionID, err := newSessionID()
+	if err != nil {
+		return nil, err
+	}
+	args := []string{"--session-id", sessionID, "--remote-control"}
+	if title != "" {
+		args = append(args, title)
+	}
+	return l.run(sessionID, transcriptDir, cwd, opts, args...)
+}
+
+func (l *Launcher) run(sessionID, dir, cwd string, opts Options, args ...string) (*Managed, error) {
+	offsets := snapshotOffsets(dir)
 	if !canOpen(cwd, 3*time.Second) {
 		return nil, ErrFolderAccess
 	}
@@ -122,7 +137,7 @@ func (l *Launcher) start(sessionID, transcript, cwd, title string, opts Options)
 		return nil, err
 	}
 	_ = terminal.Resize(cols, rows)
-	cmd := terminal.Command(l.ClaudeBin, "--resume", sessionID, "--remote-control", title)
+	cmd := terminal.Command(l.ClaudeBin, args...)
 	cmd.Dir = cwd
 	cmd.Env = childEnv()
 	if err := cmd.Start(); err != nil {
@@ -192,7 +207,7 @@ func (l *Launcher) watch(m *Managed, dir string, offsets map[string]int64, opts 
 		}
 		select {
 		case <-m.done:
-			return "", errors.New("Claude Code exited while resuming the session")
+			return "", errors.New("Claude Code exited while starting the session")
 		case <-time.After(500 * time.Millisecond):
 		}
 	}
@@ -224,6 +239,17 @@ func (l *Launcher) StopAll() {
 	for _, id := range ids {
 		l.Stop(id)
 	}
+}
+
+// newSessionID returns a random version 4 UUID, the format Claude Code expects in --session-id.
+func newSessionID() (string, error) {
+	var b [16]byte
+	if _, err := rand.Read(b[:]); err != nil {
+		return "", err
+	}
+	b[6] = b[6]&0x0f | 0x40
+	b[8] = b[8]&0x3f | 0x80
+	return fmt.Sprintf("%x-%x-%x-%x-%x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:]), nil
 }
 
 func snapshotOffsets(dir string) map[string]int64 {

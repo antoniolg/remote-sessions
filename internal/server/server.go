@@ -9,10 +9,13 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/antoniolg/remote-sessions/internal/claude"
+	"github.com/antoniolg/remote-sessions/internal/folders"
 	"github.com/antoniolg/remote-sessions/internal/launcher"
 	"github.com/antoniolg/remote-sessions/internal/transcripts"
 )
@@ -25,6 +28,8 @@ type Server struct {
 	Store    *transcripts.Store
 	Agents   *claude.Agents
 	Launcher *launcher.Launcher
+	// Home limits the folders a phone can browse and start sessions in (the user's home by default).
+	Home string
 }
 
 type running struct {
@@ -59,6 +64,8 @@ func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /health", s.health)
 	mux.HandleFunc("GET /v1/sessions", s.auth(s.list))
+	mux.HandleFunc("POST /v1/sessions", s.auth(s.create))
+	mux.HandleFunc("GET /v1/folders", s.auth(s.folders))
 	mux.HandleFunc("GET /v1/sessions/{id}/messages", s.auth(s.messages))
 	mux.HandleFunc("POST /v1/sessions/{id}/remote-control", s.auth(s.connect))
 	mux.HandleFunc("DELETE /v1/sessions/{id}/remote-control", s.auth(s.disconnect))
@@ -160,15 +167,22 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 	managed, err := s.Launcher.Start(context.WithoutCancel(r.Context()), id, path, summary.Cwd, summary.Title(),
 		launcher.Options{TrustFolder: body.TrustFolder})
 	s.Agents.Invalidate()
+	if err != nil {
+		launchError(w, id, summary.Cwd, managed, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false})
+}
+
+// launchError answers a failed Start or Create with the codes the apps translate.
+func launchError(w http.ResponseWriter, id, cwd string, managed *launcher.Managed, err error) {
 	var promptErr *launcher.PromptError
 	switch {
-	case err == nil:
-		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false})
 	case errors.Is(err, launcher.ErrTrustRequired):
-		writeJSON(w, http.StatusConflict, map[string]string{"code": "trust_required", "folder": summary.Cwd,
-			"error": "Claude Code asks whether you trust " + summary.Cwd + ". Confirm to trust it and connect."})
+		writeJSON(w, http.StatusConflict, map[string]string{"code": "trust_required", "folder": cwd,
+			"error": "Claude Code asks whether you trust " + cwd + ". Confirm to trust it and connect."})
 	case errors.Is(err, launcher.ErrFolderAccess):
-		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+summary.Cwd+
+		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+cwd+
 			". On macOS, allow remote-sessions in System Settings › Privacy & Security › Files and Folders (or Full Disk Access).")
 	case errors.As(err, &promptErr):
 		log.Printf("remote-control %s: %v", id, err)
@@ -182,6 +196,68 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		}
 		writeError(w, http.StatusBadGateway, "launch_failed", "Could not start Remote Control: "+err.Error())
 	}
+}
+
+func (s *Server) home() string {
+	if s.Home != "" {
+		return s.Home
+	}
+	home, _ := os.UserHomeDir()
+	return home
+}
+
+// folders lists the subfolders of ?path= (home by default) to pick where a new session starts.
+func (s *Server) folders(w http.ResponseWriter, r *http.Request) {
+	listing, err := folders.List(s.home(), r.URL.Query().Get("path"), 3*time.Second)
+	if err != nil {
+		folderError(w, r.URL.Query().Get("path"), err)
+		return
+	}
+	writeJSON(w, http.StatusOK, listing)
+}
+
+func folderError(w http.ResponseWriter, path string, err error) {
+	switch {
+	case errors.Is(err, folders.ErrOutside):
+		writeError(w, http.StatusBadRequest, "outside_home", "Only folders inside your home folder can be used")
+	case errors.Is(err, folders.ErrNotFolder):
+		writeError(w, http.StatusNotFound, "not_found", "Folder not found: "+path)
+	case errors.Is(err, folders.ErrAccess):
+		writeError(w, http.StatusForbidden, "folder_access", "The computer does not let Remote Sessions open "+path+
+			". On macOS, allow remote-sessions in System Settings › Privacy & Security › Files and Folders (or Full Disk Access).")
+	default:
+		writeError(w, http.StatusInternalServerError, "internal", err.Error())
+	}
+}
+
+// create starts a new Claude Code session with Remote Control in the given folder.
+func (s *Server) create(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Cwd         string `json:"cwd"`
+		Title       string `json:"title"`
+		TrustFolder bool   `json:"trustFolder"`
+	}
+	if err := json.NewDecoder(io.LimitReader(r.Body, 16<<10)).Decode(&body); err != nil {
+		writeError(w, http.StatusBadRequest, "bad_request", "Invalid body")
+		return
+	}
+	cwd, err := folders.Resolve(s.home(), body.Cwd)
+	if err != nil {
+		folderError(w, body.Cwd, err)
+		return
+	}
+	title := strings.Join(strings.Fields(transcripts.Clip(body.Title, 80)), " ")
+	managed, err := s.Launcher.Create(cwd, s.Store.ProjectDir(cwd), title, launcher.Options{TrustFolder: body.TrustFolder})
+	s.Agents.Invalidate()
+	if err != nil {
+		id := ""
+		if managed != nil {
+			id = managed.SessionID
+		}
+		launchError(w, id, cwd, managed, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, map[string]any{"id": managed.SessionID, "url": managed.URL, "cwd": cwd})
 }
 
 func (s *Server) disconnect(w http.ResponseWriter, r *http.Request) {

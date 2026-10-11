@@ -107,3 +107,10 @@ func TestParseMessagesReturnsLatest(t *testing.T) {
 		t.Fatalf("got %+v", got)
 	}
 }
+
+func TestProjectDir(t *testing.T) {
+	s := NewStore("/home/me/.claude/projects")
+	if got, want := s.ProjectDir("/Users/me/my.app_v2"), "/home/me/.claude/projects/-Users-me-my-app-v2"; got != want {
+		t.Fatalf("ProjectDir = %s, want %s", got, want)
+	}
+}

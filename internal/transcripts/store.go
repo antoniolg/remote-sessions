@@ -146,3 +146,11 @@ func BridgeURL(bridgeSessionID string) string {
 	}
 	return "https://claude.ai/code/" + id
 }
+
+var projectDirChars = regexp.MustCompile(`[^A-Za-z0-9]`)
+
+// ProjectDir is the folder where Claude Code keeps the transcripts of sessions started in cwd
+// ("/Users/me/my.app" → "<Dir>/-Users-me-my-app").
+func (s *Store) ProjectDir(cwd string) string {
+	return filepath.Join(s.Dir, projectDirChars.ReplaceAllString(cwd, "-"))
+}
