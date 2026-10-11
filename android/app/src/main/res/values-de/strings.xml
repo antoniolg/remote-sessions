@@ -211,4 +211,5 @@
     <string name="folders_error_title">Ordner konnte nicht geöffnet werden</string>
     <string name="new_session_progress">Neue Unterhaltung in %1$s</string>
     <string name="error_code_outside_home">Es können nur Ordner innerhalb deines Benutzerordners verwendet werden.</string>
+    <string name="open_on_computer_message">Diese Unterhaltung ist auf dem Computer ohne Remote Control geöffnet. Gib dort /remote-control ein, um hier weiterzumachen, oder schließe sie dort und tippe auf Verbinden.</string>
 </resources>

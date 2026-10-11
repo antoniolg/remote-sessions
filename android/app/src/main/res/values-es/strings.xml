@@ -215,4 +215,5 @@
     <string name="folders_error_title">No se ha podido abrir la carpeta</string>
     <string name="new_session_progress">Nueva conversación en %1$s</string>
     <string name="error_code_outside_home">Solo se pueden usar carpetas dentro de tu carpeta personal.</string>
+    <string name="open_on_computer_message">Esta conversación está abierta en el ordenador sin Remote Control. Escribe /remote-control en ella para seguirla desde aquí, o ciérrala allí y pulsa Conectar.</string>
 </resources>

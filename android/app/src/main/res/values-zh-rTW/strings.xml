@@ -207,4 +207,5 @@
     <string name="folders_error_title">無法開啟資料夾</string>
     <string name="new_session_progress">在 %1$s 中新增對話</string>
     <string name="error_code_outside_home">只能使用個人資料夾內的資料夾。</string>
+    <string name="open_on_computer_message">此對話已在電腦上開啟，但未啟用 Remote Control。在其中輸入 /remote-control 即可在這裡繼續，或在電腦上關閉後點一下「連線」。</string>
 </resources>

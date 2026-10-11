@@ -16,6 +16,7 @@ val BrandOrange = Color(0xFFD97757)
 
 /** "Open on the computer" indicator. */
 val RunningGreen = Color(0xFF34A853)
+val OpenOnComputerOrange = Color(0xFFF29900)
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFFA6492C),

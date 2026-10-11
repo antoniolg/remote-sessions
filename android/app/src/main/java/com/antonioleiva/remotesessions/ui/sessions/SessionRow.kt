@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.outlined.Computer
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.rounded.Podcasts
 import androidx.compose.material3.FilledIconButton
@@ -30,8 +32,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.antonioleiva.remotesessions.data.model.Availability
 import com.antonioleiva.remotesessions.data.model.Session
 import com.antonioleiva.remotesessions.ui.common.relativeTimeText
+import com.antonioleiva.remotesessions.ui.theme.OpenOnComputerOrange
 import com.antonioleiva.remotesessions.ui.theme.RunningGreen
 
 @Composable
@@ -49,24 +53,12 @@ fun SessionRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (session.running != null) {
-                    val runningLabel = stringResource(R.string.session_running)
-                    Box(
-                        modifier = Modifier
-                            .size(8.dp)
-                            .background(RunningGreen, CircleShape)
-                            .semantics { contentDescription = runningLabel },
-                    )
-                    Spacer(Modifier.width(8.dp))
-                }
-                Text(
-                    session.displayTitle(),
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
+            Text(
+                session.displayTitle(),
+                style = MaterialTheme.typography.titleMedium,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
             val prompt = session.lastPrompt
             if (!prompt.isNullOrBlank() && prompt != session.displayTitle()) {
                 Text(
@@ -88,16 +80,33 @@ fun SessionRow(
                     Text(relativeTimeText(it), style = MaterialTheme.typography.labelMedium, color = meta, maxLines = 1)
                 }
             }
+            AvailabilityLabel(session)
         }
         Spacer(Modifier.width(8.dp))
-        if (session.remote != null) {
-            FilledIconButton(onClick = onConnect, enabled = connectEnabled) {
-                Icon(Icons.Rounded.Podcasts, contentDescription = stringResource(R.string.session_open_in_claude))
+        when (session.availability) {
+            Availability.RemoteControl -> FilledIconButton(onClick = onConnect, enabled = connectEnabled) {
+                Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = stringResource(R.string.session_open_in_claude))
             }
-        } else {
-            FilledTonalIconButton(onClick = onConnect, enabled = connectEnabled) {
+            Availability.OpenOnComputer -> FilledTonalIconButton(onClick = onConnect, enabled = connectEnabled) {
+                Icon(Icons.Outlined.Computer, contentDescription = stringResource(R.string.session_running))
+            }
+            Availability.Closed -> FilledTonalIconButton(onClick = onConnect, enabled = connectEnabled) {
                 Icon(Icons.Rounded.Podcasts, contentDescription = stringResource(R.string.session_connect))
             }
         }
+    }
+}
+
+/** Says whether a conversation has Remote Control or is open on the computer; nothing when closed. */
+@Composable
+fun AvailabilityLabel(session: Session, modifier: Modifier = Modifier) {
+    val (icon, text, color) = when (session.availability) {
+        Availability.RemoteControl -> Triple(Icons.Rounded.Podcasts, stringResource(R.string.session_state_remote), RunningGreen)
+        Availability.OpenOnComputer -> Triple(Icons.Outlined.Computer, stringResource(R.string.session_running), OpenOnComputerOrange)
+        Availability.Closed -> return
+    }
+    Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(14.dp))
+        Text(text, style = MaterialTheme.typography.labelMedium, color = color, maxLines = 1)
     }
 }

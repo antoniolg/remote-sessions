@@ -207,4 +207,5 @@
     <string name="folders_error_title">Tidak dapat membuka folder</string>
     <string name="new_session_progress">Percakapan baru di %1$s</string>
     <string name="error_code_outside_home">Hanya folder di dalam folder utama Anda yang dapat digunakan.</string>
+    <string name="open_on_computer_message">Percakapan ini terbuka di komputer tanpa Remote Control. Ketik /remote-control di dalamnya untuk melanjutkan di sini, atau tutup di sana lalu ketuk Hubungkan.</string>
 </resources>

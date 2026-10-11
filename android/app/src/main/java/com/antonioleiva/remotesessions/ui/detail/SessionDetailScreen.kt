@@ -6,6 +6,7 @@ import com.antonioleiva.remotesessions.R
 import com.antonioleiva.remotesessions.ui.common.asString
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.antonioleiva.remotesessions.data.model.Availability
 import com.antonioleiva.remotesessions.data.model.Session
+import com.antonioleiva.remotesessions.ui.sessions.AvailabilityLabel
+import androidx.compose.material.icons.outlined.Computer
 import com.antonioleiva.remotesessions.ui.sessions.EmptyState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,25 +116,37 @@ fun SessionDetailScreen(
 @Composable
 private fun ConnectBar(session: Session, busy: Boolean, onConnect: () -> Unit, onOpenRemote: () -> Unit, onStop: () -> Unit) {
     Surface(tonalElevation = 3.dp, modifier = Modifier.fillMaxWidth()) {
-        Row(
+        Column(
             modifier = Modifier
                 .navigationBarsPadding()
                 .padding(horizontal = 16.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            if (session.remote != null) {
-                Button(onClick = onOpenRemote, enabled = !busy, modifier = Modifier.weight(1f).height(56.dp)) {
-                    Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(20.dp))
-                    Text(stringResource(R.string.detail_open), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
-                }
-                OutlinedButton(onClick = onStop, enabled = !busy, modifier = Modifier.weight(1f).height(56.dp)) {
-                    Icon(Icons.Rounded.Stop, contentDescription = null, modifier = Modifier.size(20.dp))
-                    Text(stringResource(R.string.detail_stop), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
-                }
-            } else {
-                Button(onClick = onConnect, enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-                    Icon(Icons.Rounded.Podcasts, contentDescription = null, modifier = Modifier.size(20.dp))
-                    Text(stringResource(R.string.detail_connect), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+            AvailabilityLabel(session)
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                when (session.availability) {
+                    Availability.RemoteControl -> {
+                        Button(onClick = onOpenRemote, enabled = !busy, modifier = Modifier.weight(1f).height(56.dp)) {
+                            Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = null, modifier = Modifier.size(20.dp))
+                            Text(stringResource(R.string.detail_open), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+                        }
+                        // Only sessions this server started can be stopped from here.
+                        if (session.startedByServer) {
+                            OutlinedButton(onClick = onStop, enabled = !busy, modifier = Modifier.weight(1f).height(56.dp)) {
+                                Icon(Icons.Rounded.Stop, contentDescription = null, modifier = Modifier.size(20.dp))
+                                Text(stringResource(R.string.detail_stop), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+                            }
+                        }
+                    }
+                    Availability.OpenOnComputer -> OutlinedButton(onClick = onConnect, enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp)) {
+                        Icon(Icons.Outlined.Computer, contentDescription = null, modifier = Modifier.size(20.dp))
+                        Text(stringResource(R.string.session_running), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+                    }
+                    Availability.Closed -> Button(onClick = onConnect, enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp)) {
+                        Icon(Icons.Rounded.Podcasts, contentDescription = null, modifier = Modifier.size(20.dp))
+                        Text(stringResource(R.string.detail_connect), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+                    }
                 }
             }
         }

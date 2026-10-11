@@ -211,4 +211,5 @@
     <string name="folders_error_title">Kan de map niet openen</string>
     <string name="new_session_progress">Nieuw gesprek in %1$s</string>
     <string name="error_code_outside_home">Alleen mappen binnen je thuismap kunnen worden gebruikt.</string>
+    <string name="open_on_computer_message">Dit gesprek is op de computer geopend zonder Remote Control. Typ er /remote-control in om hier verder te gaan, of sluit het daar en tik op Verbinden.</string>
 </resources>

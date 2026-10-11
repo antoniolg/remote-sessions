@@ -215,4 +215,5 @@
     <string name="folders_error_title">Impossible d’ouvrir le dossier</string>
     <string name="new_session_progress">Nouvelle conversation dans %1$s</string>
     <string name="error_code_outside_home">Seuls les dossiers de votre dossier personnel peuvent être utilisés.</string>
+    <string name="open_on_computer_message">Cette conversation est ouverte sur l’ordinateur sans Remote Control. Tapez /remote-control dedans pour la poursuivre ici, ou fermez-la là-bas et touchez Connecter.</string>
 </resources>

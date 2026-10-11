@@ -207,4 +207,5 @@
     <string name="folders_error_title">フォルダを開けませんでした</string>
     <string name="new_session_progress">%1$s で新しい会話</string>
     <string name="error_code_outside_home">ホームフォルダ内のフォルダのみ使用できます。</string>
+    <string name="open_on_computer_message">この会話は Remote Control なしでコンピュータ上で開いています。ここで続けるにはその会話で /remote-control と入力するか、コンピュータで閉じてから「接続」をタップしてください。</string>
 </resources>

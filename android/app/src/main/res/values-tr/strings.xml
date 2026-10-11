@@ -211,4 +211,5 @@
     <string name="folders_error_title">Klasör açılamadı</string>
     <string name="new_session_progress">%1$s içinde yeni sohbet</string>
     <string name="error_code_outside_home">Yalnızca ana klasörünüzdeki klasörler kullanılabilir.</string>
+    <string name="open_on_computer_message">Bu sohbet bilgisayarda Remote Control olmadan açık. Burada devam etmek için içine /remote-control yazın veya orada kapatıp Bağlan\'a dokunun.</string>
 </resources>

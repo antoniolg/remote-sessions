@@ -91,7 +91,7 @@ fun RemoteSessionsRoot(
                 onSelectProject = sessionsViewModel::setProject,
                 onSelectComputer = { id -> scope.launch { container.store.select(id) } },
                 onOpen = { navigation.push(Screen.Detail(it)) },
-                onConnect = { if (it.remote != null) connectViewModel.open(it) else connectViewModel.connect(it) },
+                onConnect = connectViewModel::open,
                 onSettings = { navigation.push(Screen.Settings) },
                 onNewSession = { navigation.push(Screen.NewSession()) },
                 onTransientErrorShown = sessionsViewModel::clearTransientError,
@@ -110,7 +110,7 @@ fun RemoteSessionsRoot(
                         detail.refresh()
                         sessionsViewModel.refresh()
                     },
-                    onConnect = { connectViewModel.connect(session) },
+                    onConnect = { connectViewModel.open(session) },
                     onOpenRemote = { connectViewModel.open(session) },
                     onStop = { connectViewModel.stop(session) },
                 )
@@ -160,6 +160,7 @@ fun RemoteSessionsRoot(
             onPairComputer = onboardingViewModel::beginAddComputer,
             onTrust = connectViewModel::trustAndConnect,
             onDismissTrust = connectViewModel::dismissTrust,
+            onDismissOpenOnComputer = connectViewModel::dismissOpenOnComputer,
         )
     }
 }

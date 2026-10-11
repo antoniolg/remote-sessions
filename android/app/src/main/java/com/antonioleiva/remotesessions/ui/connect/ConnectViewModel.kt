@@ -3,6 +3,7 @@ package com.antonioleiva.remotesessions.ui.connect
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antonioleiva.remotesessions.AppContainer
+import com.antonioleiva.remotesessions.data.model.Availability
 import com.antonioleiva.remotesessions.data.model.Session
 import com.antonioleiva.remotesessions.data.net.ApiErrorCode
 import com.antonioleiva.remotesessions.data.net.ApiException
@@ -37,6 +38,8 @@ data class ConnectUiState(
     val demoNotice: Boolean = false,
     /** Claude Code asks whether to trust this session's folder; the user decides. */
     val pendingTrust: PendingTrust? = null,
+    /** A conversation open on the computer without Remote Control, to explain why it can't connect. */
+    val openOnComputer: Session? = null,
 )
 
 data class PendingTrust(val launch: Launch, val folder: String)
@@ -107,10 +110,16 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
         _state.update { it.copy(opening = null) }
     }
 
+    /** The main action for a conversation: open it, explain why it can't connect, or connect. */
     fun open(session: Session) {
-        val url = session.remote?.url ?: return connect(session)
-        urls.trySend(url)
+        when (session.availability) {
+            Availability.RemoteControl -> session.remote?.url?.let { urls.trySend(it) }
+            Availability.OpenOnComputer -> _state.update { it.copy(openOnComputer = session) }
+            Availability.Closed -> connect(session)
+        }
     }
+
+    fun dismissOpenOnComputer() = _state.update { it.copy(openOnComputer = null) }
 
     fun stop(session: Session) {
         val source = container.currentSource.value ?: return

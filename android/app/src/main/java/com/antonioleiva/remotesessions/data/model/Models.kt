@@ -15,6 +15,25 @@ data class Session(
     val remote: Remote? = null,
 ) {
     val updatedAtMillis: Long? get() = parseTimestamp(updatedAt)
+
+    val availability: Availability
+        get() = when {
+            remote != null -> Availability.RemoteControl
+            running != null && running.kind != "remote-sessions" -> Availability.OpenOnComputer
+            else -> Availability.Closed
+        }
+
+    /** Started by Remote Sessions, so it can also stop it. */
+    val startedByServer: Boolean get() = running?.kind == "remote-sessions"
+}
+
+enum class Availability {
+    /** Has Remote Control: opens straight away in the Claude app. */
+    RemoteControl,
+    /** Open on the computer (terminal or desktop app) without Remote Control: it can't be resumed here. */
+    OpenOnComputer,
+    /** Closed: Connect resumes it with Remote Control. */
+    Closed,
 }
 
 @Serializable

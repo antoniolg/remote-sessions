@@ -214,4 +214,6 @@
     <string name="folders_error_title">Couldn’t open the folder</string>
     <string name="new_session_progress">New conversation in %1$s</string>
     <string name="error_code_outside_home">Only folders inside your home folder can be used.</string>
+    <string name="session_state_remote" translatable="false">Remote Control</string>
+    <string name="open_on_computer_message">This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect.</string>
 </resources>
