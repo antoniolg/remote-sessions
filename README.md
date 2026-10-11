@@ -50,7 +50,7 @@ go run ./cmd/remote-sessions serve  # run it from source
 
 - iOS app: `ios/` (SwiftUI, generated with XcodeGen: `cd ios && xcodegen generate`). `ios/tools/testflight.sh upload` builds and uploads to TestFlight; it reads the App Store Connect API key ids from the untracked `ios/tools/asc.env`.
 - Android app: `android/` (Kotlin, Jetpack Compose). See `android/README.md`.
-- Releases: tag `vX.Y.Z` and run `goreleaser release --clean`; it publishes to GitHub Releases and the Homebrew tap (`antoniolg/homebrew-tap`).
+- Releases: tag `vX.Y.Z` and run `~/.local/bin/oprun --with-op-token scripts/release.sh`; it signs the macOS binaries with the Developer ID certificate (1Password, Agent Runtime) and publishes to GitHub Releases and the Homebrew tap (`antoniolg/homebrew-tap`).
 
 ## License
 

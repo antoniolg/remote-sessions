@@ -1,5 +1,5 @@
 # Builds the server for every OS and publishes it to GitHub Releases and the Homebrew tap.
-# Release: tag vX.Y.Z and run `goreleaser release --clean` with GITHUB_TOKEN (needs write access to antoniolg/homebrew-tap).
+# Release: tag vX.Y.Z and run scripts/release.sh, which loads the signing secrets and runs `goreleaser release --clean`.
 version: 2
 project_name: remote-sessions
 
@@ -10,6 +10,22 @@ builds:
     goos: [darwin, linux, windows]
     goarch: [amd64, arm64]
     ldflags: ["-s -w -X main.version={{ .Version }}"]
+
+# Signs the macOS binaries with the Developer ID certificate and notarizes them. macOS ties privacy
+# permissions (Full Disk Access) to the signing identity, so an ad-hoc signature lost them on every upgrade.
+notarize:
+  macos:
+    - enabled: '{{ isEnvSet "MACOS_SIGN_P12" }}'
+      sign:
+        certificate: "{{ .Env.MACOS_SIGN_P12 }}"
+        password: "{{ .Env.MACOS_SIGN_PASSWORD }}"
+      notarize:
+        issuer_id: "{{ .Env.MACOS_NOTARY_ISSUER_ID }}"
+        key_id: "{{ .Env.MACOS_NOTARY_KEY_ID }}"
+        key: "{{ .Env.MACOS_NOTARY_KEY }}"
+        # Brew and the install scripts don't quarantine the binary, so the release doesn't wait for Apple:
+        # the stable signature is what keeps the permissions. New certificates can take hours to notarize.
+        wait: false
 
 archives:
   - formats: [tar.gz]
@@ -25,7 +41,7 @@ checksum:
 changelog:
   sort: asc
 
-# A formula, like the other tools in the tap: formulas are not quarantined, so the unnotarized binary runs as is.
+# A formula, like the other tools in the tap: formulas are not quarantined.
 brews:
   - name: remote-sessions
     repository:
