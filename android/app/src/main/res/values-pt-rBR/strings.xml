@@ -203,4 +203,16 @@
     <string name="trust_confirm">Confiar e conectar</string>
     <string name="error_code_folder_access">O computador não permite que o Remote Sessions abra a pasta desta conversa. Em um Mac, permita o remote-sessions em Ajustes do Sistema › Privacidade e Segurança › Arquivos e Pastas.</string>
     <string name="error_code_prompt_blocked">O Claude Code está esperando uma resposta no computador. Abra a conversa lá para continuar.</string>
+    <string name="new_session_title">Nova conversa</string>
+    <string name="new_session_name">Nome (opcional)</string>
+    <string name="new_session_hint">O Claude Code começa na pasta que você escolher e abre no app Claude com o Remote Control.</string>
+    <string name="new_session_recent">Projetos recentes</string>
+    <string name="new_session_browse">Escolher outra pasta</string>
+    <string name="folders_home">Pasta pessoal</string>
+    <string name="folders_empty_title">Nenhuma subpasta</string>
+    <string name="folders_empty_message">Você pode começar a conversa nesta pasta.</string>
+    <string name="folders_start_here">Começar aqui</string>
+    <string name="folders_error_title">Não foi possível abrir a pasta</string>
+    <string name="new_session_progress">Nova conversa em %1$s</string>
+    <string name="error_code_outside_home">Só é possível usar pastas dentro da sua pasta pessoal.</string>
 </resources>

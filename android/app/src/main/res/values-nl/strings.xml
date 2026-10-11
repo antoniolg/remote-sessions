@@ -199,4 +199,16 @@
     <string name="trust_confirm">Vertrouwen en verbinden</string>
     <string name="error_code_folder_access">De computer staat Remote Sessions niet toe de map van dit gesprek te openen. Sta op een Mac remote-sessions toe in Systeeminstellingen › Privacy en beveiliging › Bestanden en mappen.</string>
     <string name="error_code_prompt_blocked">Claude Code wacht op de computer op een antwoord. Open het gesprek daar om verder te gaan.</string>
+    <string name="new_session_title">Nieuw gesprek</string>
+    <string name="new_session_name">Naam (optioneel)</string>
+    <string name="new_session_hint">Claude Code start in de map die je kiest en opent in de Claude-app met Remote Control.</string>
+    <string name="new_session_recent">Recente projecten</string>
+    <string name="new_session_browse">Andere map kiezen</string>
+    <string name="folders_home">Thuismap</string>
+    <string name="folders_empty_title">Geen submappen</string>
+    <string name="folders_empty_message">Je kunt het gesprek in deze map starten.</string>
+    <string name="folders_start_here">Hier starten</string>
+    <string name="folders_error_title">Kan de map niet openen</string>
+    <string name="new_session_progress">Nieuw gesprek in %1$s</string>
+    <string name="error_code_outside_home">Alleen mappen binnen je thuismap kunnen worden gebruikt.</string>
 </resources>

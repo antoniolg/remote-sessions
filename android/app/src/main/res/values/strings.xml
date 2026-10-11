@@ -202,4 +202,16 @@
     <string name="trust_confirm">Trust and connect</string>
     <string name="error_code_folder_access">The computer doesn’t let Remote Sessions open this conversation’s folder. On a Mac, allow remote-sessions in System Settings › Privacy &amp; Security › Files and Folders.</string>
     <string name="error_code_prompt_blocked">Claude Code is waiting for an answer on the computer. Open the conversation there to continue.</string>
+    <string name="new_session_title">New conversation</string>
+    <string name="new_session_name">Name (optional)</string>
+    <string name="new_session_hint">Claude Code starts in the folder you choose and opens in the Claude app with Remote Control.</string>
+    <string name="new_session_recent">Recent projects</string>
+    <string name="new_session_browse">Choose another folder</string>
+    <string name="folders_home">Home folder</string>
+    <string name="folders_empty_title">No subfolders</string>
+    <string name="folders_empty_message">You can start the conversation in this folder.</string>
+    <string name="folders_start_here">Start here</string>
+    <string name="folders_error_title">Couldn’t open the folder</string>
+    <string name="new_session_progress">New conversation in %1$s</string>
+    <string name="error_code_outside_home">Only folders inside your home folder can be used.</string>
 </resources>

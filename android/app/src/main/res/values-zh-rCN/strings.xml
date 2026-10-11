@@ -195,4 +195,16 @@
     <string name="trust_confirm">信任并连接</string>
     <string name="error_code_folder_access">电脑不允许 Remote Sessions 打开此对话的文件夹。在 Mac 上，请在“系统设置”›“隐私与安全性”›“文件与文件夹”中允许 remote-sessions。</string>
     <string name="error_code_prompt_blocked">Claude Code 正在电脑上等待回答。请在电脑上打开该对话以继续。</string>
+    <string name="new_session_title">新对话</string>
+    <string name="new_session_name">名称（可选）</string>
+    <string name="new_session_hint">Claude Code 会在你选择的文件夹中启动，并通过 Remote Control 在 Claude 应用中打开。</string>
+    <string name="new_session_recent">最近的项目</string>
+    <string name="new_session_browse">选择其他文件夹</string>
+    <string name="folders_home">个人文件夹</string>
+    <string name="folders_empty_title">没有子文件夹</string>
+    <string name="folders_empty_message">你可以在此文件夹中开始对话。</string>
+    <string name="folders_start_here">在此开始</string>
+    <string name="folders_error_title">无法打开文件夹</string>
+    <string name="new_session_progress">在 %1$s 中新建对话</string>
+    <string name="error_code_outside_home">只能使用个人文件夹中的文件夹。</string>
 </resources>

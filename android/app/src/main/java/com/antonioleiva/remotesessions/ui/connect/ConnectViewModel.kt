@@ -22,9 +22,15 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/** What is starting with Remote Control: an existing conversation or a new one in a folder. */
+sealed interface Launch {
+    data class Resume(val session: Session) : Launch
+    data class Create(val folder: String, val title: String?) : Launch
+}
+
 data class ConnectUiState(
-    /** The session whose Remote Control is starting; drives the progress overlay. */
-    val opening: Session? = null,
+    /** What is starting; drives the progress overlay. */
+    val opening: Launch? = null,
     val stopping: Boolean = false,
     @param:StringRes val errorTitle: Int? = null,
     val error: UiText? = null,
@@ -33,9 +39,9 @@ data class ConnectUiState(
     val pendingTrust: PendingTrust? = null,
 )
 
-data class PendingTrust(val session: Session, val folder: String)
+data class PendingTrust(val launch: Launch, val folder: String)
 
-/** Asks the computer to resume a session with Remote Control and hands the claude.ai URL to the UI. */
+/** Asks the computer to resume or start a session with Remote Control and hands the claude.ai URL to the UI. */
 class ConnectViewModel(private val container: AppContainer) : ViewModel() {
     private val _state = MutableStateFlow(ConnectUiState())
     val state: StateFlow<ConnectUiState> = _state.asStateFlow()
@@ -50,23 +56,31 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
 
     private var job: Job? = null
 
-    fun connect(session: Session, trustFolder: Boolean = false) {
+    fun connect(session: Session) = run(Launch.Resume(session))
+
+    /** Starts a new conversation in [folder] of the computer. */
+    fun create(folder: String, title: String?) = run(Launch.Create(folder, title))
+
+    private fun run(launch: Launch, trustFolder: Boolean = false) {
         val source = container.currentSource.value ?: return
         if (source.isDemo) {
             _state.update { it.copy(demoNotice = true) }
             return
         }
         if (_state.value.opening != null) return
-        _state.update { it.copy(opening = session) }
+        _state.update { it.copy(opening = launch) }
         job = viewModelScope.launch {
             try {
-                val result = source.startRemoteControl(session.id, trustFolder)
-                urls.send(result.url)
+                val url = when (launch) {
+                    is Launch.Resume -> source.startRemoteControl(launch.session.id, trustFolder).url
+                    is Launch.Create -> source.createSession(launch.folder, launch.title, trustFolder).url
+                }
+                urls.send(url)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: ApiException) {
                 if (e.code == ApiErrorCode.TRUST_REQUIRED) {
-                    _state.update { it.copy(pendingTrust = PendingTrust(session, e.folder.orEmpty())) }
+                    _state.update { it.copy(pendingTrust = PendingTrust(launch, e.folder.orEmpty())) }
                 } else {
                     showError(R.string.connect_error_title, e.toUiText())
                 }
@@ -83,7 +97,7 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
     fun trustAndConnect() {
         val pending = _state.value.pendingTrust ?: return
         _state.update { it.copy(pendingTrust = null) }
-        connect(pending.session, trustFolder = true)
+        run(pending.launch, trustFolder = true)
     }
 
     fun dismissTrust() = _state.update { it.copy(pendingTrust = null) }

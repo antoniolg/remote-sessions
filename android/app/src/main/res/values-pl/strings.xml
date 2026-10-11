@@ -207,4 +207,16 @@
     <string name="trust_confirm">Zaufaj i połącz</string>
     <string name="error_code_folder_access">Komputer nie pozwala Remote Sessions otworzyć folderu tej rozmowy. Na Macu zezwól remote-sessions w Ustawieniach systemowych › Prywatność i ochrona › Pliki i foldery.</string>
     <string name="error_code_prompt_blocked">Claude Code czeka na komputerze na odpowiedź. Otwórz tam rozmowę, aby kontynuować.</string>
+    <string name="new_session_title">Nowa rozmowa</string>
+    <string name="new_session_name">Nazwa (opcjonalnie)</string>
+    <string name="new_session_hint">Claude Code uruchomi się w wybranym folderze i otworzy w aplikacji Claude z Remote Control.</string>
+    <string name="new_session_recent">Ostatnie projekty</string>
+    <string name="new_session_browse">Wybierz inny folder</string>
+    <string name="folders_home">Folder domowy</string>
+    <string name="folders_empty_title">Brak podfolderów</string>
+    <string name="folders_empty_message">Możesz rozpocząć rozmowę w tym folderze.</string>
+    <string name="folders_start_here">Zacznij tutaj</string>
+    <string name="folders_error_title">Nie można otworzyć folderu</string>
+    <string name="new_session_progress">Nowa rozmowa w %1$s</string>
+    <string name="error_code_outside_home">Można używać tylko folderów w folderze domowym.</string>
 </resources>

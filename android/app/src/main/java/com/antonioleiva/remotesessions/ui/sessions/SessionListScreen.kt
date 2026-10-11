@@ -66,6 +66,7 @@ fun SessionListScreen(
     onOpen: (Session) -> Unit,
     onConnect: (Session) -> Unit,
     onSettings: () -> Unit,
+    onNewSession: () -> Unit,
     onTransientErrorShown: () -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -90,6 +91,8 @@ fun SessionListScreen(
                 onSelectComputer = onSelectComputer,
                 onSelectProject = onSelectProject,
                 onSettings = onSettings,
+                newSessionEnabled = connectEnabled,
+                onNewSession = onNewSession,
                 scrollBehavior = scrollBehavior,
             )
         },

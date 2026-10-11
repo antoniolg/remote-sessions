@@ -195,4 +195,16 @@
     <string name="trust_confirm">신뢰하고 연결</string>
     <string name="error_code_folder_access">컴퓨터가 Remote Sessions에서 이 대화의 폴더를 여는 것을 허용하지 않습니다. Mac에서는 시스템 설정 › 개인정보 보호 및 보안 › 파일 및 폴더에서 remote-sessions를 허용하세요.</string>
     <string name="error_code_prompt_blocked">Claude Code가 컴퓨터에서 응답을 기다리고 있습니다. 계속하려면 컴퓨터에서 대화를 여세요.</string>
+    <string name="new_session_title">새 대화</string>
+    <string name="new_session_name">이름(선택 사항)</string>
+    <string name="new_session_hint">선택한 폴더에서 Claude Code가 시작되고 Remote Control로 Claude 앱에서 열립니다.</string>
+    <string name="new_session_recent">최근 프로젝트</string>
+    <string name="new_session_browse">다른 폴더 선택</string>
+    <string name="folders_home">홈 폴더</string>
+    <string name="folders_empty_title">하위 폴더 없음</string>
+    <string name="folders_empty_message">이 폴더에서 대화를 시작할 수 있습니다.</string>
+    <string name="folders_start_here">여기서 시작</string>
+    <string name="folders_error_title">폴더를 열 수 없습니다</string>
+    <string name="new_session_progress">%1$s에서 새 대화</string>
+    <string name="error_code_outside_home">홈 폴더 안의 폴더만 사용할 수 있습니다.</string>
 </resources>

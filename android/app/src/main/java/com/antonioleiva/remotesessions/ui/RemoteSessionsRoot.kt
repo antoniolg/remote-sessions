@@ -25,6 +25,9 @@ import com.antonioleiva.remotesessions.ui.connect.ConnectDialogs
 import com.antonioleiva.remotesessions.ui.connect.ConnectViewModel
 import com.antonioleiva.remotesessions.ui.detail.DetailViewModel
 import com.antonioleiva.remotesessions.ui.detail.SessionDetailScreen
+import com.antonioleiva.remotesessions.ui.newsession.NewSessionScreen
+import com.antonioleiva.remotesessions.ui.newsession.NewSessionViewModel
+import com.antonioleiva.remotesessions.ui.newsession.recentFolders
 import com.antonioleiva.remotesessions.ui.onboarding.OnboardingScreen
 import com.antonioleiva.remotesessions.ui.onboarding.OnboardingViewModel
 import com.antonioleiva.remotesessions.ui.sessions.SessionListScreen
@@ -90,6 +93,7 @@ fun RemoteSessionsRoot(
                 onOpen = { navigation.push(Screen.Detail(it)) },
                 onConnect = { if (it.remote != null) connectViewModel.open(it) else connectViewModel.connect(it) },
                 onSettings = { navigation.push(Screen.Settings) },
+                onNewSession = { navigation.push(Screen.NewSession()) },
                 onTransientErrorShown = sessionsViewModel::clearTransientError,
             )
             is Screen.Detail -> {
@@ -109,6 +113,24 @@ fun RemoteSessionsRoot(
                     onConnect = { connectViewModel.connect(session) },
                     onOpenRemote = { connectViewModel.open(session) },
                     onStop = { connectViewModel.stop(session) },
+                )
+            }
+            is Screen.NewSession -> {
+                val newSession = viewModel(key = "new:${screen.id}") { NewSessionViewModel(container) }
+                val newState by newSession.state.collectAsStateWithLifecycle()
+                val goBack = { if (!newSession.back()) navigation.pop() }
+                BackHandler(onBack = goBack)
+                NewSessionScreen(
+                    state = newState,
+                    recent = recentFolders(sessions.sessions),
+                    onBack = goBack,
+                    onNameChange = newSession::setName,
+                    onBrowse = newSession::browse,
+                    onRetry = newSession::retry,
+                    onStart = { folder ->
+                        connectViewModel.create(folder, newState.title)
+                        navigation.pop()
+                    },
                 )
             }
             Screen.Settings -> SettingsScreen(

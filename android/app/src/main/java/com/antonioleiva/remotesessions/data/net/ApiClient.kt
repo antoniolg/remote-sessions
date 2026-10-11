@@ -1,6 +1,8 @@
 package com.antonioleiva.remotesessions.data.net
 
 import com.antonioleiva.remotesessions.data.model.ApiErrorBody
+import com.antonioleiva.remotesessions.data.model.CreatedSession
+import com.antonioleiva.remotesessions.data.model.FolderListing
 import com.antonioleiva.remotesessions.data.model.Health
 import com.antonioleiva.remotesessions.data.model.Message
 import com.antonioleiva.remotesessions.data.model.MessageList
@@ -10,6 +12,7 @@ import com.antonioleiva.remotesessions.data.model.SessionList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
@@ -34,6 +37,7 @@ object ApiErrorCode {
     const val TRUST_REQUIRED = "trust_required"
     const val FOLDER_ACCESS = "folder_access"
     const val PROMPT_BLOCKED = "prompt_blocked"
+    const val OUTSIDE_HOME = "outside_home"
     const val INTERNAL = "internal"
 }
 
@@ -76,6 +80,16 @@ class ApiClient(
     suspend fun stopRemoteControl(sessionId: String) {
         val request = request("v1/sessions/$sessionId/remote-control").delete().build()
         execute(request, timeoutSeconds = 20) { }
+    }
+
+    suspend fun folders(path: String?): FolderListing =
+        get("v1/folders", timeoutSeconds = 20, query = path?.let { mapOf("path" to it) }.orEmpty())
+
+    /** Like [startRemoteControl], waits for Remote Control on the server. */
+    suspend fun createSession(cwd: String, title: String?, trustFolder: Boolean): CreatedSession {
+        val body = ApiJson.encodeToString(CreateSessionBody(cwd, title, trustFolder))
+        val request = request("v1/sessions").post(body.toRequestBody("application/json".toMediaType())).build()
+        return execute(request, timeoutSeconds = 75) { ApiJson.decodeFromString(it) }
     }
 
     private suspend inline fun <reified T> get(
@@ -125,6 +139,9 @@ class ApiClient(
         }
     }
 }
+
+@Serializable
+private data class CreateSessionBody(val cwd: String, val title: String?, val trustFolder: Boolean)
 
 /** Suspends until the call completes; cancelling the coroutine cancels the HTTP call. */
 suspend fun Call.await(): Response = suspendCancellableCoroutine { continuation ->

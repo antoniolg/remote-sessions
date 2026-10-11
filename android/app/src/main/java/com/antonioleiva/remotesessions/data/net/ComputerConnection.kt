@@ -1,6 +1,8 @@
 package com.antonioleiva.remotesessions.data.net
 
 import com.antonioleiva.remotesessions.data.SessionsSource
+import com.antonioleiva.remotesessions.data.model.CreatedSession
+import com.antonioleiva.remotesessions.data.model.FolderListing
 import com.antonioleiva.remotesessions.data.model.Health
 import com.antonioleiva.remotesessions.data.model.Message
 import com.antonioleiva.remotesessions.data.model.PairedComputer
@@ -54,6 +56,11 @@ class ComputerConnection(
         call(retry = false) { it.startRemoteControl(sessionId, trustFolder) }
 
     override suspend fun stopRemoteControl(sessionId: String) = call(retry = false) { it.stopRemoteControl(sessionId) }
+
+    override suspend fun folders(path: String?): FolderListing = call(retry = true) { it.folders(path) }
+
+    override suspend fun createSession(cwd: String, title: String?, trustFolder: Boolean): CreatedSession =
+        call(retry = false) { it.createSession(cwd, title, trustFolder) }
 
     private suspend fun <T> call(retry: Boolean, block: suspend (ApiClient) -> T): T {
         val wasCached = cached != null

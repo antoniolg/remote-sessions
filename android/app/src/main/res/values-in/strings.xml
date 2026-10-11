@@ -195,4 +195,16 @@
     <string name="trust_confirm">Percayai dan hubungkan</string>
     <string name="error_code_folder_access">Komputer tidak mengizinkan Remote Sessions membuka folder percakapan ini. Di Mac, izinkan remote-sessions di Pengaturan Sistem › Privasi &amp; Keamanan › File dan Folder.</string>
     <string name="error_code_prompt_blocked">Claude Code sedang menunggu jawaban di komputer. Buka percakapan di sana untuk melanjutkan.</string>
+    <string name="new_session_title">Percakapan baru</string>
+    <string name="new_session_name">Nama (opsional)</string>
+    <string name="new_session_hint">Claude Code dimulai di folder yang Anda pilih dan terbuka di aplikasi Claude dengan Remote Control.</string>
+    <string name="new_session_recent">Proyek terbaru</string>
+    <string name="new_session_browse">Pilih folder lain</string>
+    <string name="folders_home">Folder utama</string>
+    <string name="folders_empty_title">Tidak ada subfolder</string>
+    <string name="folders_empty_message">Anda dapat memulai percakapan di folder ini.</string>
+    <string name="folders_start_here">Mulai di sini</string>
+    <string name="folders_error_title">Tidak dapat membuka folder</string>
+    <string name="new_session_progress">Percakapan baru di %1$s</string>
+    <string name="error_code_outside_home">Hanya folder di dalam folder utama Anda yang dapat digunakan.</string>
 </resources>

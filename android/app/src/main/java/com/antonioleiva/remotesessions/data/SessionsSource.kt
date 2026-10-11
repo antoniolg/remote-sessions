@@ -1,5 +1,7 @@
 package com.antonioleiva.remotesessions.data
 
+import com.antonioleiva.remotesessions.data.model.CreatedSession
+import com.antonioleiva.remotesessions.data.model.FolderListing
 import com.antonioleiva.remotesessions.data.model.Health
 import com.antonioleiva.remotesessions.data.model.Message
 import com.antonioleiva.remotesessions.data.model.RemoteControlResult
@@ -16,4 +18,8 @@ interface SessionsSource {
     /** [trustFolder] answers yes if Claude Code asks whether to trust the folder (only after the user confirmed). */
     suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean = false): RemoteControlResult
     suspend fun stopRemoteControl(sessionId: String)
+    /** Subfolders of [path] on the computer (the home folder when null). */
+    suspend fun folders(path: String?): FolderListing
+    /** Starts a new conversation with Remote Control in [cwd]. */
+    suspend fun createSession(cwd: String, title: String?, trustFolder: Boolean = false): CreatedSession
 }

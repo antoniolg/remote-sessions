@@ -53,6 +53,29 @@ data class RemoteControlResult(
     val reused: Boolean = false,
 )
 
+/** `POST /v1/sessions`: a new conversation started with Remote Control. */
+@Serializable
+data class CreatedSession(
+    val id: String,
+    val url: String,
+    val cwd: String,
+)
+
+/** `GET /v1/folders`: a folder of the computer and its subfolders. [parent] is null at the home folder. */
+@Serializable
+data class FolderListing(
+    val path: String,
+    val parent: String? = null,
+    val home: String,
+    val folders: List<Folder> = emptyList(),
+) {
+    val isHome: Boolean get() = path == home
+    val name: String get() = path.trimEnd('/', '\\').substringAfterLast('/').substringAfterLast('\\')
+}
+
+@Serializable
+data class Folder(val name: String, val path: String)
+
 @Serializable
 data class Health(
     val ok: Boolean,

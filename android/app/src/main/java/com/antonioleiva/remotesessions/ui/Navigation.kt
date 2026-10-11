@@ -8,6 +8,8 @@ sealed interface Screen {
     data object Sessions : Screen
     data class Detail(val session: Session) : Screen
     data object Settings : Screen
+    /** [id] gives every visit its own view model, so it always starts clean. */
+    data class NewSession(val id: Long = System.nanoTime()) : Screen
 }
 
 /** A tiny back stack; onboarding is shown on top of it by [OnboardingViewModel.active]. */

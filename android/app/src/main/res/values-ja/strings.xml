@@ -195,4 +195,16 @@
     <string name="trust_confirm">信頼して接続</string>
     <string name="error_code_folder_access">コンピュータが、このチャットのフォルダを Remote Sessions で開くことを許可していません。Mac では「システム設定」›「プライバシーとセキュリティ」›「ファイルとフォルダ」で remote-sessions を許可してください。</string>
     <string name="error_code_prompt_blocked">Claude Code がコンピュータで応答を待っています。続けるには、コンピュータでそのチャットを開いてください。</string>
+    <string name="new_session_title">新しい会話</string>
+    <string name="new_session_name">名前（任意）</string>
+    <string name="new_session_hint">選んだフォルダで Claude Code が起動し、Remote Control で Claude アプリに開きます。</string>
+    <string name="new_session_recent">最近のプロジェクト</string>
+    <string name="new_session_browse">別のフォルダを選択</string>
+    <string name="folders_home">ホームフォルダ</string>
+    <string name="folders_empty_title">サブフォルダはありません</string>
+    <string name="folders_empty_message">このフォルダで会話を始められます。</string>
+    <string name="folders_start_here">ここで開始</string>
+    <string name="folders_error_title">フォルダを開けませんでした</string>
+    <string name="new_session_progress">%1$s で新しい会話</string>
+    <string name="error_code_outside_home">ホームフォルダ内のフォルダのみ使用できます。</string>
 </resources>

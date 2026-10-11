@@ -46,7 +46,7 @@ fun ConnectDialogs(
         )
     }
 
-    state.opening?.let { session ->
+    state.opening?.let { launch ->
         Dialog(
             onDismissRequest = {},
             properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
@@ -60,7 +60,13 @@ fun ConnectDialogs(
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                     Text(stringResource(R.string.connect_progress_title), style = MaterialTheme.typography.titleMedium)
                     Text(
-                        session.displayTitle(),
+                        when (launch) {
+                            is Launch.Resume -> launch.session.displayTitle()
+                            is Launch.Create -> stringResource(
+                                R.string.new_session_progress,
+                                launch.title ?: launch.folder.trimEnd('/', '\\').substringAfterLast('/').substringAfterLast('\\'),
+                            )
+                        },
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,

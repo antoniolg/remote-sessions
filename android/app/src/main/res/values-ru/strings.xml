@@ -207,4 +207,16 @@
     <string name="trust_confirm">Доверять и подключиться</string>
     <string name="error_code_folder_access">Компьютер не разрешает Remote Sessions открыть папку этого разговора. На Mac разрешите remote-sessions в Системных настройках › Конфиденциальность и безопасность › Файлы и папки.</string>
     <string name="error_code_prompt_blocked">Claude Code ждёт ответа на компьютере. Откройте там разговор, чтобы продолжить.</string>
+    <string name="new_session_title">Новый разговор</string>
+    <string name="new_session_name">Название (необязательно)</string>
+    <string name="new_session_hint">Claude Code запустится в выбранной папке и откроется в приложении Claude через Remote Control.</string>
+    <string name="new_session_recent">Недавние проекты</string>
+    <string name="new_session_browse">Выбрать другую папку</string>
+    <string name="folders_home">Домашняя папка</string>
+    <string name="folders_empty_title">Нет вложенных папок</string>
+    <string name="folders_empty_message">Можно начать разговор в этой папке.</string>
+    <string name="folders_start_here">Начать здесь</string>
+    <string name="folders_error_title">Не удалось открыть папку</string>
+    <string name="new_session_progress">Новый разговор в %1$s</string>
+    <string name="error_code_outside_home">Можно использовать только папки внутри домашней папки.</string>
 </resources>

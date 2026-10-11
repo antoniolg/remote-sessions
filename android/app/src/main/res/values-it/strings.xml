@@ -203,4 +203,16 @@
     <string name="trust_confirm">Fidati e connetti</string>
     <string name="error_code_folder_access">Il computer non consente a Remote Sessions di aprire la cartella di questa conversazione. Su un Mac, consenti remote-sessions in Impostazioni di Sistema › Privacy e sicurezza › File e cartelle.</string>
     <string name="error_code_prompt_blocked">Claude Code sta aspettando una risposta sul computer. Apri lì la conversazione per continuare.</string>
+    <string name="new_session_title">Nuova conversazione</string>
+    <string name="new_session_name">Nome (facoltativo)</string>
+    <string name="new_session_hint">Claude Code si avvia nella cartella che scegli e si apre nell’app Claude con Remote Control.</string>
+    <string name="new_session_recent">Progetti recenti</string>
+    <string name="new_session_browse">Scegli un’altra cartella</string>
+    <string name="folders_home">Cartella Inizio</string>
+    <string name="folders_empty_title">Nessuna sottocartella</string>
+    <string name="folders_empty_message">Puoi iniziare la conversazione in questa cartella.</string>
+    <string name="folders_start_here">Inizia qui</string>
+    <string name="folders_error_title">Impossibile aprire la cartella</string>
+    <string name="new_session_progress">Nuova conversazione in %1$s</string>
+    <string name="error_code_outside_home">Puoi usare solo cartelle all’interno della tua cartella Inizio.</string>
 </resources>

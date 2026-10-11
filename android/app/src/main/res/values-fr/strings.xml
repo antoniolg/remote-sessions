@@ -203,4 +203,16 @@
     <string name="trust_confirm">Faire confiance et se connecter</string>
     <string name="error_code_folder_access">L’ordinateur n’autorise pas Remote Sessions à ouvrir le dossier de cette conversation. Sur un Mac, autorisez remote-sessions dans Réglages Système › Confidentialité et sécurité › Fichiers et dossiers.</string>
     <string name="error_code_prompt_blocked">Claude Code attend une réponse sur l’ordinateur. Ouvrez-y la conversation pour continuer.</string>
+    <string name="new_session_title">Nouvelle conversation</string>
+    <string name="new_session_name">Nom (facultatif)</string>
+    <string name="new_session_hint">Claude Code démarre dans le dossier choisi et s’ouvre dans l’app Claude avec Remote Control.</string>
+    <string name="new_session_recent">Projets récents</string>
+    <string name="new_session_browse">Choisir un autre dossier</string>
+    <string name="folders_home">Dossier personnel</string>
+    <string name="folders_empty_title">Aucun sous-dossier</string>
+    <string name="folders_empty_message">Vous pouvez démarrer la conversation dans ce dossier.</string>
+    <string name="folders_start_here">Commencer ici</string>
+    <string name="folders_error_title">Impossible d’ouvrir le dossier</string>
+    <string name="new_session_progress">Nouvelle conversation dans %1$s</string>
+    <string name="error_code_outside_home">Seuls les dossiers de votre dossier personnel peuvent être utilisés.</string>
 </resources>

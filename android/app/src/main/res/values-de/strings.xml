@@ -199,4 +199,16 @@
     <string name="trust_confirm">Vertrauen und verbinden</string>
     <string name="error_code_folder_access">Der Computer erlaubt Remote Sessions nicht, den Ordner dieser Unterhaltung zu öffnen. Erlaube auf einem Mac remote-sessions unter Systemeinstellungen › Datenschutz &amp; Sicherheit › Dateien und Ordner.</string>
     <string name="error_code_prompt_blocked">Claude Code wartet auf dem Computer auf eine Antwort. Öffne die Unterhaltung dort, um fortzufahren.</string>
+    <string name="new_session_title">Neue Unterhaltung</string>
+    <string name="new_session_name">Name (optional)</string>
+    <string name="new_session_hint">Claude Code startet im gewählten Ordner und öffnet sich mit Remote Control in der Claude-App.</string>
+    <string name="new_session_recent">Letzte Projekte</string>
+    <string name="new_session_browse">Anderen Ordner wählen</string>
+    <string name="folders_home">Benutzerordner</string>
+    <string name="folders_empty_title">Keine Unterordner</string>
+    <string name="folders_empty_message">Du kannst die Unterhaltung in diesem Ordner starten.</string>
+    <string name="folders_start_here">Hier starten</string>
+    <string name="folders_error_title">Ordner konnte nicht geöffnet werden</string>
+    <string name="new_session_progress">Neue Unterhaltung in %1$s</string>
+    <string name="error_code_outside_home">Es können nur Ordner innerhalb deines Benutzerordners verwendet werden.</string>
 </resources>
