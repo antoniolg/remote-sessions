@@ -1,0 +1,113 @@
+:root {
+  color-scheme: light dark;
+  --bg: #faf9f5;
+  --card: #ffffff;
+  --text: #1f1e1d;
+  --muted: #6b6a66;
+  --line: #e5e3dc;
+  --accent: #c96442;
+  --accent-text: #ffffff;
+  --user: #f0eee6;
+  --error: #b3261e;
+  --ok: #2e7d32;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1e1d;
+    --card: #2a2927;
+    --text: #f0eee6;
+    --muted: #a3a19b;
+    --line: #3a3936;
+    --user: #33322f;
+    --error: #f2b8b5;
+    --ok: #81c784;
+  }
+}
+* { box-sizing: border-box; min-width: 0; }
+/* Classes that set display (.primary) would otherwise show hidden elements. */
+[hidden] { display: none !important; }
+/* An app, not a page: no pinch or double-tap zoom, no sideways scrolling. */
+html {
+  touch-action: pan-y;
+  /* clip, not hidden: hidden turns html/body into scroll containers and breaks position: sticky. */
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+/* The bar stays on top while the page scrolls under it; main leaves room for it. */
+:root { --bar: calc(env(safe-area-inset-top) + 56px); }
+.bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  height: var(--bar);
+  display: flex; align-items: center; gap: 8px;
+  padding: calc(env(safe-area-inset-top) + 8px) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.bar h1 { flex: 1; margin: 0; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+main {
+  padding: calc(var(--bar) + 12px) max(16px, env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 24px) max(16px, env(safe-area-inset-left));
+  max-width: 720px; margin: 0 auto;
+}
+button, .primary, input, textarea {
+  font: inherit; color: inherit;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); padding: 10px 14px;
+  font-size: 16px; max-width: 100%;
+}
+button, .primary, .cards li { user-select: none; -webkit-user-select: none; }
+button { cursor: pointer; }
+section > button, .actions > button, details > button { width: 100%; }
+button:disabled { opacity: .5; }
+.icon { border: 0; background: none; padding: 8px; min-width: 40px; display: grid; place-items: center; }
+.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); text-align: center; text-decoration: none; display: block; }
+textarea, input { display: block; width: 100%; margin: 8px 0; resize: vertical; }
+.muted { color: var(--muted); font-size: 14px; }
+.error { color: var(--error); }
+code { font-size: 13px; overflow-wrap: anywhere; }
+.cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.cards li {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 14px; cursor: pointer;
+}
+.cards .t { font-weight: 600; overflow-wrap: anywhere; }
+.cards .s { color: var(--muted); font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.badge { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); margin-right: 6px; }
+.badge.remote { color: var(--ok); border-color: currentColor; }
+.meta { color: var(--muted); font-size: 14px; margin-bottom: 8px; overflow-wrap: anywhere; }
+#messages { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
+#messages li { white-space: pre-wrap; overflow-wrap: anywhere; padding: 10px 12px; border-radius: 12px; }
+#messages li.user { background: var(--user); margin-left: 15%; }
+#messages li .tools { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.actions { position: sticky; bottom: 0; display: grid; gap: 8px; padding: 8px 0 calc(env(safe-area-inset-bottom) + 8px); background: var(--bg); }
+dialog {
+  border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--text);
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 64px); overflow-y: auto; padding: 16px;
+}
+dialog::backdrop { background: rgb(0 0 0 / .4); }
+dialog h2 { margin-top: 0; font-size: 18px; }
+#diag-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+#diag-table td { border-top: 1px solid var(--line); padding: 6px 4px; vertical-align: top; }
+#diag-table td { overflow-wrap: anywhere; }
+#diag-table td:nth-child(2) { width: 40%; }
+.row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+@media (min-width: 720px) {
+  .actions { grid-template-columns: 1fr 1fr; }
+  .actions > .error, .actions > input { grid-column: 1 / -1; }
+}
+
+.scanner { position: relative; margin: 12px 0; border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 1; max-height: 60dvh; }
+.scanner video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.scanner .frame { position: absolute; inset: 15%; border: 3px solid rgb(255 255 255 / .8); border-radius: 12px; }
+details { margin-top: 16px; }
+summary { cursor: pointer; }

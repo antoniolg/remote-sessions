@@ -87,3 +87,19 @@ func TestUnknownSessionIs404(t *testing.T) {
 		t.Fatalf("delete: %d %v", rec.Code, body)
 	}
 }
+
+func TestServesWebClientWithoutToken(t *testing.T) {
+	h := testServer(t)
+	for _, path := range []string{"/app/", "/app/app.js", "/app/manifest.webmanifest", "/app/sw.js"} {
+		rec, _ := do(t, h, "GET", path, "")
+		if rec.Code != 200 || rec.Header().Get("Content-Security-Policy") == "" {
+			t.Fatalf("%s: %d, CSP %q", path, rec.Code, rec.Header().Get("Content-Security-Policy"))
+		}
+	}
+	if rec, _ := do(t, h, "GET", "/", ""); rec.Code != http.StatusFound || rec.Header().Get("Location") != "/app/" {
+		t.Fatalf("root: %d %s", rec.Code, rec.Header().Get("Location"))
+	}
+	if rec, _ := do(t, h, "GET", "/nope", ""); rec.Code != http.StatusNotFound {
+		t.Fatalf("unknown path: %d", rec.Code)
+	}
+}

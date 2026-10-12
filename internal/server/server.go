@@ -18,6 +18,7 @@ import (
 	"github.com/antoniolg/remote-sessions/internal/folders"
 	"github.com/antoniolg/remote-sessions/internal/launcher"
 	"github.com/antoniolg/remote-sessions/internal/transcripts"
+	"github.com/antoniolg/remote-sessions/internal/web"
 )
 
 type Server struct {
@@ -69,6 +70,9 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /v1/sessions/{id}/messages", s.auth(s.messages))
 	mux.HandleFunc("POST /v1/sessions/{id}/remote-control", s.auth(s.connect))
 	mux.HandleFunc("DELETE /v1/sessions/{id}/remote-control", s.auth(s.disconnect))
+	// The browser client (PWA): public files, the token stays in the browser.
+	mux.Handle("GET /app/", web.Handler())
+	mux.Handle("GET /{$}", http.RedirectHandler("/app/", http.StatusFound))
 	return logRequests(mux)
 }
 
