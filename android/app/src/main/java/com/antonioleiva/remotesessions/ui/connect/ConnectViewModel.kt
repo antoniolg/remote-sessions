@@ -3,6 +3,7 @@ package com.antonioleiva.remotesessions.ui.connect
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antonioleiva.remotesessions.AppContainer
+import com.antonioleiva.remotesessions.data.demo.DemoVideo
 import com.antonioleiva.remotesessions.data.model.Availability
 import com.antonioleiva.remotesessions.data.model.Session
 import com.antonioleiva.remotesessions.data.net.ApiErrorCode
@@ -67,7 +68,7 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
 
     private fun run(launch: Launch, trustFolder: Boolean = false) {
         val source = container.currentSource.value ?: return
-        if (source.isDemo) {
+        if (source.isDemo && !DemoVideo.enabled) {
             _state.update { it.copy(demoNotice = true) }
             return
         }

@@ -27,8 +27,10 @@ class DemoSessionsSource(private val data: DemoData) : SessionsSource {
         return data.messages(sessionId)
     }
 
-    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean, fork: Boolean): RemoteControlResult =
+    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean, fork: Boolean): RemoteControlResult {
+        if (DemoVideo.enabled) delay(120_000)
         throw UnsupportedOperationException("Remote Control is not available in demo mode")
+    }
 
     override suspend fun stopRemoteControl(sessionId: String) = Unit
 
@@ -36,8 +38,8 @@ class DemoSessionsSource(private val data: DemoData) : SessionsSource {
         delay(200)
         val home = "/Users/demo"
         val tree = mapOf(
-            home to listOf("Documents", "Projects"),
-            "$home/Projects" to listOf("api", "docs", "mobile-app", "shop"),
+            home to listOf("Desktop", "Documents", "Downloads", "Projects"),
+            "$home/Projects" to listOf("api", "docs", "landing-page", "mobile-app", "shop"),
             "$home/Documents" to listOf("Content"),
         )
         val current = path?.replace("~", home) ?: home
@@ -49,6 +51,8 @@ class DemoSessionsSource(private val data: DemoData) : SessionsSource {
         )
     }
 
-    override suspend fun createSession(cwd: String, title: String?, trustFolder: Boolean): CreatedSession =
+    override suspend fun createSession(cwd: String, title: String?, trustFolder: Boolean): CreatedSession {
+        if (DemoVideo.enabled) delay(120_000)
         throw UnsupportedOperationException("Remote Control is not available in demo mode")
+    }
 }

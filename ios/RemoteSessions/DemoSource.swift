@@ -4,6 +4,14 @@ import Foundation
 struct DemoSource: SessionSource {
     private static let now = Date()
 
+    #if DEBUG
+    /// Launch video (store/video): REMOTE_SESSIONS_SCREEN=video shows every conversation state in the list and
+    /// keeps "Starting Remote Control…" on screen instead of the demo error.
+    static let video = ProcessInfo.processInfo.environment["REMOTE_SESSIONS_SCREEN"] == "video"
+    #else
+    static let video = false
+    #endif
+
     private static func ago(_ minutes: Double) -> Date {
         now.addingTimeInterval(-minutes * 60)
     }
@@ -11,11 +19,14 @@ struct DemoSource: SessionSource {
     func sessions() async throws -> [Session] {
         [
             Session(id: "demo-1", title: String(localized: "Fix Google sign-in"), lastPrompt: String(localized: "Add a test for the expired token case"),
-                    cwd: "~/Projects/shop", project: "shop", updatedAt: Self.ago(4), running: .init(kind: "interactive", status: "busy"), remote: nil),
+                    cwd: "~/Projects/shop", project: "shop", updatedAt: Self.ago(4),
+                    running: Self.video ? nil : .init(kind: "interactive", status: "busy"), remote: nil),
             Session(id: "demo-2", title: String(localized: "Migrate the API to version 2"), lastPrompt: String(localized: "Review the missing endpoints"),
-                    cwd: "~/Projects/api", project: "api", updatedAt: Self.ago(95), running: nil, remote: nil),
+                    cwd: "~/Projects/api", project: "api", updatedAt: Self.ago(95),
+                    running: nil, remote: Self.video ? .init(url: URL(string: "https://claude.ai/code")!) : nil),
             Session(id: "demo-3", title: String(localized: "Ideas for the October newsletter"), lastPrompt: String(localized: "Give me three shorter headlines"),
-                    cwd: "~/Documents/Content", project: "Content", updatedAt: Self.ago(60 * 26), running: nil, remote: nil),
+                    cwd: "~/Documents/Content", project: "Content", updatedAt: Self.ago(60 * 26),
+                    running: Self.video ? .init(kind: "interactive", status: "idle") : nil, remote: nil),
             Session(id: "demo-4", title: String(localized: "Speed up the CI pipeline"), lastPrompt: String(localized: "Cache the Gradle dependencies"),
                     cwd: "~/Projects/mobile-app", project: "mobile-app", updatedAt: Self.ago(60 * 30), running: nil, remote: nil),
             Session(id: "demo-5", title: String(localized: "Write the release notes"), lastPrompt: String(localized: "Make them shorter and friendlier"),
@@ -37,6 +48,7 @@ struct DemoSource: SessionSource {
     }
 
     func connect(sessionID: String, trustFolder: Bool, fork: Bool) async throws -> URL {
+        if Self.video { try await Task.sleep(for: .seconds(120)) }
         throw SourceError.demo
     }
 
@@ -47,8 +59,8 @@ struct DemoSource: SessionSource {
     func folders(path: String?) async throws -> FolderListing {
         let home = "/Users/demo"
         let tree = [
-            home: ["Documents", "Projects"],
-            "\(home)/Projects": ["api", "docs", "mobile-app", "shop"],
+            home: ["Desktop", "Documents", "Downloads", "Projects"],
+            "\(home)/Projects": ["api", "docs", "landing-page", "mobile-app", "shop"],
             "\(home)/Documents": ["Content"],
         ]
         let current = path.map { $0.replacingOccurrences(of: "~", with: home) } ?? home
@@ -58,6 +70,7 @@ struct DemoSource: SessionSource {
     }
 
     func create(cwd: String, title: String?, trustFolder: Bool) async throws -> URL {
+        if Self.video { try await Task.sleep(for: .seconds(120)) }
         throw SourceError.demo
     }
 }

@@ -18,9 +18,10 @@ struct RemoteSessionsApp: App {
         if let text = environment["REMOTE_SESSIONS_PAIR"], let link = PairingLink(text) {
             _openedLink = State(initialValue: PairingLinkBox(link: link))
         }
-        // Store screenshots: REMOTE_SESSIONS_SCREEN=list|detail shows the demo, welcome|install the onboarding.
+        // Store screenshots: REMOTE_SESSIONS_SCREEN=list|detail shows the demo, welcome|install the onboarding;
+        // video shows the demo for the launch video (DemoSource.video).
         switch environment["REMOTE_SESSIONS_SCREEN"] {
-        case "list", "detail":
+        case "list", "detail", "video":
             store.demoMode = true
             _onboarding = State(initialValue: false)
         case "welcome", "install":

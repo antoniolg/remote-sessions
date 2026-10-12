@@ -1,6 +1,7 @@
 package com.antonioleiva.remotesessions
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.antonioleiva.remotesessions.data.demo.DemoVideo
 import com.antonioleiva.remotesessions.data.pairing.PairingUri
 import com.antonioleiva.remotesessions.ui.NavigationViewModel
 import com.antonioleiva.remotesessions.ui.RemoteSessionsRoot
@@ -39,6 +41,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        if ((applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0 && intent.getBooleanExtra("video", false)) {
+            DemoVideo.enabled = true
+        }
         if (savedInstanceState == null) handlePairingLink(intent)
         val versionName = runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull().orEmpty()
         setContent {

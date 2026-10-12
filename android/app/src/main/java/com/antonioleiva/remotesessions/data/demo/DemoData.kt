@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.StringRes
 import com.antonioleiva.remotesessions.R
 import com.antonioleiva.remotesessions.data.model.Message
+import com.antonioleiva.remotesessions.data.model.Remote
 import com.antonioleiva.remotesessions.data.model.Running
 import com.antonioleiva.remotesessions.data.model.Session
 import java.time.Instant
@@ -97,7 +98,15 @@ class DemoData(private val context: Context) {
             project = demo.project,
             updatedAt = now.minus(demo.minutesAgo, ChronoUnit.MINUTES).toString(),
             running = demo.running,
-        )
+        ).let { if (DemoVideo.enabled) it.forVideo() else it }
+    }
+
+    /** The launch video shows every state: closed, with Remote Control and open on the computer. */
+    private fun Session.forVideo(): Session = when (id) {
+        "demo-login" -> copy(running = null)
+        "demo-newsletter" -> copy(running = null, remote = Remote("https://claude.ai/code"))
+        "demo-migration" -> copy(running = Running(kind = "interactive", status = "idle"))
+        else -> this
     }
 
     fun messages(sessionId: String, now: Instant = Instant.now()): List<Message> {

@@ -33,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.antonioleiva.remotesessions.data.demo.DemoVideo
 import com.antonioleiva.remotesessions.data.model.PairedComputer
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,7 +79,8 @@ private fun ComputerSelector(
     val subtitleStyle = MaterialTheme.typography.labelMedium
     val color = MaterialTheme.colorScheme.onSurfaceVariant
     when {
-        demo -> Text(stringResource(R.string.sessions_demo_subtitle), style = subtitleStyle, color = color)
+        // The launch video shows a computer name, like a paired computer would, instead of "Demo mode".
+        demo -> Text(if (DemoVideo.enabled) "MacBook Pro" else stringResource(R.string.sessions_demo_subtitle), style = subtitleStyle, color = color)
         computers.size <= 1 -> selected?.let { Text(it.name, style = subtitleStyle, color = color, maxLines = 1) }
         else -> {
             var expanded by remember { mutableStateOf(false) }

@@ -26,7 +26,9 @@ struct SessionListView: View {
     }
 
     private var title: String {
-        store.demoMode ? String(localized: "Demo") : project ?? store.selected?.name ?? "Remote Sessions"
+        // The launch video shows a computer name, like a paired computer would, instead of "Demo".
+        if store.demoMode && DemoSource.video { return project ?? "MacBook Pro" }
+        return store.demoMode ? String(localized: "Demo") : project ?? store.selected?.name ?? "Remote Sessions"
     }
 
     var body: some View {
