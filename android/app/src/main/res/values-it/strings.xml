@@ -216,4 +216,6 @@
     <string name="new_session_progress">Nuova conversazione in %1$s</string>
     <string name="error_code_outside_home">Puoi usare solo cartelle all’interno della tua cartella Inizio.</string>
     <string name="open_on_computer_message">Questa conversazione è aperta sul computer senza Remote Control. Scrivi /remote-control al suo interno per continuarla qui, oppure chiudila lì e tocca Connetti.</string>
+    <string name="settings_crash_reports">Invia segnalazioni di arresto anomalo</string>
+    <string name="settings_crash_reports_hint">Se l’app si chiude inaspettatamente, invia un rapporto tecnico per poter risolvere il problema. Non include mai le tue conversazioni.</string>
 </resources>

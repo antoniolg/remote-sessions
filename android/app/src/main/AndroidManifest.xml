@@ -52,5 +52,7 @@
                 <data android:scheme="remotesessions" android:host="pair" />
             </intent-filter>
         </activity>
+        <!-- Off until the app reads the user's choice (Settings › Send crash reports); see CrashReports. -->
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
     </application>
 </manifest>

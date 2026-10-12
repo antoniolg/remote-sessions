@@ -5,3 +5,5 @@ local.properties
 .idea/
 *.iml
 captures/
+# Firebase config of the published app (1Password, Agent Runtime); builds without it skip crash reports.
+app/google-services.json

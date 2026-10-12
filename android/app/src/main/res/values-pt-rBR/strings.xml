@@ -216,4 +216,6 @@
     <string name="new_session_progress">Nova conversa em %1$s</string>
     <string name="error_code_outside_home">Só é possível usar pastas dentro da sua pasta pessoal.</string>
     <string name="open_on_computer_message">Esta conversa está aberta no computador sem o Remote Control. Digite /remote-control nela para continuar aqui ou feche-a lá e toque em Conectar.</string>
+    <string name="settings_crash_reports">Enviar relatórios de falhas</string>
+    <string name="settings_crash_reports_hint">Se o app fechar inesperadamente, ele envia um relatório técnico para que o problema seja corrigido. Nunca inclui suas conversas.</string>
 </resources>

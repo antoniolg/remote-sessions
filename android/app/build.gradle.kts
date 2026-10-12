@@ -6,6 +6,13 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+// Crash reports (Firebase Crashlytics) need app/google-services.json, which stays out of git:
+// builds without it, such as forks, simply leave Firebase out.
+if (file("google-services.json").exists()) {
+    pluginManager.apply(libs.plugins.google.services.get().pluginId)
+    pluginManager.apply(libs.plugins.firebase.crashlytics.get().pluginId)
+}
+
 // Release signing is optional: set these in ~/.gradle/gradle.properties to sign release builds.
 val keystorePath = providers.gradleProperty("REMOTE_SESSIONS_KEYSTORE").orNull
 val keystorePassword = providers.gradleProperty("REMOTE_SESSIONS_STORE_PASSWORD").orNull
@@ -21,8 +28,8 @@ android {
         applicationId = "com.antonioleiva.remotesessions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 4
-        versionName = "1.0.1"
+        versionCode = 5
+        versionName = "1.0.2"
     }
 
     signingConfigs {
@@ -89,6 +96,9 @@ dependencies {
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
     implementation(libs.mlkit.barcode.scanning)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

@@ -208,4 +208,6 @@
     <string name="new_session_progress">在 %1$s 中新建对话</string>
     <string name="error_code_outside_home">只能使用个人文件夹中的文件夹。</string>
     <string name="open_on_computer_message">此对话已在电脑上打开，但未启用 Remote Control。在其中输入 /remote-control 即可在这里继续，或在电脑上关闭它后轻点“连接”。</string>
+    <string name="settings_crash_reports">发送崩溃报告</string>
+    <string name="settings_crash_reports_hint">如果应用意外关闭，它会发送一份技术报告以便修复问题。报告绝不包含你的对话。</string>
 </resources>

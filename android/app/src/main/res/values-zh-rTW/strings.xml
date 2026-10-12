@@ -208,4 +208,6 @@
     <string name="new_session_progress">在 %1$s 中新增對話</string>
     <string name="error_code_outside_home">只能使用個人資料夾內的資料夾。</string>
     <string name="open_on_computer_message">此對話已在電腦上開啟，但未啟用 Remote Control。在其中輸入 /remote-control 即可在這裡繼續，或在電腦上關閉後點一下「連線」。</string>
+    <string name="settings_crash_reports">傳送當機報告</string>
+    <string name="settings_crash_reports_hint">如果 App 意外關閉，會傳送一份技術報告以便修正問題。報告絕不包含你的對話。</string>
 </resources>

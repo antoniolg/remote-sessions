@@ -220,4 +220,6 @@
     <string name="new_session_progress">Nowa rozmowa w %1$s</string>
     <string name="error_code_outside_home">Można używać tylko folderów w folderze domowym.</string>
     <string name="open_on_computer_message">Ta rozmowa jest otwarta na komputerze bez Remote Control. Wpisz w niej /remote-control, aby kontynuować tutaj, albo zamknij ją tam i stuknij Połącz.</string>
+    <string name="settings_crash_reports">Wysyłaj raporty o awariach</string>
+    <string name="settings_crash_reports_hint">Jeśli aplikacja nieoczekiwanie się zamknie, wyśle raport techniczny, aby można było naprawić błąd. Nigdy nie zawiera Twoich rozmów.</string>
 </resources>

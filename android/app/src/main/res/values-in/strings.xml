@@ -208,4 +208,6 @@
     <string name="new_session_progress">Percakapan baru di %1$s</string>
     <string name="error_code_outside_home">Hanya folder di dalam folder utama Anda yang dapat digunakan.</string>
     <string name="open_on_computer_message">Percakapan ini terbuka di komputer tanpa Remote Control. Ketik /remote-control di dalamnya untuk melanjutkan di sini, atau tutup di sana lalu ketuk Hubungkan.</string>
+    <string name="settings_crash_reports">Kirim laporan error</string>
+    <string name="settings_crash_reports_hint">Jika aplikasi tertutup secara tiba-tiba, aplikasi mengirim laporan teknis agar masalahnya bisa diperbaiki. Laporan tidak pernah berisi percakapan Anda.</string>
 </resources>

@@ -137,6 +137,7 @@ fun RemoteSessionsRoot(
                 computers = current.computers,
                 selectedId = current.selected?.id,
                 demo = current.demo,
+                crashReports = current.crashReports,
                 versionName = versionName,
                 onBack = navigation::pop,
                 onSelect = { id -> scope.launch { container.store.select(id) } },
@@ -145,6 +146,7 @@ fun RemoteSessionsRoot(
                 onOpenLink = { url ->
                     if (!openUrl(context, url)) connectViewModel.showError(R.string.open_error_title, uiText(R.string.open_error_message, url))
                 },
+                onSetCrashReports = { enabled -> scope.launch { container.store.setCrashReports(enabled) } },
                 onSetDemo = { enabled ->
                     scope.launch { container.store.setDemo(enabled) }
                     navigation.reset()

@@ -1,6 +1,10 @@
 package com.antonioleiva.remotesessions.ui.settings
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material3.Switch
+import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -47,12 +51,14 @@ fun SettingsScreen(
     computers: List<PairedComputer>,
     selectedId: String?,
     demo: Boolean,
+    crashReports: Boolean,
     versionName: String,
     onBack: () -> Unit,
     onSelect: (String) -> Unit,
     onRemove: (String) -> Unit,
     onAddComputer: () -> Unit,
     onSetDemo: (Boolean) -> Unit,
+    onSetCrashReports: (Boolean) -> Unit,
     onOpenLink: (String) -> Unit,
 ) {
     var removing by remember { mutableStateOf<PairedComputer?>(null) }
@@ -120,6 +126,16 @@ fun SettingsScreen(
                         supportingContent = { Text(stringResource(R.string.settings_demo_enter_hint)) },
                     )
                 }
+            }
+            item { HorizontalDivider(Modifier.padding(vertical = 8.dp)) }
+            item {
+                ListItem(
+                    modifier = Modifier.toggleable(value = crashReports, role = Role.Switch, onValueChange = onSetCrashReports),
+                    leadingContent = { Icon(Icons.Outlined.BugReport, contentDescription = null) },
+                    headlineContent = { Text(stringResource(R.string.settings_crash_reports)) },
+                    supportingContent = { Text(stringResource(R.string.settings_crash_reports_hint)) },
+                    trailingContent = { Switch(checked = crashReports, onCheckedChange = null) },
+                )
             }
             item { HorizontalDivider(Modifier.padding(vertical = 8.dp)) }
             item { SectionHeader(stringResource(R.string.settings_about)) }

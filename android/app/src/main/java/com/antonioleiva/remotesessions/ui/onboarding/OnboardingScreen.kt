@@ -24,6 +24,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.antonioleiva.remotesessions.ui.common.RequestLocalNetworkPermission
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,14 +79,18 @@ fun OnboardingScreen(
                     OnboardingStep.Install -> InstallStep(state.platform, viewModel::selectPlatform, viewModel::next)
                     OnboardingStep.Scan -> ScanStep(state.scanError, viewModel::onCode, viewModel::clearScanError)
                     OnboardingStep.Tailscale -> TailscaleStep(state.pending?.name, viewModel::next)
-                    OnboardingStep.Test -> TestStep(
-                        computerName = state.pending?.name.orEmpty(),
-                        test = state.test,
-                        onRetry = viewModel::runTest,
-                        onSaveAnyway = { viewModel.saveAnyway(); onPaired() },
-                        onRescan = { viewModel.back() },
-                        onDone = { viewModel.finish(); onPaired() },
-                    )
+                    OnboardingStep.Test -> {
+                        // Android 17 asks before reaching the computer; the test runs again once it's allowed.
+                        RequestLocalNetworkPermission(enabled = true, onGranted = viewModel::runTest)
+                        TestStep(
+                            computerName = state.pending?.name.orEmpty(),
+                            test = state.test,
+                            onRetry = viewModel::runTest,
+                            onSaveAnyway = { viewModel.saveAnyway(); onPaired() },
+                            onRescan = { viewModel.back() },
+                            onDone = { viewModel.finish(); onPaired() },
+                        )
+                    }
                 }
             }
         }

@@ -19,6 +19,8 @@ data class StoredState(
     val computers: List<PairedComputer> = emptyList(),
     val selectedId: String? = null,
     val demo: Boolean = false,
+    /** Send crash reports (Firebase Crashlytics); on unless the user turns it off. */
+    val crashReports: Boolean = true,
 ) {
     val selected: PairedComputer? get() = computers.firstOrNull { it.id == selectedId } ?: computers.firstOrNull()
 }
@@ -32,6 +34,7 @@ class ComputerStore(context: Context, private val cipher: TokenCipher) {
             computers = prefs.computers().map { it.toComputer() },
             selectedId = prefs[SELECTED],
             demo = prefs[DEMO] ?: false,
+            crashReports = prefs[CRASH_REPORTS] ?: true,
         )
     }
 
@@ -57,6 +60,8 @@ class ComputerStore(context: Context, private val cipher: TokenCipher) {
     }
 
     suspend fun setDemo(enabled: Boolean) = dataStore.edit { it[DEMO] = enabled }
+
+    suspend fun setCrashReports(enabled: Boolean) = dataStore.edit { it[CRASH_REPORTS] = enabled }
 
     private fun Preferences.computers(): List<StoredComputer> =
         this[COMPUTERS]?.let { runCatching { ApiJson.decodeFromString<List<StoredComputer>>(it) }.getOrNull() }.orEmpty()
@@ -103,5 +108,6 @@ class ComputerStore(context: Context, private val cipher: TokenCipher) {
         val COMPUTERS = stringPreferencesKey("computers")
         val SELECTED = stringPreferencesKey("selected_id")
         val DEMO = booleanPreferencesKey("demo")
+        val CRASH_REPORTS = booleanPreferencesKey("crash_reports")
     }
 }

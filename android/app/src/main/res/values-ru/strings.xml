@@ -220,4 +220,6 @@
     <string name="new_session_progress">Новый разговор в %1$s</string>
     <string name="error_code_outside_home">Можно использовать только папки внутри домашней папки.</string>
     <string name="open_on_computer_message">Этот разговор открыт на компьютере без Remote Control. Введите в нём /remote-control, чтобы продолжить здесь, или закройте его там и нажмите «Подключить».</string>
+    <string name="settings_crash_reports">Отправлять отчёты о сбоях</string>
+    <string name="settings_crash_reports_hint">Если приложение неожиданно закроется, оно отправит технический отчёт, чтобы ошибку можно было исправить. Ваши разговоры в него не входят.</string>
 </resources>

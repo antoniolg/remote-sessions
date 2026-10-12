@@ -73,6 +73,10 @@ class ComputerConnection(
             if (e is ConnectionException) throw e
             mutex.withLock { if (cached === client) cached = null }
             if (retry && wasCached) call(retry = false, block) else throw friendly(e)
+        } catch (e: SecurityException) {
+            // Android 17 blocks the local network until the user grants the permission.
+            mutex.withLock { if (cached === client) cached = null }
+            throw friendly(e)
         }
     }
 
@@ -109,6 +113,8 @@ class ComputerConnection(
     } catch (e: ApiException) {
         e
     } catch (e: kotlinx.serialization.SerializationException) {
+        e
+    } catch (e: SecurityException) {
         e
     }
 

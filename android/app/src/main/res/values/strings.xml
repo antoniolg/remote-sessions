@@ -216,4 +216,6 @@
     <string name="error_code_outside_home">Only folders inside your home folder can be used.</string>
     <string name="session_state_remote" translatable="false">Remote Control</string>
     <string name="open_on_computer_message">This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect.</string>
+    <string name="settings_crash_reports">Send crash reports</string>
+    <string name="settings_crash_reports_hint">If the app closes unexpectedly, it sends a technical report so it can be fixed. It never includes your conversations.</string>
 </resources>

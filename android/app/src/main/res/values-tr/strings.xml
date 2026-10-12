@@ -212,4 +212,6 @@
     <string name="new_session_progress">%1$s içinde yeni sohbet</string>
     <string name="error_code_outside_home">Yalnızca ana klasörünüzdeki klasörler kullanılabilir.</string>
     <string name="open_on_computer_message">Bu sohbet bilgisayarda Remote Control olmadan açık. Burada devam etmek için içine /remote-control yazın veya orada kapatıp Bağlan\'a dokunun.</string>
+    <string name="settings_crash_reports">Çökme raporları gönder</string>
+    <string name="settings_crash_reports_hint">Uygulama beklenmedik şekilde kapanırsa, sorunun düzeltilebilmesi için teknik bir rapor gönderir. Sohbetleriniz asla dahil edilmez.</string>
 </resources>

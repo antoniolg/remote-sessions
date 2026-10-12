@@ -208,4 +208,6 @@
     <string name="new_session_progress">%1$s で新しい会話</string>
     <string name="error_code_outside_home">ホームフォルダ内のフォルダのみ使用できます。</string>
     <string name="open_on_computer_message">この会話は Remote Control なしでコンピュータ上で開いています。ここで続けるにはその会話で /remote-control と入力するか、コンピュータで閉じてから「接続」をタップしてください。</string>
+    <string name="settings_crash_reports">クラッシュレポートを送信</string>
+    <string name="settings_crash_reports_hint">アプリが予期せず終了した場合、修正のために技術的なレポートを送信します。会話の内容は含まれません。</string>
 </resources>
