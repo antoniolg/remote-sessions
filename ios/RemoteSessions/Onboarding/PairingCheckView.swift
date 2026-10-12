@@ -40,7 +40,7 @@ struct PairingCheckView: View {
         let reached = ReachedHost()
         let client = APIClient(computer: link.computer, token: link.token) { host in reached.host = host }
         do {
-            let health = try await client.health()
+            let health = try await reachHealth(client)
             guard health.id == link.computer.id else {
                 error = String(localized: "A different computer answered at that address. Scan the code again.")
                 return
@@ -54,6 +54,21 @@ struct PairingCheckView: View {
             // Left the screen.
         } catch {
             self.error = error.localizedDescription
+        }
+    }
+}
+
+extension PairingCheckView {
+    /// The first request triggers iOS's local network permission prompt, and requests fail until the
+    /// user answers it, so an unreachable computer is retried for a while before giving up.
+    private func reachHealth(_ client: APIClient) async throws -> Health {
+        let deadline = Date().addingTimeInterval(30)
+        while true {
+            do {
+                return try await client.health()
+            } catch SourceError.unreachable where Date() < deadline {
+                try await Task.sleep(for: .seconds(2))
+            }
         }
     }
 }
