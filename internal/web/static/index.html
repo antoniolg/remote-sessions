@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1f1e1d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Remote Sessions">
+  <title>Remote Sessions</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="app.css">
+  <script src="jsqr.js" defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <button class="icon" id="back" hidden aria-label="Back"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <h1 id="title">Remote Sessions</h1>
+    <button class="icon" id="new" hidden aria-label="New conversation"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button class="icon" id="diag-open" aria-label="Diagnostics"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button>
+  </header>
+
+  <main>
+    <!-- Pairing: shown when the browser has no token yet. It reads the same QR code as the store apps. -->
+    <section id="pair" hidden>
+      <p>Scan the code that <code>remote-sessions pair</code> shows on the computer.</p>
+      <div class="scanner" id="scanner" hidden>
+        <video id="scan-video" playsinline muted></video>
+        <div class="frame"></div>
+      </div>
+      <p class="muted" id="scan-status"></p>
+      <button class="primary" id="scan-start">Scan the QR code</button>
+      <p class="error" id="pair-error" hidden></p>
+      <details>
+        <summary class="muted">Can't scan it? Paste the link</summary>
+        <textarea id="pair-input" rows="3" placeholder="remotesessions://pair?…"></textarea>
+        <button id="pair-save">Pair</button>
+      </details>
+    </section>
+
+    <!-- Conversation list -->
+    <section id="list" hidden>
+      <p class="muted" id="list-status"></p>
+      <ul id="sessions" class="cards"></ul>
+    </section>
+
+    <!-- One conversation -->
+    <section id="detail" hidden>
+      <div class="meta" id="detail-meta"></div>
+      <ol id="messages"></ol>
+      <div class="actions">
+        <p class="error" id="detail-error" hidden></p>
+        <a class="primary" id="open-claude" hidden target="_blank" rel="noopener noreferrer">Open in Claude</a>
+        <button class="primary" id="connect">Connect with Remote Control</button>
+        <button id="stop" hidden>Stop on the computer</button>
+      </div>
+    </section>
+
+    <!-- New conversation: pick a folder -->
+    <section id="create" hidden>
+      <p class="muted" id="folder-path"></p>
+      <ul id="folders" class="cards"></ul>
+      <div class="actions">
+        <input id="create-title" placeholder="Name (optional)" maxlength="80">
+        <p class="error" id="create-error" hidden></p>
+        <a class="primary" id="create-open" hidden target="_blank" rel="noopener noreferrer">Open in Claude</a>
+        <button class="primary" id="create-start">Start here</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- What the browser lets this page do: the point of the prototype -->
+  <dialog id="diag">
+    <h2>What this browser allows</h2>
+    <table id="diag-table"></table>
+    <p class="muted">Origin: <code id="diag-origin"></code></p>
+    <div class="row">
+      <button id="unpair">Forget this computer</button>
+      <button class="primary" id="diag-close">Close</button>
+    </div>
+  </dialog>
+</body>
+</html>
