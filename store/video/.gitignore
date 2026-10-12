@@ -1,0 +1,2 @@
+# Rendered videos stay out of git (about 120 MB): `pnpm render` in tools/ builds them again.
+*.mp4
