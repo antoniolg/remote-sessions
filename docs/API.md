@@ -73,11 +73,13 @@ Latest messages (max 200), oldest first:
 
 ### `POST /v1/sessions/{id}/remote-control`
 Resumes the session in a pseudo-terminal with Remote Control and waits (up to ~45 s) for its claude.ai URL. Optional body: `{"trustFolder": true}` to answer yes if Claude Code asks whether to trust the folder (only after the user confirmed it).
+
+When the session is open elsewhere on the computer (`running` without `remote`), `{"fork": true}` continues it in a copy instead: Claude Code's `--fork-session` copies the whole history under a new id with Remote Control, and the original stays untouched. The response then includes the copy's `id`.
 ```json
 { "url": "https://claude.ai/code/session_01…", "reused": false }
 ```
 - `reused: true` when this server already had it running.
-- `409 open_elsewhere` when the session is open elsewhere on the computer (terminal or desktop app).
+- `409 open_elsewhere` when the session is open elsewhere on the computer (terminal or desktop app) and `fork` is not set.
 - `504 remote_control_timeout` when Remote Control did not come up in time.
 - `502 launch_failed` when Claude Code exited or could not start.
 - `409 trust_required`, `403 folder_access`, `502 prompt_blocked`: see the error codes above.

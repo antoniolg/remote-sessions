@@ -134,6 +134,24 @@ func (l *Launcher) Create(cwd, transcriptDir, title string, opts Options) (*Mana
 	return l.run(sessionID, transcriptDir, cwd, opts, args...)
 }
 
+// Fork starts a copy of a session (its whole history under a new id) with Remote Control, for
+// sessions open elsewhere on the computer: running a second process on the same session would mix
+// both histories in one transcript, while the copy leaves the original untouched.
+func (l *Launcher) Fork(sourceID, transcript, cwd, title string, opts Options) (*Managed, error) {
+	sessionID, err := newSessionID()
+	if err != nil {
+		return nil, err
+	}
+	if info, err := os.Stat(cwd); err != nil || !info.IsDir() {
+		cwd, _ = os.UserHomeDir()
+	}
+	args := []string{"--resume", sourceID, "--fork-session", "--session-id", sessionID, "--remote-control"}
+	if title != "" {
+		args = append(args, title)
+	}
+	return l.run(sessionID, filepath.Dir(transcript), cwd, opts, args...)
+}
+
 func (l *Launcher) run(sessionID, dir, cwd string, opts Options, args ...string) (*Managed, error) {
 	offsets := snapshotOffsets(dir)
 	if !canOpen(cwd, 3*time.Second) {

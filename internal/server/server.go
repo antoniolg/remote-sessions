@@ -170,6 +170,12 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "not_found", "Conversation not found")
 		return
 	}
+	var body struct {
+		TrustFolder bool `json:"trustFolder"`
+		// Fork continues a session open elsewhere on the computer in a copy (see Launcher.Fork).
+		Fork bool `json:"fork"`
+	}
+	_ = json.NewDecoder(io.LimitReader(r.Body, 4096)).Decode(&body)
 	if managed, ok := s.Launcher.Get(id); ok && managed.URL != "" {
 		summary, err := s.Store.SummaryFor(path)
 		if err != nil || !summary.RemoteDroppedSince(managed.Started) {
@@ -181,8 +187,9 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		s.Launcher.Stop(id)
 		s.Agents.Invalidate()
 	}
-	if _, open := s.Agents.Running()[id]; open {
-		writeError(w, http.StatusConflict, "open_elsewhere", "The conversation is already open on the computer. Close it there or run /remote-control in it.")
+	_, open := s.Agents.Running()[id]
+	if open && !body.Fork {
+		writeError(w, http.StatusConflict, "open_elsewhere", "The conversation is already open on the computer. Close it there, run /remote-control in it, or relaunch it as a copy.")
 		return
 	}
 	summary, err := s.Store.SummaryFor(path)
@@ -190,10 +197,16 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "internal", err.Error())
 		return
 	}
-	var body struct {
-		TrustFolder bool `json:"trustFolder"`
+	if open {
+		managed, err := s.Launcher.Fork(id, path, summary.Cwd, summary.Title(), launcher.Options{TrustFolder: body.TrustFolder})
+		s.Agents.Invalidate()
+		if err != nil {
+			launchError(w, id, summary.Cwd, managed, err)
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": false, "id": managed.SessionID})
+		return
 	}
-	_ = json.NewDecoder(io.LimitReader(r.Body, 4096)).Decode(&body)
 	// Keep going if the phone gives up: the session stays useful and the next tap reuses it.
 	managed, err := s.Launcher.Start(context.WithoutCancel(r.Context()), id, path, summary.Cwd, summary.Title(),
 		launcher.Options{TrustFolder: body.TrustFolder})

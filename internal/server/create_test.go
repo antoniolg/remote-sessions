@@ -104,3 +104,42 @@ func TestOpenRemoteURLIgnoresDroppedRemoteControl(t *testing.T) {
 		t.Fatalf("dropped: %q, want no URL", got)
 	}
 }
+
+func TestConnectForksASessionOpenElsewhere(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("uses a shell script as claude")
+	}
+	argsFile := filepath.Join(t.TempDir(), "args")
+	// A fake claude: `agents` reports sessionID as open; anything else records its arguments and
+	// publishes a Remote Control URL.
+	script := filepath.Join(t.TempDir(), "claude")
+	os.WriteFile(script, []byte(`#!/bin/sh
+if [ "$1" = "agents" ]; then echo '[{"sessionId":"`+sessionID+`","kind":"interactive","status":"idle","startedAt":1}]'; exit 0; fi
+echo "$@" > `+argsFile+`
+echo https://claude.ai/code/session_fork1
+sleep 30
+`), 0o755)
+	dir := t.TempDir()
+	project := filepath.Join(dir, "-repo")
+	os.MkdirAll(project, 0o755)
+	os.WriteFile(filepath.Join(project, sessionID+".jsonl"), []byte(`{"type":"user","uuid":"u1","cwd":"`+dir+`","message":{"content":"Hola"}}`+"\n"), 0o644)
+	l := launcher.New(script)
+	l.Timeout = 5 * time.Second
+	s := &Server{ID: "id", Name: "test", Version: "test", Token: "secret", Store: transcripts.NewStore(dir),
+		Agents: &claude.Agents{Bin: script}, Launcher: l, Home: dir}
+	defer s.Launcher.StopAll()
+
+	if code, body := post(t, s, "/v1/sessions/"+sessionID+"/remote-control", map[string]any{}); code != 409 || body["code"] != "open_elsewhere" {
+		t.Fatalf("without fork: %d %v", code, body)
+	}
+	code, body := post(t, s, "/v1/sessions/"+sessionID+"/remote-control", map[string]any{"fork": true})
+	copyID, _ := body["id"].(string)
+	if code != 200 || body["url"] != "https://claude.ai/code/session_fork1" || !transcripts.SessionIDPattern.MatchString(copyID) || copyID == sessionID {
+		t.Fatalf("fork: %d %v", code, body)
+	}
+	args, _ := os.ReadFile(argsFile)
+	want := "--resume " + sessionID + " --fork-session --session-id " + copyID + " --remote-control Hola"
+	if got := strings.TrimSpace(string(args)); got != want {
+		t.Fatalf("claude args = %q, want %q", got, want)
+	}
+}
