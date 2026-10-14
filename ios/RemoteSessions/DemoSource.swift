@@ -36,7 +36,7 @@ struct DemoSource: SessionSource {
         ]
     }
 
-    func connect(sessionID: String, trustFolder: Bool) async throws -> URL {
+    func connect(sessionID: String, trustFolder: Bool, fork: Bool) async throws -> URL {
         throw SourceError.demo
     }
 

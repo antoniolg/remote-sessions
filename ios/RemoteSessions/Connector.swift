@@ -13,8 +13,17 @@ struct Launch {
 final class Connector {
     private(set) var opening: Launch?
     var errorMessage: String?
-    /// A conversation open on the computer without Remote Control, to explain why it can't connect.
+    /// A disconnected conversation (open on the computer without Remote Control) waiting for the
+    /// user to confirm its relaunch as a copy.
     var openOnComputer: Session?
+    private(set) var relaunchSource: SessionSource?
+    private(set) var lastOpenURL: OpenURLAction?
+
+    func askToRelaunch(_ session: Session, source: SessionSource?, openURL: OpenURLAction) {
+        relaunchSource = source
+        lastOpenURL = openURL
+        openOnComputer = session
+    }
     /// A launch waiting for the user to trust its folder.
     var pendingTrust: (launch: Launch, folder: String)?
     private var openURL: OpenURLAction?
@@ -25,7 +34,15 @@ final class Connector {
     func connect(_ session: Session, source: SessionSource?, openURL: OpenURLAction) {
         guard let source else { return }
         run(Launch(title: session.displayTitle) { trust in
-            try await source.connect(sessionID: session.id, trustFolder: trust)
+            try await source.connect(sessionID: session.id, trustFolder: trust, fork: false)
+        }, openURL: openURL)
+    }
+
+    /// Continues a conversation that is open on the computer without Remote Control in a copy with it.
+    func relaunch(_ session: Session, source: SessionSource?, openURL: OpenURLAction) {
+        guard let source else { return }
+        run(Launch(title: session.displayTitle) { trust in
+            try await source.connect(sessionID: session.id, trustFolder: trust, fork: true)
         }, openURL: openURL)
     }
 
@@ -107,10 +124,16 @@ struct ConnectorPresentation: ViewModifier {
                     Text("Claude Code will be able to read, edit and run files in \(folder). Trust it only if it's your own project.")
                 }
             }
-            .alert("Open on the computer", isPresented: .constant(connector.openOnComputer != nil)) {
-                Button("OK") { connector.openOnComputer = nil }
+            .alert("Relaunch this conversation?", isPresented: .constant(connector.openOnComputer != nil)) {
+                Button("Relaunch") {
+                    if let session = connector.openOnComputer, let openURL = connector.lastOpenURL {
+                        connector.relaunch(session, source: connector.relaunchSource, openURL: openURL)
+                    }
+                    connector.openOnComputer = nil
+                }
+                Button("Cancel", role: .cancel) { connector.openOnComputer = nil }
             } message: {
-                Text("This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect.")
+                Text("It's still open on the computer, but its Remote Control is disconnected, so you can't reach it from claude.ai. Relaunching opens a copy with the whole conversation and Remote Control; the original stays on the computer.")
             }
             .alert("Couldn't connect", isPresented: .constant(connector.errorMessage != nil)) {
                 Button("OK") { connector.errorMessage = nil }
@@ -134,14 +157,14 @@ struct ConnectButton: View {
             case .remoteControl:
                 if let url = session.remote?.url { openURL(url) }
             case .openOnComputer:
-                connector.openOnComputer = session
+                connector.askToRelaunch(session, source: store.source, openURL: openURL)
             case .closed:
                 connector.connect(session, source: store.source, openURL: openURL)
             }
         } label: {
             switch session.availability {
             case .remoteControl: Label("Open", systemImage: "arrow.up.forward.app")
-            case .openOnComputer: Label("Open on the computer", systemImage: "desktopcomputer")
+            case .openOnComputer: Label("Relaunch", systemImage: "arrow.triangle.branch")
             case .closed: Label("Connect", systemImage: "antenna.radiowaves.left.and.right")
             }
         }
@@ -192,7 +215,7 @@ struct AvailabilityLabel: View {
             Label("Remote Control", systemImage: "antenna.radiowaves.left.and.right")
                 .foregroundStyle(.green)
         case .openOnComputer:
-            Label("Open on the computer", systemImage: "desktopcomputer")
+            Label("Disconnected", systemImage: "bolt.horizontal.circle")
                 .foregroundStyle(.orange)
         case .closed:
             EmptyView()

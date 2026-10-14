@@ -22,7 +22,8 @@ struct Session: Identifiable, Decodable, Hashable {
     enum Availability {
         /// Has Remote Control: opens straight away in the Claude app.
         case remoteControl
-        /// Open on the computer (terminal or desktop app) without Remote Control: it can't be resumed here.
+        /// Open on the computer (terminal or desktop app) without a working Remote Control, so claude.ai
+        /// can't reach it: shown as disconnected, and relaunched as a copy.
         case openOnComputer
         /// Closed: Connect resumes it with Remote Control.
         case closed

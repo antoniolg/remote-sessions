@@ -4679,95 +4679,6 @@
         }
       }
     },
-    "Open on the computer" : {
-      "comment" : "Accessibility label: the conversation is open in Claude Code on the computer.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auf dem Computer geöffnet"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abierta en el ordenador"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouverte sur l’ordinateur"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terbuka di komputer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aperta sul computer"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コンピュータで開いています"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "컴퓨터에서 열려 있음"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geopend op de computer"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otwarta na komputerze"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aberta no computador"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Открыт на компьютере"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilgisayarda açık"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已在电脑上打开"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已在電腦上打開"
-          }
-        }
-      }
-    },
     "Operating system" : {
       "localizations" : {
         "de" : {
@@ -10138,94 +10049,6 @@
         }
       }
     },
-    "This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta conversación está abierta en el ordenador sin Remote Control. Escribe /remote-control en ella para seguirla desde aquí, o ciérrala allí y pulsa Conectar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette conversation est ouverte sur l’ordinateur sans Remote Control. Tapez /remote-control dedans pour la poursuivre ici, ou fermez-la là-bas et touchez Connecter."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Unterhaltung ist auf dem Computer ohne Remote Control geöffnet. Gib dort /remote-control ein, um hier weiterzumachen, oder schließe sie dort und tippe auf Verbinden."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Questa conversazione è aperta sul computer senza Remote Control. Scrivi /remote-control al suo interno per continuarla qui, oppure chiudila lì e tocca Connetti."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta conversa está aberta no computador sem o Remote Control. Digite /remote-control nela para continuar aqui ou feche-a lá e toque em Conectar."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "この会話は Remote Control なしでコンピュータ上で開いています。ここで続けるにはその会話で /remote-control と入力するか、コンピュータで閉じてから「接続」をタップしてください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "이 대화는 Remote Control 없이 컴퓨터에서 열려 있습니다. 여기서 계속하려면 해당 대화에 /remote-control을 입력하거나, 컴퓨터에서 닫은 후 연결을 탭하세요."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此对话已在电脑上打开，但未启用 Remote Control。在其中输入 /remote-control 即可在这里继续，或在电脑上关闭它后轻点“连接”。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此對話已在電腦上開啟，但未啟用 Remote Control。在其中輸入 /remote-control 即可在這裡繼續，或在電腦上關閉後點一下「連線」。"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Этот разговор открыт на компьютере без Remote Control. Введите в нём /remote-control, чтобы продолжить здесь, или закройте его там и нажмите «Подключить»."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dit gesprek is op de computer geopend zonder Remote Control. Typ er /remote-control in om hier verder te gaan, of sluit het daar en tik op Verbind."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bu sohbet bilgisayarda Remote Control olmadan açık. Burada devam etmek için içine /remote-control yazın veya orada kapatıp Bağlan'a dokunun."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ta rozmowa jest otwarta na komputerze bez Remote Control. Wpisz w niej /remote-control, aby kontynuować tutaj, albo zamknij ją tam i stuknij Połącz."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Percakapan ini terbuka di komputer tanpa Remote Control. Ketik /remote-control di dalamnya untuk melanjutkan di sini, atau tutup di sana lalu ketuk Hubungkan."
-          }
-        }
-      }
-    },
     "Remote Control" : {
       "localizations" : {
         "es" : {
@@ -10310,6 +10133,358 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remote Control"
+          }
+        }
+      }
+    },
+    "Disconnected" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desconectada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déconnectée"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getrennt"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnessa"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desconectada"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切断済み"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 끊김"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已断开"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已中斷連線"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отключён"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbinding verbroken"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bağlantı kesildi"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozłączona"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terputus"
+          }
+        }
+      }
+    },
+    "Relaunch" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relanzar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relancer"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu starten"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riavvia"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reabrir"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "再開"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시 시작"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新启动"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新啟動"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перезапустить"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opnieuw starten"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeniden başlat"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uruchom ponownie"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mulai ulang"
+          }
+        }
+      }
+    },
+    "Relaunch this conversation?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Relanzar esta conversación?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relancer cette conversation ?"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Unterhaltung neu starten?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riavviare questa conversazione?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reabrir esta conversa?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この会話を再開しますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 대화를 다시 시작할까요?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新启动此对话？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要重新啟動此對話嗎？"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перезапустить этот разговор?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit gesprek opnieuw starten?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu sohbet yeniden başlatılsın mı?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uruchomić ponownie tę rozmowę?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mulai ulang percakapan ini?"
+          }
+        }
+      }
+    },
+    "It's still open on the computer, but its Remote Control is disconnected, so you can't reach it from claude.ai. Relaunching opens a copy with the whole conversation and Remote Control; the original stays on the computer." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sigue abierta en el ordenador, pero su Remote Control se ha desconectado y no se puede abrir desde claude.ai. Al relanzarla se abre una copia con toda la conversación y Remote Control; la original sigue en el ordenador."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elle est toujours ouverte sur l’ordinateur, mais son Remote Control est déconnecté : elle est inaccessible depuis claude.ai. La relancer ouvre une copie avec toute la conversation et Remote Control ; l’originale reste sur l’ordinateur."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie ist auf dem Computer noch geöffnet, aber ihr Remote Control ist getrennt, daher ist sie über claude.ai nicht erreichbar. Ein Neustart öffnet eine Kopie mit der ganzen Unterhaltung und Remote Control; das Original bleibt auf dem Computer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È ancora aperta sul computer, ma il suo Remote Control è disconnesso, quindi non è raggiungibile da claude.ai. Riavviandola si apre una copia con tutta la conversazione e Remote Control; l’originale resta sul computer."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ela continua aberta no computador, mas o Remote Control dela foi desconectado e não dá para acessá-la pelo claude.ai. Ao reabrir, abre-se uma cópia com toda a conversa e Remote Control; a original continua no computador."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コンピュータでは開いたままですが、Remote Control が切断されているため claude.ai からアクセスできません。再開すると、会話全体を含み Remote Control が有効なコピーが開きます。元の会話はコンピュータに残ります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "컴퓨터에서는 아직 열려 있지만 Remote Control 연결이 끊겨 claude.ai에서 접근할 수 없습니다. 다시 시작하면 전체 대화와 Remote Control이 포함된 사본이 열리며, 원본은 컴퓨터에 그대로 남습니다."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它仍在电脑上打开，但其 Remote Control 已断开，无法从 claude.ai 访问。重新启动会打开一个包含完整对话并启用 Remote Control 的副本；原对话仍保留在电脑上。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它仍在電腦上開啟，但其 Remote Control 已中斷連線，無法從 claude.ai 存取。重新啟動會開啟一份包含完整對話並啟用 Remote Control 的副本；原始對話仍保留在電腦上。"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Он всё ещё открыт на компьютере, но его Remote Control отключён, поэтому открыть его из claude.ai нельзя. При перезапуске откроется копия со всем разговором и Remote Control; оригинал останется на компьютере."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het staat nog open op de computer, maar de Remote Control is verbroken, dus je kunt het niet via claude.ai bereiken. Opnieuw starten opent een kopie met het hele gesprek en Remote Control; het origineel blijft op de computer."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilgisayarda hâlâ açık, ancak Remote Control bağlantısı kesildiği için claude.ai üzerinden erişilemiyor. Yeniden başlatmak, tüm sohbeti içeren ve Remote Control açık bir kopya açar; orijinali bilgisayarda kalır."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadal jest otwarta na komputerze, ale jej Remote Control jest rozłączony, więc nie można jej otworzyć z claude.ai. Ponowne uruchomienie otwiera kopię z całą rozmową i Remote Control; oryginał zostaje na komputerze."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Percakapan masih terbuka di komputer, tetapi Remote Control-nya terputus sehingga tidak bisa dibuka dari claude.ai. Memulai ulang akan membuka salinan berisi seluruh percakapan dengan Remote Control; aslinya tetap di komputer."
           }
         }
       }

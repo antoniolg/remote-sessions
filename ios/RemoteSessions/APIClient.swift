@@ -5,7 +5,8 @@ import Foundation
 protocol SessionSource: Sendable {
     func sessions() async throws -> [Session]
     func messages(sessionID: String) async throws -> [Message]
-    func connect(sessionID: String, trustFolder: Bool) async throws -> URL
+    /// `fork` continues a conversation open elsewhere on the computer in a copy with Remote Control.
+    func connect(sessionID: String, trustFolder: Bool, fork: Bool) async throws -> URL
     func disconnect(sessionID: String) async throws
     /// Subfolders of `path` (the home folder when nil).
     func folders(path: String?) async throws -> FolderListing
@@ -60,8 +61,8 @@ struct APIClient: SessionSource {
         try await request("v1/sessions/\(sessionID)/messages?limit=60", as: MessageList.self).messages
     }
 
-    func connect(sessionID: String, trustFolder: Bool) async throws -> URL {
-        let body = trustFolder ? Data(#"{"trustFolder":true}"#.utf8) : nil
+    func connect(sessionID: String, trustFolder: Bool, fork: Bool) async throws -> URL {
+        let body = try JSONSerialization.data(withJSONObject: ["trustFolder": trustFolder, "fork": fork])
         return try await request("v1/sessions/\(sessionID)/remote-control", method: "POST", body: body, timeout: 70, as: RemoteControlResult.self).url
     }
 
