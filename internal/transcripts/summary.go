@@ -32,6 +32,12 @@ type Summary struct {
 	// BridgeAfter is the latest timestamp written before the bridge record, which has none of its own:
 	// it tells whether Remote Control was turned on in the current run of an open session.
 	BridgeAfter time.Time
+	// RemoteOnAt and RemoteOffAt are the latest "/remote-control is active" and "Remote Control
+	// disconnected" notices, and RemoteURL the URL of the latest active one. Older Claude Code
+	// versions don't write them; bridge-session records keep being rewritten after a disconnect.
+	RemoteOnAt  time.Time
+	RemoteOffAt time.Time
+	RemoteURL   string
 	Messages    int
 	UpdatedAt   time.Time
 }
@@ -44,6 +50,17 @@ func (s Summary) Title() string {
 		}
 	}
 	return "" // the apps show a translated "Untitled"
+}
+
+// RemoteActiveSince reports whether Remote Control was turned on at or after since and has not
+// disconnected afterwards.
+func (s Summary) RemoteActiveSince(since time.Time) bool {
+	return !s.RemoteOnAt.IsZero() && s.RemoteOnAt.After(s.RemoteOffAt) && !s.RemoteOnAt.Before(since)
+}
+
+// RemoteDroppedSince reports whether Remote Control disconnected after since and was not turned on again.
+func (s Summary) RemoteDroppedSince(since time.Time) bool {
+	return s.RemoteOffAt.After(since) && s.RemoteOffAt.After(s.RemoteOnAt)
 }
 
 // Project is the last path component of the working directory.
@@ -65,19 +82,22 @@ func Clip(text string, max int) string {
 }
 
 type record struct {
-	Type            string         `json:"type"`
-	UUID            string         `json:"uuid"`
-	SessionID       string         `json:"sessionId"`
-	Cwd             string         `json:"cwd"`
-	Timestamp       string         `json:"timestamp"`
-	IsMeta          bool           `json:"isMeta"`
-	IsSidechain     bool           `json:"isSidechain"`
-	CustomTitle     string         `json:"customTitle"`
-	AITitle         string         `json:"aiTitle"`
-	SummaryText     string         `json:"summary"`
-	LastPrompt      string         `json:"lastPrompt"`
-	BridgeSessionID string         `json:"bridgeSessionId"`
-	Message         *recordMessage `json:"message"`
+	Type            string          `json:"type"`
+	UUID            string          `json:"uuid"`
+	SessionID       string          `json:"sessionId"`
+	Cwd             string          `json:"cwd"`
+	Timestamp       string          `json:"timestamp"`
+	IsMeta          bool            `json:"isMeta"`
+	IsSidechain     bool            `json:"isSidechain"`
+	CustomTitle     string          `json:"customTitle"`
+	AITitle         string          `json:"aiTitle"`
+	SummaryText     string          `json:"summary"`
+	LastPrompt      string          `json:"lastPrompt"`
+	BridgeSessionID string          `json:"bridgeSessionId"`
+	Subtype         string          `json:"subtype"`
+	Content         json.RawMessage `json:"content"`
+	URL             string          `json:"url"`
+	Message         *recordMessage  `json:"message"`
 }
 
 type recordMessage struct {
@@ -169,6 +189,17 @@ func Summarize(id string, data []byte) Summary {
 			if r.BridgeSessionID != "" {
 				s.BridgeSessionID = r.BridgeSessionID
 				s.BridgeAfter = latest
+			}
+		case "system":
+			at, _ := time.Parse(time.RFC3339Nano, r.Timestamp)
+			var text string
+			_ = json.Unmarshal(r.Content, &text)
+			switch {
+			case r.Subtype == "bridge_status" && strings.HasPrefix(text, "/remote-control is active"):
+				s.RemoteOnAt = at
+				s.RemoteURL = r.URL
+			case r.Subtype == "informational" && strings.HasPrefix(text, "Remote Control disconnected"):
+				s.RemoteOffAt = at
 			}
 		case "user":
 			if typed := typedText(r); typed != "" {

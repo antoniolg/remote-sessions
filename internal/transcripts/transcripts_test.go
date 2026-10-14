@@ -128,3 +128,26 @@ func TestBridgeAfterIsTheLatestTimestampBeforeTheBridge(t *testing.T) {
 		t.Fatalf("bridge %q after %v, want cse_abc after %v", s.BridgeSessionID, s.BridgeAfter, want)
 	}
 }
+
+func TestRemoteControlNotices(t *testing.T) {
+	on := `{"type":"system","subtype":"bridge_status","content":"/remote-control is active · Continue here, on your phone, or at https://claude.ai/code/session_A","url":"https://claude.ai/code/session_A","timestamp":"2026-10-14T06:00:00.000Z"}` + "\n"
+	off := `{"type":"system","subtype":"informational","content":"Remote Control disconnected — this session was ended or archived from another device or app (code 4090)","timestamp":"2026-10-14T07:15:10.920Z"}` + "\n"
+	// Rewritten after the disconnect too, so it must not count as "on".
+	bridge := `{"type":"bridge-session","bridgeSessionId":"cse_A","lastSequenceNum":111}` + "\n"
+	started := time.Date(2026, 10, 14, 5, 0, 0, 0, time.UTC)
+
+	dropped := Summarize("id", []byte(on+off+bridge))
+	if dropped.RemoteActiveSince(started) || !dropped.RemoteDroppedSince(started) {
+		t.Fatalf("after a disconnect: active=%v dropped=%v", dropped.RemoteActiveSince(started), dropped.RemoteDroppedSince(started))
+	}
+
+	again := `{"type":"system","subtype":"bridge_status","content":"/remote-control is active · …","url":"https://claude.ai/code/session_B","timestamp":"2026-10-14T08:00:00.000Z"}` + "\n"
+	back := Summarize("id", []byte(on+off+bridge+again))
+	if !back.RemoteActiveSince(started) || back.RemoteDroppedSince(started) || back.RemoteURL != "https://claude.ai/code/session_B" {
+		t.Fatalf("turned on again: active=%v dropped=%v url=%s", back.RemoteActiveSince(started), back.RemoteDroppedSince(started), back.RemoteURL)
+	}
+	// Turned on in an earlier run of the process.
+	if back.RemoteActiveSince(time.Date(2026, 10, 14, 9, 0, 0, 0, time.UTC)) {
+		t.Fatal("a notice from before the process started counted as active")
+	}
+}

@@ -90,3 +90,17 @@ func TestCreateStartsANewSessionWithRemoteControl(t *testing.T) {
 		t.Fatal("the new session is not managed")
 	}
 }
+
+func TestOpenRemoteURLIgnoresDroppedRemoteControl(t *testing.T) {
+	agent := claude.Agent{StartedAt: time.Date(2026, 10, 14, 5, 0, 0, 0, time.UTC).UnixMilli()}
+	on := time.Date(2026, 10, 14, 6, 0, 0, 0, time.UTC)
+	active := transcripts.Summary{BridgeSessionID: "cse_A", RemoteOnAt: on, RemoteURL: "https://claude.ai/code/session_A"}
+	if got := openRemoteURL(active, agent); got != "https://claude.ai/code/session_A" {
+		t.Fatalf("active: %q", got)
+	}
+	dropped := active
+	dropped.RemoteOffAt = on.Add(time.Hour)
+	if got := openRemoteURL(dropped, agent); got != "" {
+		t.Fatalf("dropped: %q, want no URL", got)
+	}
+}

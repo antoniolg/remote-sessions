@@ -28,6 +28,14 @@ type Agent struct {
 	StartedAt int64 `json:"startedAt"`
 }
 
+// Started is when the process started, or the zero time if unknown.
+func (a Agent) Started() time.Time {
+	if a.StartedAt == 0 {
+		return time.Time{}
+	}
+	return time.UnixMilli(a.StartedAt)
+}
+
 // RemoteControlSince reports whether a Remote Control bridge recorded after lastBefore (the latest
 // transcript entry written before it) belongs to this run of the session rather than to an older one.
 func (a Agent) RemoteControlSince(lastBefore time.Time) bool {

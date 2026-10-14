@@ -98,17 +98,37 @@ func (s *Server) present(summary transcripts.Summary, agents map[string]claude.A
 	}
 	if managed, ok := s.Launcher.Get(summary.ID); ok {
 		out.Running = &running{Kind: "remote-sessions"}
-		if managed.URL != "" {
+		// Remote Control can drop while Claude Code keeps running (the session was archived, the
+		// computer slept…); then Connect starts it again instead of handing out a dead link.
+		if managed.URL != "" && !summary.RemoteDroppedSince(managed.Started) {
 			out.Remote = &remote{URL: managed.URL}
 		}
 	} else if agent, ok := agents[summary.ID]; ok {
 		out.Running = &running{Kind: agent.Kind, Status: agent.Status}
-		// Open on the computer with /remote-control turned on: the phone can open it too.
-		if summary.BridgeSessionID != "" && agent.RemoteControlSince(summary.BridgeAfter) {
-			out.Remote = &remote{URL: transcripts.BridgeURL(summary.BridgeSessionID)}
+		if url := openRemoteURL(summary, agent); url != "" {
+			out.Remote = &remote{URL: url}
 		}
 	}
 	return out
+}
+
+// openRemoteURL is the Remote Control URL of a session open on the computer (terminal or desktop
+// app) when /remote-control is on in its current run, or "".
+func openRemoteURL(summary transcripts.Summary, agent claude.Agent) string {
+	if !summary.RemoteOnAt.IsZero() || !summary.RemoteOffAt.IsZero() {
+		if !summary.RemoteActiveSince(agent.Started()) {
+			return ""
+		}
+		if summary.RemoteURL != "" {
+			return summary.RemoteURL
+		}
+		return transcripts.BridgeURL(summary.BridgeSessionID)
+	}
+	// Older Claude Code versions only write bridge-session records.
+	if summary.BridgeSessionID != "" && agent.RemoteControlSince(summary.BridgeAfter) {
+		return transcripts.BridgeURL(summary.BridgeSessionID)
+	}
+	return ""
 }
 
 func (s *Server) list(w http.ResponseWriter, _ *http.Request) {
@@ -151,8 +171,15 @@ func (s *Server) connect(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if managed, ok := s.Launcher.Get(id); ok && managed.URL != "" {
-		writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": true})
-		return
+		summary, err := s.Store.SummaryFor(path)
+		if err != nil || !summary.RemoteDroppedSince(managed.Started) {
+			writeJSON(w, http.StatusOK, map[string]any{"url": managed.URL, "reused": true})
+			return
+		}
+		// Its Remote Control dropped: start the session again to get a working one.
+		log.Printf("remote-control %s: disconnected, restarting the session", id)
+		s.Launcher.Stop(id)
+		s.Agents.Invalidate()
 	}
 	if _, open := s.Agents.Running()[id]; open {
 		writeError(w, http.StatusConflict, "open_elsewhere", "The conversation is already open on the computer. Close it there or run /remote-control in it.")
