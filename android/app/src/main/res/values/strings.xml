@@ -43,7 +43,6 @@
     <string name="sessions_empty_message">When you use Claude Code on the computer, your conversations will show up here.</string>
     <string name="sessions_no_results_title">No results</string>
     <string name="sessions_no_results_message">No conversation matches your search or the selected project.</string>
-    <string name="session_running">Open on the computer</string>
     <string name="session_connect">Connect</string>
     <string name="session_open_in_claude">Open in Claude</string>
 
@@ -215,7 +214,10 @@
     <string name="new_session_progress">New conversation in %1$s</string>
     <string name="error_code_outside_home">Only folders inside your home folder can be used.</string>
     <string name="session_state_remote" translatable="false">Remote Control</string>
-    <string name="open_on_computer_message">This conversation is open on the computer without Remote Control. Type /remote-control in it to continue here, or close it there and tap Connect.</string>
     <string name="settings_crash_reports">Send crash reports</string>
     <string name="settings_crash_reports_hint">If the app closes unexpectedly, it sends a technical report so it can be fixed. It never includes your conversations.</string>
+    <string name="session_state_disconnected">Disconnected</string>
+    <string name="action_relaunch">Relaunch</string>
+    <string name="relaunch_title">Relaunch this conversation?</string>
+    <string name="relaunch_message">It’s still open on the computer, but its Remote Control is disconnected, so you can’t reach it from claude.ai. Relaunching opens a copy with the whole conversation and Remote Control; the original stays on the computer.</string>
 </resources>

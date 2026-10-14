@@ -40,7 +40,6 @@
     <string name="sessions_empty_message">Bilgisayarda Claude Code kullandığında sohbetlerin burada görünecek.</string>
     <string name="sessions_no_results_title">Sonuç yok</string>
     <string name="sessions_no_results_message">Aramanla veya seçili projeyle eşleşen sohbet yok.</string>
-    <string name="session_running">Bilgisayarda açık</string>
     <string name="session_connect">Bağlan</string>
     <string name="session_open_in_claude">Claude’da aç</string>
 
@@ -211,7 +210,10 @@
     <string name="folders_error_title">Klasör açılamadı</string>
     <string name="new_session_progress">%1$s içinde yeni sohbet</string>
     <string name="error_code_outside_home">Yalnızca ana klasörünüzdeki klasörler kullanılabilir.</string>
-    <string name="open_on_computer_message">Bu sohbet bilgisayarda Remote Control olmadan açık. Burada devam etmek için içine /remote-control yazın veya orada kapatıp Bağlan\'a dokunun.</string>
     <string name="settings_crash_reports">Çökme raporları gönder</string>
     <string name="settings_crash_reports_hint">Uygulama beklenmedik şekilde kapanırsa, sorunun düzeltilebilmesi için teknik bir rapor gönderir. Sohbetleriniz asla dahil edilmez.</string>
+    <string name="session_state_disconnected">Bağlantı kesildi</string>
+    <string name="action_relaunch">Yeniden başlat</string>
+    <string name="relaunch_title">Bu sohbet yeniden başlatılsın mı?</string>
+    <string name="relaunch_message">Bilgisayarda hâlâ açık, ancak Remote Control bağlantısı kesildiği için claude.ai üzerinden erişilemiyor. Yeniden başlatmak, tüm sohbeti içeren ve Remote Control açık bir kopya açar; orijinali bilgisayarda kalır.</string>
 </resources>

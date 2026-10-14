@@ -3,6 +3,7 @@ package com.antonioleiva.remotesessions.ui.connect
 import com.antonioleiva.remotesessions.ui.common.displayTitle
 import androidx.compose.ui.res.stringResource
 import com.antonioleiva.remotesessions.R
+import com.antonioleiva.remotesessions.data.model.Session
 import com.antonioleiva.remotesessions.ui.common.asString
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,13 +37,15 @@ fun ConnectDialogs(
     onTrust: () -> Unit,
     onDismissTrust: () -> Unit,
     onDismissOpenOnComputer: () -> Unit,
+    onRelaunch: (Session) -> Unit,
 ) {
-    if (state.openOnComputer != null) {
+    state.openOnComputer?.let { session ->
         AlertDialog(
             onDismissRequest = onDismissOpenOnComputer,
-            title = { Text(stringResource(R.string.session_running)) },
-            text = { Text(stringResource(R.string.open_on_computer_message)) },
-            confirmButton = { TextButton(onClick = onDismissOpenOnComputer) { Text(stringResource(R.string.action_ok)) } },
+            title = { Text(stringResource(R.string.relaunch_title)) },
+            text = { Text(stringResource(R.string.relaunch_message)) },
+            confirmButton = { TextButton(onClick = { onRelaunch(session) }) { Text(stringResource(R.string.action_relaunch)) } },
+            dismissButton = { TextButton(onClick = onDismissOpenOnComputer) { Text(stringResource(R.string.action_cancel)) } },
         )
     }
 

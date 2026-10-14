@@ -52,8 +52,8 @@ class ComputerConnection(
     override suspend fun messages(sessionId: String): List<Message> = call(retry = true) { it.messages(sessionId) }
 
     // Not retried on another host: the computer may already be starting Remote Control.
-    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean): RemoteControlResult =
-        call(retry = false) { it.startRemoteControl(sessionId, trustFolder) }
+    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean, fork: Boolean): RemoteControlResult =
+        call(retry = false) { it.startRemoteControl(sessionId, trustFolder, fork) }
 
     override suspend fun stopRemoteControl(sessionId: String) = call(retry = false) { it.stopRemoteControl(sessionId) }
 

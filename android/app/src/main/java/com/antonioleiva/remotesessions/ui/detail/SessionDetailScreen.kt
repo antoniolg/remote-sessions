@@ -46,7 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.antonioleiva.remotesessions.data.model.Availability
 import com.antonioleiva.remotesessions.data.model.Session
 import com.antonioleiva.remotesessions.ui.sessions.AvailabilityLabel
-import androidx.compose.material.icons.outlined.Computer
+import androidx.compose.material.icons.automirrored.outlined.CallSplit
 import com.antonioleiva.remotesessions.ui.sessions.EmptyState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -140,8 +140,8 @@ private fun ConnectBar(session: Session, busy: Boolean, onConnect: () -> Unit, o
                         }
                     }
                     Availability.OpenOnComputer -> OutlinedButton(onClick = onConnect, enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-                        Icon(Icons.Outlined.Computer, contentDescription = null, modifier = Modifier.size(20.dp))
-                        Text(stringResource(R.string.session_running), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
+                        Icon(Icons.AutoMirrored.Outlined.CallSplit, contentDescription = null, modifier = Modifier.size(20.dp))
+                        Text(stringResource(R.string.action_relaunch), modifier = Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium)
                     }
                     Availability.Closed -> Button(onClick = onConnect, enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp)) {
                         Icon(Icons.Rounded.Podcasts, contentDescription = null, modifier = Modifier.size(20.dp))

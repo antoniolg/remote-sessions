@@ -37,7 +37,6 @@
     <string name="sessions_empty_message">在電腦上使用 Claude Code 後，你的對話就會顯示在這裡。</string>
     <string name="sessions_no_results_title">沒有結果</string>
     <string name="sessions_no_results_message">沒有符合搜尋內容或所選專案的對話。</string>
-    <string name="session_running">已在電腦上開啟</string>
     <string name="session_connect">連線</string>
     <string name="session_open_in_claude">在 Claude 中開啟</string>
 
@@ -207,7 +206,10 @@
     <string name="folders_error_title">無法開啟資料夾</string>
     <string name="new_session_progress">在 %1$s 中新增對話</string>
     <string name="error_code_outside_home">只能使用個人資料夾內的資料夾。</string>
-    <string name="open_on_computer_message">此對話已在電腦上開啟，但未啟用 Remote Control。在其中輸入 /remote-control 即可在這裡繼續，或在電腦上關閉後點一下「連線」。</string>
     <string name="settings_crash_reports">傳送當機報告</string>
     <string name="settings_crash_reports_hint">如果 App 意外關閉，會傳送一份技術報告以便修正問題。報告絕不包含你的對話。</string>
+    <string name="session_state_disconnected">已中斷連線</string>
+    <string name="action_relaunch">重新啟動</string>
+    <string name="relaunch_title">要重新啟動此對話嗎？</string>
+    <string name="relaunch_message">它仍在電腦上開啟，但其 Remote Control 已中斷連線，無法從 claude.ai 存取。重新啟動會開啟一份包含完整對話並啟用 Remote Control 的副本；原始對話仍保留在電腦上。</string>
 </resources>

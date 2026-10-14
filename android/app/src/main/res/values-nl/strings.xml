@@ -40,7 +40,6 @@
     <string name="sessions_empty_message">Als je Claude Code op de computer gebruikt, verschijnen je gesprekken hier.</string>
     <string name="sessions_no_results_title">Geen resultaten</string>
     <string name="sessions_no_results_message">Geen enkel gesprek komt overeen met je zoekopdracht of het geselecteerde project.</string>
-    <string name="session_running">Geopend op de computer</string>
     <string name="session_connect">Verbinden</string>
     <string name="session_open_in_claude">Openen in Claude</string>
 
@@ -211,7 +210,10 @@
     <string name="folders_error_title">Kan de map niet openen</string>
     <string name="new_session_progress">Nieuw gesprek in %1$s</string>
     <string name="error_code_outside_home">Alleen mappen binnen je thuismap kunnen worden gebruikt.</string>
-    <string name="open_on_computer_message">Dit gesprek is op de computer geopend zonder Remote Control. Typ er /remote-control in om hier verder te gaan, of sluit het daar en tik op Verbinden.</string>
     <string name="settings_crash_reports">Crashrapporten versturen</string>
     <string name="settings_crash_reports_hint">Als de app onverwacht sluit, verstuurt hij een technisch rapport zodat het probleem kan worden opgelost. Je gesprekken worden nooit meegestuurd.</string>
+    <string name="session_state_disconnected">Verbinding verbroken</string>
+    <string name="action_relaunch">Opnieuw starten</string>
+    <string name="relaunch_title">Dit gesprek opnieuw starten?</string>
+    <string name="relaunch_message">Het staat nog open op de computer, maar de Remote Control is verbroken, dus je kunt het niet via claude.ai bereiken. Opnieuw starten opent een kopie met het hele gesprek en Remote Control; het origineel blijft op de computer.</string>
 </resources>

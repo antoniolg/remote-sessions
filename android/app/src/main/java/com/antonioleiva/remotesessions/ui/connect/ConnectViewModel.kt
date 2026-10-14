@@ -25,7 +25,8 @@ import kotlinx.coroutines.launch
 
 /** What is starting with Remote Control: an existing conversation or a new one in a folder. */
 sealed interface Launch {
-    data class Resume(val session: Session) : Launch
+    /** [fork] relaunches a disconnected session as a copy (see [ConnectViewModel.relaunch]). */
+    data class Resume(val session: Session, val fork: Boolean = false) : Launch
     data class Create(val folder: String, val title: String?) : Launch
 }
 
@@ -38,7 +39,7 @@ data class ConnectUiState(
     val demoNotice: Boolean = false,
     /** Claude Code asks whether to trust this session's folder; the user decides. */
     val pendingTrust: PendingTrust? = null,
-    /** A conversation open on the computer without Remote Control, to explain why it can't connect. */
+    /** A disconnected conversation waiting for the user to confirm its relaunch as a copy. */
     val openOnComputer: Session? = null,
 )
 
@@ -75,7 +76,7 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
         job = viewModelScope.launch {
             try {
                 val url = when (launch) {
-                    is Launch.Resume -> source.startRemoteControl(launch.session.id, trustFolder).url
+                    is Launch.Resume -> source.startRemoteControl(launch.session.id, trustFolder, launch.fork).url
                     is Launch.Create -> source.createSession(launch.folder, launch.title, trustFolder).url
                 }
                 urls.send(url)
@@ -120,6 +121,12 @@ class ConnectViewModel(private val container: AppContainer) : ViewModel() {
     }
 
     fun dismissOpenOnComputer() = _state.update { it.copy(openOnComputer = null) }
+
+    /** Continues a disconnected session (open on the computer without Remote Control) in a copy with it. */
+    fun relaunch(session: Session) {
+        _state.update { it.copy(openOnComputer = null) }
+        run(Launch.Resume(session, fork = true))
+    }
 
     fun stop(session: Session) {
         val source = container.currentSource.value ?: return

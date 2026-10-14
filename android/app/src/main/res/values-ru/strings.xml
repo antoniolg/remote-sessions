@@ -46,7 +46,6 @@
     <string name="sessions_empty_message">Когда вы будете работать с Claude Code на компьютере, ваши диалоги появятся здесь.</string>
     <string name="sessions_no_results_title">Ничего не найдено</string>
     <string name="sessions_no_results_message">Нет диалогов, соответствующих запросу или выбранному проекту.</string>
-    <string name="session_running">Открыт на компьютере</string>
     <string name="session_connect">Подключить</string>
     <string name="session_open_in_claude">Открыть в Claude</string>
 
@@ -219,7 +218,10 @@
     <string name="folders_error_title">Не удалось открыть папку</string>
     <string name="new_session_progress">Новый разговор в %1$s</string>
     <string name="error_code_outside_home">Можно использовать только папки внутри домашней папки.</string>
-    <string name="open_on_computer_message">Этот разговор открыт на компьютере без Remote Control. Введите в нём /remote-control, чтобы продолжить здесь, или закройте его там и нажмите «Подключить».</string>
     <string name="settings_crash_reports">Отправлять отчёты о сбоях</string>
     <string name="settings_crash_reports_hint">Если приложение неожиданно закроется, оно отправит технический отчёт, чтобы ошибку можно было исправить. Ваши разговоры в него не входят.</string>
+    <string name="session_state_disconnected">Отключён</string>
+    <string name="action_relaunch">Перезапустить</string>
+    <string name="relaunch_title">Перезапустить этот разговор?</string>
+    <string name="relaunch_message">Он всё ещё открыт на компьютере, но его Remote Control отключён, поэтому открыть его из claude.ai нельзя. При перезапуске откроется копия со всем разговором и Remote Control; оригинал останется на компьютере.</string>
 </resources>

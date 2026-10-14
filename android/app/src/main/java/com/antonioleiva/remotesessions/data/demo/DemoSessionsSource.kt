@@ -27,7 +27,7 @@ class DemoSessionsSource(private val data: DemoData) : SessionsSource {
         return data.messages(sessionId)
     }
 
-    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean): RemoteControlResult =
+    override suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean, fork: Boolean): RemoteControlResult =
         throw UnsupportedOperationException("Remote Control is not available in demo mode")
 
     override suspend fun stopRemoteControl(sessionId: String) = Unit

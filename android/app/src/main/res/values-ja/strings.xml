@@ -37,7 +37,6 @@
     <string name="sessions_empty_message">コンピュータで Claude Code を使うと、ここに会話が表示されます。</string>
     <string name="sessions_no_results_title">結果なし</string>
     <string name="sessions_no_results_message">検索条件または選択したプロジェクトに一致する会話はありません。</string>
-    <string name="session_running">コンピュータで開いています</string>
     <string name="session_connect">接続</string>
     <string name="session_open_in_claude">Claude で開く</string>
 
@@ -207,7 +206,10 @@
     <string name="folders_error_title">フォルダを開けませんでした</string>
     <string name="new_session_progress">%1$s で新しい会話</string>
     <string name="error_code_outside_home">ホームフォルダ内のフォルダのみ使用できます。</string>
-    <string name="open_on_computer_message">この会話は Remote Control なしでコンピュータ上で開いています。ここで続けるにはその会話で /remote-control と入力するか、コンピュータで閉じてから「接続」をタップしてください。</string>
     <string name="settings_crash_reports">クラッシュレポートを送信</string>
     <string name="settings_crash_reports_hint">アプリが予期せず終了した場合、修正のために技術的なレポートを送信します。会話の内容は含まれません。</string>
+    <string name="session_state_disconnected">切断済み</string>
+    <string name="action_relaunch">再開</string>
+    <string name="relaunch_title">この会話を再開しますか？</string>
+    <string name="relaunch_message">コンピュータでは開いたままですが、Remote Control が切断されているため claude.ai からアクセスできません。再開すると、会話全体を含み Remote Control が有効なコピーが開きます。元の会話はコンピュータに残ります。</string>
 </resources>

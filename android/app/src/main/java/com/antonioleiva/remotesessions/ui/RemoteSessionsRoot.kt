@@ -163,6 +163,7 @@ fun RemoteSessionsRoot(
             onTrust = connectViewModel::trustAndConnect,
             onDismissTrust = connectViewModel::dismissTrust,
             onDismissOpenOnComputer = connectViewModel::dismissOpenOnComputer,
+            onRelaunch = connectViewModel::relaunch,
         )
     }
 }

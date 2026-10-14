@@ -46,7 +46,6 @@
     <string name="sessions_empty_message">Gdy użyjesz Claude Code na komputerze, Twoje rozmowy pojawią się tutaj.</string>
     <string name="sessions_no_results_title">Brak wyników</string>
     <string name="sessions_no_results_message">Żadna rozmowa nie pasuje do wyszukiwania ani wybranego projektu.</string>
-    <string name="session_running">Otwarta na komputerze</string>
     <string name="session_connect">Połącz</string>
     <string name="session_open_in_claude">Otwórz w Claude</string>
 
@@ -219,7 +218,10 @@
     <string name="folders_error_title">Nie można otworzyć folderu</string>
     <string name="new_session_progress">Nowa rozmowa w %1$s</string>
     <string name="error_code_outside_home">Można używać tylko folderów w folderze domowym.</string>
-    <string name="open_on_computer_message">Ta rozmowa jest otwarta na komputerze bez Remote Control. Wpisz w niej /remote-control, aby kontynuować tutaj, albo zamknij ją tam i stuknij Połącz.</string>
     <string name="settings_crash_reports">Wysyłaj raporty o awariach</string>
     <string name="settings_crash_reports_hint">Jeśli aplikacja nieoczekiwanie się zamknie, wyśle raport techniczny, aby można było naprawić błąd. Nigdy nie zawiera Twoich rozmów.</string>
+    <string name="session_state_disconnected">Rozłączona</string>
+    <string name="action_relaunch">Uruchom ponownie</string>
+    <string name="relaunch_title">Uruchomić ponownie tę rozmowę?</string>
+    <string name="relaunch_message">Nadal jest otwarta na komputerze, ale jej Remote Control jest rozłączony, więc nie można jej otworzyć z claude.ai. Ponowne uruchomienie otwiera kopię z całą rozmową i Remote Control; oryginał zostaje na komputerze.</string>
 </resources>

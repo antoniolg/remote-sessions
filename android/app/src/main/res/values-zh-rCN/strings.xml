@@ -37,7 +37,6 @@
     <string name="sessions_empty_message">在电脑上使用 Claude Code 后，你的对话会显示在这里。</string>
     <string name="sessions_no_results_title">无结果</string>
     <string name="sessions_no_results_message">没有与搜索内容或所选项目匹配的对话。</string>
-    <string name="session_running">已在电脑上打开</string>
     <string name="session_connect">连接</string>
     <string name="session_open_in_claude">在 Claude 中打开</string>
 
@@ -207,7 +206,10 @@
     <string name="folders_error_title">无法打开文件夹</string>
     <string name="new_session_progress">在 %1$s 中新建对话</string>
     <string name="error_code_outside_home">只能使用个人文件夹中的文件夹。</string>
-    <string name="open_on_computer_message">此对话已在电脑上打开，但未启用 Remote Control。在其中输入 /remote-control 即可在这里继续，或在电脑上关闭它后轻点“连接”。</string>
     <string name="settings_crash_reports">发送崩溃报告</string>
     <string name="settings_crash_reports_hint">如果应用意外关闭，它会发送一份技术报告以便修复问题。报告绝不包含你的对话。</string>
+    <string name="session_state_disconnected">已断开</string>
+    <string name="action_relaunch">重新启动</string>
+    <string name="relaunch_title">重新启动此对话？</string>
+    <string name="relaunch_message">它仍在电脑上打开，但其 Remote Control 已断开，无法从 claude.ai 访问。重新启动会打开一个包含完整对话并启用 Remote Control 的副本；原对话仍保留在电脑上。</string>
 </resources>

@@ -17,7 +17,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
-import androidx.compose.material.icons.outlined.Computer
+import androidx.compose.material.icons.automirrored.outlined.CallSplit
+import androidx.compose.material.icons.outlined.LinkOff
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.rounded.Podcasts
 import androidx.compose.material3.FilledIconButton
@@ -88,7 +89,7 @@ fun SessionRow(
                 Icon(Icons.AutoMirrored.Filled.OpenInNew, contentDescription = stringResource(R.string.session_open_in_claude))
             }
             Availability.OpenOnComputer -> FilledTonalIconButton(onClick = onConnect, enabled = connectEnabled) {
-                Icon(Icons.Outlined.Computer, contentDescription = stringResource(R.string.session_running))
+                Icon(Icons.AutoMirrored.Outlined.CallSplit, contentDescription = stringResource(R.string.action_relaunch))
             }
             Availability.Closed -> FilledTonalIconButton(onClick = onConnect, enabled = connectEnabled) {
                 Icon(Icons.Rounded.Podcasts, contentDescription = stringResource(R.string.session_connect))
@@ -102,7 +103,7 @@ fun SessionRow(
 fun AvailabilityLabel(session: Session, modifier: Modifier = Modifier) {
     val (icon, text, color) = when (session.availability) {
         Availability.RemoteControl -> Triple(Icons.Rounded.Podcasts, stringResource(R.string.session_state_remote), RunningGreen)
-        Availability.OpenOnComputer -> Triple(Icons.Outlined.Computer, stringResource(R.string.session_running), OpenOnComputerOrange)
+        Availability.OpenOnComputer -> Triple(Icons.Outlined.LinkOff, stringResource(R.string.session_state_disconnected), OpenOnComputerOrange)
         Availability.Closed -> return
     }
     Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {

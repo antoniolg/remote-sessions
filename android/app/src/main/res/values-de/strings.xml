@@ -40,7 +40,6 @@
     <string name="sessions_empty_message">Sobald du Claude Code auf dem Computer nutzt, erscheinen deine Unterhaltungen hier.</string>
     <string name="sessions_no_results_title">Keine Ergebnisse</string>
     <string name="sessions_no_results_message">Keine Unterhaltung passt zu deiner Suche oder zum ausgewählten Projekt.</string>
-    <string name="session_running">Auf dem Computer geöffnet</string>
     <string name="session_connect">Verbinden</string>
     <string name="session_open_in_claude">In Claude öffnen</string>
 
@@ -211,7 +210,10 @@
     <string name="folders_error_title">Ordner konnte nicht geöffnet werden</string>
     <string name="new_session_progress">Neue Unterhaltung in %1$s</string>
     <string name="error_code_outside_home">Es können nur Ordner innerhalb deines Benutzerordners verwendet werden.</string>
-    <string name="open_on_computer_message">Diese Unterhaltung ist auf dem Computer ohne Remote Control geöffnet. Gib dort /remote-control ein, um hier weiterzumachen, oder schließe sie dort und tippe auf Verbinden.</string>
     <string name="settings_crash_reports">Absturzberichte senden</string>
     <string name="settings_crash_reports_hint">Wenn die App unerwartet beendet wird, sendet sie einen technischen Bericht, damit der Fehler behoben werden kann. Deine Unterhaltungen sind nie enthalten.</string>
+    <string name="session_state_disconnected">Getrennt</string>
+    <string name="action_relaunch">Neu starten</string>
+    <string name="relaunch_title">Diese Unterhaltung neu starten?</string>
+    <string name="relaunch_message">Sie ist auf dem Computer noch geöffnet, aber ihr Remote Control ist getrennt, daher ist sie über claude.ai nicht erreichbar. Ein Neustart öffnet eine Kopie mit der ganzen Unterhaltung und Remote Control; das Original bleibt auf dem Computer.</string>
 </resources>

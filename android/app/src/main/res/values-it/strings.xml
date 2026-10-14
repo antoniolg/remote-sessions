@@ -43,7 +43,6 @@
     <string name="sessions_empty_message">Quando userai Claude Code sul computer, le tue conversazioni compariranno qui.</string>
     <string name="sessions_no_results_title">Nessun risultato</string>
     <string name="sessions_no_results_message">Nessuna conversazione corrisponde alla ricerca o al progetto selezionato.</string>
-    <string name="session_running">Aperta sul computer</string>
     <string name="session_connect">Connetti</string>
     <string name="session_open_in_claude">Apri in Claude</string>
 
@@ -215,7 +214,10 @@
     <string name="folders_error_title">Impossibile aprire la cartella</string>
     <string name="new_session_progress">Nuova conversazione in %1$s</string>
     <string name="error_code_outside_home">Puoi usare solo cartelle all’interno della tua cartella Inizio.</string>
-    <string name="open_on_computer_message">Questa conversazione è aperta sul computer senza Remote Control. Scrivi /remote-control al suo interno per continuarla qui, oppure chiudila lì e tocca Connetti.</string>
     <string name="settings_crash_reports">Invia segnalazioni di arresto anomalo</string>
     <string name="settings_crash_reports_hint">Se l’app si chiude inaspettatamente, invia un rapporto tecnico per poter risolvere il problema. Non include mai le tue conversazioni.</string>
+    <string name="session_state_disconnected">Disconnessa</string>
+    <string name="action_relaunch">Riavvia</string>
+    <string name="relaunch_title">Riavviare questa conversazione?</string>
+    <string name="relaunch_message">È ancora aperta sul computer, ma il suo Remote Control è disconnesso, quindi non è raggiungibile da claude.ai. Riavviandola si apre una copia con tutta la conversazione e Remote Control; l’originale resta sul computer.</string>
 </resources>

@@ -69,8 +69,8 @@ class ApiClient(
         get<MessageList>("v1/sessions/$sessionId/messages", timeoutSeconds = 20, query = mapOf("limit" to "$limit")).messages
 
     /** Waits up to ~45 s on the server, so the call timeout is generous. */
-    suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean = false): RemoteControlResult {
-        val body = if (trustFolder) """{"trustFolder":true}""" else ""
+    suspend fun startRemoteControl(sessionId: String, trustFolder: Boolean = false, fork: Boolean = false): RemoteControlResult {
+        val body = """{"trustFolder":$trustFolder,"fork":$fork}"""
         val request = request("v1/sessions/$sessionId/remote-control")
             .post(body.toRequestBody("application/json".toMediaType()))
             .build()

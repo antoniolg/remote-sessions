@@ -37,7 +37,6 @@
     <string name="sessions_empty_message">Saat kamu memakai Claude Code di komputer, percakapanmu akan muncul di sini.</string>
     <string name="sessions_no_results_title">Tidak ada hasil</string>
     <string name="sessions_no_results_message">Tidak ada percakapan yang cocok dengan pencarian atau proyek yang dipilih.</string>
-    <string name="session_running">Terbuka di komputer</string>
     <string name="session_connect">Hubungkan</string>
     <string name="session_open_in_claude">Buka di Claude</string>
 
@@ -207,7 +206,10 @@
     <string name="folders_error_title">Tidak dapat membuka folder</string>
     <string name="new_session_progress">Percakapan baru di %1$s</string>
     <string name="error_code_outside_home">Hanya folder di dalam folder utama Anda yang dapat digunakan.</string>
-    <string name="open_on_computer_message">Percakapan ini terbuka di komputer tanpa Remote Control. Ketik /remote-control di dalamnya untuk melanjutkan di sini, atau tutup di sana lalu ketuk Hubungkan.</string>
     <string name="settings_crash_reports">Kirim laporan error</string>
     <string name="settings_crash_reports_hint">Jika aplikasi tertutup secara tiba-tiba, aplikasi mengirim laporan teknis agar masalahnya bisa diperbaiki. Laporan tidak pernah berisi percakapan Anda.</string>
+    <string name="session_state_disconnected">Terputus</string>
+    <string name="action_relaunch">Mulai ulang</string>
+    <string name="relaunch_title">Mulai ulang percakapan ini?</string>
+    <string name="relaunch_message">Percakapan masih terbuka di komputer, tetapi Remote Control-nya terputus sehingga tidak bisa dibuka dari claude.ai. Memulai ulang akan membuka salinan berisi seluruh percakapan dengan Remote Control; aslinya tetap di komputer.</string>
 </resources>
