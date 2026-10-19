@@ -32,7 +32,8 @@ to start one in any folder → closing card (free, open source, no accounts, ins
 **Google Play.** The listing takes a YouTube URL, not a file.
 
 1. Upload `play-promo-es.mp4` and `play-promo-en.mp4` to YouTube as Public or Unlisted (not Private), with ads off and
-   no age restriction.
+   no age restriction. Uploaded as Unlisted to the DevExpert channel on 2026-10-19:
+   [Spanish](https://www.youtube.com/watch?v=lX80U3IhQvU) and [English](https://www.youtube.com/watch?v=yhLPlD4WJQE).
 2. Play Console → Remote Sessions → Grow users → Store presence → Main store listing → Video: paste the English URL,
    and the Spanish one in the es-ES translation.
 3. Save and send the changes for review.
