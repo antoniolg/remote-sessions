@@ -39,7 +39,7 @@ for (const t of targets.filter((t) => !wanted.length || wanted.includes(t.name))
   const raw = join(tmp, `${t.name}.raw.mp4`);
   const final = join(outDir, `${t.name}.mp4`);
   console.log(`▶ ${t.name}: rendering ${t.comp}`);
-  run('npx', ['remotion', 'render', 'src/index.ts', t.comp, raw, '--codec=h264', '--crf=14', '--audio-codec=aac', '--audio-bitrate=320k', '--log=error']);
+  run('npx', ['remotion', 'render', 'src/index.ts', t.comp, raw, '--codec=h264', '--crf=14', '--audio-codec=aac', '--audio-bitrate=320k', '--concurrency=8', '--log=error']);
   const m = measureJson(raw);
   const audio = `loudnorm=I=-14:TP=-1.0:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=48000`;
   const video =

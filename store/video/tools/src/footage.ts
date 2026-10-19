@@ -12,8 +12,8 @@ type Takes = { list: string; connect: Take; create: Take; welcome?: string; inst
 // a little of the still screen before and after the transition that a tap starts.
 const ios = { row: { x: 0.34, y: 0.228 }, connect: { x: 0.5, y: 0.929 }, plus: { x: 0.902, y: 0.088 },
   other: { x: 0.34, y: 0.735 }, projects: { x: 0.34, y: 0.3745 }, landing: { x: 0.34, y: 0.321 }, start: { x: 0.5, y: 0.9215 } };
-const android = { row: { x: 0.333, y: 0.23 }, connect: { x: 0.5, y: 0.93 }, plus: { x: 0.698, y: 0.0617 },
-  other: { x: 0.3056, y: 0.715 }, projects: { x: 0.3056, y: 0.3454 }, landing: { x: 0.3056, y: 0.284 }, start: { x: 0.5, y: 0.9275 } };
+const android = { row: { x: 0.385, y: 0.23 }, connect: { x: 0.5, y: 0.93 }, plus: { x: 0.699, y: 0.0902 },
+  other: { x: 0.305, y: 0.7435 }, projects: { x: 0.2125, y: 0.3744 }, landing: { x: 0.2556, y: 0.3131 }, start: { x: 0.5, y: 0.9277 } };
 
 const at = (frame: number, p: { x: number; y: number }): Tap => ({ at: frame, ...p });
 
@@ -24,15 +24,15 @@ export const footage: Record<Platform, Record<Lang, Takes>> = {
       welcome: 'cap/ios-es-welcome.png',
       install: 'cap/ios-es-install.png',
       connect: { src: 'cap/ios-es-connect.mp4', segments: [
-        { from: 112, to: 172, tap: at(128, ios.row) },
-        { from: 318, to: 356, tap: at(329, ios.connect) },
+        { from: 122, to: 182, tap: at(138, ios.row) },
+        { from: 287, to: 325, tap: at(298, ios.connect) },
       ] },
       create: { src: 'cap/ios-es-new.mp4', rate: 1.25, segments: [
-        { from: 110, to: 152, tap: at(119, ios.plus) },
-        { from: 178, to: 217, tap: at(187, ios.other) },
-        { from: 353, to: 390, tap: at(361, ios.projects) },
-        { from: 418, to: 456, tap: at(426, ios.landing) },
-        { from: 575, to: 625, tap: at(583, ios.start) },
+        { from: 114, to: 156, tap: at(123, ios.plus) },
+        { from: 269, to: 308, tap: at(278, ios.other) },
+        { from: 337, to: 374, tap: at(346, ios.projects) },
+        { from: 408, to: 446, tap: at(417, ios.landing) },
+        { from: 563, to: 613, tap: at(572, ios.start) },
       ] },
     },
     en: {
@@ -40,15 +40,15 @@ export const footage: Record<Platform, Record<Lang, Takes>> = {
       welcome: 'cap/ios-en-welcome.png',
       install: 'cap/ios-en-install.png',
       connect: { src: 'cap/ios-en-connect.mp4', segments: [
-        { from: 95, to: 155, tap: at(111, ios.row) },
-        { from: 249, to: 287, tap: at(260, ios.connect) },
+        { from: 103, to: 163, tap: at(119, ios.row) },
+        { from: 251, to: 289, tap: at(262, ios.connect) },
       ] },
       create: { src: 'cap/ios-en-new.mp4', rate: 1.25, segments: [
-        { from: 295, to: 337, tap: at(304, ios.plus) },
-        { from: 440, to: 479, tap: at(449, ios.other) },
-        { from: 515, to: 552, tap: at(523, ios.projects) },
-        { from: 585, to: 623, tap: at(593, ios.landing) },
-        { from: 740, to: 790, tap: at(748, ios.start) },
+        { from: 107, to: 149, tap: at(116, ios.plus) },
+        { from: 273, to: 312, tap: at(282, ios.other) },
+        { from: 343, to: 380, tap: at(352, ios.projects) },
+        { from: 417, to: 455, tap: at(426, ios.landing) },
+        { from: 564, to: 614, tap: at(573, ios.start) },
       ] },
     },
   },
@@ -56,29 +56,29 @@ export const footage: Record<Platform, Record<Lang, Takes>> = {
     es: {
       list: 'cap/and-es-list.png',
       connect: { src: 'cap/and-es-connect.mp4', segments: [
-        { from: 70, to: 124, tap: at(86, android.row) },
-        { from: 167, to: 205, tap: at(178, android.connect) },
+        { from: 114, to: 168, tap: at(130, android.row) },
+        { from: 238, to: 276, tap: at(249, android.connect) },
       ] },
       create: { src: 'cap/and-es-new.mp4', rate: 1.25, segments: [
-        { from: 76, to: 116, tap: at(84, android.plus) },
-        { from: 146, to: 182, tap: at(155, android.other) },
-        { from: 207, to: 242, tap: at(216, android.projects) },
-        { from: 267, to: 302, tap: at(276, android.landing) },
-        { from: 332, to: 380, tap: at(341, android.start) },
+        { from: 124, to: 164, tap: at(132, android.plus) },
+        { from: 227, to: 263, tap: at(236, android.other) },
+        { from: 332, to: 367, tap: at(341, android.projects) },
+        { from: 437, to: 472, tap: at(446, android.landing) },
+        { from: 544, to: 592, tap: at(553, android.start) },
       ] },
     },
     en: {
       list: 'cap/and-en-list.png',
       connect: { src: 'cap/and-en-connect.mp4', segments: [
-        { from: 71, to: 125, tap: at(87, android.row) },
-        { from: 168, to: 206, tap: at(179, android.connect) },
+        { from: 116, to: 170, tap: at(132, android.row) },
+        { from: 240, to: 278, tap: at(251, android.connect) },
       ] },
       create: { src: 'cap/and-en-new.mp4', rate: 1.25, segments: [
-        { from: 77, to: 117, tap: at(85, android.plus) },
-        { from: 146, to: 182, tap: at(155, android.other) },
-        { from: 207, to: 242, tap: at(216, android.projects) },
-        { from: 268, to: 303, tap: at(277, android.landing) },
-        { from: 333, to: 381, tap: at(342, android.start) },
+        { from: 125, to: 165, tap: at(133, android.plus) },
+        { from: 227, to: 263, tap: at(236, android.other) },
+        { from: 332, to: 367, tap: at(341, android.projects) },
+        { from: 437, to: 472, tap: at(446, android.landing) },
+        { from: 543, to: 591, tap: at(552, android.start) },
       ] },
     },
   },
@@ -87,7 +87,7 @@ export const footage: Record<Platform, Record<Lang, Takes>> = {
 /** Where the conversation states sit in the list, as fractions of the screen (for the zoom in the list scene). */
 export const stateRows: Record<Platform, { y: number }> = {
   ios: { y: 0.435 },
-  android: { y: 0.485 },
+  android: { y: 0.515 },
 };
 
 export const takeLength = (take: Take) =>
