@@ -35,7 +35,8 @@ struct SessionDetailView: View {
         .toolbar {
             if shown.remote != nil && shown.startedByServer {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Stop", role: .destructive) {
+                    // With an icon too: on iPhone Duo, toolbar items without one stay out of the vertical bar.
+                    Button("Stop", systemImage: "stop.circle", role: .destructive) {
                         Task { await connector.stop(shown, source: store.source) }
                     }
                 }

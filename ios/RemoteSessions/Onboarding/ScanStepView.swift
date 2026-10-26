@@ -39,6 +39,7 @@ struct ScanStepView: View {
             Spacer(minLength: 0)
         }
         .padding(24)
+        .readableWidth()
         .alert("That's not a Remote Sessions code", isPresented: $invalid) {
             Button("OK") {}
         } message: {

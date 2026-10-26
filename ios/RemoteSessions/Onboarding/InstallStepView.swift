@@ -86,6 +86,7 @@ struct InstallStepView: View {
                     .foregroundStyle(.secondary)
             }
             .padding(24)
+            .readableWidth()
         }
         .onChange(of: system) { copied = false }
         .safeAreaInset(edge: .bottom) {
@@ -95,6 +96,7 @@ struct InstallStepView: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
             .padding(24)
+            .readableWidth()
             .background(.bar)
         }
     }

@@ -79,10 +79,18 @@ struct OnboardingView: View {
             }
         }
         .padding(24)
+        .readableWidth()
     }
 }
 
 /// PairingLink is not Hashable on purpose (it holds a token); navigation only needs identity.
+extension View {
+    /// Keeps a step's text and full-width buttons readable on wide screens (iPad, the open iPhone Duo).
+    func readableWidth() -> some View {
+        frame(maxWidth: 560).frame(maxWidth: .infinity)
+    }
+}
+
 struct PairingLinkBox: Hashable {
     let id = UUID()
     let link: PairingLink
@@ -97,7 +105,8 @@ private struct Requirement: View {
 
     var body: some View {
         Label {
-            Text(text)
+            // Wraps instead of truncating when the screen is short (landscape).
+            Text(text).fixedSize(horizontal: false, vertical: true)
         } icon: {
             Image(systemName: icon).foregroundStyle(.tint)
         }
@@ -134,6 +143,7 @@ struct TailscaleStepView: View {
             .controlSize(.large)
         }
         .padding(24)
+        .readableWidth()
         .navigationBarBackButtonHidden()
     }
 }
