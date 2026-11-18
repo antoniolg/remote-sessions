@@ -102,6 +102,9 @@ code { font-size: 13px; overflow-wrap: anywhere; }
 .state.remote { color: var(--ok); }
 .state.remote::before { background: var(--ok); }
 .meta { color: var(--muted); font-size: 14px; margin-bottom: 8px; overflow-wrap: anywhere; }
+/* The conversation fills the screen so its buttons sit at the foot from the first frame, skeleton or not. */
+#detail:not([hidden]) { display: flex; flex-direction: column; min-height: calc(100dvh - var(--bar) - 36px - env(safe-area-inset-bottom)); }
+#detail .actions { margin-top: auto; }
 #messages { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
 #messages li { white-space: pre-wrap; overflow-wrap: anywhere; padding: 10px 12px; border-radius: 12px; }
 #messages li.user { background: var(--user); margin-left: 15%; }

@@ -232,3 +232,18 @@ test("a card keeps project and a short age on one line under the prompt", async 
   await expect(meta).toHaveText(/^web · (now|\d+ (min|hr|hrs|day|days))$/);
   if (process.env.CARD_SHOT) await page.screenshot({ path: process.env.CARD_SHOT });
 });
+
+test("the conversation's buttons stay put while its messages load", async ({ page }) => {
+  /** @type {() => void} */
+  let release = () => {};
+  const held = new Promise((resolve) => { release = () => resolve(undefined); });
+  await page.route("**/messages?*", async (route) => { await held; await route.continue(); });
+  await paired(page, [alphaEntry()]);
+  await cards(page).filter({ hasText: "Fix the login form" }).click();
+  await expect(page.locator("#messages")).toHaveAttribute("aria-busy", "true");
+  const loading = await page.locator("#connect").boundingBox();
+  release();
+  await expect(page.locator("#messages")).toHaveAttribute("aria-busy", "false");
+  const loaded = await page.locator("#connect").boundingBox();
+  expect(loaded?.y).toBe(loading?.y);
+});
