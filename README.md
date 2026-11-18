@@ -33,6 +33,17 @@ remote-sessions serve [--log]      Run the server in the foreground
 remote-sessions service install|uninstall|restart
 ```
 
+## No app? Use the browser
+
+Every server also serves a web client at `https://<computer>:8787/app/`, an alternative to the store apps for a browser (desktop or phone). It uses the same API and reads the same QR code, with the camera or by pasting the `remotesessions://pair` link that `remote-sessions pair` prints.
+
+- **Certificate:** the browser cannot pin the certificate like the apps do, so it warns that it is self-signed. Accept it only if the fingerprint matches the one `remote-sessions pair` prints.
+- **Several computers:** pick "Add a computer…" and scan another computer's code. The page calls that computer directly, so open its address once (the page shows the links) and accept its certificate too. With more than one computer, "All computers" merges their conversations into one list.
+- **One address for every computer:** behind a reverse proxy with a trusted certificate, route `/<computer-name>/` to each other computer (lowercase, spaces as dashes: "MacBook Pro" becomes `/macbook-pro/`), stripping that prefix. The page finds them there when pairing, and moves already paired ones on its next load, so every call goes to the page's own address: no certificates to accept and no "Not secure" warning.
+- Keys stay in the browser's `localStorage`, one per computer; Settings → "Forget" removes one (`remote-sessions pair --rotate` revokes it on the computer).
+- Search, the project filter and the selected computer live in the address (`?computer=&q=&project=`), so a bookmark or a reload keeps them. The page speaks English or Spanish, following the browser.
+- **Limits compared with the apps:** no Bonjour, so a computer is found only at the addresses in its code (or behind the proxy); without a trusted certificate Chrome refuses the service worker, so the page needs the computer to load; and it is a no-app alternative, not a replacement: the apps stay the main clients.
+
 ## How it works
 
 - The server reads the transcripts Claude Code keeps in `~/.claude/projects` and asks `claude agents --json` which sessions are open.
@@ -52,6 +63,13 @@ go run ./cmd/remote-sessions serve  # run it from source
 
 - iOS app: `ios/` (SwiftUI, generated with XcodeGen: `cd ios && xcodegen generate`). `ios/tools/testflight.sh upload` builds and uploads to TestFlight; it reads the App Store Connect API key ids from the untracked `ios/tools/asc.env`.
 - Android app: `android/` (Kotlin, Jetpack Compose). See `android/README.md`.
+- Browser client: `internal/web/static/`, plain JavaScript embedded in the binary (no build step). Its checks live in `internal/web/` and need Node only for development:
+  ```bash
+  cd internal/web && npm ci
+  npm run typecheck   # JSDoc types, checked by tsc
+  npm test            # unit tests (vitest)
+  npx playwright install chromium && npm run e2e   # builds the server and drives two test instances
+  ```
 - Releases: tag `vX.Y.Z` and run `~/.local/bin/oprun --with-op-token scripts/release.sh`; it signs the macOS binaries with the Developer ID certificate (1Password, Agent Runtime) and publishes to GitHub Releases and the Homebrew tap (`antoniolg/homebrew-tap`).
 
 ## License
