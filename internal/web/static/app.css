@@ -1,0 +1,175 @@
+:root {
+  color-scheme: light dark;
+  --bg: #faf9f5;
+  --card: #ffffff;
+  --text: #1f1e1d;
+  --muted: #6b6a66;
+  --line: #e5e3dc;
+  --accent: #c96442;
+  --accent-text: #ffffff;
+  --user: #f0eee6;
+  --error: #b3261e;
+  --ok: #2e7d32;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1e1d;
+    --card: #2a2927;
+    --text: #f0eee6;
+    --muted: #a3a19b;
+    --line: #3a3936;
+    --user: #33322f;
+    --error: #f2b8b5;
+    --ok: #81c784;
+  }
+}
+* { box-sizing: border-box; min-width: 0; }
+/* Classes that set display (.primary) would otherwise show hidden elements. */
+[hidden] { display: none !important; }
+/* An app, not a page: no pinch or double-tap zoom, no sideways scrolling. */
+html {
+  touch-action: pan-y;
+  /* clip, not hidden: hidden turns html/body into scroll containers and breaks position: sticky. */
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+/* The bar stays on top while the page scrolls under it; main leaves room for it. */
+:root { --bar: calc(env(safe-area-inset-top) + 56px); }
+.bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  height: var(--bar);
+  display: flex; align-items: center; gap: 8px;
+  padding: calc(env(safe-area-inset-top) + 8px) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.bar h1 { flex: 1; margin: 0; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar select {
+  flex: 0 1 auto; min-width: 0; max-width: 100%; margin-right: auto;
+  font: inherit; font-size: 18px; font-weight: 600; color: var(--text);
+  border: 0; border-radius: 8px; padding: 4px 30px 4px 8px; cursor: pointer;
+  /* Our own chevron, so it gets breathing room from the edge instead of the native one hugging it. */
+  appearance: none; -webkit-appearance: none;
+  field-sizing: content; /* as wide as the chosen option, not the longest one */
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8882' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center / 12px;
+}
+.bar select:focus { outline: none; }
+.bar select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bar select:hover { background-color: var(--line); }
+#pair-links { padding-left: 20px; overflow-wrap: anywhere; }
+main {
+  padding: calc(var(--bar) + 12px) max(16px, env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 24px) max(16px, env(safe-area-inset-left));
+  max-width: 720px; margin: 0 auto;
+}
+button, .primary, input, textarea {
+  font: inherit; color: inherit;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); padding: 10px 14px;
+  font-size: 16px; max-width: 100%;
+}
+button, .primary, .cards li { user-select: none; -webkit-user-select: none; }
+button { cursor: pointer; }
+section > button, .actions > button, details > button { width: 100%; }
+button:disabled { opacity: .5; }
+.icon { border: 0; background: none; padding: 8px; min-width: 40px; display: grid; place-items: center; }
+.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); text-align: center; text-decoration: none; display: block; }
+textarea, input { display: block; width: 100%; margin: 8px 0; resize: vertical; }
+.muted { color: var(--muted); font-size: 14px; }
+/* Focus uses the accent instead of the browser's default blue ring. */
+input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+button:focus { outline: none; }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.error { color: var(--error); }
+code { font-size: 13px; overflow-wrap: anywhere; }
+.cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.cards li {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 14px; cursor: pointer;
+}
+.cards .t { font-weight: 600; overflow-wrap: anywhere; }
+.cards .s { color: var(--muted); font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.badge { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); margin-right: 6px; }
+.badge.remote { color: var(--ok); border-color: currentColor; }
+.meta { color: var(--muted); font-size: 14px; margin-bottom: 8px; overflow-wrap: anywhere; }
+#messages { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
+#messages li { white-space: pre-wrap; overflow-wrap: anywhere; padding: 10px 12px; border-radius: 12px; }
+#messages li.user { background: var(--user); margin-left: 15%; }
+#messages li .tools { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.actions { position: sticky; bottom: 0; display: grid; gap: 8px; padding: 8px 0 calc(env(safe-area-inset-bottom) + 8px); background: var(--bg); }
+
+@media (min-width: 720px) {
+  /* Visible buttons share the row and a lone one takes it whole; errors and inputs get their own line. */
+  .actions { display: flex; flex-wrap: wrap; }
+  .actions > * { flex: 1 1 240px; }
+  .actions > .error, .actions > input { flex-basis: 100%; }
+}
+}
+
+.scanner { position: relative; margin: 12px 0; border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 1; max-height: 60dvh; }
+.scanner video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.scanner .frame { position: absolute; inset: 15%; border: 3px solid rgb(255 255 255 / .8); border-radius: 12px; }
+details { margin-top: 16px; }
+summary { cursor: pointer; }
+
+/* Loading placeholders */
+.skeleton { display: grid; gap: 8px; cursor: default; pointer-events: none; }
+#messages li.skeleton { background: var(--card); }
+#messages li.skeleton.user { background: var(--user); margin-left: 15%; }
+.skeleton .sk-line {
+  display: block; height: 12px; border-radius: 6px;
+  background: linear-gradient(90deg, var(--line) 25%, var(--card) 50%, var(--line) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+.skeleton .sk-line:first-child { height: 15px; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton .sk-line { animation: none; } }
+
+/* Search and project filter live in the bar on the list view.
+   Wide screens keep them on the bar's row; narrow ones wrap them to a second row. */
+.filters { display: flex; gap: 8px; }
+.filters[hidden] { display: none; }
+.filters input { margin: 0; flex: 1; min-width: 0; padding: 7px 12px; }
+.bar .filters select {
+  flex: 0 1 auto; margin: 0; max-width: 40%;
+  font-size: 15px; font-weight: 400;
+  background-color: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0 34px 0 12px;
+  background-position: right 12px center;
+}
+.bar .filters select:hover { background-color: var(--card); }
+@media (min-width: 720px) {
+  .bar .filters { flex: 1 1 auto; max-width: 560px; margin: 0 auto; }
+}
+/* With room to spare, line them up with the list column (main's 720px minus its padding). */
+@media (min-width: 1100px) {
+  .bar .filters { position: absolute; left: 50%; transform: translateX(-50%); width: 688px; max-width: none; margin: 0; }
+}
+@media (max-width: 719px) {
+  body.filtering { --bar: calc(env(safe-area-inset-top) + 104px); }
+  .bar { flex-wrap: wrap; align-content: center; row-gap: 8px; }
+  .bar .filters { order: 1; flex: 1 0 100%; }
+}
+
+/* Section labels and settings rows */
+.label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 20px 0 8px; }
+.split { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.row { display: flex; align-items: center; gap: 10px; }
+.check { color: var(--accent); font-weight: 700; }
+button.small { padding: 4px 10px; font-size: 14px; width: auto; }
+.rows a { color: var(--accent); text-decoration: none; display: block; }
+#settings > button { margin: 8px 0; }
+#recent .path { font-size: 12px; overflow-wrap: anywhere; }
+
+/* Conversation cards: a chevron says they open */
+#sessions li:not(.skeleton) { position: relative; padding-right: 34px; }
+#sessions li:not(.skeleton)::after { content: "›"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 22px; }

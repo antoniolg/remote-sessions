@@ -9,10 +9,12 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"time"
 
 	"github.com/antoniolg/remote-sessions/internal/claude"
@@ -42,6 +44,13 @@ func printPairing(info pairing.Info) {
 	fmt.Println()
 	fmt.Println(i18n.T("cannot_scan"))
 	fmt.Println(info.URI())
+	fmt.Println()
+	// The browser client reads this same code with the camera: the addresses carry no key.
+	fmt.Println(i18n.T("web_open"))
+	for _, host := range info.Hosts {
+		fmt.Printf("  https://%s/\n", net.JoinHostPort(host, strconv.Itoa(info.Port)))
+	}
+	fmt.Println(i18n.T("web_certificate", info.Fingerprint))
 	fmt.Println()
 	fmt.Println(i18n.T("keep_secret"))
 }

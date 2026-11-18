@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable",
+      "webworker.importscripts"
+    ],
+    "skipLibCheck": true
+  },
+  "include": [
+    "static/app.js",
+    "static/js/**/*.js",
+    "types/*.d.ts"
+  ]
+}

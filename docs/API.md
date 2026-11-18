@@ -6,6 +6,8 @@ The `remote-sessions` server runs on the computer where Claude Code is used. Mob
 - HTTPS on port `8787` (configurable), listening on every interface.
 - The certificate is self-signed (ECDSA P-256). Apps **pin it**: they accept the connection only when the SHA-256 of the leaf certificate (DER) equals the `fp` received when pairing, and ignore hostname and chain validation.
 - Every endpoint except `/health` needs `Authorization: Bearer <token>`.
+- `/app/` serves the browser client's static files without a token (they hold no data; the client sends the token like the apps).
+- `/health` and `/v1/*` answer cross-origin requests (`Access-Control-Allow-Origin: *`, preflight for `GET`, `POST`, `DELETE` with `Authorization` and `Content-Type`), so the browser client served by one computer can call the others it is paired with. The token is a header, never a cookie, so this grants nothing without it. `/health` needs no token, so it is shared cross-origin only when the request carries the token: other websites cannot read the computer's name.
 
 ## Pairing
 `remote-sessions pair` prints a QR code with this URI (also usable as a link):

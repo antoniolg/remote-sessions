@@ -18,6 +18,7 @@ import (
 	"github.com/antoniolg/remote-sessions/internal/folders"
 	"github.com/antoniolg/remote-sessions/internal/launcher"
 	"github.com/antoniolg/remote-sessions/internal/transcripts"
+	"github.com/antoniolg/remote-sessions/internal/web"
 )
 
 type Server struct {
@@ -69,7 +70,42 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /v1/sessions/{id}/messages", s.auth(s.messages))
 	mux.HandleFunc("POST /v1/sessions/{id}/remote-control", s.auth(s.connect))
 	mux.HandleFunc("DELETE /v1/sessions/{id}/remote-control", s.auth(s.disconnect))
-	return logRequests(mux)
+	// The browser client (PWA): public files, the token stays in the browser.
+	mux.Handle("GET /app/", web.Handler())
+	mux.Handle("GET /{$}", http.RedirectHandler("/app/", http.StatusFound))
+	return logRequests(s.allowCrossOrigin(mux))
+}
+
+// allowCrossOrigin lets a browser client served by another paired computer call this API.
+// The token travels in the Authorization header, never in a cookie, so any origin may ask:
+// without the token every /v1/ call still answers 401. /health needs no token, so it is
+// shared cross-origin only with one: other websites cannot read this computer's name.
+func (s *Server) allowCrossOrigin(next http.Handler) http.Handler {
+	expected := []byte("Bearer " + s.Token)
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/health" && !strings.HasPrefix(r.URL.Path, "/v1/") {
+			next.ServeHTTP(w, r)
+			return
+		}
+		header := w.Header()
+		preflight := r.Method == http.MethodOptions && r.Header.Get("Access-Control-Request-Method") != ""
+		keyed := subtle.ConstantTimeCompare([]byte(r.Header.Get("Authorization")), expected) == 1
+		if preflight || r.URL.Path != "/health" || keyed {
+			header.Set("Access-Control-Allow-Origin", "*")
+		}
+		if preflight && r.Header.Get("Access-Control-Request-Method") != "" {
+			header.Set("Access-Control-Allow-Methods", "GET, POST, DELETE")
+			header.Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+			header.Set("Access-Control-Max-Age", "600")
+			// Chrome's Private Network Access asks before a page reaches a LAN address.
+			if r.Header.Get("Access-Control-Request-Private-Network") == "true" {
+				header.Set("Access-Control-Allow-Private-Network", "true")
+			}
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }
 
 func (s *Server) auth(next http.HandlerFunc) http.HandlerFunc {
