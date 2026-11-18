@@ -58,17 +58,24 @@ describe("launch", () => {
   const trustError = new ApiError(403, { code: "trust_required", folder: "/Users/me/web" });
 
   test("asks before trusting a folder and retries trusting it", async () => {
-    vi.stubGlobal("confirm", vi.fn(() => true));
+    const confirmTrust = vi.fn(async () => true);
     const call = vi.fn(async (trust) => { if (!trust) throw trustError; return "ok"; });
-    await expect(launch(call)).resolves.toBe("ok");
+    await expect(launch(call, confirmTrust)).resolves.toBe("ok");
     expect(call.mock.calls).toEqual([[false], [true]]);
-    expect(confirm).toHaveBeenCalledWith(expect.stringContaining("/Users/me/web"));
+    expect(confirmTrust).toHaveBeenCalledWith("/Users/me/web");
   });
 
   test("gives up when the person does not trust the folder", async () => {
-    vi.stubGlobal("confirm", vi.fn(() => false));
+    const confirmTrust = vi.fn(async () => false);
     const call = vi.fn(async () => { throw trustError; });
-    await expect(launch(call)).rejects.toBe(trustError);
+    await expect(launch(call, confirmTrust)).rejects.toBe(trustError);
     expect(call).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not ask for other errors", async () => {
+    const confirmTrust = vi.fn(async () => true);
+    const error = new ApiError(500, { code: "internal" });
+    await expect(launch(async () => { throw error; }, confirmTrust)).rejects.toBe(error);
+    expect(confirmTrust).not.toHaveBeenCalled();
   });
 });

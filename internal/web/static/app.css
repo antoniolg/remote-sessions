@@ -173,3 +173,8 @@ button.small { padding: 4px 10px; font-size: 14px; width: auto; }
 /* Conversation cards: a chevron says they open */
 #sessions li:not(.skeleton) { position: relative; padding-right: 34px; }
 #sessions li:not(.skeleton)::after { content: "›"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 22px; }
+/* In-page yes/no question (ask.js); window.confirm() is not shown in some embedded browsers. */
+dialog.ask { max-width: min(420px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); }
+dialog.ask::backdrop { background: rgb(0 0 0 / 45%); }
+dialog.ask p { margin: 0 0 16px; overflow-wrap: anywhere; }
+.ask-actions { display: flex; gap: 8px; justify-content: flex-end; }

@@ -1,6 +1,7 @@
 // @ts-check
 // The v1 API (docs/API.md) on one paired computer, and the messages for its error codes.
 
+import { ask } from "./ask.js";
 import { t } from "./i18n.js";
 
 /** @import { Computer } from "./computers.js" */
@@ -81,18 +82,28 @@ export function describe(error, computer) {
   return t("unreachable", { where, health: computer ? `${computer.origin}/health` : t("its_address") });
 }
 
+/**
+ * Asks in the page whether Claude Code may trust a folder.
+ * @param {string} folder
+ * @returns {Promise<boolean>}
+ */
+export function confirmTrust(folder) {
+  return ask(t("trust_folder", { folder }), { yes: t("trust"), no: t("cancel") });
+}
+
 // Runs a launch call; asks before trusting a folder, as the store apps do.
 /**
  * @template T
  * @param {(trustFolder: boolean) => Promise<T>} call
+ * @param {(folder: string) => Promise<boolean>} [shouldTrust]
  * @returns {Promise<T>}
  */
-export async function launch(call) {
+export async function launch(call, shouldTrust = confirmTrust) {
   try {
     return await call(false);
   } catch (error) {
     if (error instanceof ApiError && error.code === "trust_required"
-      && confirm(t("trust_folder", { folder: error.body.folder || "" }))) {
+      && await shouldTrust(error.body.folder || "")) {
       return call(true);
     }
     throw error;

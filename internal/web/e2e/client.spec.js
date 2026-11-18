@@ -66,6 +66,43 @@ test("opens a conversation with its messages and the tools used", async ({ page 
   await expect(cards(page)).toHaveCount(2);
 });
 
+test("asks in the page before trusting a folder, then connects trusting it", async ({ page }) => {
+  /** @type {unknown[]} */
+  const bodies = [];
+  await page.route("**/remote-control", async (route) => {
+    const body = route.request().postDataJSON();
+    bodies.push(body ?? null);
+    if (body?.trustFolder) {
+      await route.fulfill({ json: { url: "https://claude.ai/code/session_e2e" } });
+    } else {
+      await route.fulfill({ status: 409, json: { code: "trust_required", folder: "/work/web", error: "Claude Code asks whether you trust /work/web." } });
+    }
+  });
+  await paired(page, [alphaEntry()]);
+  await cards(page).filter({ hasText: "Fix the login form" }).click();
+  await page.click("#connect");
+  const dialog = page.locator("dialog.ask");
+  await expect(dialog).toContainText("/work/web");
+  await dialog.getByRole("button", { name: "Trust" }).click();
+  await expect(page.locator("#open-claude")).toHaveAttribute("href", "https://claude.ai/code/session_e2e");
+  await expect(dialog).toHaveCount(0);
+  expect(bodies).toEqual([null, { trustFolder: true }]);
+});
+
+test("cancelling the trust question does not retry", async ({ page }) => {
+  let calls = 0;
+  await page.route("**/remote-control", async (route) => {
+    calls += 1;
+    await route.fulfill({ status: 409, json: { code: "trust_required", folder: "/work/web", error: "Claude Code asks whether you trust /work/web." } });
+  });
+  await paired(page, [alphaEntry()]);
+  await cards(page).filter({ hasText: "Fix the login form" }).click();
+  await page.click("#connect");
+  await page.locator("dialog.ask").getByRole("button", { name: "Cancel" }).click();
+  await expect(page.locator("#detail-error")).toContainText("/work/web");
+  expect(calls).toBe(1);
+});
+
 test("adds a second computer and merges both lists under All computers", async ({ page }) => {
   await paired(page, [alphaEntry()]);
   await page.selectOption("#computer", "add");
@@ -91,8 +128,9 @@ test("settings select and forget computers", async ({ page }) => {
   await expect(rows).toHaveCount(2);
   await expect(rows.filter({ hasText: alpha.name })).toContainText("✓");
   await expect(page.locator("#version")).not.toBeEmpty();
-  page.once("dialog", (dialog) => dialog.accept());
   await rows.filter({ hasText: beta.name }).getByRole("button", { name: "Forget" }).click();
+  // Asked in the page, not with window.confirm(): the Claude app's browser pane never shows those.
+  await page.locator("dialog.ask").getByRole("button", { name: "Forget" }).click();
   await expect(rows).toHaveCount(1);
   await rows.first().click();
   await expect(cards(page)).toHaveCount(2);

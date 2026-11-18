@@ -2,6 +2,7 @@
 // Settings: the paired computers (select, forget, add) and what this page is.
 
 /** @import { Computer } from "./computers.js" */
+import { ask } from "./ask.js";
 import { t } from "./i18n.js";
 import { ALL, forget, list, select, selected } from "./computers.js";
 import { $, el } from "./dom.js";
@@ -20,9 +21,9 @@ function computerRow(computer, current) {
   const end = el("div", "row");
   if (current) end.append(el("span", "check", "✓"));
   const remove = el("button", "small", t("forget"));
-  remove.addEventListener("click", (event) => {
+  remove.addEventListener("click", async (event) => {
     event.stopPropagation();
-    if (!confirm(t("forget_confirm", { name: computer.name }))) return;
+    if (!await ask(t("forget_confirm", { name: computer.name }), { yes: t("forget"), no: t("cancel") })) return;
     forget(computer.id);
     if (list().length) renderComputers(); else onAdd();
   });
