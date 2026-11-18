@@ -22,7 +22,6 @@ import (
 	"github.com/antoniolg/remote-sessions/internal/i18n"
 	"github.com/antoniolg/remote-sessions/internal/pairing"
 	"github.com/antoniolg/remote-sessions/internal/service"
-	"github.com/antoniolg/remote-sessions/internal/tailscale"
 	"github.com/antoniolg/remote-sessions/internal/transcripts"
 )
 
@@ -48,18 +47,10 @@ func printPairing(info pairing.Info) {
 	fmt.Println()
 	// The browser client reads this same code with the camera: the addresses carry no key.
 	fmt.Println(i18n.T("web_open"))
-	// Optional: with `tailscale serve` in front, the browser gets a trusted certificate.
-	ts, hasTailscale := tailscale.Detect(info.Port)
-	if ts.ServeURL != "" {
-		fmt.Printf("  %s  %s\n", ts.ServeURL, i18n.T("web_trusted"))
-	}
 	for _, host := range info.Hosts {
 		fmt.Printf("  https://%s/\n", net.JoinHostPort(host, strconv.Itoa(info.Port)))
 	}
 	fmt.Println(i18n.T("web_certificate", info.Fingerprint))
-	if hasTailscale && ts.DNSName != "" && ts.ServeURL == "" {
-		fmt.Println(i18n.T("web_tailscale_hint", info.Port))
-	}
 	fmt.Println()
 	fmt.Println(i18n.T("keep_secret"))
 }
