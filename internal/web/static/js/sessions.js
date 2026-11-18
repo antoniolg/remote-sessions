@@ -113,15 +113,16 @@ export function recentFolders(computer) {
 /** @param {Session} session @param {boolean} showComputer */
 function sessionCard(session, showComputer) {
   const item = el("li");
-  const badges = el("div");
-  if (session.remote) badges.append(el("span", "badge remote", "Remote Control"));
-  else if (session.running) badges.append(el("span", "badge", t("badge_open")));
-  const where = [showComputer ? session.computer.name : null, session.project, ago(session.updatedAt)];
+  // One line under the prompt: state (coloured dot), computer, project and age.
+  const meta = el("div", "muted meta-line");
+  if (session.remote) meta.append(el("span", "state remote", "Remote Control"));
+  else if (session.running) meta.append(el("span", "state", t("badge_open")));
+  const where = [showComputer ? session.computer.name : null, session.project, ago(session.updatedAt)].filter(Boolean);
+  if (where.length) meta.append((meta.childElementCount ? " · " : "") + where.join(" · "));
   item.append(
     el("div", "t", session.title),
     el("div", "s", session.lastPrompt || ""),
-    badges,
-    el("div", "muted", where.filter(Boolean).join(" · ")),
+    meta,
   );
   item.addEventListener("click", () => {
     history.pushState({ view: "detail" }, "");

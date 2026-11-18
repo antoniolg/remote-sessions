@@ -8,13 +8,13 @@ test("$ finds an element and fails loudly on a missing id", () => {
   expect(() => $("nope")).toThrow("#nope is missing from index.html");
 });
 
-test("ago describes how long ago something happened", () => {
+test("ago gives a short age: now, then minutes, hours or days", () => {
   const now = Date.parse("2026-11-18T12:00:00Z");
-  const say = (unit, value) => new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(value, unit);
-  expect(ago("2026-11-18T11:59:50Z", now)).toBe(say("minute", 0));
-  expect(ago("2026-11-18T11:15:00Z", now)).toBe(say("minute", -45));
-  expect(ago("2026-11-18T09:00:00Z", now)).toBe(say("hour", -3));
-  expect(ago("2026-11-16T12:00:00Z", now)).toBe(say("day", -2));
+  const short = (unit, value) => new Intl.NumberFormat("en", { style: "unit", unit, unitDisplay: "short" }).format(value);
+  expect(ago("2026-11-18T11:59:50Z", now)).toBe(new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(0, "minute"));
+  expect(ago("2026-11-18T11:15:00Z", now)).toBe(short("minute", 45));
+  expect(ago("2026-11-18T09:00:00Z", now)).toBe(short("hour", 3));
+  expect(ago("2026-11-16T12:00:00Z", now)).toBe(short("day", 2));
 });
 
 test("skeleton builds hidden placeholders with one bar per width", () => {

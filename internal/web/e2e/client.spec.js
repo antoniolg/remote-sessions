@@ -224,3 +224,11 @@ test.describe("in Spanish", () => {
     await expect(page.getByRole("button", { name: "Olvidar" })).toBeVisible();
   });
 });
+
+test("a card keeps project and a short age on one line under the prompt", async ({ page }) => {
+  await paired(page, [alphaEntry()], alpha.id);
+  const meta = cards(page).nth(0).locator(".meta-line");
+  await expect(meta).toHaveCount(1);
+  await expect(meta).toHaveText(/^web · (now|\d+ (min|hr|hrs|day|days))$/);
+  if (process.env.CARD_SHOT) await page.screenshot({ path: process.env.CARD_SHOT });
+});

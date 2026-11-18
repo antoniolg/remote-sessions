@@ -61,15 +61,16 @@ export function setOpenLink(id, url) {
 
 /** @param {string} iso @param {number} [now] */
 export function ago(iso, now = Date.now()) {
-  // Same language as the rest of the page.
-  const relative = new Intl.RelativeTimeFormat(currentLanguage(), { numeric: "auto" });
-  const seconds = (new Date(iso).getTime() - now) / 1000;
-  /** @type {[Intl.RelativeTimeFormatUnit, number][]} */
+  // Short and in the page's language: "now", then "16 min", "3 h", "2 d".
+  const seconds = Math.max(0, (now - new Date(iso).getTime()) / 1000);
+  /** @type {[string, number][]} */
   const units = [["day", 86400], ["hour", 3600], ["minute", 60]];
   for (const [unit, size] of units) {
-    if (Math.abs(seconds) >= size) return relative.format(Math.round(seconds / size), unit);
+    if (seconds >= size) {
+      return new Intl.NumberFormat(currentLanguage(), { style: "unit", unit, unitDisplay: "short" }).format(Math.round(seconds / size));
+    }
   }
-  return relative.format(0, "minute");
+  return new Intl.RelativeTimeFormat(currentLanguage(), { numeric: "auto" }).format(0, "minute");
 }
 
 // Grey placeholders shaped like the content that is on its way; screen readers get aria-busy instead.
